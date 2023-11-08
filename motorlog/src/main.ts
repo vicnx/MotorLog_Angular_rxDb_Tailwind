@@ -6,7 +6,7 @@ import { routes } from './routes';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export function HttpLoaderFactory(httpHandler: HttpBackend) {
     return new TranslateHttpLoader(new HttpClient(httpHandler), './assets/i18n/', '.json');
 }
@@ -23,7 +23,8 @@ bootstrapApplication(AppComponent, {
                     useFactory: HttpLoaderFactory,
                     deps: [HttpBackend]
                 }
-            })
+            }),
+            BrowserAnimationsModule,
         ),
         provideRouter(routes)
     ]

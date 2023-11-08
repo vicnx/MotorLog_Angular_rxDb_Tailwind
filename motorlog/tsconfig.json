@@ -27,7 +27,9 @@
       "@pages/*":["src/app/pages/*"],
       "@shared/*":["src/app/shared/*"],
       "@components/*":["src/app/components/*"],
-    }
+      "@assets/*":["src/assets/*"]
+    },
+    "strictPropertyInitialization":false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
