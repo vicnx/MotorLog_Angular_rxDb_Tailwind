@@ -4,19 +4,19 @@
       "route": "/home",
       "url": "/home",
       "icon": "home",
-      "name": "pages.home"
+      "name": "pages.home.title"
     },
     {
       "route": "/profile",
       "url": "/profile",
       "icon": "person",
-      "name": "pages.profile"
+      "name": "pages.profile.title"
     },
     {
       "route": "/settings",
       "url": "/settings",
       "icon": "settings",
-      "name": "pages.settings"
+      "name": "pages.settings.title"
     }
   ]
 }
