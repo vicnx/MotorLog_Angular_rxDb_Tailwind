@@ -1,0 +1,19 @@
+{
+    "pages": {
+      "home": {
+        "title": "Inicio"
+    }
+    },
+    "welcome": {
+        "title": "Welcome to ",
+        "info": "The application to have control of your vehicles.",
+        "subtitle1": "First time?",
+        "info2":"Tell me your name",
+        "name":"Name"
+    },
+    "errors": {
+        "MSGS": {
+            "request_error": "An error occurred in the request"
+        }
+    }
+}

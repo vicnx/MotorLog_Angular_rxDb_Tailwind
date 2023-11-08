@@ -1,0 +1,10 @@
+{
+  "printWidth": 175,
+  "tabWidth": 4,
+  "singleQuote": true,
+  "eslintIntegration": true,
+  "arrowParens": "always",
+  "trailingComma": "none",
+  "htmlWhitespaceSensitivity": "css",
+  "semi": true
+}

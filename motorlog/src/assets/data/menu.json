@@ -1,0 +1,22 @@
+{
+  "menuItems": [
+    {
+      "route": "/home",
+      "url": "/home",
+      "icon": "home",
+      "name": "pages.home"
+    },
+    {
+      "route": "/profile",
+      "url": "/profile",
+      "icon": "person",
+      "name": "pages.profile"
+    },
+    {
+      "route": "/settings",
+      "url": "/settings",
+      "icon": "settings",
+      "name": "pages.settings"
+    }
+  ]
+}

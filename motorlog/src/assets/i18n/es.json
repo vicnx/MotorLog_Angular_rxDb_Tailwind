@@ -1,0 +1,20 @@
+{
+    "pages": {
+        "home": {
+            "title": "Home"
+        }
+    },
+    "welcome": {
+        "title": "Bienvenido a ",
+        "info": "La aplicación para tener control de tus vehículos.",
+        "subtitle1": "¿Primera vez?",
+        "info2": "Dime tu nombre",
+        "name": "Nombre",
+        "importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste."
+    },
+    "errors": {
+        "MSGS": {
+            "request_error": "Ocurrió un error en la solicitud"
+        }
+    }
+}
