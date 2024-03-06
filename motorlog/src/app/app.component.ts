@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -13,4 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'motorlog';
+  constructor(private translate: TranslateService){
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
+  }
 }
