@@ -13,5 +13,7 @@ import { NgxSpinner, NgxSpinnerComponent, NgxSpinnerModule, NgxSpinnerService } 
 export class HomeComponent {
     constructor(public translateService: TranslateService, public spinner: NgxSpinnerService) {
       // this.spinner.show()
+      console.log(this.translateService.instant('pages.home.title'))
+
     }
 }
