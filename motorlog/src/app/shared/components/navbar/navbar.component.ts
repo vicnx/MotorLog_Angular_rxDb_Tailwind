@@ -44,6 +44,10 @@ export class NavbarComponent implements OnInit {
 
     }
 
+    private initUi():void {
+
+    }
+
     toggleSidebar() {
       this.menuService.toogleMenu();
     }
