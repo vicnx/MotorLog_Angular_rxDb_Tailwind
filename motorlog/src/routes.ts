@@ -6,6 +6,10 @@ export const routes: Routes =[
     path: 'home',
     loadComponent: () => import("@pages/home/home.component").then((c)=> c.HomeComponent),
   },
+  {
+    path: 'welcome',
+    loadComponent: () => import("@pages/welcome/welcome.component").then((c)=> c.WelcomeComponent),
+  },
   // canActivate: [authGuard]
   // {
   //   path: 'home',
@@ -15,6 +19,6 @@ export const routes: Routes =[
 
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'welcome'
   }
 ]
