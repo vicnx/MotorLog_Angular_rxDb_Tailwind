@@ -1,31 +1,25 @@
-<div class="page bg-gradient-to-b from-pink-500 via-red-500 to-yellow-500">
-  <div class="container">
-      <div class="header">
-          <img src="./../../../../../assets/icon/logo_small.png" alt="" class="h-8" />
-      </div>
-      <div class="main">
-          <img src="./../../../../../assets//images/undraw_trip_re_f724.svg" alt="" class="h-32 mx-auto" />
-          <h1 class="text-xl">{{'welcome.title' | translate}} {{const.appName}}</h1>
-          <p>{{'welcome.info' | translate}}</p>
+<div class="h-screen bg-gradient-to-b flex flex-col">
+    <div class="flex flex-col justify-center flex-grow">
+        <div class="flex items-center flex-col">
+            <img class="h-7.5" src="./../../../../../assets//images/undraw_trip_re_f724.svg" alt=""
+                class="h-32 mx-auto" />
+            <h1 class="text-xl">{{'welcome.title' | translate}} {{const.appName}}</h1>
+            <p class="w-3/4 text-center text-sm mt-2">{{'welcome.info' | translate}}</p>
 
-          <div class="card bg-white shadow-md rounded-lg p-4 mt-4">
-              <div class="card-header">
-                  <h2>{{'welcome.subtitle1' | translate}}</h2>
-              </div>
-              <div class="card-content">
-                  <p>{{'welcome.info2' | translate}}</p>
-                  <input type="text" placeholder="Username" class="p-2 border border-gray-300 rounded-md w-full" />
+            <div class="p-4 mt-1 w-3/4 text-center">
+                <div class="mb-1">
+                    <input type="text" [maxLength]="const.form.inputText.maxLength" placeholder="Name" pInputText class="m-2" />
                 </div>
-          </div>
-          <div class="!mt-4 !m-10">
-            <p-button  (click)="login()">Login</p-button>
-          </div>
-      </div>
-      <footer class="mt-8">
-          <div class="import small min-w-max bg-white p-4 rounded-lg flex flex-col justify-between items-center">
-              <p>{{'welcome.importText' | translate}}</p>
-              <p-button icon="fas fa-cloud-download-alt" [rounded]="true"[text]="true"></p-button>
-          </div>
-      </footer>
-  </div>
+            </div>
+            <div>
+                <p-button (click)="login()">{{'welcome.start' | translate}} <i class="fas fa-chevron-right ml-2"></i></p-button>
+            </div>
+        </div>
+    </div>
+    <footer class="flex items-center flex-col p-4 mt-4 text-center w-100 mb-5">
+        <div class="w-3/4">
+            <p class="text-xs">{{'welcome.importText' | translate}}</p>
+            <p-button icon="fas fa-cloud-download-alt" [rounded]="false" [text]="true"></p-button>
+        </div>
+    </footer>
 </div>

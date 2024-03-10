@@ -9,7 +9,9 @@
         "info": "The application to have control of your vehicles.",
         "subtitle1": "First time?",
         "info2":"Tell me your name",
-        "name":"Name"
+        "name":"Name",
+        "importText": "You can also import a backup and continue where you left off.",
+        "start":"Start"
     },
     "errors": {
         "MSGS": {

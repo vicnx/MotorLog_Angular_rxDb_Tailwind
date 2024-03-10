@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
@@ -16,9 +16,10 @@ import { MenuService } from '@shared/services/menu.service';
     imports: [RouterOutlet, CommonModule,NgxSpinnerModule, NavbarComponent, TranslateModule],
     providers: [MenuService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'motorlog';
-  constructor(private translateService: TranslateService){
+  showMenu = false;
+  constructor(private translateService: TranslateService, private menuService: MenuService){
     // Configura los idiomas disponibles
     this.translateService.addLangs(['en', 'es']);
 
@@ -26,5 +27,14 @@ export class AppComponent {
     this.translateService.setDefaultLang('en');
     const browserLang = this.translateService.getBrowserLang();
     this.translateService.use(browserLang?.match(/en|es/) ? browserLang : 'en');
+  }
+
+  public ngOnInit(): void {
+    this.menuService.checkEnableMenu();
+    this.subscribesServices();
+  }
+
+  private subscribesServices(): void {
+    this.menuService.enableMenu$.subscribe((enableMenu)=> this.showMenu = enableMenu)
   }
 }

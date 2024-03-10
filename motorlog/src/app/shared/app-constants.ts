@@ -11,5 +11,10 @@ export const CONSTANTS = {
         default: {
             name: 'Default User'
         }
+    },
+    form: {
+      inputText:{
+        maxLength: 20
+      }
     }
 };

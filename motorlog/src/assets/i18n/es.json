@@ -10,7 +10,9 @@
         "subtitle1": "¿Primera vez?",
         "info2": "Dime tu nombre",
         "name": "Nombre",
-        "importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste."
+        "importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste.",
+        "start":"Empezar"
+
     },
     "errors": {
         "MSGS": {

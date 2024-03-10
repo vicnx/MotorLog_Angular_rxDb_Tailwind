@@ -7,6 +7,9 @@ export class MenuService {
     private showMenuSubject = new BehaviorSubject<boolean>(false);
     showMenu$: Observable<boolean> = this.showMenuSubject.asObservable();
 
+    private enableMenuSubject = new BehaviorSubject<boolean>(false);
+    enableMenu$: Observable<boolean> = this.enableMenuSubject.asObservable();
+
     url: string = './assets/data/menu.json';
     constructor(private http: HttpClient) {}
 
@@ -15,7 +18,12 @@ export class MenuService {
     }
 
     toogleMenu(): void {
-      console.log(!this.showMenuSubject.value)
       this.showMenuSubject.next(!this.showMenuSubject.value);
+    }
+
+    checkEnableMenu(): void {
+      //TODO Comprobar si hay usuario logeado. (crear servicio user)
+      let isUserLogged = false;
+      this.enableMenuSubject.next(isUserLogged)
     }
 }
