@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { CONSTANTS } from './app-constants';
 import { UserModel } from './models/user.model';
 import { UtilsService } from './services/utils.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     template: ''
@@ -20,7 +21,8 @@ export class BaseComponent {
         protected router: Router,
         protected translateService: TranslateService,
         protected utils: UtilsService,
-        protected messageService: MessageService
+        protected messageService: MessageService,
+        public spinner: NgxSpinnerService
     ) {
         this.pageName = '';
     }
@@ -39,5 +41,9 @@ export class BaseComponent {
         //         this.router.navigate([CONSTANTS.routes.welcome]);
         //     }
         // });
+    }
+
+    public showErrorMsg(msg: string): void {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: msg, key:'toast' });
     }
 }

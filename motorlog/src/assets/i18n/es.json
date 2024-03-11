@@ -16,7 +16,8 @@
     },
     "errors": {
         "MSGS": {
-            "request_error": "Ocurrió un error en la solicitud"
+            "request_error": "Ocurrió un error en la solicitud",
+            "name": "Necesitamos saber tu nombre."
         }
     }
 }

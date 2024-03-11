@@ -15,7 +15,8 @@
     },
     "errors": {
         "MSGS": {
-            "request_error": "An error occurred in the request"
+            "request_error": "An error occurred in the request",
+            "name": "We need to know your name"
         }
     }
 }
