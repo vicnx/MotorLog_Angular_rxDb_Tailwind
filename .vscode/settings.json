@@ -1,3 +1,8 @@
 {
-  "scss.lint.unknownAtRules": "ignore"
+  "scss.lint.unknownAtRules": "ignore",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#103511",
+    "titleBar.activeBackground": "#164A17",
+    "titleBar.activeForeground": "#F7FDF7"
+  }
 }
