@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    //TODO Check user logged
     this.menuService.checkEnableMenu();
     this.subscribesServices();
   }

@@ -5,7 +5,13 @@ export const CONSTANTS = {
         home: '/home',
         settings: '/settings',
         vehicles: '/vehicles',
-        welcome: '/welcome'
+        welcome: '/welcome',
+        literal: {
+            home: 'home',
+            settings: 'settings',
+            vehicles: 'vehicles',
+            welcome: 'welcome'
+        }
     },
     user: {
         default: {
@@ -13,8 +19,8 @@ export const CONSTANTS = {
         }
     },
     form: {
-      inputText:{
-        maxLength: 20
-      }
+        inputText: {
+            maxLength: 20
+        }
     }
 };
