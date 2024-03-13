@@ -6,6 +6,7 @@ import { CONSTANTS } from './app-constants';
 import { UserModel } from './models/user.model';
 import { UtilsService } from './services/utils.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserService } from './services/user.service';
 
 @Component({
     template: ''
@@ -23,6 +24,7 @@ export class BaseComponent {
     routerSvc = inject(Router);
     messageSvc = inject(MessageService);
     spinnerSvc = inject(NgxSpinnerService);
+    userSvc = inject(UserService)
 
     constructor() {
         this.pageName = '';

@@ -6,6 +6,7 @@ import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { MenuItemModel } from '@shared/models/menu.model';
 import { MenuService } from '@shared/services/menu.service';
+import { UserService } from '@shared/services/user.service';
 import { UtilsService } from '@shared/services/utils.service';
 import { SidebarModule } from 'primeng/sidebar';
 import { Toast, ToastModule } from 'primeng/toast';
@@ -33,7 +34,7 @@ export class SidebarComponent extends BaseComponent {
     }
 
     public logout(): void {
-        this.showNotImplemented()
+        this.userSvc.setLogginUser(false);
     }
 
 

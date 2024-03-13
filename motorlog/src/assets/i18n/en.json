@@ -11,7 +11,9 @@
         "info2":"Tell me your name",
         "name":"Name",
         "importText": "You can also import a backup and continue where you left off.",
-        "start":"Start"
+        "start":"Start",
+        "continue":"Continue",
+        "welcome-back": "Welcome back {{userName}}"
     },
     "errors": {
         "MSGS": {

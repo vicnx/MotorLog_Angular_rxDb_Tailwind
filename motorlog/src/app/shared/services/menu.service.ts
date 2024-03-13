@@ -12,7 +12,7 @@ export class MenuService {
     userLogged = false;
     constructor(private http: HttpClient) {
       effect(()=>{
-        this.userLogged = this.userSvc.userExistonDb();
+        this.userLogged = this.userSvc.user() ? true : false;
       })
     }
 

@@ -1,18 +1,22 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { Injectable, Signal, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { RxUserDocumentType, UserModel } from '@shared/models/user.model';
+import { CONSTANTS } from './../app-constants';
 import { DBService } from './db.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	dbSvc = inject(DBService);
 	user = signal<UserModel>({} as UserModel);
-	userExistonDb = signal<boolean>(false);
+	isUserLogged = signal<boolean>(false);
+	userExistOnBd: Signal<boolean> = computed(() => (this.user() ? true : false));
+	routerSvc = inject(Router);
 
 	getUser(): any {
 		const query = this.dbSvc.db.user.findOne('1');
 		query.exec().then((results: any) => {
 			this.user.update((val) => (val = results));
-      this.setLogginUser(results ? true :false);
+			this.setLogginUser(results ? true : false);
 		});
 	}
 
@@ -31,12 +35,24 @@ export class UserService {
 		const query = this.dbSvc.db.user.findOne('1');
 		query.exec().then((res: any) => {
 			this.user.set(res);
-      this.setLogginUser(res ? true :false);
+			if (res) {
+				this.checkSessionLogged();
+			} else {
+				this.setLogginUser(false);
+			}
 		});
 	}
 
-  private setLogginUser(logged: boolean): void {
-    this.userExistonDb.set(logged);
-    sessionStorage.setItem('isUserLogged', logged.toString())
-  }
+	public setLogginUser(logged: boolean): void {
+		this.isUserLogged.set(logged);
+		sessionStorage.setItem('isUserLogged', logged.toString());
+		if (!logged) {
+			this.routerSvc.navigate([CONSTANTS.routes.welcome]);
+		}
+	}
+
+	private checkSessionLogged(): void {
+		let aux = sessionStorage.getItem('isUserLogged') == 'true' ? true : false;
+		this.isUserLogged.set(aux);
+	}
 }

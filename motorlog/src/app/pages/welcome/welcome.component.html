@@ -1,29 +1,44 @@
 <form (ngSubmit)="checkErrors()" [formGroup]="loginForm">
-  User Info: {{userSvc.user() || 'No user' | json}}
-  <div class="h-screen flex flex-col">
-    <div class="flex flex-col justify-center flex-grow">
-      <div class="flex items-center flex-col">
-        <img class="h-7.5" [src]="welcomeImg" alt="" class="h-32 mx-auto" />
-        <h1 class="text-xl mt-5">{{'welcome.title' | translate}} {{const.appName}}</h1>
-        <p class="w-3/4 text-center text-sm mt-2">{{'welcome.info' | translate}}</p>
-        <div class="p-4 mt-1 w-3/4 text-center">
-          <div class="mb-1">
-            <input type="text" name="userName" formControlName="userName" required placeholder="Name" pInputText
-              class="m-2" [maxlength]="const.form.inputText.maxLength" />
-          </div>
-        </div>
-        <div>
-          <p-button type="submit" [outlined]="true">{{'welcome.start' | translate}} <i
-              class="fas fa-chevron-right ml-2"></i></p-button>
-        </div>
-      </div>
-    </div>
-    <footer class="flex items-center flex-col p-4 mt-4 text-center w-100 mb-5">
-      <div class="w-3/4">
-        <p class="text-xs">{{'welcome.importText' | translate}}</p>
-        <p-button icon="fas fa-cloud-download-alt" [rounded]="false" [text]="true" (onClick)="importData()"></p-button>
-      </div>
-    </footer>
-  </div>
-  <p-toast key="toast"></p-toast>
+	<div class="h-screen flex flex-col">
+		<div class="flex flex-col justify-center flex-grow">
+			<div class="flex items-center flex-col">
+				<img class="h-7.5" [src]="welcomeImg" alt="" class="h-32 mx-auto" />
+				<h1 class="text-3xl mt-5">
+					@if (!userSvc.userExistOnBd()) {
+					{{ 'welcome.title' | translate }}
+					}
+					<span class="text-primary-500 font-bold"> {{ const.appName }} 🚗</span>
+				</h1>
+				<p class="w-3/4 text-center text-sm mt-2">{{ 'welcome.info' | translate }}</p>
+				<div class="p-4 mt-1 w-3/4 text-center">
+					<div class="mb-1">
+						@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
+						<span class="text-xl">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
+						}@else {
+						<input type="text" name="userName" formControlName="userName" required placeholder="Name" pInputText class="m-2" [maxlength]="const.form.inputText.maxLength" />
+						}
+					</div>
+				</div>
+				<div>
+					<p-button type="submit" [outlined]="true">
+						@if (!userSvc.userExistOnBd()) {
+						{{ 'welcome.start' | translate }}
+						}@else {
+						{{ 'welcome.continue' | translate }}
+						}
+						<i class="fas fa-chevron-right ml-2"></i
+					></p-button>
+				</div>
+			</div>
+		</div>
+		@if (!userSvc.userExistOnBd()) {
+		<footer class="flex items-center flex-col p-4 mt-4 text-center w-100 mb-5">
+			<div class="w-3/4">
+				<p class="text-xs">{{ 'welcome.importText' | translate }}</p>
+				<p-button icon="fas fa-cloud-download-alt" [rounded]="false" [text]="true" (onClick)="importData()"></p-button>
+			</div>
+		</footer>
+		}
+	</div>
+	<p-toast key="toast"></p-toast>
 </form>

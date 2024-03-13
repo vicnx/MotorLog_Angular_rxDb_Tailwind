@@ -6,16 +6,14 @@ import { UserService } from '@shared/services/user.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    imports: [CommonModule, TranslateModule, NgxSpinnerModule],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+	selector: 'app-home',
+	standalone: true,
+	imports: [CommonModule, TranslateModule, NgxSpinnerModule],
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-	userSvc = inject(UserService);
-
-    ngOnInit(): void {
-        console.log('Home Page');
-    }
+	ngOnInit(): void {
+		console.log('Home Page');
+	}
 }

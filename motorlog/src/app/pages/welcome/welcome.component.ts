@@ -20,18 +20,18 @@ import { ToastModule } from 'primeng/toast';
 export class WelcomeComponent extends BaseComponent implements OnInit {
 	public welcomeImg: string = './../../../../../assets//images/welcome.svg';
 	public loginForm: FormGroup; // Definir FormGroup
-
-	userSvc = inject(UserService);
-
 	constructor() {
 		super();
 		this.loginForm = new FormGroup({
 			userName: new FormControl('', [Validators.required, Validators.maxLength(Number(CONSTANTS.form.inputText))])
 		});
 		effect(() => {
-			if (this.userSvc.userExistonDb()) {
-				this.routerSvc.navigate([this.const.routes.home]);
+			if (this.userSvc.userExistOnBd()) {
+        this.userSvc.checkUserExistsDb()
 			}
+      if(this.userSvc.isUserLogged()){
+				this.routerSvc.navigate([this.const.routes.home]);
+      }
 		});
 	}
 
@@ -40,6 +40,11 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public checkErrors(): void {
+    if(this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()){
+      this.userSvc.setLogginUser(true);
+		  this.spinnerSvc.hide();
+      return
+    }
 		this.spinnerSvc.show();
 		if (this.loginForm.invalid) {
 			this.showErrorMsg(this.translateSvc.instant('errors.MSGS.name'));
@@ -55,7 +60,9 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	private registerUser(): void {
-		this.userSvc.setUser(this.loginForm.get('userName')?.value);
-		this.spinnerSvc.hide();
+    if(!this.userSvc.userExistOnBd()){
+      this.userSvc.setUser(this.loginForm.get('userName')?.value);
+		  this.spinnerSvc.hide();
+    }
 	}
 }

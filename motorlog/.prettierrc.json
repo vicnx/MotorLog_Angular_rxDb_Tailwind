@@ -1,14 +1,23 @@
 {
-  "printWidth": 175,
-  "tabWidth": 4,
-  "singleQuote": true,
-  "bracketSameLine": false,
-  "jsxBracketSameLine": true,
-  "eslintIntegration": true,
-  "arrowParens": "always",
-  "trailingComma": "none",
-  "htmlWhitespaceSensitivity": "css",
-  "semi": true,
-  "useTabs": true,
-  "endOfLine": "auto"
+	"printWidth": 175,
+	"tabWidth": 4,
+	"singleQuote": true,
+	"bracketSameLine": true,
+	"jsxBracketSameLine": true,
+	"eslintIntegration": true,
+	"arrowParens": "always",
+	"trailingComma": "none",
+	"htmlWhitespaceSensitivity": "css",
+	"semi": true,
+	"useTabs": true,
+	"endOfLine": "auto",
+	"overrides": [
+		{
+			"files": "*.html",
+			"options": {
+				"printWidth": 200,
+        "parser": "angular"
+			}
+		}
+	]
 }
