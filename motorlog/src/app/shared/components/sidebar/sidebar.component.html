@@ -39,19 +39,19 @@
             </nav>
           </div>
           <div class="flex flex-shrink-0 p-4 px-4 bg-gray-50">
-            <a href="#" class="flex-shrink-0 block w-full group">
               <div class="flex items-center">
                 <div>
                   <img class="inline-block rounded-full h-9 w-9" [src]="avatarImage">
                 </div>
-                <div class="ml-3">
+                <div class="w-full ml-3 flex justify-between">
                   <p class="text-sm font-medium text-gray-900">{{profile.name || const.user.default.name}}</p>
+                  <i class="fas fa-sign-out-alt" (click)="logout()"></i>
                 </div>
               </div>
-            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </p-sidebar>
+<p-toast key="toast"></p-toast>

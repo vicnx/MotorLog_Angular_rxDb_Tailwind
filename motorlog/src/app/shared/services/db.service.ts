@@ -45,7 +45,7 @@ let DB_INSTANCE: any;
 
 export async function initDatabase() {
     if (!initState) {
-        initState = createDatabase().then((db) => (DB_INSTANCE = db));
+        initState = createDatabase().then((db) => {(DB_INSTANCE = db)});
     }
     await initState;
 }

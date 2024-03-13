@@ -2,6 +2,6 @@
   [fullScreen]="true"></ngx-spinner>
 <div>
   <!-- <app-theme-toggle></app-theme-toggle> -->
-  <app-navbar *ngIf="showMenu"></app-navbar>
+  <app-navbar *ngIf="userSvc.user()"></app-navbar>
   <router-outlet></router-outlet>
 </div>

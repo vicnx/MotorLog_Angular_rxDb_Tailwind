@@ -2,9 +2,13 @@
   "printWidth": 175,
   "tabWidth": 4,
   "singleQuote": true,
+  "bracketSameLine": false,
+  "jsxBracketSameLine": true,
   "eslintIntegration": true,
   "arrowParens": "always",
   "trailingComma": "none",
   "htmlWhitespaceSensitivity": "css",
-  "semi": true
+  "semi": true,
+  "useTabs": true,
+  "endOfLine": "auto"
 }
