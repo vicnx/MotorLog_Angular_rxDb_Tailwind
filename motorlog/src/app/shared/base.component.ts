@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
@@ -16,19 +16,20 @@ export class BaseComponent {
     public const = CONSTANTS;
     public userData: UserModel = {} as UserModel;
 
-    constructor(
-        protected route: ActivatedRoute,
-        protected router: Router,
-        protected translateService: TranslateService,
-        protected utils: UtilsService,
-        protected messageService: MessageService,
-        public spinner: NgxSpinnerService
-    ) {
+    // Services
+    routeSvc = inject(ActivatedRoute);
+    utilsSvc = inject(UtilsService);
+    translateSvc = inject(TranslateService);
+    routerSvc = inject(Router);
+    messageSvc = inject(MessageService);
+    spinnerSvc = inject(NgxSpinnerService);
+
+    constructor() {
         this.pageName = '';
     }
 
     public showNotImplemented(): void {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key:'toast' });
+        this.messageSvc.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key: 'toast' });
     }
 
     protected checkUser(): void {
@@ -44,6 +45,6 @@ export class BaseComponent {
     }
 
     public showErrorMsg(msg: string): void {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: msg, key:'toast' });
+        this.messageSvc.add({ severity: 'error', summary: 'Error', detail: msg, key: 'toast' });
     }
 }

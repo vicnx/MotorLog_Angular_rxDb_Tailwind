@@ -25,28 +25,30 @@ export class AppComponent implements OnInit {
   showMenu = false;
   // darkMode = signal<boolean>(false)
 
+  // Services
   vehiclesSvc = inject(VehiclesApiService)
+  translateSvc = inject(TranslateService);
+  menuSvc= inject(MenuService);
 
-  constructor(private translateService: TranslateService, private menuService: MenuService, private themeService: ThemeService, private messageService: MessageService){
-    this.translateService.addLangs(['en', 'es']);
-    this.translateService.setDefaultLang('en');
-    const browserLang = this.translateService.getBrowserLang();
-    this.translateService.use(browserLang?.match(/en|es/) ? browserLang : 'es');
+  constructor(){
+    this.translateSvc.addLangs(['en', 'es']);
+    this.translateSvc.setDefaultLang('en');
+    const browserLang = this.translateSvc.getBrowserLang();
+    this.translateSvc.use(browserLang?.match(/en|es/) ? browserLang : 'es');
   }
 
   public ngOnInit(): void {
     //TODO Check user logged
-    this.menuService.checkEnableMenu();
+    this.menuSvc.checkEnableMenu();
     this.subscribesServices();
     this.vehiclesSvc.getAllBrands().subscribe({
       next: (res) =>
       console.log(res)
     })
-
   }
 
   private subscribesServices(): void {
-    this.menuService.enableMenu$.subscribe((enableMenu)=> this.showMenu = enableMenu)
+    this.menuSvc.enableMenu$.subscribe((enableMenu)=> this.showMenu = enableMenu)
     // this.themeService.isDarkMode$.subscribe((darkMode)=> this.darkMode.set(darkMode))
   }
 

@@ -1,10 +1,10 @@
-import { FormsModule } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UtilsService } from '@shared/services/utils.service';
-import { DropdownModule } from 'primeng/dropdown';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MenuService } from '@shared/services/menu.service';
+import { UtilsService } from '@shared/services/utils.service';
+import { DropdownModule } from 'primeng/dropdown';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
@@ -17,38 +17,37 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 export class NavbarComponent implements OnInit {
     menuOptions: any[] = [];
     langs: any[] | undefined;
-
     selectedLang: any | undefined;
-    constructor(private utils: UtilsService, private translateService: TranslateService, private menuService: MenuService) {
-    }
+
+    // Services
+    utilsSvc = inject(UtilsService);
+    translateSvc = inject(TranslateService);
+    menuSvc = inject(MenuService);
+    constructor() {}
 
     public avatarImage: string;
 
     ngOnInit() {
-
-        this.avatarImage = this.utils.generateAvatar('random');
+        this.avatarImage = this.utilsSvc.generateAvatar('random');
         this.langs = [
             { label: 'Español', icon: 'fi fi-es', value: 'es' },
             { label: 'Inglés', icon: 'fi fi-gb', value: 'en' }
         ];
         this.selectedLang = this.langs[0];
-        this.translateService.onLangChange.subscribe(() => {
-          this.menuOptions = [
-            { label: this.translateService.instant('pages.home.title'), link: '#' },
-            { label: 'About', link: '#' },
-            { label: 'Services', link: '#' },
-            { label: 'Pricing', link: '#' },
-            { label: 'Contact', link: '#' }
-        ];
-      });
-
+        this.translateSvc.onLangChange.subscribe(() => {
+            this.menuOptions = [
+                { label: this.translateSvc.instant('pages.home.title'), link: '#' },
+                { label: 'About', link: '#' },
+                { label: 'Services', link: '#' },
+                { label: 'Pricing', link: '#' },
+                { label: 'Contact', link: '#' }
+            ];
+        });
     }
 
-    private initUi():void {
-
-    }
+    private initUi(): void {}
 
     toggleSidebar() {
-      this.menuService.toogleMenu();
+        this.menuSvc.toogleMenu();
     }
 }

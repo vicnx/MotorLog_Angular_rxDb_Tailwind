@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ThemeService } from '@shared/services/theme.service';
 
 @Component({
@@ -13,16 +13,17 @@ import { ThemeService } from '@shared/services/theme.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeToggleComponent implements OnInit {
-   //TODO problema con primeng. funciona el cambio pero los componentes de primng no cambian de tema.
+    //TODO problema con primeng. funciona el cambio pero los componentes de primng no cambian de tema.
     isDarkTheme: boolean;
-
-    constructor(private themeService: ThemeService) {}
+    // Services
+    themeSvc = inject(ThemeService);
+    constructor() {}
 
     ngOnInit(): void {
-        this.themeService.isDarkMode$.subscribe((isDarkTheme) => (this.isDarkTheme = isDarkTheme));
+        this.themeSvc.isDarkMode$.subscribe((isDarkTheme) => (this.isDarkTheme = isDarkTheme));
     }
 
     toggleTheme() {
-        this.themeService.toggleDarkMode();
+        this.themeSvc.toggleDarkMode();
     }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
@@ -23,18 +23,24 @@ export class SidebarComponent {
     public avatarImage: string;
     public profile: any = {};
 
-    constructor(private route: ActivatedRoute, private utils: UtilsService, private translate: TranslateService, private router: Router, private menuService: MenuService) {}
+    routeSvc= inject(ActivatedRoute);
+    utilsSvc= inject(UtilsService);
+    translateSvc= inject(TranslateService);
+    routerSvc= inject(Router);
+    menuSvc = inject(MenuService)
+
+    constructor() {}
 
     ngOnInit(): void {
-        this.menuService.showMenu$.subscribe((open) => (this.show = open));
+        this.menuSvc.showMenu$.subscribe((open) => (this.show = open));
         this.routeControl();
         this.loadMenu();
-        this.avatarImage = this.profile.avatar || this.utils.generateAvatar('random');
+        this.avatarImage = this.profile.avatar || this.utilsSvc.generateAvatar('random');
     }
 
     private routeControl(): void {
         this.pageSelected = window.location.hash.substr(1);
-        this.router.events.subscribe((event) => {
+        this.routerSvc.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.pageSelected = event.url;
             }
@@ -47,7 +53,7 @@ export class SidebarComponent {
     }
 
     private loadMenu(): void {
-        this.menuService.getMenuItems().subscribe({
+        this.menuSvc.getMenuItems().subscribe({
             next: (resp) => {
                 this.menuItems = resp.menuItems;
             }
@@ -55,6 +61,6 @@ export class SidebarComponent {
     }
 
     public hideSidebar(): void {
-        this.menuService.toogleMenu();
+        this.menuSvc.toogleMenu();
     }
 }

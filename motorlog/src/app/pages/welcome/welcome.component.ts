@@ -1,13 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
-import { UtilsService } from '@shared/services/utils.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
@@ -24,15 +20,8 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
     public welcomeImg: string = './../../../../../assets//images/welcome.svg';
     public loginForm: FormGroup; // Definir FormGroup
 
-    constructor(
-        protected override route: ActivatedRoute,
-        protected override router: Router,
-        protected translate: TranslateService,
-        protected override utils: UtilsService,
-        protected override messageService: MessageService,
-        public override spinner: NgxSpinnerService
-    ) {
-        super(route, router, translate, utils, messageService, spinner);
+    constructor() {
+        super();
         this.loginForm = new FormGroup({
             userName: new FormControl('', [Validators.required, Validators.maxLength(Number(CONSTANTS.form.inputText))])
         });
@@ -43,10 +32,10 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
     }
 
     public checkErrors(): void {
-      this.spinner.show();
+        this.spinnerSvc.show();
         if (this.loginForm.invalid) {
-            this.showErrorMsg(this.translate.instant('errors.MSGS.name'));
-            this.spinner.hide();
+            this.showErrorMsg(this.translateSvc.instant('errors.MSGS.name'));
+            this.spinnerSvc.hide();
             return;
         }
         this.registerUser();
@@ -57,7 +46,7 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
     }
 
     private registerUser(): void {
-      //TODO: registrar usuario.
-      this.spinner.hide();
+        //TODO: registrar usuario.
+        this.spinnerSvc.hide();
     }
 }

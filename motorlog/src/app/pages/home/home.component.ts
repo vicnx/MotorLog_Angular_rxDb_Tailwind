@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { NgxSpinner, NgxSpinnerComponent, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { BaseComponent } from '@shared/base.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
     selector: 'app-home',
@@ -10,10 +11,8 @@ import { NgxSpinner, NgxSpinnerComponent, NgxSpinnerModule, NgxSpinnerService } 
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-    constructor(public translateService: TranslateService, public spinner: NgxSpinnerService) {
-      // this.spinner.show()
-      console.log(this.translateService.instant('pages.home.title'))
-
+export class HomeComponent extends BaseComponent implements OnInit {
+    ngOnInit(): void {
+        console.log('Home Page');
     }
 }
