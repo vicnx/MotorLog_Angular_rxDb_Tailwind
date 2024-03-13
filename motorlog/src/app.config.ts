@@ -8,10 +8,11 @@ import { initDatabase } from '@shared/services/db.service';
 import { HttpLoaderFactory } from './main';
 import { routes } from './routes';
 import { ErrorResponseInterceptor } from '@shared/interceptors/error-response.interceptor';
+import { LoadingInterceptor } from '@shared/interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(withFetch(), withInterceptors([ErrorResponseInterceptor])),
+        provideHttpClient(withFetch(), withInterceptors([ErrorResponseInterceptor, LoadingInterceptor])),
         importProvidersFrom(
             BrowserModule,
             HttpClientModule,

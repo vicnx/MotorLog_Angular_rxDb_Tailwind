@@ -16,15 +16,16 @@ async function createDatabase(): Promise<any> {
         storage: getRxStorageDexie()
     });
     // create collection
+    // id: { type: 'string', primary: true, maxLength: 100 },
+    // name: { type: 'string' },
+    // avatar: { type: 'string' },
+    // username: { type: 'string'}
     await db.addCollections({
         user: {
             schema: USER_SCHEMA
         }
     });
-    // id: { type: 'string', primary: true, maxLength: 100 },
-    // name: { type: 'string' },
-    // avatar: { type: 'string' },
-    // username: { type: 'string'}
+
 
     // const test = await db.user.insert({
     //     id: '1',

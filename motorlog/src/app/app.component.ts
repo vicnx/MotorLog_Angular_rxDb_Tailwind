@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
@@ -9,6 +9,7 @@ import { ThemeService } from '@shared/services/theme.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { VehiclesApiService } from './api/vehicles_api.service';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class AppComponent implements OnInit {
   showMenu = false;
   // darkMode = signal<boolean>(false)
 
+  vehiclesSvc = inject(VehiclesApiService)
+
   constructor(private translateService: TranslateService, private menuService: MenuService, private themeService: ThemeService, private messageService: MessageService){
     this.translateService.addLangs(['en', 'es']);
     this.translateService.setDefaultLang('en');
@@ -35,6 +38,11 @@ export class AppComponent implements OnInit {
     //TODO Check user logged
     this.menuService.checkEnableMenu();
     this.subscribesServices();
+    this.vehiclesSvc.getAllBrands().subscribe({
+      next: (res) =>
+      console.log(res)
+    })
+
   }
 
   private subscribesServices(): void {
