@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
 })
 export class WelcomeComponent extends BaseComponent implements OnInit {
 	public welcomeImg: string = './../../../../../assets//images/welcome.svg';
-	public loginForm: FormGroup; // Definir FormGroup
+	public loginForm: FormGroup;
 	constructor() {
 		super();
 		this.loginForm = new FormGroup({
@@ -27,11 +27,11 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		});
 		effect(() => {
 			if (this.userSvc.userExistOnBd()) {
-        this.userSvc.checkUserExistsDb()
+				this.userSvc.checkUserExistsDb();
 			}
-      if(this.userSvc.isUserLogged()){
+			if (this.userSvc.isUserLogged()) {
 				this.routerSvc.navigate([this.const.routes.home]);
-      }
+			}
 		});
 	}
 
@@ -40,11 +40,11 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public checkErrors(): void {
-    if(this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()){
-      this.userSvc.setLogginUser(true);
-		  this.spinnerSvc.hide();
-      return
-    }
+		if (this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()) {
+			this.userSvc.setLogginUser(true);
+			this.spinnerSvc.hide();
+			return;
+		}
 		this.spinnerSvc.show();
 		if (this.loginForm.invalid) {
 			this.showErrorMsg(this.translateSvc.instant('errors.MSGS.name'));
@@ -55,14 +55,13 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public importData(): void {
-		this.userSvc.getUser();
 		this.showNotImplemented();
 	}
 
 	private registerUser(): void {
-    if(!this.userSvc.userExistOnBd()){
-      this.userSvc.setUser(this.loginForm.get('userName')?.value);
-		  this.spinnerSvc.hide();
-    }
+		if (!this.userSvc.userExistOnBd()) {
+			this.userSvc.setUser(this.loginForm.get('userName')?.value);
+			this.spinnerSvc.hide();
+		}
 	}
 }

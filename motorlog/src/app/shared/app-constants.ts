@@ -1,5 +1,4 @@
 export const CONSTANTS = {
-    defaultAvatar: 'path/to/default-avatar.png',
     appName: 'MotorLog',
     routes: {
         home: '/home',
@@ -15,7 +14,8 @@ export const CONSTANTS = {
     },
     user: {
         default: {
-            name: 'Default User'
+            name: 'Default User',
+            avatar: 'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg'
         }
     },
     form: {

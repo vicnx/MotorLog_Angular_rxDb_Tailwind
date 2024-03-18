@@ -6,6 +6,8 @@ import { MenuService } from '@shared/services/menu.service';
 import { UtilsService } from '@shared/services/utils.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { UserService } from '@shared/services/user.service';
+import { CONSTANTS } from '@shared/app-constants';
 
 @Component({
     selector: 'app-navbar',
@@ -23,26 +25,13 @@ export class NavbarComponent implements OnInit {
     utilsSvc = inject(UtilsService);
     translateSvc = inject(TranslateService);
     menuSvc = inject(MenuService);
+    userSvc = inject(UserService);
     constructor() {}
 
     public avatarImage: string;
 
     ngOnInit() {
-        this.avatarImage = this.utilsSvc.generateAvatar('random');
-        this.langs = [
-            { label: 'Español', icon: 'fi fi-es', value: 'es' },
-            { label: 'Inglés', icon: 'fi fi-gb', value: 'en' }
-        ];
-        this.selectedLang = this.langs[0];
-        this.translateSvc.onLangChange.subscribe(() => {
-            this.menuOptions = [
-                { label: this.translateSvc.instant('pages.home.title'), link: '#' },
-                { label: 'About', link: '#' },
-                { label: 'Services', link: '#' },
-                { label: 'Pricing', link: '#' },
-                { label: 'Contact', link: '#' }
-            ];
-        });
+        this.avatarImage = this.userSvc.user().avatar || CONSTANTS.user.default.avatar;
     }
 
     private initUi(): void {}

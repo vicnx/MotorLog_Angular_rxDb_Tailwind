@@ -21,4 +21,8 @@ export class UtilsService {
 
     return avatar.toDataUriSync();
   }
+
+  public  generateUsername(name: string): any {
+    return name.toLowerCase().split(" ").map(word => word[0]).join("");
+  }
 }

@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { RxUserDocumentType, UserModel } from '@shared/models/user.model';
 import { CONSTANTS } from './../app-constants';
 import { DBService } from './db.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	dbSvc = inject(DBService);
+  utilsSvc = inject(UtilsService);
 	user = signal<UserModel>({} as UserModel);
 	isUserLogged = signal<boolean>(false);
 	userExistOnBd: Signal<boolean> = computed(() => (this.user() ? true : false));
@@ -22,7 +24,7 @@ export class UserService {
 
 	// prettier-ignore
 	setUser(name: string) {
-		const data = { id: '1', name: name} as RxUserDocumentType;
+		const data = { id: '1', name: name, avatar: this.utilsSvc.generateAvatar(name), resgister_date: new Date(), gender: null, username: this.utilsSvc.generateUsername(name)} as RxUserDocumentType;
 		const query = this.dbSvc.db.user.insert(data);
 		query.then(() => {
 				this.getUser();
