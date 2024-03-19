@@ -1,5 +1,5 @@
 {
-	"printWidth": 175,
+	"printWidth": 10000,
 	"tabWidth": 4,
 	"singleQuote": true,
 	"bracketSameLine": true,
@@ -11,6 +11,7 @@
 	"semi": true,
 	"useTabs": true,
 	"endOfLine": "auto",
+  "proseWrap":"preserve",
 	"overrides": [
 		{
 			"files": "*.html",

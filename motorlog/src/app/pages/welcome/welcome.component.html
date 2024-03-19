@@ -3,7 +3,7 @@
 		<div class="flex flex-col justify-center flex-grow">
 			<div class="flex items-center flex-col">
 				<img class="h-7.5" [src]="welcomeImg" alt="" class="h-32 mx-auto" />
-				<h1 class="text-3xl mt-5">
+				<h1 class="text-2xl mt-5">
 					@if (!userSvc.userExistOnBd()) {
 					{{ 'welcome.title' | translate }}
 					}

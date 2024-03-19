@@ -4,12 +4,12 @@ import { addRxPlugin, createRxDatabase } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { RxMotorLogDataBase } from 'src/app/RxDB';
 import { RxDBJsonDumpPlugin } from "rxdb/plugins/json-dump";
-// import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
+import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
 
 
 addRxPlugin(RxDBJsonDumpPlugin);
 // para ver errores.
-// addRxPlugin(RxDBDevModePlugin);
+addRxPlugin(RxDBDevModePlugin);
 async function createDatabase(): Promise<any> {
     const db = await createRxDatabase<any>({
         name: 'motorlog-db',
