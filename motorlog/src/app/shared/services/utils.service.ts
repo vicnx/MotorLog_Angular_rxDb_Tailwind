@@ -24,6 +24,6 @@ export class UtilsService {
 	public generateUsername(name: string): any {
 		const words = name.toLowerCase().split(' ');
 		//prettier-ignore
-		return words[0][0] + (words.length > 1 ? words[1] : '') + (words.length > 2 ? words.slice(2).map(word => word[0]).join("") : '');
+		return words.length == 1 ? words[0] : words[0][0] + (words.length > 1 ? words[1] : '') + (words.length > 2 ? words.slice(2).map(word => word[0]).join("") : '');
 	}
 }
