@@ -1,5 +1,5 @@
 {
-	"printWidth": 10000,
+	"printWidth": 175,
 	"tabWidth": 4,
 	"singleQuote": true,
 	"bracketSameLine": true,
@@ -9,7 +9,7 @@
 	"trailingComma": "none",
 	"htmlWhitespaceSensitivity": "css",
 	"semi": true,
-	"useTabs": true,
+	"useTabs": false,
 	"endOfLine": "auto",
   "proseWrap":"preserve",
 	"overrides": [

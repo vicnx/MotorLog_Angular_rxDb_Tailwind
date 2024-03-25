@@ -13,3 +13,8 @@
   @tailwind utilities;
 }
 @import "flag-icons/css/flag-icons.min.css";
+
+.p-sidebar-full {
+  max-height: 100vh;
+  max-width: 100vw;
+}

@@ -7,19 +7,20 @@ import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-togg
 import { MenuService } from '@shared/services/menu.service';
 import { ThemeService } from '@shared/services/theme.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { VehiclesApiService } from './api/vehicles_api.service';
 import { DBService } from '@shared/services/db.service';
 import { UserService } from '@shared/services/user.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule],
-	providers: [MenuService, ThemeService, MessageService, UserService, DBService]
+	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule],
+	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService]
 })
 export class AppComponent implements OnInit {
 	title = 'motorlog';

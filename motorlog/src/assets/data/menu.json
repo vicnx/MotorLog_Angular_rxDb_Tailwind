@@ -3,20 +3,8 @@
     {
       "route": "/home",
       "url": "/home",
-      "icon": "home",
+      "icon": "fa-home",
       "name": "pages.home.title"
-    },
-    {
-      "route": "/profile",
-      "url": "/profile",
-      "icon": "person",
-      "name": "pages.profile.title"
-    },
-    {
-      "route": "/settings",
-      "url": "/settings",
-      "icon": "settings",
-      "name": "pages.settings.title"
     }
   ]
 }

@@ -2,7 +2,7 @@ import { HttpClientModule, HttpBackend, provideHttpClient, withFetch, withInterc
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { initDatabase } from '@shared/services/db.service';
 import { HttpLoaderFactory } from './main';
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
             }),
             BrowserAnimationsModule
         ),
-        provideRouter(routes),
+        provideRouter(routes, withHashLocation()),
         { provide: APP_INITIALIZER, useFactory: () => initDatabase, multi: true }
     ]
 };

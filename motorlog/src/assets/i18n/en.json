@@ -1,7 +1,7 @@
 {
     "pages": {
       "home": {
-        "title": "Inicio"
+        "title": "Home"
     }
     },
     "welcome": {
@@ -20,5 +20,11 @@
             "request_error": "An error occurred in the request",
             "name": "We need to know your name"
         }
+    },
+    "confirm": {
+        "default_msg": "Are you sure you want to proceed?",
+        "default_header": "Confirmation",
+        "default_yes": "Yes",
+        "default_no": "No"
     }
 }

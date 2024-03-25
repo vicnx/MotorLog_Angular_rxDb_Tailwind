@@ -11,15 +11,20 @@
         "info2": "Dime tu nombre",
         "name": "Nombre",
         "importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste.",
-        "start":"Empezar",
-        "continue":"Continuar",
+        "start": "Empezar",
+        "continue": "Continuar",
         "welcome-back": "Bienvenido de nuevo, {{userName}}"
-
     },
     "errors": {
         "MSGS": {
             "request_error": "Ocurrió un error en la solicitud",
             "name": "Necesitamos saber tu nombre."
         }
+    },
+    "confirm": {
+        "default_msg": "¿Estas seguro que deseas continuar?",
+        "default_header": "Confirmación",
+        "default_yes": "Sí",
+        "default_no": "No"
     }
 }
