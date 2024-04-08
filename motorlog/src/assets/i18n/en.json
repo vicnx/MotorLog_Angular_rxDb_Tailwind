@@ -26,5 +26,9 @@
         "default_header": "Confirmation",
         "default_yes": "Yes",
         "default_no": "No"
+    },
+    "lang": {
+      "spanish": "Spanish",
+      "english": "English"
     }
 }

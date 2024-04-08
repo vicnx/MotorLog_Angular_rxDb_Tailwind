@@ -1,7 +1,7 @@
 {
     "pages": {
         "home": {
-            "title": "Home"
+            "title": "Inicio"
         }
     },
     "welcome": {
@@ -26,5 +26,9 @@
         "default_header": "Confirmación",
         "default_yes": "Sí",
         "default_no": "No"
+    },
+    "lang": {
+      "spanish": "Español",
+      "english": "Inglés"
     }
 }

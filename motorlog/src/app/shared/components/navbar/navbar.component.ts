@@ -8,11 +8,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { UserService } from '@shared/services/user.service';
 import { CONSTANTS } from '@shared/app-constants';
+import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent],
+    imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent, LangDropdownComponent],
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
