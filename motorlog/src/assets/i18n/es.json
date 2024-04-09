@@ -1,34 +1,37 @@
 {
-    "pages": {
-        "home": {
-            "title": "Inicio"
-        }
-    },
-    "welcome": {
-        "title": "Bienvenido a ",
-        "info": "La aplicación para tener control de tus vehículos.",
-        "subtitle1": "¿Primera vez?",
-        "info2": "Dime tu nombre",
-        "name": "Nombre",
-        "importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste.",
-        "start": "Empezar",
-        "continue": "Continuar",
-        "welcome-back": "Bienvenido de nuevo, {{userName}}"
-    },
-    "errors": {
-        "MSGS": {
-            "request_error": "Ocurrió un error en la solicitud",
-            "name": "Necesitamos saber tu nombre."
-        }
-    },
-    "confirm": {
-        "default_msg": "¿Estas seguro que deseas continuar?",
-        "default_header": "Confirmación",
-        "default_yes": "Sí",
-        "default_no": "No"
-    },
-    "lang": {
-      "spanish": "Español",
-      "english": "Inglés"
-    }
+	"pages": {
+		"home": {
+			"title": "Inicio"
+		},
+		"add-vehicle": {
+			"title": "Añadir nuevo vehículo"
+		}
+	},
+	"welcome": {
+		"title": "Bienvenido a ",
+		"info": "La aplicación para tener control de tus vehículos.",
+		"subtitle1": "¿Primera vez?",
+		"info2": "Dime tu nombre",
+		"name": "Nombre",
+		"importText": "También puedes importar una copia de seguridad y continuar donde lo dejaste.",
+		"start": "Empezar",
+		"continue": "Continuar",
+		"welcome-back": "Bienvenido de nuevo, {{userName}}"
+	},
+	"errors": {
+		"MSGS": {
+			"request_error": "Ocurrió un error en la solicitud",
+			"name": "Necesitamos saber tu nombre."
+		}
+	},
+	"confirm": {
+		"default_msg": "¿Estas seguro que deseas continuar?",
+		"default_header": "Confirmación",
+		"default_yes": "Sí",
+		"default_no": "No"
+	},
+	"lang": {
+		"spanish": "Español",
+		"english": "Inglés"
+	}
 }

@@ -1,34 +1,37 @@
 {
-    "pages": {
-      "home": {
-        "title": "Home"
-    }
-    },
-    "welcome": {
-        "title": "Welcome to ",
-        "info": "The application to have control of your vehicles.",
-        "subtitle1": "First time?",
-        "info2":"Tell me your name",
-        "name":"Name",
-        "importText": "You can also import a backup and continue where you left off.",
-        "start":"Start",
-        "continue":"Continue",
-        "welcome-back": "Welcome back {{userName}}"
-    },
-    "errors": {
-        "MSGS": {
-            "request_error": "An error occurred in the request",
-            "name": "We need to know your name"
-        }
-    },
-    "confirm": {
-        "default_msg": "Are you sure you want to proceed?",
-        "default_header": "Confirmation",
-        "default_yes": "Yes",
-        "default_no": "No"
-    },
-    "lang": {
-      "spanish": "Spanish",
-      "english": "English"
-    }
+	"pages": {
+		"home": {
+			"title": "Home"
+		},
+		"add-vehicle": {
+			"title": "Add new vehicle"
+		}
+	},
+	"welcome": {
+		"title": "Welcome to ",
+		"info": "The application to have control of your vehicles.",
+		"subtitle1": "First time?",
+		"info2": "Tell me your name",
+		"name": "Name",
+		"importText": "You can also import a backup and continue where you left off.",
+		"start": "Start",
+		"continue": "Continue",
+		"welcome-back": "Welcome back {{userName}}"
+	},
+	"errors": {
+		"MSGS": {
+			"request_error": "An error occurred in the request",
+			"name": "We need to know your name"
+		}
+	},
+	"confirm": {
+		"default_msg": "Are you sure you want to proceed?",
+		"default_header": "Confirmation",
+		"default_yes": "Yes",
+		"default_no": "No"
+	},
+	"lang": {
+		"spanish": "Spanish",
+		"english": "English"
+	}
 }

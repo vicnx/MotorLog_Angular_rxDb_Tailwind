@@ -1,0 +1,41 @@
+<div class="container mx-auto">
+  <form class="p-4">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Nombre del Vehículo</label>
+      <input type="text" class="p-2 border border-gray-300 rounded-md w-full" placeholder="Nombre del Vehículo">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Marca</label>
+      <p-dropdown [options]="marcas" [style]="{'width':'100%'}" placeholder="Seleccione una marca"></p-dropdown>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Modelo</label>
+      <p-dropdown [options]="modelos" [style]="{'width':'100%'}" placeholder="Seleccione un modelo"></p-dropdown>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Color</label>
+      <input type="text" class="p-2 border border-gray-300 rounded-md w-full" placeholder="Color">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Imagen</label>
+      <input type="file" class="p-2 border border-gray-300 rounded-md w-full" accept="image/*">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">CC</label>
+      <input type="number" class="p-2 border border-gray-300 rounded-md w-full" placeholder="CC">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">CV</label>
+      <input type="number" class="p-2 border border-gray-300 rounded-md w-full" placeholder="CV">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Icono</label>
+      <p-dropdown [options]="iconos" [style]="{'width':'100%'}" placeholder="Seleccione un icono"></p-dropdown>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Observaciones</label>
+      <textarea class="p-2 border border-gray-300 rounded-md w-full" rows="3" placeholder="Observaciones"></textarea>
+    </div>
+    <p-button label="Submit"></p-button>
+  </form>
+</div>

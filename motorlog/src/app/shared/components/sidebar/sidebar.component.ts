@@ -60,6 +60,7 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public hideSidebar(): void {
+    console.log('hideSidebar')
 		this.menuSvc.toogleMenu();
 	}
 }
