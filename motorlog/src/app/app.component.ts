@@ -13,6 +13,7 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 import { DBService } from '@shared/services/db.service';
 import { UserService } from '@shared/services/user.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { VehiclesService } from '@shared/services/vehicles.service';
 
 @Component({
 	selector: 'app-root',
@@ -20,17 +21,18 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
 	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule],
-	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService]
+	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService, VehiclesService, VehiclesApiService]
 })
 export class AppComponent implements OnInit {
 	title = 'motorlog';
 	// darkMode = signal<boolean>(false)
 
 	// Services
-	vehiclesSvc = inject(VehiclesApiService);
+	vehiclesApiSvc = inject(VehiclesApiService);
 	translateSvc = inject(TranslateService);
 	menuSvc = inject(MenuService);
 	userSvc = inject(UserService);
+	vehiclesSvc = inject(VehiclesService);
 
 	constructor() {
 		this.translateSvc.addLangs(['en', 'es']);

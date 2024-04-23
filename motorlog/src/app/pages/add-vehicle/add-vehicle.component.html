@@ -1,41 +1,62 @@
 <div class="container mx-auto">
-  <form class="p-4">
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Nombre del Vehículo</label>
-      <input type="text" class="p-2 border border-gray-300 rounded-md w-full" placeholder="Nombre del Vehículo">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Marca</label>
-      <p-dropdown [options]="marcas" [style]="{'width':'100%'}" placeholder="Seleccione una marca"></p-dropdown>
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Modelo</label>
-      <p-dropdown [options]="modelos" [style]="{'width':'100%'}" placeholder="Seleccione un modelo"></p-dropdown>
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Color</label>
-      <input type="text" class="p-2 border border-gray-300 rounded-md w-full" placeholder="Color">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Imagen</label>
-      <input type="file" class="p-2 border border-gray-300 rounded-md w-full" accept="image/*">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">CC</label>
-      <input type="number" class="p-2 border border-gray-300 rounded-md w-full" placeholder="CC">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">CV</label>
-      <input type="number" class="p-2 border border-gray-300 rounded-md w-full" placeholder="CV">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Icono</label>
-      <p-dropdown [options]="iconos" [style]="{'width':'100%'}" placeholder="Seleccione un icono"></p-dropdown>
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Observaciones</label>
-      <textarea class="p-2 border border-gray-300 rounded-md w-full" rows="3" placeholder="Observaciones"></textarea>
-    </div>
-    <p-button label="Submit"></p-button>
-  </form>
+	<form class="p-4" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.vehicle_name' | translate }}</label>
+			<input pInputText type="text" class="w-full" [placeholder]="'add_vehicle.vehicle_name' | translate" formControlName="nombreVehiculo" />
+			<div *ngIf="vehicleForm?.get('nombreVehiculo')?.invalid && vehicleForm?.get('nombreVehiculo')?.touched" class="text-red-500 text-sm mt-1">
+				{{ 'add_vehicle.validations.vehicle_name_required' | translate }}
+			</div>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.brand' | translate }}</label>
+			<p-dropdown [options]="marcas" [style]="{ width: '100%' }" [placeholder]="'add_vehicle.brand_placeholder' | translate" formControlName="marca"></p-dropdown>
+			<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="text-red-500 text-sm mt-1">
+				{{ 'add_vehicle.validations.brand_required' | translate }}
+			</div>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.model' | translate }}</label>
+			<p-dropdown [options]="modelos" [style]="{ width: '100%' }" [placeholder]="'add_vehicle.model_placeholder' | translate"formControlName="modelo"></p-dropdown>
+			<div *ngIf="vehicleForm?.get('modelo')?.invalid && vehicleForm?.get('modelo')?.touched" class="text-red-500 text-sm mt-1">
+        {{ 'add_vehicle.validations.model_required' | translate }}
+			</div>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.color' | translate }}</label>
+			<p-colorPicker formControlName="color"></p-colorPicker>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.imagen' | translate }}</label>
+			<input pInputText type="file" class="w-full" accept="image/*" formControlName="imagen" />
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.cc' | translate }}</label>
+			<input pInputText type="number" class="w-full" placeholder="CC" formControlName="cc" />
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.cv' | translate }}</label>
+			<input pInputText type="number" class="w-full" placeholder="CV" formControlName="cv" />
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.icon' | translate }}</label>
+			<p-selectButton [options]="iconos" [(ngModel)]="iconoSeleccionado" optionLabel="icon" formControlName="icono">
+				<ng-template let-icono pTemplate>
+					<i [class]="icono"></i>
+				</ng-template>
+			</p-selectButton>
+			<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">
+        {{ 'add_vehicle.validations.icono_required' | translate }}
+			</div>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.observ' | translate }}</label>
+			<textarea
+				class="p-2 border border-gray-300 rounded-md w-full"
+				rows="3"
+				placeholder="Observaciones"
+				formControlName="observaciones"
+			></textarea>
+		</div>
+		<p-button type="submit" [label]="'add_vehicle.save' | translate"></p-button>
+	</form>
 </div>

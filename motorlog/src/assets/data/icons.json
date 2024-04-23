@@ -1,0 +1,15 @@
+{
+	"vehicle_icons": [
+		"fas fa-car",
+		"fas fa-truck",
+		"fas fa-motorcycle",
+		"fas fa-bicycle",
+		"fas fa-plane",
+		"fas fa-rocket",
+		"fas fa-dog",
+		"fas fa-cat",
+		"fas fa-fish",
+		"fas fa-dove",
+		"fas fa-horse"
+	]
+}

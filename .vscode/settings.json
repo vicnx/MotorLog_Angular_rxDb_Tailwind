@@ -3,10 +3,5 @@
   "prettier.requireConfig": false,
   "prettier.bracketSpacing": false,
   "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#103511",
-    "titleBar.activeBackground": "#164A17",
-    "titleBar.activeForeground": "#F7FDF7"
-  }
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
 }
