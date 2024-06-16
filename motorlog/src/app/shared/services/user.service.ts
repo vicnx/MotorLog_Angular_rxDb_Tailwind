@@ -28,14 +28,14 @@ export class UserService {
 
     // prettier-ignore
     setUser(name: string) {
-		const data = { id: '1', name: name, avatar: this.utilsSvc.generateAvatar(name), resgister_date: new Date().toString(), gender: null, username: this.utilsSvc.generateUsername(name)} as RxUserDocumentType;
-		const query = this.dbSvc.db.user.insert(data);
-		query.then(() => {
-				this.getUser();
-			}).catch((error) => {
-				throw error;
-		});
-	}
+      const data = { id: '1', name: name, avatar: this.utilsSvc.generateAvatar(name), resgister_date: new Date().toString(), gender: null, username: this.utilsSvc.generateUsername(name)} as RxUserDocumentType;
+      const query = this.dbSvc.db.user.insert(data);
+      query.then(() => {
+          this.getUser();
+        }).catch((error) => {
+          throw error;
+      });
+	  }
 
     public checkUserExistsDb(): any {
         const query = this.dbSvc.db.user.findOne('1');

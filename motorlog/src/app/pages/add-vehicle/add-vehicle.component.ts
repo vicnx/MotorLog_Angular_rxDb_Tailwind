@@ -12,79 +12,81 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { InputTextModule } from 'primeng/inputtext';
 import { VehiclesService } from '@shared/services/vehicles.service';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
+import { MessageService } from 'primeng/api';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
-	imports: [CommonModule, TranslateModule, NgxSpinnerModule, InputTextModule, DropdownModule, FormsModule,ReactiveFormsModule, ButtonModule, SelectButtonModule, ColorPickerModule ],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		NgxSpinnerModule,
+		InputTextModule,
+		DropdownModule,
+		FormsModule,
+		ReactiveFormsModule,
+		ButtonModule,
+		SelectButtonModule,
+		ColorPickerModule
+	],
 	templateUrl: './add-vehicle.component.html'
 })
 export class AddVehicleComponent extends BaseComponent implements OnInit {
-  //FAKE INFO
-  marcas = ['Marca 1', 'Marca 2', 'Marca 3'];
-  modelos = ['Modelo 1', 'Modelo 2', 'Modelo 3'];
-  iconos = ['fas fa-car', 'fas fa-truck', 'fas fa-motorcycle'];
+	//FAKE INFO
+	optionsBrands = [];
+	// optionsModels = [];
+	optionsIcons = [];
 
-  marcaSeleccionada: string;
-  modeloSeleccionado: string;
-  iconoSeleccionado: string;
 	formBuilder = inject(FormBuilder);
-  vehicleForm: FormGroup;
-  vehicleSvc = inject(VehiclesService)
-  vehiclesApiSvc = inject(VehiclesApiService)
+	vehicleForm: FormGroup;
+	vehicleSvc = inject(VehiclesService);
+	vehiclesApiSvc = inject(VehiclesApiService);
 
 	ngOnInit(): void {
-    this.initForm();
+		this.initForm();
 	}
 
-  onSubmit() {
-    if (this.vehicleForm.valid) {
-      console.log(this.vehicleForm.value);
-    } else {
-      this.marcarCamposComoTocados(this.vehicleForm);
-    }
-  }
+	public onSubmit(): void {
+		if (this.vehicleForm.valid) {
+			this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
+				next: (res) => {
+					this.showSuccess();
+					this.routerSvc.navigate([this.const.routes.home]);
+				}
+			});
+		} else {
+			this.markFieldsAsTouched(this.vehicleForm);
+		}
+	}
 
-  private marcarCamposComoTocados(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-      control.markAsDirty();
+	private initForm(): void {
+		this.vehicleForm = this.formBuilder.group({
+			nombreVehiculo: ['', Validators.required],
+			marca: ['', Validators.required],
+			modelo: ['', Validators.required],
+			color: [''],
+			imagen: [{ value: '', disabled: true }],
+			cc: ['', [Validators.max(9999)]],
+			cv: ['', [Validators.max(999)]],
+			icono: ['', Validators.required],
+			observaciones: ['', Validators.maxLength(200)]
+		});
+		this.loadIcons();
+		this.loadDropdowns();
+	}
 
-      if (control instanceof FormGroup) {
-        this.marcarCamposComoTocados(control);
-      }
-    });
-  }
-
-  private initForm(): void {
-    this.vehicleForm = this.formBuilder.group({
-      nombreVehiculo: ['', Validators.required],
-      marca: ['', Validators.required],
-      modelo: ['', Validators.required],
-      color: [''],
-      imagen: [{ value: '', disabled: true }],
-      cc: ['', [Validators.max(9999)]],
-      cv: ['', [Validators.max(999)]],
-      icono: ['', Validators.required],
-      observaciones: ['', Validators.maxLength(200)]
-    });
-    	this.loadIcons();
-      this.loadDropdowns()
-
-  }
-
-  private loadIcons(): void {
-    this.vehicleSvc.getVehicleIcons().subscribe({
+	private loadIcons(): void {
+		this.vehicleSvc.getVehicleIcons().subscribe({
 			next: (resp) => {
-				this.iconos = resp.vehicle_icons;
+				this.optionsIcons = resp.vehicle_icons;
 			}
 		});
-  }
+	}
 
-  private loadDropdowns(): void {
-    this.vehiclesApiSvc.getAllBrands().subscribe({
-      next: (resp)=>{
-        this.marcas = resp.Results
-      }
-    })
-  }
+	private loadDropdowns(): void {
+		this.vehicleSvc.getVehicleBrands().subscribe({
+			next: (resp) => {
+				this.optionsBrands = resp;
+			}
+		});
+	}
 }

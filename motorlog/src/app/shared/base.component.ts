@@ -7,6 +7,7 @@ import { UserModel } from './models/user.model';
 import { UtilsService } from './services/utils.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from './services/user.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     template: ''
@@ -34,6 +35,10 @@ export class BaseComponent {
         this.messageSvc.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key: 'toast' });
     }
 
+    public showSuccess(): void {
+      this.messageSvc.add({ severity: 'success', summary: 'Success', detail:  this.translateSvc.instant('msgs.success'), key: 'toast'});
+    }
+
     protected checkUser(): void {
         // this.dexieService.isLoggedIn$.subscribe((isLoggedIn) => {
         //     this.userIsLogged = this.dexieService.isLoggedIn;
@@ -48,5 +53,15 @@ export class BaseComponent {
 
     public showErrorMsg(msg: string): void {
         this.messageSvc.add({ severity: 'error', summary: 'Error', detail: msg, key: 'toast' });
+    }
+
+    protected markFieldsAsTouched(formGroup: FormGroup) {
+      Object.values(formGroup.controls).forEach((control) => {
+        control.markAsTouched();
+        control.markAsDirty();
+        if (control instanceof FormGroup) {
+          this.markFieldsAsTouched(control);
+        }
+      });
     }
 }

@@ -53,5 +53,8 @@
       "model_required":"Modelo es requerido",
       "icono_required":"Icono es requerido"
     }
+  },
+  "msgs":{
+    "success":"Operación realizada con éxito."
   }
 }

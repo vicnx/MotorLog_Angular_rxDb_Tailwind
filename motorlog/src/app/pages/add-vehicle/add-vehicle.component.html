@@ -9,16 +9,37 @@
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.brand' | translate }}</label>
-			<p-dropdown [options]="marcas" [style]="{ width: '100%' }" [placeholder]="'add_vehicle.brand_placeholder' | translate" formControlName="marca"></p-dropdown>
+			<p-dropdown
+				[options]="optionsBrands"
+				[style]="{ width: '100%' }"
+				[placeholder]="'add_vehicle.brand_placeholder' | translate"
+				formControlName="marca"
+				optionLabel="name"
+        optionValue="code"
+				[filter]="true"
+				filterBy="name"
+				[showClear]="true"
+			></p-dropdown>
 			<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="text-red-500 text-sm mt-1">
 				{{ 'add_vehicle.validations.brand_required' | translate }}
 			</div>
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.model' | translate }}</label>
-			<p-dropdown [options]="modelos" [style]="{ width: '100%' }" [placeholder]="'add_vehicle.model_placeholder' | translate"formControlName="modelo"></p-dropdown>
+      <input pInputText type="text" class="w-full" [placeholder]="'add_vehicle.model' | translate" formControlName="modelo" />
+			<!-- <p-dropdown
+				[options]="optionsModels"
+				[style]="{ width: '100%' }"
+				[placeholder]="'add_vehicle.model_placeholder' | translate"
+				formControlName="modelo"
+				optionLabel="name"
+        optionValue="code"
+				[filter]="true"
+				filterBy="name"
+				[showClear]="true"
+			></p-dropdown> -->
 			<div *ngIf="vehicleForm?.get('modelo')?.invalid && vehicleForm?.get('modelo')?.touched" class="text-red-500 text-sm mt-1">
-        {{ 'add_vehicle.validations.model_required' | translate }}
+				{{ 'add_vehicle.validations.model_required' | translate }}
 			</div>
 		</div>
 		<div class="mb-4">
@@ -39,13 +60,13 @@
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'add_vehicle.icon' | translate }}</label>
-			<p-selectButton [options]="iconos" [(ngModel)]="iconoSeleccionado" optionLabel="icon" formControlName="icono">
+			<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono">
 				<ng-template let-icono pTemplate>
 					<i [class]="icono"></i>
 				</ng-template>
 			</p-selectButton>
 			<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">
-        {{ 'add_vehicle.validations.icono_required' | translate }}
+				{{ 'add_vehicle.validations.icono_required' | translate }}
 			</div>
 		</div>
 		<div class="mb-4">
@@ -53,7 +74,7 @@
 			<textarea
 				class="p-2 border border-gray-300 rounded-md w-full"
 				rows="3"
-				placeholder="Observaciones"
+				[placeholder]="'add_vehicle.observ' | translate"
 				formControlName="observaciones"
 			></textarea>
 		</div>

@@ -1,7 +1,8 @@
 {
   "scss.lint.unknownAtRules": "ignore",
-  "prettier.requireConfig": false,
+  "prettier.requireConfig": true,
   "prettier.bracketSpacing": false,
   "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "prettier.tabWidth": 4
 }
