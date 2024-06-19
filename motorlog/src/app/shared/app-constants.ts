@@ -22,5 +22,6 @@ export const CONSTANTS = {
         inputText: {
             maxLength: 20
         }
-    }
+    },
+    defaultImage: "https://st2.depositphotos.com/12042916/47940/i/450/depositphotos_479409116-stock-photo-raster-cabriolet-car-flat-icon.jpg"
 };

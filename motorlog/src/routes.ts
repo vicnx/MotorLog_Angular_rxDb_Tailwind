@@ -17,6 +17,11 @@ export const routes: Routes = [
 		loadComponent: () => import('@pages/add-vehicle/add-vehicle.component').then((c) => c.AddVehicleComponent),
 		canActivate: [AuthGuard]
 	},
+  {
+		path: 'vehicles-list',
+		loadComponent: () => import('@pages/vehicles-list/vehicles-list.component').then((c) => c.VehiclesListComponent),
+		canActivate: [AuthGuard]
+	},
 	// canActivate: [authGuard]
 	// {
 	//   path: 'home',

@@ -50,6 +50,7 @@ export class AddVehicleComponent extends BaseComponent implements OnInit {
 			this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
 				next: (res) => {
 					this.showSuccess();
+          this.vehicleSvc.getSavedVehicles();
 					this.routerSvc.navigate([this.const.routes.home]);
 				}
 			});
@@ -65,6 +66,7 @@ export class AddVehicleComponent extends BaseComponent implements OnInit {
 			modelo: ['', Validators.required],
 			color: [''],
 			imagen: [{ value: '', disabled: true }],
+			imagenMarca: [{ value: '', disabled: true }],
 			cc: ['', [Validators.max(9999)]],
 			cv: ['', [Validators.max(999)]],
 			icono: ['', Validators.required],

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { UserService } from './user.service';
 import { DBService } from './db.service';
@@ -10,11 +10,13 @@ import * as crypto from 'crypto-js';
 export class VehiclesService {
 	dbSvc = inject(DBService);
 	utilsSvc = inject(UtilsService);
-
+  vehicles = signal<VehicleModel[]>([] as VehicleModel[]);
+  vehiclesBrands = signal<any>([] as any);
 	userSvc = inject(UserService);
 	urlIcons: string = './assets/data/icons.json';
 	urlVehicleBrands: string = './assets/data/vehicle-brands.json';
 	http = inject(HttpClient);
+
 
 	getVehicleIcons(): Observable<any> {
 		return this.http.get(this.urlIcons);
@@ -35,4 +37,19 @@ export class VehiclesService {
 		const hash = crypto.SHA256(data).toString();
 		return hash.substring(0, 10);
 	}
+
+  getSavedVehicles(): any {
+    const query = this.dbSvc.db.vehicles.find({});
+    query.exec().then((results: any) => {
+        this.vehicles.update((val) => (val = results));
+    });
+  }
+
+  loadVehicleBrands(): any {
+    this.http.get(this.urlVehicleBrands).subscribe({
+      next: (res)=>{
+        this.vehiclesBrands.update((val)=> val = res);
+      }
+    })
+  }
 }

@@ -4,7 +4,28 @@
 			"title": "Home"
 		},
 		"add-vehicle": {
-			"title": "Add new vehicle"
+			"title": "Add new vehicle",
+			"vehicle_name": "Vehicle name",
+			"brand": "Brand",
+			"model": "Model",
+			"color": "Color",
+			"imagen": "Image",
+			"cc": "CC",
+			"cv": "CV",
+			"icon": "Icon",
+			"observ": "Observations",
+			"brand_placeholder": "Select a brand",
+			"model_placeholder": "Select a model",
+			"save": "Save",
+			"validations": {
+				"vehicle_name_required": "Vehicle name is required",
+				"brand_required": "Brand is required",
+				"model_required": "Model is required",
+				"icono_required": "Icon is required"
+			}
+		},
+		"vehicles-list": {
+			"title": "My vehicles"
 		}
 	},
 	"welcome": {
@@ -34,27 +55,7 @@
 		"spanish": "Spanish",
 		"english": "English"
 	},
-  "add_vehicle":{
-    "vehicle_name":"Vehicle name",
-    "brand":"Brand",
-    "model":"Model",
-    "color":"Color",
-    "imagen":"Image",
-    "cc":"CC",
-    "cv":"CV",
-    "icon":"Icon",
-    "observ":"Observations",
-    "brand_placeholder":"Select a brand",
-    "model_placeholder":"Select a model",
-    "save":"Save",
-    "validations":{
-      "vehicle_name_required":"Vehicle name is required",
-      "brand_required":"Brand is required",
-      "model_required":"Model is required",
-      "icono_required":"Icon is required"
-    }
-  },
-  "msgs":{
-    "success":"Operation carried out successfully."
-  }
+	"msgs": {
+		"success": "Operation carried out successfully."
+	}
 }

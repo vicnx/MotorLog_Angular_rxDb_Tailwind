@@ -1,0 +1,24 @@
+<div class="card" class="max-w-screen-sm mx-auto">
+	<p-dataView #dv *ngIf="this.vehicleSvc.vehicles()" [value]="this.vehicleSvc.vehicles()">
+		<ng-template pTemplate="list" let-vehicles>
+			<ul class="divide-y divide-gray-200 mb-10">
+				<li *ngFor="let vehicle of vehicles" class="p-3 flex items-center user-card h-20 cursor-pointer transition duration-300 ease-in-out transform hover:brightness-90 bg-white" (click)="onClickVehicle(vehicle)">
+          <div class="ml-2">
+            <img class="w-10 h-10 rounded-sm" [src]="getLogoBrand(vehicle.marca)" alt="image">
+          </div>
+
+					<div class="ml-10 flex-grow">
+						<div class="text-ba">{{ vehicle.marca | capitalizeFirst }}</div>
+						<div class="text-xs">{{ vehicle.modelo | capitalizeFirst }}</div>
+					</div>
+
+					<div class="ml-auto w-28 truncate mr-5">
+						<span class="text-lg font-semibold truncate">
+							<i class="{{vehicle.icono}} text-sm mr-2" [ngStyle]="{ color: vehicle.color }"></i> {{ vehicle.nombreVehiculo | capitalizeFirst }}
+						</span>
+					</div>
+				</li>
+			</ul>
+		</ng-template>
+	</p-dataView>
+</div>

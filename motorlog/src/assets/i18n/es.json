@@ -4,7 +4,28 @@
 			"title": "Inicio"
 		},
 		"add-vehicle": {
-			"title": "Añadir nuevo vehículo"
+			"title": "Añadir nuevo vehículo",
+			"vehicle_name": "Nombre del Vehículo",
+			"brand": "Marca",
+			"model": "Modelo",
+			"color": "Color",
+			"imagen": "Imagen",
+			"cc": "CC",
+			"cv": "CV",
+			"icon": "Icon",
+			"observ": "Observaciones",
+			"brand_placeholder": "Seleccione una marca",
+			"model_placeholder": "Seleccione un modelo",
+			"save": "Guardar",
+			"validations": {
+				"vehicle_name_required": "Nombre del Vehículo es requerido",
+				"brand_required": "Marca es requerida",
+				"model_required": "Modelo es requerido",
+				"icono_required": "Icono es requerido"
+			}
+		},
+		"vehicles-list": {
+			"title": "Mis vehiculos"
 		}
 	},
 	"welcome": {
@@ -34,27 +55,7 @@
 		"spanish": "Español",
 		"english": "Inglés"
 	},
-  "add_vehicle":{
-    "vehicle_name":"Nombre del Vehículo",
-    "brand":"Marca",
-    "model":"Modelo",
-    "color":"Color",
-    "imagen":"Imagen",
-    "cc":"CC",
-    "cv":"CV",
-    "icon":"Icon",
-    "observ":"Observaciones",
-    "brand_placeholder":"Seleccione una marca",
-    "model_placeholder":"Seleccione un modelo",
-    "save":"Guardar",
-    "validations":{
-      "vehicle_name_required":"Nombre del Vehículo es requerido",
-      "brand_required":"Marca es requerida",
-      "model_required":"Modelo es requerido",
-      "icono_required":"Icono es requerido"
-    }
-  },
-  "msgs":{
-    "success":"Operación realizada con éxito."
-  }
+	"msgs": {
+		"success": "Operación realizada con éxito."
+	}
 }
