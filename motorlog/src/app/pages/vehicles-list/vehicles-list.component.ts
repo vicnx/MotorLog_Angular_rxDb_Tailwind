@@ -51,6 +51,6 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	}
 
 	public onClickVehicle(vehicle: VehicleModel): void {
-		console.log(vehicle);
+		this.routerSvc.navigate([`/vehicle-details/${vehicle.id}`]);
 	}
 }

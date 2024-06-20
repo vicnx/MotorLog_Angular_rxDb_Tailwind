@@ -12,23 +12,23 @@ export const routes: Routes = [
 		loadComponent: () => import('@pages/welcome/welcome.component').then((c) => c.WelcomeComponent),
 		canActivate: [AuthGuard]
 	},
-	{
-		path: 'add-vehicle',
-		loadComponent: () => import('@pages/add-vehicle/add-vehicle.component').then((c) => c.AddVehicleComponent),
-		canActivate: [AuthGuard]
-	},
+  {
+    path: 'add-vehicle',
+    loadComponent: () => import('@pages/vehicle-details/vehicle-details.component').then((c) => c.VehicleDetailsComponent),
+    canActivate: [AuthGuard],
+    data: { isConsulta: false }
+  },
+  {
+    path: 'vehicle-details/:id',
+    loadComponent: () => import('@pages/vehicle-details/vehicle-details.component').then((c) => c.VehicleDetailsComponent),
+    canActivate: [AuthGuard],
+    data: { isConsulta: true }
+  },
   {
 		path: 'vehicles-list',
 		loadComponent: () => import('@pages/vehicles-list/vehicles-list.component').then((c) => c.VehiclesListComponent),
 		canActivate: [AuthGuard]
 	},
-	// canActivate: [authGuard]
-	// {
-	//   path: 'home',
-	//   component: HomeComponent,
-	//   // canActivate: [authGuard],
-	// },
-
 	{
 		path: '**',
 		redirectTo: 'welcome'

@@ -2,7 +2,7 @@
 	<form class="p-4" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.vehicle_name' | translate }}</label>
-			<input pInputText type="text" class="w-full" [placeholder]="'pages.add-vehicle.vehicle_name' | translate" formControlName="nombreVehiculo" />
+			<input pInputText type="text" class="w-full" [placeholder]="'pages.add-vehicle.vehicle_name' | translate" formControlName="nombreVehiculo"[disabled]="isConsulta" />
 			<div *ngIf="vehicleForm?.get('nombreVehiculo')?.invalid && vehicleForm?.get('nombreVehiculo')?.touched" class="text-red-500 text-sm mt-1">
 				{{ 'pages.add-vehicle.validations.vehicle_name_required' | translate }}
 			</div>
@@ -19,6 +19,7 @@
 				[filter]="true"
 				filterBy="name"
 				[showClear]="true"
+        [disabled]="isConsulta"
 			></p-dropdown>
 			<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="text-red-500 text-sm mt-1">
 				{{ 'pages.add-vehicle.validations.brand_required' | translate }}
@@ -26,7 +27,7 @@
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.model' | translate }}</label>
-      <input pInputText type="text" class="w-full" [placeholder]="'pages.add-vehicle.model' | translate" formControlName="modelo" />
+      <input pInputText type="text" class="w-full" [placeholder]="'pages.add-vehicle.model' | translate" formControlName="modelo" [disabled]="isConsulta"/>
 			<!-- <p-dropdown
 				[options]="optionsModels"
 				[style]="{ width: '100%' }"
@@ -44,23 +45,23 @@
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.color' | translate }}</label>
-			<p-colorPicker formControlName="color"></p-colorPicker>
+			<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.imagen' | translate }}</label>
-			<input pInputText type="file" class="w-full" accept="image/*" formControlName="imagen" />
+			<input pInputText type="file" class="w-full" accept="image/*" formControlName="imagen" [disabled]="isConsulta"/>
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cc' | translate }}</label>
-			<input pInputText type="number" class="w-full" placeholder="CC" formControlName="cc" />
+			<input pInputText type="number" class="w-full" placeholder="CC" formControlName="cc" [disabled]="isConsulta"/>
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cv' | translate }}</label>
-			<input pInputText type="number" class="w-full" placeholder="CV" formControlName="cv" />
+			<input pInputText type="number" class="w-full" placeholder="CV" formControlName="cv" [disabled]="isConsulta"/>
 		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.icon' | translate }}</label>
-			<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono">
+			<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
 				<ng-template let-icono pTemplate>
 					<i [class]="icono"></i>
 				</ng-template>
@@ -76,8 +77,9 @@
 				rows="3"
 				[placeholder]="'pages.add-vehicle.observ' | translate"
 				formControlName="observaciones"
+        [disabled]="isConsulta"
 			></textarea>
 		</div>
-		<p-button type="submit" [label]="'pages.add-vehicle.save' | translate"></p-button>
+		<p-button [disabled]="isConsulta" type="submit" [label]="'pages.add-vehicle.save' | translate"></p-button>
 	</form>
 </div>

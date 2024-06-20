@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { VehiclesService } from '@shared/services/vehicles.service';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 import { MessageService } from 'primeng/api';
+import { VehicleModel } from '@shared/models/vehicle.model';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -28,9 +29,9 @@ import { MessageService } from 'primeng/api';
 		SelectButtonModule,
 		ColorPickerModule
 	],
-	templateUrl: './add-vehicle.component.html'
+	templateUrl: './vehicle-details.component.html'
 })
-export class AddVehicleComponent extends BaseComponent implements OnInit {
+export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 	//FAKE INFO
 	optionsBrands = [];
 	// optionsModels = [];
@@ -41,7 +42,14 @@ export class AddVehicleComponent extends BaseComponent implements OnInit {
 	vehicleSvc = inject(VehiclesService);
 	vehiclesApiSvc = inject(VehiclesApiService);
 
+	//Consulta
+	isConsulta: boolean = false;
+	vehicleData: VehicleModel;
+
 	ngOnInit(): void {
+		this.routeSvc.data.subscribe((data) => {
+			this.isConsulta = data['isConsulta'];
+		});
 		this.initForm();
 	}
 
@@ -50,7 +58,7 @@ export class AddVehicleComponent extends BaseComponent implements OnInit {
 			this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
 				next: (res) => {
 					this.showSuccess();
-          this.vehicleSvc.getSavedVehicles();
+					this.vehicleSvc.getSavedVehicles();
 					this.routerSvc.navigate([this.const.routes.home]);
 				}
 			});
@@ -72,6 +80,25 @@ export class AddVehicleComponent extends BaseComponent implements OnInit {
 			icono: ['', Validators.required],
 			observaciones: ['', Validators.maxLength(200)]
 		});
+		if (this.isConsulta) {
+			this.spinnerSvc.show();
+			this.routeSvc.paramMap.subscribe((params) => {
+				const vehicleId = params.get('id');
+				if (vehicleId) {
+					//prettier-ignore
+					this.vehicleSvc.getVehicleById(vehicleId).exec().then((vehicle: any) => {
+							if (vehicle) {
+								this.vehicleData = vehicle._data as any;
+								this.vehicleForm.patchValue(this.vehicleData);
+                this.spinnerSvc.hide()
+							}else{
+                this.routerSvc.navigate(['/vehicle-list']);
+                this.spinnerSvc.hide();
+              }
+						})
+				}
+			});
+		}
 		this.loadIcons();
 		this.loadDropdowns();
 	}

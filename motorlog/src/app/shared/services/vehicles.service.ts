@@ -6,6 +6,7 @@ import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import * as crypto from 'crypto-js';
+import { RxQuery } from 'rxdb';
 @Injectable()
 export class VehiclesService {
 	dbSvc = inject(DBService);
@@ -43,6 +44,11 @@ export class VehiclesService {
     query.exec().then((results: any) => {
         this.vehicles.update((val) => (val = results));
     });
+  }
+
+  getVehicleById(id: string): RxQuery<any> {
+    const query = this.dbSvc.db.vehicles.findOne().where('id').equals(id);
+    return query as any;
   }
 
   loadVehicleBrands(): any {
