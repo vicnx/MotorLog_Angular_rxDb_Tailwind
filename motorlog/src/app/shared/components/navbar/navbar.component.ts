@@ -9,11 +9,13 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { UserService } from '@shared/services/user.service';
 import { CONSTANTS } from '@shared/app-constants';
 import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
+import { Location } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent, LangDropdownComponent],
+    imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent, LangDropdownComponent, ButtonModule],
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
@@ -27,6 +29,7 @@ export class NavbarComponent implements OnInit {
     translateSvc = inject(TranslateService);
     menuSvc = inject(MenuService);
     userSvc = inject(UserService);
+    locationSvc = inject(Location)
     constructor() {}
 
     public avatarImage: string;
@@ -39,5 +42,9 @@ export class NavbarComponent implements OnInit {
 
     toggleSidebar() {
         this.menuSvc.toogleMenu();
+    }
+
+    goBack() {
+      this.locationSvc.back(); // Navega a la página anterior
     }
 }

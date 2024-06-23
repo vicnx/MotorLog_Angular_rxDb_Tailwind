@@ -55,16 +55,36 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 
 	public onSubmit(): void {
 		if (this.vehicleForm.valid) {
-			this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
-				next: (res) => {
-					this.showSuccess();
-					this.vehicleSvc.getSavedVehicles();
-					this.routerSvc.navigate([this.const.routes.home]);
-				}
-			});
+			if (this.isConsulta) {
+				this.editVehicle();
+			} else {
+				this.newVehicle();
+			}
 		} else {
 			this.markFieldsAsTouched(this.vehicleForm);
 		}
+	}
+
+	private newVehicle(): void {
+		this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
+			next: (res) => {
+				this.operationOK();
+			}
+		});
+	}
+
+	private editVehicle(): void {
+    this.vehicleSvc.updateVehicle(this.vehicleData.id,this.vehicleForm.value).subscribe({
+      next: (res) => {
+        this.operationOK();
+      }
+    })
+  }
+
+	private operationOK(): void {
+		this.showSuccess();
+		this.vehicleSvc.getSavedVehicles();
+		this.routerSvc.navigate([this.const.routes.vehiclesList]);
 	}
 
 	private initForm(): void {
@@ -80,6 +100,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			icono: ['', Validators.required],
 			observaciones: ['', Validators.maxLength(200)]
 		});
+
 		if (this.isConsulta) {
 			this.spinnerSvc.show();
 			this.routeSvc.paramMap.subscribe((params) => {
@@ -90,12 +111,12 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 							if (vehicle) {
 								this.vehicleData = vehicle._data as any;
 								this.vehicleForm.patchValue(this.vehicleData);
-                this.spinnerSvc.hide()
-							}else{
-                this.routerSvc.navigate(['/vehicle-list']);
-                this.spinnerSvc.hide();
-              }
-						})
+								this.spinnerSvc.hide();
+							} else {
+								this.routerSvc.navigate(['/vehicle-list']);
+								this.spinnerSvc.hide();
+							}
+					});
 				}
 			});
 		}

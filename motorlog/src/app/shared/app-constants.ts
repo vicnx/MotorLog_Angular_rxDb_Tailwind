@@ -3,7 +3,8 @@ export const CONSTANTS = {
     routes: {
         home: '/home',
         settings: '/settings',
-        vehicles: '/vehicles',
+        vehiclesList: '/vehicles-list',
+        vehicleDetails: '/vehicle-details',
         welcome: '/welcome',
         literal: {
             home: 'home',

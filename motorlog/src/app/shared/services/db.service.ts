@@ -7,10 +7,12 @@ import { RxDBJsonDumpPlugin } from 'rxdb/plugins/json-dump';
 import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
 import { VEHICLE_SCHEMA } from '@shared/models/vehicle.model';
 import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
+import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 addRxPlugin(RxDBJsonDumpPlugin);
 // para ver errores.
 addRxPlugin(RxDBDevModePlugin);
 addRxPlugin(RxDBQueryBuilderPlugin);
+addRxPlugin(RxDBUpdatePlugin);
 
 async function createDatabase(): Promise<any> {
 	const db = await createRxDatabase<any>({

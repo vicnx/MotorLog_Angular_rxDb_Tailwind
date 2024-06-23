@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, switchMap } from 'rxjs';
 import { UserService } from './user.service';
 import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
@@ -11,13 +11,12 @@ import { RxQuery } from 'rxdb';
 export class VehiclesService {
 	dbSvc = inject(DBService);
 	utilsSvc = inject(UtilsService);
-  vehicles = signal<VehicleModel[]>([] as VehicleModel[]);
-  vehiclesBrands = signal<any>([] as any);
+	vehicles = signal<VehicleModel[]>([] as VehicleModel[]);
+	vehiclesBrands = signal<any>([] as any);
 	userSvc = inject(UserService);
 	urlIcons: string = './assets/data/icons.json';
 	urlVehicleBrands: string = './assets/data/vehicle-brands.json';
 	http = inject(HttpClient);
-
 
 	getVehicleIcons(): Observable<any> {
 		return this.http.get(this.urlIcons);
@@ -39,23 +38,35 @@ export class VehiclesService {
 		return hash.substring(0, 10);
 	}
 
-  getSavedVehicles(): any {
-    const query = this.dbSvc.db.vehicles.find({});
-    query.exec().then((results: any) => {
-        this.vehicles.update((val) => (val = results));
-    });
-  }
+	getSavedVehicles(): any {
+		const query = this.dbSvc.db.vehicles.find({});
+		query.exec().then((results: any) => {
+			this.vehicles.update((val) => (val = results));
+		});
+	}
 
-  getVehicleById(id: string): RxQuery<any> {
-    const query = this.dbSvc.db.vehicles.findOne().where('id').equals(id);
-    return query as any;
-  }
+	getVehicleById(id: string): RxQuery<any> {
+		const query = this.dbSvc.db.vehicles.findOne().where('id').equals(id);
+		return query as any;
+	}
 
-  loadVehicleBrands(): any {
-    this.http.get(this.urlVehicleBrands).subscribe({
-      next: (res)=>{
-        this.vehiclesBrands.update((val)=> val = res);
-      }
-    })
-  }
+	loadVehicleBrands(): any {
+		this.http.get(this.urlVehicleBrands).subscribe({
+			next: (res) => {
+				this.vehiclesBrands.update((val) => (val = res));
+			}
+		});
+	}
+
+  updateVehicle(id: string, vehicleData: VehicleModel): Observable<any> {
+    return from(this.dbSvc.db.vehicles.findOne(id).exec()).pipe(
+      switchMap((vehicle: any) => {
+        if (vehicle) {
+          return from(vehicle.update({ $set: vehicleData }));
+        } else {
+          throw new Error(`Vehicle with id ${id} not found`);
+        }
+      })
+    );
+	}
 }
