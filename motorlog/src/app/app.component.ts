@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
 		this.translateSvc.setDefaultLang('en');
 		const browserLang = this.translateSvc.getBrowserLang();
 		this.translateSvc.use(browserLang?.match(/en|es/) ? browserLang : 'es');
+    this.vehiclesSvc.getSavedVehicles();
+
 	}
 
 	public ngOnInit(): void {

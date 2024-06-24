@@ -8,6 +8,7 @@ import { UtilsService } from './services/utils.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from './services/user.service';
 import { FormGroup } from '@angular/forms';
+import { VehiclesService } from './services/vehicles.service';
 
 @Component({
     template: ''
@@ -26,6 +27,8 @@ export class BaseComponent {
     messageSvc = inject(MessageService);
     spinnerSvc = inject(NgxSpinnerService);
     userSvc = inject(UserService)
+	  vehicleSvc = inject(VehiclesService);
+
 
     constructor() {
         this.pageName = '';

@@ -13,6 +13,8 @@ export class VehiclesService {
 	utilsSvc = inject(UtilsService);
 	vehicles = signal<VehicleModel[]>([] as VehicleModel[]);
 	vehiclesBrands = signal<any>([] as any);
+	vehicleSelected = signal<VehicleModel>({} as VehicleModel);
+	vehicleSelectedId = signal<string>('');
 	userSvc = inject(UserService);
 	urlIcons: string = './assets/data/icons.json';
 	urlVehicleBrands: string = './assets/data/vehicle-brands.json';

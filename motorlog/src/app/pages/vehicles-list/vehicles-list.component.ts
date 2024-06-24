@@ -34,7 +34,6 @@ import { VehicleModel } from '@shared/models/vehicle.model';
 	templateUrl: './vehicles-list.component.html'
 })
 export class VehiclesListComponent extends BaseComponent implements OnInit {
-	vehicleSvc = inject(VehiclesService);
 	defaultImage: any = CONSTANTS.defaultImage;
 
 	ngOnInit(): void {
@@ -47,7 +46,7 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	}
 
 	public getLogoBrand(brand: string): string {
-		return this.vehicleSvc.vehiclesBrands().find((vehicle: any) => vehicle.code == brand).logo || this.defaultImage;
+		return this.vehicleSvc.vehiclesBrands().find((vehicle: any) => vehicle.code == brand)?.logo || this.defaultImage;
 	}
 
 	public onClickVehicle(vehicle: VehicleModel): void {

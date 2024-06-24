@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent implements OnInit {
+
 	ngOnInit(): void {
 		console.log('Home Page');
 	}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
@@ -39,12 +39,12 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 
 	formBuilder = inject(FormBuilder);
 	vehicleForm: FormGroup;
-	vehicleSvc = inject(VehiclesService);
 	vehiclesApiSvc = inject(VehiclesApiService);
 
 	//Consulta
 	isConsulta: boolean = false;
 	vehicleData: VehicleModel;
+
 
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data) => {
