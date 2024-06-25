@@ -1,0 +1,85 @@
+<div class="w-screen flex flex-col justify-center items-center">
+	<label class="mb-2">{{ 'pages.mant-details.add-mant.title' | translate }}</label>
+	<app-vehicle-selector></app-vehicle-selector>
+</div>
+<div class="container mx-auto">
+	<form class="p-4" [formGroup]="mantForm" (ngSubmit)="onSubmit()">
+		<div class="mb-4">
+			<label for="date" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.date' | translate }}</label>
+			<p-calendar
+				id="date"
+				formControlName="date"
+				dateFormat="dd/mm/yy"
+				[placeholder]="'pages.mant-details.add-mant.date' | translate"
+				[showTime]="true"
+				[hourFormat]="'24'"
+				[iconDisplay]="'input'"
+				[showIcon]="true"
+				[style]="{ width: '100%' }"
+			></p-calendar>
+		</div>
+		<div class="mb-4">
+			<label for="odometer" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.odometer' | translate }}</label>
+			<p-inputNumber
+				[style]="{ width: '100%' }"
+				id="odometer"
+				formControlName="odometer"
+				mode="decimal"
+				[min]="0"
+				class="w-full"
+			></p-inputNumber>
+		</div>
+		<div class="mb-4">
+			<label for="serviceType" class="block text-gray-700 text-sm font-bold mb-2">{{
+				'pages.mant-details.add-mant.service-type' | translate
+			}}</label>
+			<p-dropdown
+				id="serviceType"
+				formControlName="serviceType"
+				[options]="serviceTypes"
+				placeholder="{{ 'pages.mant-details.add-mant.service-type' | translate }}"
+				[style]="{ width: '100%' }"
+			></p-dropdown>
+		</div>
+
+		<div class="mb-4">
+			<label for="location" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.location' | translate }}</label>
+			<input
+				[style]="{ width: '100%' }"
+				pInputText
+				type="text"
+				class="w-full p-inputtext"
+				[placeholder]="'pages.mant-details.add-mant.location' | translate"
+				formControlName="location"
+			/>
+		</div>
+
+		<div class="mb-4">
+			<label for="amount" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.amount' | translate }}</label>
+			<p-inputNumber
+				[style]="{ width: '100%' }"
+				id="amount"
+				formControlName="amount"
+				mode="currency"
+				currency="USD"
+				locale="en-US"
+				class="w-full"
+			></p-inputNumber>
+		</div>
+
+		<div class="mb-4">
+			<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>
+			<textarea id="notes" [style]="{ width: '100%' }" formControlName="notes" class="w-full p-inputtext"></textarea>
+		</div>
+
+		<div class="p-field col-span-2">
+			<button
+				pButton
+				type="submit"
+				label="{{ 'pages.mant-details.add-mant.submit' | translate }}"
+				icon="fa fa-save"
+				class="p-button w-full"
+			></button>
+		</div>
+	</form>
+</div>

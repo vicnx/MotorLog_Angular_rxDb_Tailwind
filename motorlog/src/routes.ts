@@ -29,6 +29,12 @@ export const routes: Routes = [
 		loadComponent: () => import('@pages/vehicles-list/vehicles-list.component').then((c) => c.VehiclesListComponent),
 		canActivate: [AuthGuard]
 	},
+  {
+		path: 'add-maintenance',
+		loadComponent: () => import('@pages/maintenance-details/maintenance-details.component').then((c) => c.MaintenanceDetailsComponent),
+		canActivate: [AuthGuard],
+    data: { isEdit: false }
+	},
 	{
 		path: '**',
 		redirectTo: 'welcome'

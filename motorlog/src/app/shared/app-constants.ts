@@ -5,7 +5,9 @@ export const CONSTANTS = {
         settings: '/settings',
         vehiclesList: '/vehicles-list',
         vehicleDetails: '/vehicle-details',
+        addVehicle: '/add-vehicle',
         welcome: '/welcome',
+        addMaintenance: '/add-maintenance',
         literal: {
             home: 'home',
             settings: 'settings',

@@ -24,6 +24,19 @@
 				"icono_required": "Icono es requerido"
 			}
 		},
+    "mant-details":{
+      "edit-mant":"Editar mantenimiento",
+      "add-mant": {
+        "title":"Añadir mantenimiento",
+        "date": "Fecha",
+        "odometer": "Odómetro",
+        "service-type": "Tipo de Servicio",
+        "location": "Ubicación",
+        "amount": "Cantidad",
+        "notes": "Notas",
+        "submit": "Guardar"
+      }
+    },
 		"vehicles-list": {
 			"title": "Mis vehiculos"
 		}
