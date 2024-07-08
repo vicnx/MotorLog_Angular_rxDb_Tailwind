@@ -43,6 +43,10 @@
 				{{ 'pages.add-vehicle.validations.model_required' | translate }}
 			</div>
 		</div>
+    <div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.year' | translate }}</label>
+      <input pInputText type="text" class="w-full" [placeholder]="'pages.add-vehicle.year' | translate" formControlName="year" [disabled]="isConsulta" [maxlength]="4"/>
+		</div>
 		<div class="mb-4">
 			<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.color' | translate }}</label>
 			<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
@@ -80,6 +84,6 @@
         [disabled]="isConsulta"
 			></textarea>
 		</div>
-		<p-button type="submit" [label]="'pages.add-vehicle.edit' | translate"></p-button>
+		<p-button type="submit" [label]="'pages.add-vehicle.save' | translate"></p-button>
 	</form>
 </div>

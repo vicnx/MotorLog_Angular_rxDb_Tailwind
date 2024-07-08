@@ -24,10 +24,10 @@ export class VehicleSelectorComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		setTimeout(() => {
-			this.vehicleSvc.vehicleSelected.update((val) => (val = this.vehicleSvc.vehicles()[0]));
-			this.spinnerSvc.hide();
-		}, 500);
+		// setTimeout(() => {
+		// 	// this.vehicleSvc.vehicleSelected.update((val) => (val = this.vehicleSvc.vehicles()[0]));
+		// 	this.spinnerSvc.hide();
+		// }, 500);
 	}
 
 	public switchVehicle(event: DropdownChangeEvent): void {

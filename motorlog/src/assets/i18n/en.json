@@ -8,6 +8,7 @@
 			"vehicle_name": "Vehicle name",
 			"brand": "Brand",
 			"model": "Model",
+			"year": "Year",
 			"color": "Color",
 			"imagen": "Image",
 			"cc": "CC",

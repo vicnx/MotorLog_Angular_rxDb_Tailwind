@@ -49,6 +49,8 @@ export class VehiclesService {
 		const query = this.dbSvc.db.vehicles.find({});
 		query.exec().then((results: any) => {
 			this.vehicles.update((val) => (val = results));
+      // Por defecto, al obtener los vehiculos se selecciona el primero en toda la aplicación.
+      this.vehicleSelected.update((val) => (val = this.vehicles()[0]));
 		});
 	}
 

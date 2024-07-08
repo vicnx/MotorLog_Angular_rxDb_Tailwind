@@ -19,20 +19,21 @@ import { MultiSelectModule } from 'primeng/multiselect';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
-	imports: [CommonModule,
-    VehicleSelectorComponent,
-    TranslateModule,
-    FormsModule,
+	imports: [
+		CommonModule,
+		VehicleSelectorComponent,
+		TranslateModule,
+		FormsModule,
 		ReactiveFormsModule,
-    DropdownModule,
-    ButtonModule,
-    InputTextModule,
-    CalendarModule,
-    InputNumberModule,
-    FileUploadModule,
-    InputTextareaModule,
-    InputMaskModule,
-    MultiSelectModule
+		DropdownModule,
+		ButtonModule,
+		InputTextModule,
+		CalendarModule,
+		InputNumberModule,
+		FileUploadModule,
+		InputTextareaModule,
+		InputMaskModule,
+		MultiSelectModule
 	],
 	templateUrl: './maintenance-details.component.html'
 })
@@ -41,12 +42,12 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	formBuilder = inject(FormBuilder);
 	mantForm: FormGroup;
 	currentVehicleInfo: VehicleModel;
-  serviceTypes: any[];
-  constructor(){
+	serviceTypes: any[];
 
-    super();
+	constructor() {
+		super();
+	}
 
-  }
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data) => {
 			this.isEdit = data['isEdit'];
@@ -55,34 +56,37 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 		if (!this.currentVehicleInfo?.id) {
 			this.routerSvc.navigate([CONSTANTS.routes.home]);
 		}
-    this.initForm();
-    this.loadServiceTypes();
+		this.initForm();
+		this.initUi();
 	}
 
-  private initForm(): void {
-    this.mantForm = this.formBuilder.group({
-      date: [null],
-      time: [null],
-      odometer: [0],
-      serviceType: [null],
-      location: [null],
-      amount: [null],
-      files: [null],
-      notes: ['']
-    });
+	private initUi(): void {
+		this.mantForm.get('date')?.setValue(new Date());
+		this.loadServiceTypes();
+	}
 
-
-  }
-
-  private loadServiceTypes(): void {
-		this.vehicleSvc.getServiceTypes().subscribe({
-			next: (resp) => {
-        this.serviceTypes = resp.map((obj: any) => ({ ...obj, label: this.translateSvc.instant(obj.label) }));
-      }
+	private initForm(): void {
+		this.mantForm = this.formBuilder.group({
+			date: [null],
+			// time: [null],
+			odometer: [0],
+			serviceType: [null],
+			location: [null],
+			amount: [null],
+			// files: [null],
+			notes: ['']
 		});
 	}
 
-  public onSubmit(): void {
-		console.log('submit')
+	private loadServiceTypes(): void {
+		this.vehicleSvc.getServiceTypes().subscribe({
+			next: (resp) => {
+				this.serviceTypes = resp.map((obj: any) => ({ ...obj, label: this.translateSvc.instant(obj.label) }));
+			}
+		});
+	}
+
+	public onSubmit(): void {
+		console.log({ ...this.mantForm.value, vehicleId: this.vehicleSvc.vehicleSelected().id });
 	}
 }
