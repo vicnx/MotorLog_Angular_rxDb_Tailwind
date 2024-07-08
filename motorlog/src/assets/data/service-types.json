@@ -1,0 +1,82 @@
+[
+	{
+		"label": "pages.mant-details.add-mant.service-type.oil_change",
+		"value": "oil_change"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.tire_rotation",
+		"value": "tire_rotation"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.brake_inspection",
+		"value": "brake_inspection"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.battery_check",
+		"value": "battery_check"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.fluid_check",
+		"value": "fluid_check"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.filter_replacement",
+		"value": "filter_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.wiper_blade_replacement",
+		"value": "wiper_blade_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.spark_plug_replacement",
+		"value": "spark_plug_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.tire_replacement",
+		"value": "tire_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.transmission_service",
+		"value": "transmission_service"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.alignment_service",
+		"value": "alignment_service"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.air_conditioning_service",
+		"value": "air_conditioning_service"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.coolant_service",
+		"value": "coolant_service"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.belt_replacement",
+		"value": "belt_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.hose_replacement",
+		"value": "hose_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.light_check",
+		"value": "light_check"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.exhaust_system_check",
+		"value": "exhaust_system_check"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.timing_belt_replacement",
+		"value": "timing_belt_replacement"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.itv",
+		"value": "itv"
+	},
+	{
+		"label": "pages.mant-details.add-mant.service-type.full_inspection",
+		"value": "full_inspection"
+	}
+]

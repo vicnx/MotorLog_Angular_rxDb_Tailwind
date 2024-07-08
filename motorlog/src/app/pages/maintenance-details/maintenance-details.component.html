@@ -31,15 +31,17 @@
 		</div>
 		<div class="mb-4">
 			<label for="serviceType" class="block text-gray-700 text-sm font-bold mb-2">{{
-				'pages.mant-details.add-mant.service-type' | translate
+				'pages.mant-details.add-mant.service-type.name' | translate
 			}}</label>
-			<p-dropdown
+			<p-multiSelect
 				id="serviceType"
 				formControlName="serviceType"
 				[options]="serviceTypes"
-				placeholder="{{ 'pages.mant-details.add-mant.service-type' | translate }}"
+				placeholder="{{ 'pages.mant-details.add-mant.service-type.name' | translate }}"
 				[style]="{ width: '100%' }"
-			></p-dropdown>
+        optionLabel="label"
+        optionValue="value"
+			></p-multiSelect>
 		</div>
 
 		<div class="mb-4">
@@ -61,8 +63,8 @@
 				id="amount"
 				formControlName="amount"
 				mode="currency"
-				currency="USD"
-				locale="en-US"
+				currency="EUR"
+				locale="es-ES"
 				class="w-full"
 			></p-inputNumber>
 		</div>

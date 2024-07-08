@@ -30,11 +30,33 @@
         "title":"Añadir mantenimiento",
         "date": "Fecha",
         "odometer": "Odómetro",
-        "service-type": "Tipo de Servicio",
         "location": "Ubicación",
         "amount": "Cantidad",
         "notes": "Notas",
-        "submit": "Guardar"
+        "submit": "Guardar",
+        "service-type": {
+          "name":"Tipo de Servicio",
+          "oil_change": "Cambio de aceite",
+          "tire_rotation": "Rotación de ruedas",
+          "brake_inspection": "Inspección de frenos",
+          "battery_check": "Revisión de batería",
+          "fluid_check": "Revisión de fluidos",
+          "filter_replacement": "Reemplazo de filtro",
+          "wiper_blade_replacement": "Reemplazo de limpiaparabrisas",
+          "spark_plug_replacement": "Reemplazo de bujías",
+          "tire_replacement": "Reemplazo de neumáticos",
+          "transmission_service": "Servicio de transmisión",
+          "alignment_service": "Servicio de alineación",
+          "air_conditioning_service": "Servicio de aire acondicionado",
+          "coolant_service": "Servicio de refrigerante",
+          "belt_replacement": "Reemplazo de correas",
+          "hose_replacement": "Reemplazo de mangueras",
+          "light_check": "Revisión de luces",
+          "exhaust_system_check": "Revisión del sistema de escape",
+          "timing_belt_replacement": "Reemplazo de correa de distribución",
+          "itv": "ITV",
+          "full_inspection": "Revisión completa"
+        }
       }
     },
 		"vehicles-list": {

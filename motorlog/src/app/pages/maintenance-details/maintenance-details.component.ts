@@ -14,6 +14,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputMaskModule } from 'primeng/inputmask';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -29,7 +31,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     InputNumberModule,
     FileUploadModule,
     InputTextareaModule,
-    InputMaskModule
+    InputMaskModule,
+    MultiSelectModule
 	],
 	templateUrl: './maintenance-details.component.html'
 })
@@ -38,11 +41,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	formBuilder = inject(FormBuilder);
 	mantForm: FormGroup;
 	currentVehicleInfo: VehicleModel;
-  serviceTypes: any[] = [
-    { label: 'Oil Change', value: 'oil_change' },
-    { label: 'Tire Rotation', value: 'tire_rotation' },
-    // Otros tipos de servicio
-  ];
+  serviceTypes: any[];
   constructor(){
 
     super();
@@ -57,7 +56,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			this.routerSvc.navigate([CONSTANTS.routes.home]);
 		}
     this.initForm();
-
+    this.loadServiceTypes();
 	}
 
   private initForm(): void {
@@ -71,7 +70,17 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
       files: [null],
       notes: ['']
     });
+
+
   }
+
+  private loadServiceTypes(): void {
+		this.vehicleSvc.getServiceTypes().subscribe({
+			next: (resp) => {
+        this.serviceTypes = resp.map((obj: any) => ({ ...obj, label: this.translateSvc.instant(obj.label) }));
+      }
+		});
+	}
 
   public onSubmit(): void {
 		console.log('submit')

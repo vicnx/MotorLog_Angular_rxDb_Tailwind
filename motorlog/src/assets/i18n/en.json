@@ -24,6 +24,41 @@
 				"icono_required": "Icon is required"
 			}
 		},
+    "mant-details": {
+      "edit-mant": "Edit Maintenance",
+      "add-mant": {
+        "title": "Add Maintenance",
+        "date": "Date",
+        "odometer": "Odometer",
+        "location": "Location",
+        "amount": "Amount",
+        "notes": "Notes",
+        "submit": "Save",
+        "service-type": {
+          "name": "Service Type",
+          "oil_change": "Oil Change",
+          "tire_rotation": "Tire Rotation",
+          "brake_inspection": "Brake Inspection",
+          "battery_check": "Battery Check",
+          "fluid_check": "Fluid Check",
+          "filter_replacement": "Filter Replacement",
+          "wiper_blade_replacement": "Wiper Blade Replacement",
+          "spark_plug_replacement": "Spark Plug Replacement",
+          "tire_replacement": "Tire Replacement",
+          "transmission_service": "Transmission Service",
+          "alignment_service": "Alignment Service",
+          "air_conditioning_service": "Air Conditioning Service",
+          "coolant_service": "Coolant Service",
+          "belt_replacement": "Belt Replacement",
+          "hose_replacement": "Hose Replacement",
+          "light_check": "Light Check",
+          "exhaust_system_check": "Exhaust System Check",
+          "timing_belt_replacement": "Timing Belt Replacement",
+          "itv": "ITV",
+          "full_inspection": "Full Inspection"
+        }
+      }
+    },
 		"vehicles-list": {
 			"title": "My vehicles"
 		}

@@ -18,6 +18,7 @@ export class VehiclesService {
 	userSvc = inject(UserService);
 	urlIcons: string = './assets/data/icons.json';
 	urlVehicleBrands: string = './assets/data/vehicle-brands.json';
+	urlServiceTypes: string = './assets/data/service-types.json';
 	http = inject(HttpClient);
 
 	getVehicleIcons(): Observable<any> {
@@ -26,6 +27,10 @@ export class VehiclesService {
 
 	getVehicleBrands(): Observable<any> {
 		return this.http.get(this.urlVehicleBrands);
+	}
+
+  getServiceTypes(): Observable<any> {
+		return this.http.get(this.urlServiceTypes);
 	}
 
 	addVehicle(vehicleData: VehicleModel): Observable<any> {
