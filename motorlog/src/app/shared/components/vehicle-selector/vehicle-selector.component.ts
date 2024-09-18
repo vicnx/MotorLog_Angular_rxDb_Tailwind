@@ -30,14 +30,10 @@ export class VehicleSelectorComponent extends BaseComponent implements OnInit {
 		// }, 500);
 	}
 
-	public switchVehicle(event: DropdownChangeEvent): void {
-		this.spinnerSvc.show();
-		//prettier-ignore
-		this.vehicleSvc.getVehicleById(event.value).exec().then((vehicle: any) => {
-				if (vehicle) {
-					this.vehicleSvc.vehicleSelected.update((val) => (val = vehicle._data));
-					this.spinnerSvc.hide();
-				}
-		});
-	}
+  public switchVehicle(event: DropdownChangeEvent): void {
+    this.spinnerSvc.show();
+    this.vehicleSvc.getVehicleById(event.value).then(() => {
+      this.spinnerSvc.hide(); // Oculta el spinner después de la actualización
+    });
+  }
 }

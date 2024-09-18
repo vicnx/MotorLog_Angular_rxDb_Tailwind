@@ -57,6 +57,9 @@
           "timing_belt_replacement": "Timing Belt Replacement",
           "itv": "ITV",
           "full_inspection": "Full Inspection"
+        },
+        "validations":{
+          "date_required":"The maintenance date is required"
         }
       }
     },

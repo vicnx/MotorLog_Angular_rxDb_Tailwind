@@ -107,16 +107,14 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			this.routeSvc.paramMap.subscribe((params) => {
 				const vehicleId = params.get('id');
 				if (vehicleId) {
-					//prettier-ignore
-					this.vehicleSvc.getVehicleById(vehicleId).exec().then((vehicle: any) => {
-							if (vehicle) {
-								this.vehicleData = vehicle._data as any;
-								this.vehicleForm.patchValue(this.vehicleData);
-								this.spinnerSvc.hide();
-							} else {
-								this.routerSvc.navigate(['/vehicle-list']);
-								this.spinnerSvc.hide();
-							}
+					this.vehicleSvc.getVehicleById(vehicleId).then((vehicle: any) => {
+						if (vehicle) {
+							this.vehicleData = vehicle.toJSON();
+							this.vehicleForm.patchValue(this.vehicleData);
+						} else {
+							this.routerSvc.navigate(['/vehicle-list']);
+						}
+						this.spinnerSvc.hide();
 					});
 				}
 			});

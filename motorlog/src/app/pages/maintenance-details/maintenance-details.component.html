@@ -16,7 +16,11 @@
 				[iconDisplay]="'input'"
 				[showIcon]="true"
 				[style]="{ width: '100%' }"
+        [required]="true"
 			></p-calendar>
+      <div *ngIf="mantForm?.get('date')?.invalid && mantForm?.get('date')?.touched" class="text-red-500 text-sm mt-1">
+				{{ 'pages.mant-details.add-mant.validations.date_required' | translate }}
+			</div>
 		</div>
 		<div class="mb-4">
 			<label for="odometer" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.odometer' | translate }}</label>

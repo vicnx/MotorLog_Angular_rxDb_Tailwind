@@ -57,6 +57,9 @@
           "timing_belt_replacement": "Reemplazo de correa de distribución",
           "itv": "ITV",
           "full_inspection": "Revisión completa"
+        },
+        "validations":{
+          "date_required":"La fecha del mantenimiento es obligatoria"
         }
       }
     },

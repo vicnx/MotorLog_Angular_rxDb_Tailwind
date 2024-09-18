@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
@@ -67,7 +67,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 
 	private initForm(): void {
 		this.mantForm = this.formBuilder.group({
-			date: [null],
+			date: [null, Validators.required],
 			// time: [null],
 			odometer: [0],
 			serviceType: [null],
@@ -87,6 +87,11 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	}
 
 	public onSubmit(): void {
-		console.log({ ...this.mantForm.value, vehicleId: this.vehicleSvc.vehicleSelected().id });
+		this.vehicleSvc.addMaintenanceToVehicle(this.vehicleSvc.vehicleSelected().id, this.mantForm.value).subscribe({
+			next: (res) => {
+				this.showSuccess();
+				this.routerSvc.navigate([this.const.routes.home]);
+			}
+		});
 	}
 }
