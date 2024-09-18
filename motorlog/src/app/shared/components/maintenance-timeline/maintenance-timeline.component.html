@@ -6,7 +6,7 @@
       </h3>
     </div>
     <ng-container *ngFor="let maintenance of group.maintenances">
-      <div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100">
+      <div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100 cursor-pointer" (click)="goToEdit(maintenance.id)">
         <div class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
           <div class="relative z-10 size-7 flex justify-center items-center">
             <i [ngClass]="[maintenance.icon || 'fas fa-question-circle', maintenance.color || 'text-gray-600']" class="text-xl"></i>

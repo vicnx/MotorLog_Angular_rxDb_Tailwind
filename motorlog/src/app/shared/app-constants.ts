@@ -8,6 +8,7 @@ export const CONSTANTS = {
         addVehicle: '/add-vehicle',
         welcome: '/welcome',
         addMaintenance: '/add-maintenance',
+        maintenanceDetails: '/maintenance-details',
         literal: {
             home: 'home',
             settings: 'settings',
