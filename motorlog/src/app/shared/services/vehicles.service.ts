@@ -95,7 +95,7 @@ export class VehiclesService {
 				if (vehicle) {
 					const vehicleData = vehicle.toJSON();
 					const nextId = this.getNextMaintenanceId(vehicleData);
-					const maintenanceWithId = { ...newMaintenance, id: nextId };
+					const maintenanceWithId = { ...newMaintenance, id: nextId, date: newMaintenance.date.toString() };
 					const updatedMaintenances = [...vehicleData.mantenimientos, maintenanceWithId];
 					return from(
 						vehicle.update({

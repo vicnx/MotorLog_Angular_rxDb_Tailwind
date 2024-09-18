@@ -1,0 +1,47 @@
+<!-- Timeline -->
+<div>
+  <!-- Iterate through groupedMaintenances -->
+  <ng-container *ngFor="let group of groupedMaintenances">
+    <!-- Heading -->
+    <div class="ps-2 my-2 first:mt-0">
+      <h3 class="text-xs font-medium uppercase text-gray-500">
+        {{ group.date }}
+      </h3>
+    </div>
+    <!-- End Heading -->
+
+    <!-- Iterate through each maintenance item -->
+    <ng-container *ngFor="let maintenance of group.maintenances">
+      <!-- Item -->
+      <div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100">
+        <!-- Icon -->
+        <div class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
+          <div class="relative z-10 size-7 flex justify-center items-center">
+            <i [ngClass]="getIconClass(maintenance.serviceType && maintenance.serviceType.length > 0 ? maintenance.serviceType[0] : 'default')" class="text-xl text-gray-600"></i>
+          </div>
+        </div>
+        <!-- End Icon -->
+
+        <!-- Right Content -->
+        <div class="grow p-2 pb-8">
+          <h1>{{ maintenance.date | date: 'd MMM' }}</h1>
+          <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+            {{ maintenance.notes || 'Maintenance Task' }}
+          </h3>
+          <p class="mt-1 text-sm text-gray-600">
+            {{ maintenance.odometer }} km
+          </p>
+          <p class="mt-1 text-sm text-gray-600">
+            <i class="fas fa-map-pin"></i> {{ maintenance.location || 'N/A' }}
+          </p>
+          <p class="mt-1 text-sm text-gray-600">
+            {{ maintenance.amount || 'N/A' }}
+          </p>
+        </div>
+        <!-- End Right Content -->
+      </div>
+      <!-- End Item -->
+    </ng-container>
+  </ng-container>
+</div>
+<!-- End Timeline -->
