@@ -31,6 +31,9 @@ module.exports = {
                     // 900: '#064e3b',
                     // 950: '#022c22'
                 }
+            },
+            fontFamily: {
+              'sans': ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji']
             }
         }
     },

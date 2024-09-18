@@ -1,5 +1,8 @@
-<div class="w-screen flex align-middle justify-center">
-  <app-vehicle-selector></app-vehicle-selector>
+<div class="w-screen flex flex-col justify-center items-center">
+	<app-vehicle-selector></app-vehicle-selector>
 </div>
-{{vehicleSvc.vehicleSelected()?.nombreVehiculo}}
+<div class="container mx-auto max-w-screen-md">
+	{{ vehicleSvc.vehicleSelected()?.nombreVehiculo }}
+  {{vehicleSvc.vehicleSelected()?.mantenimientos?.toString()}}
+</div>
 <app-add-maintenance></app-add-maintenance>

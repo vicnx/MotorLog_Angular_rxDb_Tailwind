@@ -6,7 +6,6 @@ import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import * as crypto from 'crypto-js';
-import { RxQuery } from 'rxdb';
 import { Maintenance } from '@shared/models/maintenance.model';
 @Injectable()
 export class VehiclesService {

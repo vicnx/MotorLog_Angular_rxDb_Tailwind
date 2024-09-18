@@ -5,7 +5,7 @@
 	placeholder="Vehicle"
 	optionValue="id"
 	(onChange)="switchVehicle($event)"
-  [style]="{ minWidth: '200px', width: '50%' }">
+  [style]="{ minWidth: '200px', maxWidth:'200px' }">
 >
 	<ng-template class="w-full" let-item pTemplate="selectedItem"> <i class="{{ item?.icono }}"></i> {{ item?.nombreVehiculo }} </ng-template>
 	<ng-template let-item pTemplate="item">

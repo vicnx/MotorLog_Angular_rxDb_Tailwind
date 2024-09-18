@@ -13,7 +13,9 @@
   @tailwind utilities;
 }
 @import "flag-icons/css/flag-icons.min.css";
-
+body {
+  @apply font-sans; /* Aplícalo a todo el cuerpo */
+}
 .p-sidebar-full {
   max-height: 100vh;
   max-width: 100vw;
