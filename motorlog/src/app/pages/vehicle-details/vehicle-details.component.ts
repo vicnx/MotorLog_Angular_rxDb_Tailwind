@@ -50,6 +50,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.routeSvc.data.subscribe((data) => {
 			this.isConsulta = data['isConsulta'];
 		});
+    this.userSvc.page.update((val) => (val = this.isConsulta ? this.translateSvc.instant('pages.vehicle-details.title'): this.translateSvc.instant('pages.add-vehicle.title')) );
 		this.initForm();
 	}
 

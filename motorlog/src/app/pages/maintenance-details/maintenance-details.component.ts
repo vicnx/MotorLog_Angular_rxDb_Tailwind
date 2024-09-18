@@ -61,6 +61,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	}
 
 	private initUi(): void {
+		this.userSvc.page.update((val) => (val = this.translateSvc.instant('pages.mant-details.add-mant.title')));
 		this.mantForm.get('date')?.setValue(new Date());
 		this.loadServiceTypes();
 	}

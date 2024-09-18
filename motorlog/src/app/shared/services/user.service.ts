@@ -12,6 +12,7 @@ export class UserService {
     dbSvc = inject(DBService);
     utilsSvc = inject(UtilsService);
     user = signal<UserModel>({} as UserModel);
+    page = signal<string>("");
     isUserLogged = signal<boolean>(false);
     userExistOnBd: Signal<boolean> = computed(() => (this.user() ? true : false));
     routerSvc = inject(Router);

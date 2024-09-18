@@ -25,6 +25,9 @@
 				"icono_required": "Icono es requerido"
 			}
 		},
+    "vehicle-details":{
+      "title":"Editar vehículo"
+    },
     "mant-details":{
       "edit-mant":"Editar mantenimiento",
       "add-mant": {

@@ -37,12 +37,9 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	defaultImage: any = CONSTANTS.defaultImage;
 
 	ngOnInit(): void {
-		// this.initForm();
 		this.vehicleSvc.getSavedVehicles();
 		this.vehicleSvc.loadVehicleBrands();
-		setTimeout(() => {
-			console.log(this.vehicleSvc.vehicles());
-		}, 1000);
+		this.userSvc.page.update((val) => (val = this.translateSvc.instant('pages.vehicles-list.title')));
 	}
 
 	public getLogoBrand(brand: string): string {

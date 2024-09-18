@@ -10,11 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
+import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
 
 @Component({
 	selector: 'app-sidebar',
 	standalone: true,
-	imports: [CommonModule, SidebarModule, RouterModule, TranslateModule, ToastModule, AvatarModule, ButtonModule, ConfirmDialogModule],
+	imports: [CommonModule, SidebarModule, RouterModule, TranslateModule, ToastModule, AvatarModule, ButtonModule, ConfirmDialogModule, LangDropdownComponent],
 	templateUrl: './sidebar.component.html',
 	styleUrls: ['./sidebar.component.scss']
 })
