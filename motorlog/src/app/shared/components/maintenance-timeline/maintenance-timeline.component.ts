@@ -28,9 +28,11 @@ export class MaintenanceTimelineComponent {
   }
 
   groupAndSortMaintenances(maintenances: Maintenance[]): any[] {
+    // Agrupar mantenimientos por mes y año
     const grouped = maintenances.reduce((acc: any, maintenance: Maintenance) => {
       const date = new Date(maintenance.date);
-      const monthYear = date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
+      // Obtener el mes y año en formato "MMM yyyy"
+      const monthYear = date.toLocaleString('default', { month: 'short', year: 'numeric' });
       if (!acc[monthYear]) {
         acc[monthYear] = [];
       }
@@ -38,10 +40,15 @@ export class MaintenanceTimelineComponent {
       return acc;
     }, {});
 
-    return Object.keys(grouped).map(date => ({
-      date,
-      maintenances: grouped[date]
-    })).sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return Object.keys(grouped).map(monthYear => ({
+      date: monthYear,
+      maintenances: grouped[monthYear]
+    })).sort((a: any, b: any) => {
+      // Obtener la fecha del primer mantenimiento en el grupo para la comparación
+      const dateA = new Date(grouped[a.date][0].date);
+      const dateB = new Date(grouped[b.date][0].date);
+      return dateB.getTime() - dateA.getTime();
+    });
   }
 
   getIconClass(type: string): string {
