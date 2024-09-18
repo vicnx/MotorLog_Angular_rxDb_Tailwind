@@ -15,8 +15,9 @@ export interface Maintenance {
   id:number;
   date: string;
   odometer: number;
-  serviceType: string | null;
+  serviceType: any | null;
   location: string | null;
   amount: number | null;
   notes: string;
+  title?:string;
 }

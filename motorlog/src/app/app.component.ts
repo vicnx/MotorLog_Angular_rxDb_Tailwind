@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { Component, OnInit, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { DBService } from '@shared/services/db.service';
 import { UserService } from '@shared/services/user.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { VehiclesService } from '@shared/services/vehicles.service';
-
+import localeEs from '@angular/common/locales/es';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 		const browserLang = this.translateSvc.getBrowserLang();
 		this.translateSvc.use(browserLang?.match(/en|es/) ? browserLang : 'es');
     this.vehiclesSvc.getSavedVehicles();
+    registerLocaleData(localeEs, 'es-ES');
 	}
 
 	public ngOnInit(): void {

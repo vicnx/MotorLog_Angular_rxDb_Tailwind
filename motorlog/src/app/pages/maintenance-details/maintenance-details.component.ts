@@ -69,26 +69,30 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	private initForm(): void {
 		this.mantForm = this.formBuilder.group({
 			date: [null, Validators.required],
-			// time: [null],
 			odometer: [0],
 			serviceType: [null],
 			location: [null],
 			amount: [null],
 			// files: [null],
-			notes: ['']
+			notes: [''],
+			icon: null
 		});
 	}
 
 	private loadServiceTypes(): void {
 		this.vehicleSvc.getServiceTypes().subscribe({
 			next: (resp) => {
-				this.serviceTypes = resp.map((obj: any) => ({ ...obj, label: this.translateSvc.instant(obj.label) }));
+				this.serviceTypes = resp.map((obj: any) => ({ ...obj, desc: this.translateSvc.instant(obj.label)  }));
 			}
 		});
 	}
 
 	public onSubmit(): void {
-		this.vehicleSvc.addMaintenanceToVehicle(this.vehicleSvc.vehicleSelected().id, this.mantForm.value).subscribe({
+    //prettier-ignore
+    const serviceTypes = this.mantForm.value.serviceType || [];
+    const icon = serviceTypes?.[0]?.icon || null;
+    this.mantForm.patchValue({icon})
+    this.vehicleSvc.addMaintenanceToVehicle(this.vehicleSvc.vehicleSelected().id, this.mantForm.value).subscribe({
 			next: (res) => {
 				this.showSuccess();
 				this.routerSvc.navigate([this.const.routes.home]);
