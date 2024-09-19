@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
+import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
 import { UserService } from '@shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 @Component({
 	selector: 'welcome-page',
 	standalone: true,
-	imports: [CommonModule, TranslateModule, ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule],
+	imports: [CommonModule, TranslateModule, ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule, WelcomeDialogInfoComponent],
 	templateUrl: './welcome.component.html',
 	styleUrls: ['./welcome.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -43,6 +44,7 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		if (this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()) {
 			this.userSvc.setLogginUser(true);
 			this.spinnerSvc.hide();
+      this.userSvc.displayWelcomeDialogInfo.set(true);
 			return;
 		}
 		this.spinnerSvc.show();

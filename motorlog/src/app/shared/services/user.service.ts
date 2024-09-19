@@ -18,6 +18,7 @@ export class UserService {
     routerSvc = inject(Router);
     confirmationService = inject(ConfirmationService);
     translateSvc = inject(TranslateService);
+    displayWelcomeDialogInfo = signal<boolean>(false);
 
     getUser(): any {
         const query = this.dbSvc.db.user.findOne('1');

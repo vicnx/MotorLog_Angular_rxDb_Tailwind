@@ -2,7 +2,13 @@
 	"pages": {
 		"home": {
 			"title": "Home",
-      "no_mant":"There are no registered maintenance for this vehicle."
+      "no_mant":"There are no registered maintenance for this vehicle.",
+      "filters": {
+        "apply_filters":"Apply filters",
+        "reset_filters":"Clean filters",
+        "desde":"From",
+        "hasta":"To"
+      }
 		},
 		"add-vehicle": {
 			"title": "Add new vehicle",
@@ -85,7 +91,12 @@
 		"importText": "You can also import a backup and continue where you left off.",
 		"start": "Start",
 		"continue": "Continue",
-		"welcome-back": "Welcome back {{userName}}"
+		"welcome-back": "Welcome back {{userName}}",
+		"warning": {
+			"title": "Notice",
+			"message_1": "This application is in the beta phase, so it is possible that there are incomplete errors or functions.",
+			"message_2": "The data is saved locally, from the settings section you can make a backup."
+		}
 	},
 	"errors": {
 		"MSGS": {
