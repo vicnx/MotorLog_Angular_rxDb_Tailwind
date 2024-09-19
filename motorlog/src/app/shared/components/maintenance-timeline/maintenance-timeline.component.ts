@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, Signal, effect } from '@angular/core';
 import { TimelineModule } from 'primeng/timeline';
 import { VehiclesService } from '@shared/services/vehicles.service';
@@ -9,12 +9,14 @@ import { CONSTANTS } from '@shared/app-constants';
 import { TranslateModule } from '@ngx-translate/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-maintenance-timeline',
   templateUrl: './maintenance-timeline.component.html',
   standalone: true,
-  imports: [CommonModule, TimelineModule, TranslateModule, ButtonModule],
+  imports: [CommonModule, TimelineModule, TranslateModule, ButtonModule, CalendarModule, FormsModule],
   animations: [
     trigger('fadeInOut', [
       state('void', style({
@@ -42,15 +44,29 @@ export class MaintenanceTimelineComponent extends BaseComponent {
   groupedMaintenances: any[] = [];
   selectedMaintenanceId: number | null = null;
 
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+  filtersVisible: boolean = false;
   constructor() {
     super();
     effect(() => {
-      const vehicle = this.vehicleSelected();
-      if (vehicle && vehicle.mantenimientos && vehicle.mantenimientos.length > 0) {
-        this.groupedMaintenances = this.groupAndSortMaintenances(vehicle.mantenimientos);
-      } else {
-        this.groupedMaintenances = [];
-      }
+      this.updateMaintenances();
+    });
+  }
+
+  private filterMaintenances(maintenances: Maintenance[]): Maintenance[] {
+    if (!this.startDate && !this.endDate) {
+      return maintenances;
+    }
+    const start = this.startDate ? new Date(this.startDate) : new Date('0001-01-01');
+    const end = this.endDate ? new Date(this.endDate) : new Date('9999-12-31');
+
+    // Ajustar el final del rango para incluir todo el día
+    end.setHours(23, 59, 59, 999);
+
+    return maintenances.filter(maintenance => {
+      const maintenanceDate = new Date(maintenance.date);
+      return maintenanceDate >= start && maintenanceDate <= end;
     });
   }
 
@@ -65,6 +81,7 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 
       const color = serviceTypes.length > 0 ? serviceTypes[0].color : 'text-gray-600';
       const updatedMaintenance = { ...maintenance, title: serviceDescription, color: color };
+
       if (!acc[monthYear]) {
         acc[monthYear] = [];
       }
@@ -90,5 +107,25 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 
   getIconClasses(mant: any) {
     return [mant.icon || 'fas fa-question-circle', mant.color || 'text-gray-600', 'text-xl'];
+  }
+
+  public updateMaintenances(): void {
+    const vehicle = this.vehicleSelected();
+    if (vehicle && vehicle.mantenimientos && vehicle.mantenimientos.length > 0) {
+      const filteredMaintenances = this.filterMaintenances(vehicle.mantenimientos);
+      this.groupedMaintenances = this.groupAndSortMaintenances(filteredMaintenances);
+    } else {
+      this.groupedMaintenances = [];
+    }
+  }
+
+  public resetFilters(): void {
+    this.startDate = null;
+    this.endDate = null;
+    this.updateMaintenances(); // Actualizar la lista de mantenimientos sin filtros
+  }
+
+  toggleFilters(): void {
+    this.filtersVisible = !this.filtersVisible;
   }
 }
