@@ -13,7 +13,7 @@ export const MAINTENANCE_SCHEMA = {
 
 export interface Maintenance {
   id:number;
-  date: string;
+  date: string | Date;
   odometer: number;
   serviceType: any | null;
   location: string | null;

@@ -49,8 +49,12 @@ export class VehiclesService {
 		const query = this.dbSvc.db.vehicles.find({});
 		query.exec().then((results: any) => {
 			this.vehicles.update((val) => (val = results));
-			// Por defecto, al obtener los vehiculos se selecciona el primero en toda la aplicación.
-			this.vehicleSelected.update((val) => (val = this.vehicles()[0]));
+			// Por defecto, al obtener los vehiculos se selecciona el primero en toda la aplicación, si no actualiza el actual.
+      if(this.vehicleSelected() === undefined || (typeof this.vehicleSelected() === 'object' && Object.keys(this.vehicleSelected()).length === 0)) {
+        this.vehicleSelected.update((val) => (val = this.vehicles()[0]));
+      }else{
+        this.getVehicleById(this.vehicleSelected().id);
+      }
 		});
 	}
 

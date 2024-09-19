@@ -67,13 +67,12 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	private initUi(): void {
     //prettier-ignore
 		this.userSvc.page.update((val) => (val = this.isEdit ? this.translateSvc.instant('pages.mant-details.edit-mant') : this.translateSvc.instant('pages.mant-details.add-mant.title')));
-		this.mantForm.get('date')?.setValue(new Date());
 		this.loadServiceTypes();
 	}
 
 	private initForm(): void {
 		this.mantForm = this.formBuilder.group({
-			date: [null, Validators.required],
+			date: [new Date(), Validators.required],
 			odometer: [0],
 			serviceType: [null],
 			location: [null],
@@ -91,14 +90,13 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			this.routeSvc.paramMap.subscribe((params) => {
 				const maintenanceId = params.get('id') ?? '';
 				const maintenance = this.vehicleSvc.getMaintenanceById(maintenanceId);
-				console.log('Mantenimiento seleccionado', maintenance);
 				if (maintenance) {
-					this.mantForm.patchValue(maintenance);
-					this.maintenanceData = maintenance;
+          let mantPatch = {...maintenance, date: new Date(maintenance.date)}
+					this.mantForm.patchValue(mantPatch);
+					this.maintenanceData = mantPatch;
 					this.spinnerSvc.hide();
 				} else {
 					this.spinnerSvc.hide();
-					console.error('Mantenimiento no encontrado');
 					this.routerSvc.navigate([CONSTANTS.routes.home]);
 				}
 			});
