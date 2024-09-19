@@ -6,12 +6,13 @@ import { VehicleModel } from '@shared/models/vehicle.model';
 import { Maintenance } from '@shared/models/maintenance.model';
 import { BaseComponent } from '@shared/base.component';
 import { CONSTANTS } from '@shared/app-constants';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-maintenance-timeline',
 	templateUrl: './maintenance-timeline.component.html',
 	standalone: true,
-	imports: [CommonModule, TimelineModule]
+	imports: [CommonModule, TimelineModule, TranslateModule]
 })
 export class MaintenanceTimelineComponent extends BaseComponent {
 	vehicleSelected: Signal<VehicleModel> = inject(VehiclesService).vehicleSelected;
@@ -33,7 +34,7 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 			const monthYear = date.toLocaleString('default', { month: 'short', year: 'numeric' });
 			const serviceTypes = maintenance.serviceType || [];
 			const defaultText = this.translateSvc.instant('pages.mant-details.add-mant.service-type.default');
-			const firstServiceLabel = this.translateSvc.instant(serviceTypes[0]?.label?.toString()) || null;
+			const firstServiceLabel = serviceTypes[0] ? this.translateSvc.instant(serviceTypes[0]?.label?.toString()) || null : null;
 			//prettier-ignore
 			const serviceDescription = serviceTypes.length === 0 ? defaultText : firstServiceLabel + (serviceTypes.length > 1 ? ` +${serviceTypes.length - 1}` : '');
 			const color = serviceTypes.length > 0 ? serviceTypes[0].color : 'text-gray-600';

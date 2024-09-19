@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, Input, OnInit, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BaseComponent } from '@shared/base.component';
 import { VehiclesService } from '@shared/services/vehicles.service';
@@ -13,6 +13,7 @@ import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 })
 export class VehicleSelectorComponent extends BaseComponent implements OnInit {
 	selectedVehicle: any | undefined;
+  @Input() disabled: boolean = false;
 
 	constructor() {
 		effect(() => {

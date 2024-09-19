@@ -3,7 +3,7 @@
     <!-- <hr class="border-t border-primary-700 w-[90%] mb-5" />
     <label class="font-semibold text-lg">{{ 'pages.mant-details.add-mant.title' | translate }}</label>
     <hr class="border-t border-primary-700 w-[90%] mb-5 mt-5" /> -->
-    <app-vehicle-selector></app-vehicle-selector>
+    <app-vehicle-selector [disabled]="isEdit"></app-vehicle-selector>
   </div>
   <div class="container mx-auto max-w-screen-md">
     <form class="p-4" [formGroup]="mantForm" (ngSubmit)="onSubmit()">
@@ -80,13 +80,22 @@
         <textarea id="notes" [style]="{ width: '100%' }" formControlName="notes" class="w-full p-inputtext"></textarea>
       </div>
 
-      <div class="p-field col-span-2">
+      <div class="p-field col-span-2 flex items-center space-x-2">
         <button
           pButton
           type="submit"
           label="{{ 'pages.mant-details.add-mant.submit' | translate }}"
           icon="fa fa-save"
           class="p-button w-full"
+        ></button>
+        <button
+          *ngIf="isEdit"
+          pButton
+          type="button"
+          icon="fa fa-trash"
+          class="p-button p-button-danger"
+          style="width: 3.5rem; height: 3rem; font-size: 1.5rem;"
+          (click)="deleteMaintenance()"
         ></button>
       </div>
     </form>

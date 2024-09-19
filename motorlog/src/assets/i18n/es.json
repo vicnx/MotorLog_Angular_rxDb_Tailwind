@@ -1,7 +1,8 @@
 {
 	"pages": {
 		"home": {
-			"title": "Inicio"
+			"title": "Inicio",
+      "no_mant":"No hay mantenimientos registrados para este vehiculo."
 		},
 		"add-vehicle": {
 			"title": "Añadir nuevo vehículo",
@@ -59,11 +60,16 @@
           "exhaust_system_check": "Revisión del sistema de escape",
           "timing_belt_replacement": "Reemplazo de correa de distribución",
           "itv": "ITV",
-          "full_inspection": "Revisión completa"
+          "full_inspection": "Revisión completa",
+          "default":"Mantenimiento"
         },
         "validations":{
           "date_required":"La fecha del mantenimiento es obligatoria"
         }
+      },
+      "delete_mant":{
+        "confirm_header":"Eliminar mantenimiento",
+        "confirm_msg":"¿Estás seguro de que deseas eliminar este mantenimiento? Esta acción no se puede deshacer."
       }
     },
 		"vehicles-list": {

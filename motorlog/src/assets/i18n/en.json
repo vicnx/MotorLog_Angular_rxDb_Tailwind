@@ -1,7 +1,8 @@
 {
 	"pages": {
 		"home": {
-			"title": "Home"
+			"title": "Home",
+      "no_mant":"There are no registered maintenance for this vehicle."
 		},
 		"add-vehicle": {
 			"title": "Add new vehicle",
@@ -59,12 +60,17 @@
 					"exhaust_system_check": "Exhaust System Check",
 					"timing_belt_replacement": "Timing Belt Replacement",
 					"itv": "ITV",
-					"full_inspection": "Full Inspection"
+					"full_inspection": "Full Inspection",
+          "default":"Maintenance"
 				},
 				"validations": {
 					"date_required": "The maintenance date is required"
 				}
-			}
+			},
+      "delete_mant":{
+        "confirm_header":"Remove maintenance",
+        "confirm_msg":"Are you sure you want to eliminate this maintenance? This action cannot be undone."
+      }
 		},
 		"vehicles-list": {
 			"title": "My vehicles"

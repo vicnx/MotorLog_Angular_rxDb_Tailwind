@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, from, switchMap } from 'rxjs';
+import { Observable, from, switchMap, tap } from 'rxjs';
 import { UserService } from './user.service';
 import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
@@ -108,4 +108,54 @@ export class VehiclesService {
 			})
 		);
 	}
+
+  public getMaintenanceById(maintenanceId: string): Maintenance | undefined {
+    const vehicle = this.vehicleSelected();
+    return vehicle?.mantenimientos.find((maintenance: Maintenance) => maintenance.id.toString() === maintenanceId);
+  }
+
+  public updateMaintenance(vehicleId: string, maintenanceId: string, maintenanceData: any): Observable<any> {
+    const preparedData = this.prepareMaintenanceData(maintenanceData);
+    return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
+      switchMap((vehicle: any) => {
+        if (vehicle) {
+          const updatedMaintenances = vehicle.mantenimientos.map((maint: any) =>
+            maint.id.toString() == maintenanceId ? { ...maint, ...preparedData } : maint
+          );
+          return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+        } else {
+          throw new Error(`Vehicle with id ${vehicleId} not found`);
+        }
+      })
+    );
+  }
+
+  public deleteMaintenance(vehicleId: string, maintenanceId: string): Observable<any> {
+    console.log("deleteMaintenance called with vehicleId:", vehicleId, "and maintenanceId:", maintenanceId);
+    return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
+      switchMap((vehicle: any) => {
+        if (vehicle) {
+          const updatedMaintenances = vehicle.mantenimientos.filter((maint: any) =>
+            maint.id.toString() !== maintenanceId
+          );
+          return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+        } else {
+          throw new Error(`Vehicle with id ${vehicleId} not found`);
+        }
+      })
+    );
+  }
+
+  private prepareMaintenanceData(maintenance: any) {
+    return {
+      ...maintenance,
+      date: maintenance.date.toISOString(),
+      serviceType: maintenance.serviceType?.map((service: any) => ({
+        ...service,
+        label: service.label.toString()
+      }))
+    };
+  }
+
+
 }

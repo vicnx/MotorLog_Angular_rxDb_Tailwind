@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CONSTANTS } from './app-constants';
 import { UserModel } from './models/user.model';
 import { UtilsService } from './services/utils.service';
@@ -28,7 +28,7 @@ export class BaseComponent {
     spinnerSvc = inject(NgxSpinnerService);
     userSvc = inject(UserService)
 	  vehicleSvc = inject(VehiclesService);
-
+    confirmationSvc = inject(ConfirmationService);
 
     constructor() {
         this.pageName = '';
