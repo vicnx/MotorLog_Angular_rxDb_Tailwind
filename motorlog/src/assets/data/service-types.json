@@ -9,7 +9,7 @@
     "label": "pages.mant-details.add-mant.service-type.tire_rotation",
     "value": "tire_rotation",
     "icon": "fas fa-sync-alt",
-    "color": "text-gray-600"
+    "color": "text-red-500"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.brake_inspection",
@@ -21,7 +21,7 @@
     "label": "pages.mant-details.add-mant.service-type.battery_check",
     "value": "battery_check",
     "icon": "fas fa-car-battery",
-    "color": "text-green-500"
+    "color": "text-green-600"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.fluid_check",
@@ -87,7 +87,7 @@
     "label": "pages.mant-details.add-mant.service-type.hose_replacement",
     "value": "hose_replacement",
     "icon": "fas fa-tools",
-    "color": "text-gray-500"
+    "color": "text-yellow-300"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.light_check",
@@ -99,7 +99,7 @@
     "label": "pages.mant-details.add-mant.service-type.exhaust_system_check",
     "value": "exhaust_system_check",
     "icon": "fas fa-smog",
-    "color": "text-gray-600"
+    "color": "text-gray-500"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.timing_belt_replacement",

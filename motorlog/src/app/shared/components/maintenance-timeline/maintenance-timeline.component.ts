@@ -22,9 +22,11 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		super();
 		effect(() => {
 			const vehicle = this.vehicleSelected();
-			if (vehicle && vehicle.mantenimientos) {
+			if (vehicle && vehicle.mantenimientos && vehicle.mantenimientos.length > 0) {
 				this.groupedMaintenances = this.groupAndSortMaintenances(vehicle.mantenimientos);
-			}
+			}else{
+        this.groupedMaintenances = [];
+      }
 		});
 	}
 
@@ -57,4 +59,13 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 	public goToEdit(maintenanceId: number): void {
 		this.routerSvc.navigate([`${CONSTANTS.routes.maintenanceDetails}/${maintenanceId}`]);
 	}
+
+  getIconClasses(mant: any) {
+    console.log({
+      icon: mant.icon || 'fas fa-question-circle',
+      color: mant.color || 'text-gray-600'
+    });
+    return [mant.icon || 'fas fa-question-circle', mant.color || 'text-gray-600', 'text-xl'];
+  }
+
 }

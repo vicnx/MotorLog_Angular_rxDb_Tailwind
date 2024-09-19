@@ -58,10 +58,9 @@ export class VehiclesService {
 		//prettier-ignore
 		return this.dbSvc.db.vehicles.findOne().where('id').equals(id).exec().then((vehicle: any) => {
 				if (vehicle) {
-					// Actualizar directamente el signal con la nueva información del vehículo
 					this.vehicleSelected.set(vehicle.toJSON());
 				}
-				return vehicle; // Devolver el vehículo por si se necesita en otro contexto
+				return vehicle;
 			});
 	}
 

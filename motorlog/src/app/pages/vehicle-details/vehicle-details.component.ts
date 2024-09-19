@@ -94,7 +94,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			marca: ['', Validators.required],
 			modelo: ['', Validators.required],
 			year: [''],
-			color: [''],
+			color: ['#ff0000'],
 			imagen: [{ value: '', disabled: true }],
 			imagenMarca: [{ value: '', disabled: true }],
 			cc: ['', [Validators.max(9999)]],

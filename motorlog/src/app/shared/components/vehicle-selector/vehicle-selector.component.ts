@@ -34,7 +34,7 @@ export class VehicleSelectorComponent extends BaseComponent implements OnInit {
   public switchVehicle(event: DropdownChangeEvent): void {
     this.spinnerSvc.show();
     this.vehicleSvc.getVehicleById(event.value).then(() => {
-      this.spinnerSvc.hide(); // Oculta el spinner después de la actualización
+      this.spinnerSvc.hide();
     });
   }
 }
