@@ -14,6 +14,7 @@ import { VehiclesService } from '@shared/services/vehicles.service';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 import { MessageService } from 'primeng/api';
 import { VehicleModel } from '@shared/models/vehicle.model';
+import { InputNumberModule } from 'primeng/inputnumber';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -27,7 +28,9 @@ import { VehicleModel } from '@shared/models/vehicle.model';
 		ReactiveFormsModule,
 		ButtonModule,
 		SelectButtonModule,
-		ColorPickerModule
+		ColorPickerModule,
+		InputNumberModule,
+
 	],
 	templateUrl: './vehicle-details.component.html'
 })
@@ -55,6 +58,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 	}
 
 	public onSubmit(): void {
+    console.log(this.vehicleForm.value)
 		if (this.vehicleForm.valid) {
 			if (this.isConsulta) {
 				this.editVehicle();
@@ -93,7 +97,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			nombreVehiculo: ['', Validators.required],
 			marca: ['', Validators.required],
 			modelo: ['', Validators.required],
-			year: [''],
+			year: ['', [Validators.max(9999)]],
 			color: ['#ff0000'],
 			imagen: [{ value: '', disabled: true }],
 			imagenMarca: [{ value: '', disabled: true }],
