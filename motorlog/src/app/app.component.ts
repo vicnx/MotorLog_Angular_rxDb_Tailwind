@@ -16,13 +16,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { VehiclesService } from '@shared/services/vehicles.service';
 import localeEs from '@angular/common/locales/es';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
 	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule, WelcomeDialogInfoComponent],
-	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService, VehiclesService, VehiclesApiService]
+	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService, VehiclesService, VehiclesApiService, DataExportImportService]
 })
 export class AppComponent implements OnInit {
 	title = 'motorlog';

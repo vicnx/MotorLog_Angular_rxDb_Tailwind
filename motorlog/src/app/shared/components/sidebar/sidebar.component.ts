@@ -11,6 +11,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
 
 @Component({
 	selector: 'app-sidebar',
@@ -26,6 +27,7 @@ export class SidebarComponent extends BaseComponent {
 	public avatarImage: string;
 	public profile: any = {};
 	menuSvc = inject(MenuService);
+	dataSvc = inject(DataExportImportService);
 
 	ngOnInit(): void {
 		this.menuSvc.showMenu$.subscribe((open) => (this.show = open));
@@ -35,6 +37,7 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public openSettings(): void {
+    // this.dataSvc.exportData();
 		this.showNotImplemented();
 	}
 
