@@ -1,88 +1,85 @@
 @if (vehicleSvc.vehicles().length > 0){
-  @if (groupedMaintenances.length > 0) {
-    <div class="flex justify-between items-center mb-4">
-      <button (click)="toggleFilters()" class="p-button p-button-info p-button-icon">
-        <i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
-      </button>
+<div class="flex justify-between items-center mb-4">
+	<button (click)="toggleFilters()" class="p-button p-button-info p-button-icon">
+		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+	</button>
 
-      <p-button icon="fas fa-plus" [rounded]="true" severity="success" (onClick)="goToAddMaintenance()"></p-button>
-    </div>
-    <div @fadeInOut *ngIf="filtersVisible" class="flex flex-col md:flex-row justify-between items-start mb-4 mt-5 relative z-20">
-      <div class="flex flex-col gap-4 mb-4 md:mb-0 w-full md:w-auto">
-        <p-calendar [(ngModel)]="startDate" [placeholder]="'pages.home.filters.desde' | translate" [showIcon]="true"></p-calendar>
-        <p-calendar [(ngModel)]="endDate" [placeholder]="'pages.home.filters.hasta' | translate" [showIcon]="true"></p-calendar>
-      </div>
-      <div class="flex md:flex-col md:gap-4 w-full md:w-auto md:ml-4 md:mr-10">
-        <p-button [text]="true" (click)="updateMaintenances()">{{"pages.home.filters.apply_filters" | translate}}</p-button>
-        <p-button [text]="true" (click)="resetFilters()" severity="danger">{{"pages.home.filters.reset_filters" | translate}}</p-button>
-      </div>
-    </div>
-
-  <div class="w-full pt-5 mb-20">
-    <ng-container *ngFor="let group of groupedMaintenances">
-      <div class="ps-2 my-2 first:mt-0">
-        <h3 class="text-xs font-medium uppercase text-gray-500">
-          {{ group.date }}
-        </h3>
-      </div>
-      <ng-container *ngFor="let maintenance of group.maintenances">
-        <div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100 cursor-pointer" (click)="toggleMaintenance(maintenance.id)">
-          <div
-            class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700"
-          >
-            <div class="relative z-10 size-7 flex justify-center items-center">
-              <i [ngClass]="getIconClasses(maintenance)"></i>
-            </div>
-          </div>
-          <div class="grow p-2 pb-8">
-            <div class="flex justify-between items-start text-sm">
-              <div class="flex flex-col">
-                <h1 [ngClass]="maintenance.color" class="font-semibold text-base">
-                  {{ maintenance.title }}
-                </h1>
-                <p class="mt-1 flex items-center text-gray-600">
-                  <i class="fas fa-tachometer-alt mr-1"></i>
-                  {{ maintenance.odometer | number : '1.0-0' }} km
-                </p>
-                <p class="mt-1 flex items-center text-gray-600">
-                  <i class="fas fa-map-pin mr-1"></i>
-                  {{ maintenance.location || 'N/A' }}
-                </p>
-              </div>
-              <div class="flex flex-col items-end">
-                <p class="mt-1 text-gray-400">{{ maintenance.date | date : 'd MMM' }}</p>
-                <p [ngClass]="maintenance.color" class="font-semibold text-base">
-                  {{ maintenance.amount | currency : 'EUR' : 'symbol' : '1.2-2' : 'es-ES' }}
-                </p>
-              </div>
-            </div>
-            <div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="font-semibold text-base">
-              <ul class="list-inside text-xs pt-2">
-                <span *ngFor="let service of maintenance.serviceType" class="text-gray-500">
-                  {{ service.label | translate }} <br />
-                </span>
-              </ul>
-            </div>
-            <div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="absolute bottom-2 right-2">
-              <p-button
-                [rounded]="true"
-                [text]="true"
-                severity="primary"
-                (click)="goToEdit(maintenance.id)"
-                class="text-gray-500 hover:text-gray-700"
-              >
-                <i class="fas fa-pencil-alt text-lg"></i>
-              </p-button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </ng-container>
-  </div>
-  } @else {
-  <span>{{ 'pages.home.no_mant' | translate }}</span>}
-}@else {
-  <span>{{ 'pages.home.no_vehicles' | translate }}</span>
+	<p-button icon="fas fa-plus" [rounded]="true" severity="success" (onClick)="goToAddMaintenance()"></p-button>
+</div>
+<div @fadeInOut *ngIf="filtersVisible" class="flex flex-col md:flex-row justify-between items-start mb-4 mt-5 relative z-20">
+	<div class="flex flex-col gap-4 mb-4 md:mb-0 w-full md:w-auto">
+		<p-calendar [(ngModel)]="startDate" [placeholder]="'pages.home.filters.desde' | translate" [showIcon]="true"></p-calendar>
+		<p-calendar [(ngModel)]="endDate" [placeholder]="'pages.home.filters.hasta' | translate" [showIcon]="true"></p-calendar>
+	</div>
+	<div class="flex md:flex-col md:gap-4 w-full md:w-auto md:ml-4 md:mr-10">
+		<p-button [text]="true" (click)="updateMaintenances()">{{ 'pages.home.filters.apply_filters' | translate }}</p-button>
+		<p-button [text]="true" (click)="resetFilters()" severity="danger">{{ 'pages.home.filters.reset_filters' | translate }}</p-button>
+	</div>
+</div>
+@if (groupedMaintenances.length > 0) {
+<div class="w-full pt-5 mb-20">
+	<ng-container *ngFor="let group of groupedMaintenances">
+		<div class="ps-2 my-2 first:mt-0">
+			<h3 class="text-xs font-medium uppercase text-gray-500">
+				{{ group.date }}
+			</h3>
+		</div>
+		<ng-container *ngFor="let maintenance of group.maintenances">
+			<div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100 cursor-pointer" (click)="toggleMaintenance(maintenance.id)">
+				<div
+					class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700"
+				>
+					<div class="relative z-10 size-7 flex justify-center items-center">
+						<i [ngClass]="getIconClasses(maintenance)"></i>
+					</div>
+				</div>
+				<div class="grow p-2 pb-8">
+					<div class="flex justify-between items-start text-sm">
+						<div class="flex flex-col">
+							<h1 [ngClass]="maintenance.color" class="font-semibold text-base">
+								{{ maintenance.title }}
+							</h1>
+							<p class="mt-1 flex items-center text-gray-600">
+								<i class="fas fa-tachometer-alt mr-1"></i>
+								{{ maintenance.odometer | number : '1.0-0' }} km
+							</p>
+							<p class="mt-1 flex items-center text-gray-600">
+								<i class="fas fa-map-pin mr-1"></i>
+								{{ maintenance.location || 'N/A' }}
+							</p>
+						</div>
+						<div class="flex flex-col items-end">
+							<p class="mt-1 text-gray-400">{{ maintenance.date | date : 'd MMM' }}</p>
+							<p [ngClass]="maintenance.color" class="font-semibold text-base">
+								{{ maintenance.amount | currency : 'EUR' : 'symbol' : '1.2-2' : 'es-ES' }}
+							</p>
+						</div>
+					</div>
+					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="font-semibold text-base">
+						<ul class="list-inside text-xs pt-2">
+							<span *ngFor="let service of maintenance.serviceType" class="text-gray-500">
+								{{ service.label | translate }} <br />
+							</span>
+						</ul>
+					</div>
+					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="absolute bottom-2 right-2">
+						<p-button
+							[rounded]="true"
+							[text]="true"
+							severity="primary"
+							(click)="goToEdit(maintenance.id)"
+							class="text-gray-500 hover:text-gray-700"
+						>
+							<i class="fas fa-pencil-alt text-lg"></i>
+						</p-button>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+	</ng-container>
+</div>
+} @else {
+<span>{{ 'pages.home.no_mant' | translate }}</span
+>} }@else {
+<span>{{ 'pages.home.no_vehicles' | translate }}</span>
 }
-
-
