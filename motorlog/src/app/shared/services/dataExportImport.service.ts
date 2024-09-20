@@ -62,6 +62,7 @@ export class DataExportImportService {
 			}
 			console.log('Todos los datos han sido eliminados exitosamente.');
 			this.userSvc.setLogginUser(false);
+      location.reload();
 		} catch (error) {
 			console.error('Error eliminando datos:', error);
 		}
