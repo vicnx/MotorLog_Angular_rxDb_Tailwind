@@ -1,0 +1,128 @@
+{
+	"pages": {
+		"home": {
+			"title": "Home",
+      "no_mant":"There are no registered maintenance for this vehicle.",
+      "filters": {
+        "apply_filters":"Apply filters",
+        "reset_filters":"Clean filters",
+        "desde":"From",
+        "hasta":"To"
+      }
+		},
+		"add-vehicle": {
+			"title": "Add new vehicle",
+			"vehicle_name": "Vehicle name",
+			"brand": "Brand",
+			"model": "Model",
+			"year": "Year",
+			"color": "Color",
+			"imagen": "Image",
+			"cc": "CC",
+			"cv": "CV",
+			"icon": "Icon",
+			"observ": "Observations",
+			"brand_placeholder": "Select a brand",
+			"model_placeholder": "Select a model",
+			"save": "Save",
+			"validations": {
+				"vehicle_name_required": "Vehicle name is required",
+				"brand_required": "Brand is required",
+				"model_required": "Model is required",
+				"icono_required": "Icon is required"
+			}
+		},
+		"vehicle-details": {
+			"title": "Edit vehicle"
+		},
+		"mant-details": {
+			"edit-mant": "Edit Maintenance",
+			"add-mant": {
+				"title": "Add Maintenance",
+				"date": "Date",
+				"odometer": "Odometer",
+				"location": "Location",
+				"amount": "Amount",
+				"notes": "Notes",
+				"submit": "Save",
+				"service-type": {
+					"name": "Service Type",
+					"oil_change": "Oil Change",
+					"tire_rotation": "Tire Rotation",
+					"brake_inspection": "Brake Inspection",
+					"battery_check": "Battery Check",
+					"fluid_check": "Fluid Check",
+					"filter_replacement": "Filter Replacement",
+					"wiper_blade_replacement": "Wiper Blade Replacement",
+					"spark_plug_replacement": "Spark Plug Replacement",
+					"tire_replacement": "Tire Replacement",
+					"transmission_service": "Transmission Service",
+					"alignment_service": "Alignment Service",
+					"air_conditioning_service": "Air Conditioning Service",
+					"coolant_service": "Coolant Service",
+					"belt_replacement": "Belt Replacement",
+					"hose_replacement": "Hose Replacement",
+					"light_check": "Light Check",
+					"exhaust_system_check": "Exhaust System Check",
+					"timing_belt_replacement": "Timing Belt Replacement",
+					"itv": "ITV",
+					"full_inspection": "Full Inspection",
+          "default":"Maintenance"
+				},
+				"validations": {
+					"date_required": "The maintenance date is required"
+				}
+			},
+      "delete_mant":{
+        "confirm_header":"Remove maintenance",
+        "confirm_msg":"Are you sure you want to eliminate this maintenance? This action cannot be undone."
+      }
+		},
+		"vehicles-list": {
+			"title": "My vehicles"
+		},
+    "settings": {
+      "settings": "Settings",
+      "profile": "Profile",
+      "data": "Data management",
+      "import": "Import Data",
+      "export": "Export Data",
+      "delete": "Delete Data"
+    }
+	},
+	"welcome": {
+		"title": "Welcome to ",
+		"info": "The application to have control of your vehicles.",
+		"subtitle1": "First time?",
+		"info2": "Tell me your name",
+		"name": "Name",
+		"importText": "You can also import a backup and continue where you left off.",
+		"start": "Start",
+		"continue": "Continue",
+		"welcome-back": "Welcome back {{userName}}",
+		"warning": {
+			"title": "Notice",
+			"message_1": "This application is in the beta phase, so it is possible that there are incomplete errors or functions.",
+			"message_2": "The data is saved locally, from the settings section you can make a backup."
+		}
+	},
+	"errors": {
+		"MSGS": {
+			"request_error": "An error occurred in the request",
+			"name": "We need to know your name"
+		}
+	},
+	"confirm": {
+		"default_msg": "Are you sure you want to proceed?",
+		"default_header": "Confirmation",
+		"default_yes": "Yes",
+		"default_no": "No"
+	},
+	"lang": {
+		"spanish": "Spanish",
+		"english": "English"
+	},
+	"msgs": {
+		"success": "Operation carried out successfully."
+	}
+}

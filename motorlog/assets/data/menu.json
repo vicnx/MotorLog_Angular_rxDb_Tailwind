@@ -1,0 +1,22 @@
+{
+  "menuItems": [
+    {
+      "route": "/home",
+      "url": "/home",
+      "icon": "fa-home",
+      "name": "pages.home.title"
+    },
+    {
+      "route": "/add-vehicle",
+      "url": "/add-vehicle",
+      "icon": "fa-plus",
+      "name": "pages.add-vehicle.title"
+    },
+    {
+      "route": "/vehicles-list",
+      "url": "/vehicles-list",
+      "icon": "fa-list",
+      "name": "pages.vehicles-list.title"
+    }
+  ]
+}
