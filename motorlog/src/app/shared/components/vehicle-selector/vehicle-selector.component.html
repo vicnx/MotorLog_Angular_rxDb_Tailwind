@@ -1,3 +1,4 @@
+@if(vehicleSvc.vehicles().length > 0){
 <p-dropdown
 	[options]="this.vehicleSvc.vehicles()"
 	[(ngModel)]="selectedVehicle"
@@ -5,9 +6,10 @@
 	placeholder="Vehicle"
 	optionValue="id"
 	(onChange)="switchVehicle($event)"
-  [style]="{ minWidth: '200px', maxWidth:'200px', marginTop: '5px' }"
-  [disabled]="disabled">
+	[style]="{ minWidth: '200px', maxWidth: '200px', marginTop: '5px' }"
+	[disabled]="disabled"
 >
+	>
 	<ng-template class="w-full" let-item pTemplate="selectedItem"> <i class="{{ item?.icono }}"></i> {{ item?.nombreVehiculo }} </ng-template>
 	<ng-template let-item pTemplate="item">
 		<div class="block text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -18,3 +20,7 @@
 		</div>
 	</ng-template>
 </p-dropdown>
+
+}@else{
+<p-button [rounded]="false" [text]="true" (onClick)="goToAddVehicle()">{{ 'pages.add-vehicle.title' | translate }}</p-button>
+}

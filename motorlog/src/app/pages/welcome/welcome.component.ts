@@ -63,6 +63,7 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	private registerUser(): void {
 		if (!this.userSvc.userExistOnBd()) {
 			this.userSvc.setUser(this.loginForm.get('userName')?.value);
+      this.userSvc.displayWelcomeDialogInfo.set(true);
 			this.spinnerSvc.hide();
 		}
 	}

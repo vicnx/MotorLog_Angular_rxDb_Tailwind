@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, effect, inject } from '@angular/core';
+import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
-import { VehiclesService } from '@shared/services/vehicles.service';
+import { Button } from 'primeng/button';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 
 @Component({
 	selector: 'app-vehicle-selector',
 	standalone: true,
-	imports: [CommonModule, DropdownModule, FormsModule],
+	imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, Button],
 	templateUrl: './vehicle-selector.component.html'
 })
 export class VehicleSelectorComponent extends BaseComponent implements OnInit {
@@ -36,5 +38,9 @@ export class VehicleSelectorComponent extends BaseComponent implements OnInit {
     this.vehicleSvc.getVehicleById(event.value).then(() => {
       this.spinnerSvc.hide();
     });
+  }
+
+  public goToAddVehicle() :void {
+    this.routerSvc.navigate([CONSTANTS.routes.addVehicle])
   }
 }

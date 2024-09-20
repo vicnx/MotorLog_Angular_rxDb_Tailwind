@@ -1,12 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { DBService } from './db.service';
-import { RxCollection } from 'rxdb';
+import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { RxCollection } from 'rxdb';
+import { DBService } from './db.service';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataExportImportService {
 	dbSvc = inject(DBService);
-
+	router = inject(Router);
+	userSvc = inject(UserService);
 	public async exportData(): Promise<void> {
 		try {
 			const db = this.dbSvc.db;
@@ -44,6 +47,23 @@ export class DataExportImportService {
 			console.log('Datos importados exitosamente.');
 		} catch (error) {
 			console.error('Error importando datos:', error);
+		}
+	}
+
+	public async clearAllData(): Promise<void> {
+		try {
+			const db = this.dbSvc.db;
+			const collections = Object.keys(db.collections);
+
+			for (const collectionName of collections) {
+				const collection = db.collections[collectionName as keyof typeof db.collections] as unknown as RxCollection<any>;
+				const allDocs = await collection.find().exec();
+				await Promise.all(allDocs.map((doc) => doc.remove()));
+			}
+			console.log('Todos los datos han sido eliminados exitosamente.');
+			this.userSvc.setLogginUser(false);
+		} catch (error) {
+			console.error('Error eliminando datos:', error);
 		}
 	}
 }
