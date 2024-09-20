@@ -12,6 +12,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
+import { CONSTANTS } from '@shared/app-constants';
 
 @Component({
 	selector: 'app-sidebar',
@@ -37,8 +38,9 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public openSettings(): void {
+    this.routerSvc.navigate([CONSTANTS.routes.settings]);
     // this.dataSvc.exportData();
-		this.showNotImplemented();
+		// this.showNotImplemented();
 	}
 
 	public logout(): void {

@@ -1,0 +1,31 @@
+{
+  "settingsMenu": [
+    {
+      "label": "pages.settings.profile",
+      "icon": "fas fa-user",
+      "items": [],
+      "action": "profile"
+    },
+    {
+      "label": "pages.settings.data",
+      "icon": "fas fa-database",
+      "items": [
+        {
+          "label": "pages.settings.import",
+          "action": "import",
+          "icon": "fas fa-download"
+        },
+        {
+          "label": "pages.settings.export",
+          "action": "export",
+          "icon": "fas fa-upload"
+        },
+        {
+          "label": "pages.settings.delete",
+          "action": "delete",
+          "icon": "fas fa-trash"
+        }
+      ]
+    }
+  ]
+}

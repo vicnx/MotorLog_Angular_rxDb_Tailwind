@@ -80,7 +80,14 @@
 		},
 		"vehicles-list": {
 			"title": "My vehicles"
-		}
+		},
+    "settings": {
+      "profile": "Profile",
+      "data": "Data management",
+      "import": "Import Data",
+      "export": "Export Data",
+      "delete": "Delete Data"
+    }
 	},
 	"welcome": {
 		"title": "Welcome to ",

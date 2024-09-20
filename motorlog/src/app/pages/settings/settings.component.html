@@ -1,0 +1,36 @@
+<div class="mx-auto max-w-screen-md sm:px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5">
+  <div class="max-w-full mx-autorounded-none flex justify-center flex-col items-center">
+    <div *ngFor="let menuItem of settingsMenu" class="w-full border-b max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-5">
+      <a
+        *ngIf="menuItem.items?.length === 0"
+        class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer"
+        (click)="handleMenuAction(menuItem.action!)"
+      >
+        <div class="flex items-center space-x-4">
+          <i [ngClass]="menuItem.icon + ' text-gray-500'"></i>
+          <span class="text-lg">{{ getTranslatedLabel(menuItem.label) }}</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+
+      <div *ngIf="menuItem.items?.length">
+        <div class="p-2 text-xs text-gray-400 uppercase ml-1">
+          <i [ngClass]="menuItem.icon + ' text-gray-500'"></i> <span class="ml-2">{{ getTranslatedLabel(menuItem.label) }}</span>
+        </div>
+        <div *ngFor="let subItem of menuItem.items">
+          <a
+            class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer"
+            (click)="handleMenuAction(subItem.action!)"
+          >
+            <div class="flex items-center space-x-4">
+              <i [ngClass]="subItem.icon + ' text-gray-500'"></i>
+              <span class="text-lg">{{ getTranslatedLabel(subItem.label) }}</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+          </a>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
