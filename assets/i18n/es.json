@@ -3,6 +3,7 @@
 		"home": {
 			"title": "Inicio",
 			"no_mant": "No hay mantenimientos registrados para este vehiculo.",
+			"no_vehicles": "No hay vehiculos registrados para este usuario.",
 			"filters": {
 				"apply_filters": "Aplicar Filtros",
 				"reset_filters": "Limpiar Filtros",
@@ -87,7 +88,11 @@
       "data": "Gestión de datos",
       "import": "Importar datos",
       "export": "Exportar datos",
-      "delete": "Borrar datos"
+      "delete": "Borrar datos",
+      "delete_data":{
+        "confirm_msg":"¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
+        "confirm_header":"Borrar datos"
+      }
     }
 	},
 	"welcome": {

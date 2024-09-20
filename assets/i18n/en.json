@@ -3,6 +3,7 @@
 		"home": {
 			"title": "Home",
       "no_mant":"There are no registered maintenance for this vehicle.",
+			"no_vehicles": "There are no registered vehicles for this user.",
       "filters": {
         "apply_filters":"Apply filters",
         "reset_filters":"Clean filters",
@@ -87,7 +88,11 @@
       "data": "Data management",
       "import": "Import Data",
       "export": "Export Data",
-      "delete": "Delete Data"
+      "delete": "Delete Data",
+      "delete_data":{
+        "confirm_msg":"Are you sure you want to delete all data? This action cannot be undone.",
+        "confirm_header":"Confirm Deletion"
+      }
     }
 	},
 	"welcome": {
