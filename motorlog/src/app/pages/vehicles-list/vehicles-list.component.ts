@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
+import { AddVehicleButtonComponent } from '@shared/components/add-vehicle-button/add-vehicle-button.component';
+import { VehicleModel } from '@shared/models/vehicle.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { DataViewModule } from 'primeng/dataview';
-import { VehiclesService } from '@shared/services/vehicles.service';
 import { CapitalizeFirstPipe } from 'src/app/capitalize-first.pipe';
-import { CONSTANTS } from '@shared/app-constants';
-import { VehicleModel } from '@shared/models/vehicle.model';
 @Component({
 	selector: 'app-vehicles-list',
 	standalone: true,
@@ -29,7 +29,8 @@ import { VehicleModel } from '@shared/models/vehicle.model';
 		SelectButtonModule,
 		ColorPickerModule,
 		DataViewModule,
-		CapitalizeFirstPipe
+		CapitalizeFirstPipe,
+    AddVehicleButtonComponent
 	],
 	templateUrl: './vehicles-list.component.html'
 })

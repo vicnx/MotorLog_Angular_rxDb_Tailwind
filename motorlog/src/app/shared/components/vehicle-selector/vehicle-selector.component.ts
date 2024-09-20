@@ -6,11 +6,12 @@ import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { Button } from 'primeng/button';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { AddVehicleButtonComponent } from '../add-vehicle-button/add-vehicle-button.component';
 
 @Component({
 	selector: 'app-vehicle-selector',
 	standalone: true,
-	imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, Button],
+	imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, Button, AddVehicleButtonComponent],
 	templateUrl: './vehicle-selector.component.html'
 })
 export class VehicleSelectorComponent extends BaseComponent implements OnInit {
