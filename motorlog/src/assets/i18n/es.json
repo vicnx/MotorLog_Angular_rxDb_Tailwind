@@ -82,6 +82,7 @@
 			"title": "Mis vehiculos"
 		},
     "settings": {
+      "settings": "Ajustes",
       "profile": "Perfil",
       "data": "Gestión de datos",
       "import": "Importar datos",

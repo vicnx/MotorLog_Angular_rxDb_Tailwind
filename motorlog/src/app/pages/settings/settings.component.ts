@@ -26,6 +26,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   settingsMenu: SettingsItemModel[] = [];
 
   ngOnInit() {
+    this.userSvc.page.update((val) => (val = 'pages.settings.settings'))
     this.loadSettingsMenu();
   }
 

@@ -39,7 +39,7 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	ngOnInit(): void {
 		this.vehicleSvc.getSavedVehicles();
 		this.vehicleSvc.loadVehicleBrands();
-		this.userSvc.page.update((val) => (val = this.translateSvc.instant('pages.vehicles-list.title')));
+		this.userSvc.page.update((val) => (val = 'pages.vehicles-list.title'));
 	}
 
 	public getLogoBrand(brand: string): string {

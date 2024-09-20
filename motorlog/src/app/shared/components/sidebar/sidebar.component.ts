@@ -38,6 +38,7 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public openSettings(): void {
+    this.hideSidebar();
     this.routerSvc.navigate([CONSTANTS.routes.settings]);
     // this.dataSvc.exportData();
 		// this.showNotImplemented();

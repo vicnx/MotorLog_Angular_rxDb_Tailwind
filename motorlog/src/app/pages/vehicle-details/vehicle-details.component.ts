@@ -1,20 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, effect, inject } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
+import { VehicleModel } from '@shared/models/vehicle.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { InputTextModule } from 'primeng/inputtext';
-import { VehiclesService } from '@shared/services/vehicles.service';
-import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
-import { MessageService } from 'primeng/api';
-import { VehicleModel } from '@shared/models/vehicle.model';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -29,8 +26,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 		ButtonModule,
 		SelectButtonModule,
 		ColorPickerModule,
-		InputNumberModule,
-
+		InputNumberModule
 	],
 	templateUrl: './vehicle-details.component.html'
 })
@@ -48,17 +44,16 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 	isConsulta: boolean = false;
 	vehicleData: VehicleModel;
 
-
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data) => {
 			this.isConsulta = data['isConsulta'];
 		});
-    this.userSvc.page.update((val) => (val = this.isConsulta ? this.translateSvc.instant('pages.vehicle-details.title'): this.translateSvc.instant('pages.add-vehicle.title')) );
+		this.userSvc.page.update((val) => (val = this.isConsulta ? 'pages.vehicle-details.title' : 'pages.add-vehicle.title'));
 		this.initForm();
 	}
 
 	public onSubmit(): void {
-    console.log(this.vehicleForm.value)
+		console.log(this.vehicleForm.value);
 		if (this.vehicleForm.valid) {
 			if (this.isConsulta) {
 				this.editVehicle();
@@ -79,12 +74,12 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 	}
 
 	private editVehicle(): void {
-    this.vehicleSvc.updateVehicle(this.vehicleData.id,this.vehicleForm.value).subscribe({
-      next: (res) => {
-        this.operationOK();
-      }
-    })
-  }
+		this.vehicleSvc.updateVehicle(this.vehicleData.id, this.vehicleForm.value).subscribe({
+			next: (res) => {
+				this.operationOK();
+			}
+		});
+	}
 
 	private operationOK(): void {
 		this.showSuccess();

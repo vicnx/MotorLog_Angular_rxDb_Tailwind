@@ -66,7 +66,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 
 	private initUi(): void {
     //prettier-ignore
-		this.userSvc.page.update((val) => (val = this.isEdit ? this.translateSvc.instant('pages.mant-details.edit-mant') : this.translateSvc.instant('pages.mant-details.add-mant.title')));
+		this.userSvc.page.update((val) => (val = this.isEdit ? 'pages.mant-details.edit-mant' : 'pages.mant-details.add-mant.title'));
 		this.loadServiceTypes();
 	}
 
