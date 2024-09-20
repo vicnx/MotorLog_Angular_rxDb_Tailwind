@@ -88,6 +88,9 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 			key: 'confirmDialog',
 			accept: () => {
 				this.dataSvc.clearAllData();
+        setTimeout(() => {
+          this.routerSvc.navigate([CONSTANTS.routes.welcome])
+        }, 500);
 			},
 			reject: () => {}
 		});
