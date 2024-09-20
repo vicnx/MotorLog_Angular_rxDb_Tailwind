@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenuModule } from 'primeng/menu';  // Si usas el componente de menú de PrimeNG
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
 
 @Component({
   selector: 'app-settings',
@@ -24,6 +25,7 @@ import { MenuModule } from 'primeng/menu';  // Si usas el componente de menú de
 export class SettingsComponent extends BaseComponent implements OnInit {
   http = inject(HttpClient);
   settingsMenu: SettingsItemModel[] = [];
+	dataSvc = inject(DataExportImportService);
 
   ngOnInit() {
     this.userSvc.page.update((val) => (val = 'pages.settings.settings'))
@@ -66,9 +68,8 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   }
 
   exportData() {
-    this.showNotImplemented();
-    // Implementa la lógica de exportar datos
-    console.log('Exportar datos');
+    this.showSuccess();
+    this.dataSvc.exportData()
   }
 
   deleteData() {

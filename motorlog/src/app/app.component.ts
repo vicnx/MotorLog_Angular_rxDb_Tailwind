@@ -17,12 +17,13 @@ import { VehiclesService } from '@shared/services/vehicles.service';
 import localeEs from '@angular/common/locales/es';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
+import { ScrollTopComponent } from '@shared/components/scroll-top/scroll-top.component';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule, WelcomeDialogInfoComponent],
+	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule, WelcomeDialogInfoComponent, ScrollTopComponent],
 	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService, VehiclesService, VehiclesApiService, DataExportImportService]
 })
 export class AppComponent implements OnInit {

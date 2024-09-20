@@ -28,7 +28,6 @@ export class SidebarComponent extends BaseComponent {
 	public avatarImage: string;
 	public profile: any = {};
 	menuSvc = inject(MenuService);
-	dataSvc = inject(DataExportImportService);
 
 	ngOnInit(): void {
 		this.menuSvc.showMenu$.subscribe((open) => (this.show = open));

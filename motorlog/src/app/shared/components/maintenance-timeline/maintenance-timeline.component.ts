@@ -128,4 +128,8 @@ export class MaintenanceTimelineComponent extends BaseComponent {
   toggleFilters(): void {
     this.filtersVisible = !this.filtersVisible;
   }
+
+  public goToAddMaintenance(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.addMaintenance]);
+  }
 }
