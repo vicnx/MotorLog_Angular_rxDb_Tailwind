@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WelcomeComponent extends BaseComponent implements OnInit {
-	public welcomeImg: string = './../../../../../assets//images/welcome.svg';
+	public welcomeImg: string = 'assets/images/welcome.svg';
 	public loginForm: FormGroup;
 	constructor() {
 		super();
