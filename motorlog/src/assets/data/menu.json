@@ -17,6 +17,12 @@
       "url": "/vehicles-list",
       "icon": "fa-list",
       "name": "pages.vehicles-list.title"
+    },
+    {
+      "route": "/profile",
+      "url": "/profile",
+      "icon": "fa-user",
+      "name": "pages.profile.title"
     }
   ]
 }

@@ -68,6 +68,7 @@
 					"timing_belt_replacement": "Timing Belt Replacement",
 					"itv": "ITV",
 					"full_inspection": "Full Inspection",
+          "tire_puncture_repair": "Puncture repair",
           "default":"Maintenance"
 				},
 				"validations": {
@@ -93,6 +94,9 @@
         "confirm_msg":"Are you sure you want to delete all data? This action cannot be undone.",
         "confirm_header":"Confirm Deletion"
       }
+    },
+    "profile":{
+      "title":"Profile"
     }
 	},
 	"welcome": {
@@ -129,5 +133,11 @@
 	},
 	"msgs": {
 		"success": "Operation carried out successfully."
-	}
+	},
+  "userActions": {
+    "generateAvatar": "Generate new avatar",
+    "changeName": "Change name",
+    "logout":"Logout"
+
+  }
 }

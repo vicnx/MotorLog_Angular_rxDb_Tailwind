@@ -24,9 +24,9 @@ module.exports = {
 			fontFamily: {
 				sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji']
 			},
-      transitionProperty: {
-        'height': 'height'
-      }
+			transitionProperty: {
+				height: 'height'
+			}
 		}
 	},
 	safelist: [
@@ -45,7 +45,8 @@ module.exports = {
 		'text-cyan-400',
 		'text-red-400',
 		'text-yellow-300',
-		'text-gray-500'
+		'text-gray-500',
+		'text-orange-500'
 	],
 	plugins: [require('@tailwindcss/forms')]
 };
