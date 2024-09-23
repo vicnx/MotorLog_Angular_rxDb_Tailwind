@@ -50,8 +50,8 @@
   {
     "label": "pages.mant-details.add-mant.service-type.tire_replacement",
     "value": "tire_replacement",
-    "icon": "fas fa-tire",
-    "color": "text-black"
+    "icon": "fas fa-shuttle-van",
+    "color": "text-gray-700"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.transmission_service",
@@ -118,5 +118,11 @@
     "value": "full_inspection",
     "icon": "fas fa-clipboard-check",
     "color": "text-blue-600"
+  },
+  {
+    "label": "pages.mant-details.add-mant.service-type.tire_puncture_repair",
+    "value": "tire_puncture_repair",
+    "icon": "fas fa-tools",
+    "color": "text-orange-500"
   }
 ]
