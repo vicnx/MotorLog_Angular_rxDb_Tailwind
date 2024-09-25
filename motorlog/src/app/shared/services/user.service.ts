@@ -6,6 +6,8 @@ import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { from, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -78,5 +80,26 @@ export class UserService {
             },
             reject: () => {}
         });
+    }
+
+    // Nueva función para actualizar el usuario
+    public updateUser(id: string, updatedData: Partial<UserModel>): Observable<void> {
+        return from(this.dbSvc.db.user.findOne(id).exec()).pipe(
+            switchMap((user: any) => {
+                if (user) {
+                    return from(user.update({ $set: updatedData })).pipe(
+                        switchMap(() => {
+                            this.user.update((val) => ({ ...val, ...updatedData })); // Actualiza la señal
+                            return new Observable<void>((observer) => {
+                                observer.next(); // Emitir valor
+                                observer.complete(); // Completar la observable
+                            });
+                        })
+                    );
+                } else {
+                    throw new Error(`User with id ${id} not found`);
+                }
+            })
+        );
     }
 }

@@ -19,7 +19,7 @@ import { ButtonModule } from 'primeng/button';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
     menuOptions: any[] = [];
     langs: any[] | undefined;
     selectedLang: any | undefined;
@@ -31,14 +31,6 @@ export class NavbarComponent implements OnInit {
     userSvc = inject(UserService);
     locationSvc = inject(Location)
     constructor() {}
-
-    public avatarImage: string;
-
-    ngOnInit() {
-        this.avatarImage = this.userSvc.user().avatar || CONSTANTS.user.default.avatar;
-    }
-
-    private initUi(): void {}
 
     toggleSidebar() {
         this.menuSvc.toogleMenu();

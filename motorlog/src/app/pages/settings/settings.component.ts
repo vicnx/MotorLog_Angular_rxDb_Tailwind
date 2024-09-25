@@ -15,15 +15,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 	selector: 'app-settings',
 	standalone: true,
 	templateUrl: './settings.component.html',
-	imports: [
-		CommonModule,
-		HttpClientModule,
-		TranslateModule,
-		ButtonModule,
-		TooltipModule,
-		MenuModule,
-    ConfirmDialogModule
-	]
+	imports: [CommonModule, HttpClientModule, TranslateModule, ButtonModule, TooltipModule, MenuModule, ConfirmDialogModule]
 })
 export class SettingsComponent extends BaseComponent implements OnInit {
 	http = inject(HttpClient);
@@ -58,8 +50,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 				this.deleteData();
 				break;
 			case 'profile':
-				// this.deleteData();
-				this.showNotImplemented();
+				this.routerSvc.navigate([CONSTANTS.routes.profile]);
 				break;
 			default:
 				console.warn('Action not found:', action);
@@ -88,9 +79,9 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 			key: 'confirmDialog',
 			accept: () => {
 				this.dataSvc.clearAllData();
-        setTimeout(() => {
-          this.routerSvc.navigate([CONSTANTS.routes.welcome])
-        }, 500);
+				setTimeout(() => {
+					this.routerSvc.navigate([CONSTANTS.routes.welcome]);
+				}, 500);
 			},
 			reject: () => {}
 		});

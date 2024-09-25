@@ -1,0 +1,10 @@
+<p-dialog [header]="'userActions.generateAvatar.title' | translate" [(visible)]="visible" [modal]="true" [closable]="false">
+  <div class="flex flex-col items-center">
+    <img [src]="newAvatar" [alt]="'userActions.generateAvatar.title' | translate" class="h-32 w-32 rounded-full mb-4" />
+    <p>{{'userActions.generateAvatar.msg'| translate}}</p>
+    <div class="flex justify-between w-full mt-4">
+      <button (click)="onGenerateAnother()" class="p-button p-button-secondary">{{'userActions.generateAvatar.generateOther'| translate}}</button>
+      <button (click)="onApply()" class="p-button p-button-primary">{{'userActions.generateAvatar.apply'| translate}}</button>
+    </div>
+  </div>
+</p-dialog>

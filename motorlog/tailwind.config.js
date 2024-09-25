@@ -7,19 +7,20 @@ module.exports = {
 			colors: {
 				transparent: 'transparent',
 				current: 'currentColor',
-				primary: {
-					50: '#e0f7f6',
-					100: '#b3eae5',
-					200: '#80dfd5',
-					300: '#47d2c3',
-					400: '#27cabe',
-					500: '#14b8a6',
-					600: '#0da38f',
-					700: '#0b8f7c',
-					800: '#077766',
-					900: '#055e53',
-					950: '#023835'
-				}
+        primary: {
+          50: '#f1ebff',
+          100: '#d0c6ff',
+          200: '#a39eff',
+          300: '#7b76ff',
+          400: '#5b5cff',
+          500: '#8B5CF6', // Color base
+          600: '#743cdb',
+          700: '#5c2db3',
+          800: '#461f8c',
+          900: '#3a1781',
+          950: '#210d54'
+        }
+
 			},
 			fontFamily: {
 				sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji']
