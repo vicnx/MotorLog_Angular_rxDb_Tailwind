@@ -68,7 +68,7 @@
 					"timing_belt_replacement": "Reemplazo de correa de distribución",
 					"itv": "ITV",
 					"full_inspection": "Revisión completa",
-          "tire_puncture_repair": "Reparación de pinchazo",
+					"tire_puncture_repair": "Reparación de pinchazo",
 					"default": "Mantenimiento"
 				},
 				"validations": {
@@ -83,21 +83,21 @@
 		"vehicles-list": {
 			"title": "Mis vehiculos"
 		},
-    "settings": {
-      "settings": "Ajustes",
-      "profile": "Perfil",
-      "data": "Gestión de datos",
-      "import": "Importar datos",
-      "export": "Exportar datos",
-      "delete": "Borrar datos",
-      "delete_data":{
-        "confirm_msg":"¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
-        "confirm_header":"Borrar datos"
-      }
-    },
-    "profile":{
-      "title":"Perfil"
-    }
+		"settings": {
+			"settings": "Ajustes",
+			"profile": "Perfil",
+			"data": "Gestión de datos",
+			"import": "Importar datos",
+			"export": "Exportar datos",
+			"delete": "Borrar datos",
+			"delete_data": {
+				"confirm_msg": "¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
+				"confirm_header": "Borrar datos"
+			}
+		},
+		"profile": {
+			"title": "Perfil"
+		}
 	},
 	"welcome": {
 		"title": "Bienvenido a ",
@@ -134,9 +134,14 @@
 	"msgs": {
 		"success": "Operación realizada con éxito."
 	},
-  "userActions": {
-    "generateAvatar": "Generar nuevo avatar",
-    "changeName": "Cambiar nombre",
-    "logout":"Cerrar sesión"
-  }
+	"userActions": {
+		"generateAvatar": {
+			"title": "Generar nuevo avatar",
+			"msg": "¿Desea aplicar este nuevo avatar?",
+			"generateOther": "Generar otro",
+			"apply": "Aplicar"
+		},
+		"changeName": "Cambiar nombre",
+		"logout": "Cerrar sesión"
+	}
 }

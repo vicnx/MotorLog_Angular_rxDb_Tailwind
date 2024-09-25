@@ -2,14 +2,14 @@
 	"pages": {
 		"home": {
 			"title": "Home",
-      "no_mant":"There are no registered maintenance for this vehicle.",
+			"no_mant": "There are no registered maintenance for this vehicle.",
 			"no_vehicles": "There are no registered vehicles for this user.",
-      "filters": {
-        "apply_filters":"Apply filters",
-        "reset_filters":"Clean filters",
-        "desde":"From",
-        "hasta":"To"
-      }
+			"filters": {
+				"apply_filters": "Apply filters",
+				"reset_filters": "Clean filters",
+				"desde": "From",
+				"hasta": "To"
+			}
 		},
 		"add-vehicle": {
 			"title": "Add new vehicle",
@@ -68,36 +68,36 @@
 					"timing_belt_replacement": "Timing Belt Replacement",
 					"itv": "ITV",
 					"full_inspection": "Full Inspection",
-          "tire_puncture_repair": "Puncture repair",
-          "default":"Maintenance"
+					"tire_puncture_repair": "Puncture repair",
+					"default": "Maintenance"
 				},
 				"validations": {
 					"date_required": "The maintenance date is required"
 				}
 			},
-      "delete_mant":{
-        "confirm_header":"Remove maintenance",
-        "confirm_msg":"Are you sure you want to eliminate this maintenance? This action cannot be undone."
-      }
+			"delete_mant": {
+				"confirm_header": "Remove maintenance",
+				"confirm_msg": "Are you sure you want to eliminate this maintenance? This action cannot be undone."
+			}
 		},
 		"vehicles-list": {
 			"title": "My vehicles"
 		},
-    "settings": {
-      "settings": "Settings",
-      "profile": "Profile",
-      "data": "Data management",
-      "import": "Import Data",
-      "export": "Export Data",
-      "delete": "Delete Data",
-      "delete_data":{
-        "confirm_msg":"Are you sure you want to delete all data? This action cannot be undone.",
-        "confirm_header":"Confirm Deletion"
-      }
-    },
-    "profile":{
-      "title":"Profile"
-    }
+		"settings": {
+			"settings": "Settings",
+			"profile": "Profile",
+			"data": "Data management",
+			"import": "Import Data",
+			"export": "Export Data",
+			"delete": "Delete Data",
+			"delete_data": {
+				"confirm_msg": "Are you sure you want to delete all data? This action cannot be undone.",
+				"confirm_header": "Confirm Deletion"
+			}
+		},
+		"profile": {
+			"title": "Profile"
+		}
 	},
 	"welcome": {
 		"title": "Welcome to ",
@@ -134,10 +134,14 @@
 	"msgs": {
 		"success": "Operation carried out successfully."
 	},
-  "userActions": {
-    "generateAvatar": "Generate new avatar",
-    "changeName": "Change name",
-    "logout":"Logout"
-
-  }
+	"userActions": {
+		"generateAvatar": {
+			"title": "Generate new avatar",
+			"msg": "Do you want to apply this new avatar?",
+			"generateOther": "Generate another",
+			"apply": "Apply"
+		},
+		"changeName": "Change name",
+		"logout": "Logout"
+	}
 }
