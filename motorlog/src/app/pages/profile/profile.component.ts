@@ -24,6 +24,10 @@ export class ProfileComponent extends BaseComponent {
   showAvatarDialog: boolean = false;
   showChangeNameDialog: boolean = false;
 
+  ngOnInit(): void {
+    this.userSvc.page.update((val) => (val = 'pages.profile.title'));
+  }
+
   handleUserAction(action: string) {
     switch (action) {
       case 'generateAvatar':
