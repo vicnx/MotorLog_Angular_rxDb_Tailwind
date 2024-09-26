@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { UserService } from '@shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -21,6 +22,9 @@ import { ToastModule } from 'primeng/toast';
 export class WelcomeComponent extends BaseComponent implements OnInit {
 	public welcomeImg: string = 'assets/images/welcome.svg';
 	public loginForm: FormGroup;
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  dataSvc = inject(DataExportImportService);
+
 	constructor() {
 		super();
 		this.loginForm = new FormGroup({
@@ -57,7 +61,8 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public importData(): void {
-		this.showNotImplemented();
+    console.log(this.fileInput)
+    this.fileInput.nativeElement.click();
 	}
 
 	private registerUser(): void {
@@ -68,3 +73,6 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		}
 	}
 }
+
+
+

@@ -1,3 +1,4 @@
+<!-- Menú de configuración -->
 <div class="bg-gray-50 min-h-screen">
   <div class="sm:mx-auto max-w-screen-md sm:px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 pt-5 mx-3">
     <div class="max-w-full mx-autorounded-none flex justify-center flex-col items-center">
@@ -37,3 +38,5 @@
   </div>
 </div>
 
+<!-- Input oculto para seleccionar archivos -->
+<input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />

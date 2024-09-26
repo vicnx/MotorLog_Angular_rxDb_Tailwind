@@ -94,7 +94,12 @@
 			"delete_data": {
 				"confirm_msg": "¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
 				"confirm_header": "Borrar datos"
-			}
+			},
+      "import_data":{
+        "confirm": {
+          "msg": "Se van a importar datos del usuario {{username}}, ¿quiere continuar?"
+        }
+      }
 		},
 		"profile": {
 			"title": "Perfil"

@@ -94,7 +94,12 @@
 			"delete_data": {
 				"confirm_msg": "Are you sure you want to delete all data? This action cannot be undone.",
 				"confirm_header": "Confirm Deletion"
-			}
+			},
+      "import_data":{
+        "confirm": {
+          "msg": "User data will be imported {{username}}, do you want to continue?"
+        }
+      }
 		},
 		"profile": {
 			"title": "Profile"

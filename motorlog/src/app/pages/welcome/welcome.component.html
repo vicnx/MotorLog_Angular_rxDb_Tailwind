@@ -41,4 +41,5 @@
 		}
 	</div>
 	<p-toast key="toast" position="top-center"></p-toast>
+  <input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />
 </form>
