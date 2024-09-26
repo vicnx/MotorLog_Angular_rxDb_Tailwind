@@ -80,6 +80,7 @@
           [max]="1000000"
 				></p-inputNumber>
 			</div>
+      <app-image-selector [imageControl]="imageControl" [label]="'pages.mant-details.add-mant.imagen' | translate" [modoConsulta]="!isEdit"></app-image-selector>
 
 			<div class="mb-4">
 				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>

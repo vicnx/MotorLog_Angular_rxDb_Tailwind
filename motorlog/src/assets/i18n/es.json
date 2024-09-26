@@ -46,6 +46,7 @@
 				"amount": "Cantidad",
 				"notes": "Notas",
 				"submit": "Guardar",
+        "imagen":"Imagen",
 				"service-type": {
 					"name": "Tipo de Servicio",
 					"oil_change": "Cambio de aceite",

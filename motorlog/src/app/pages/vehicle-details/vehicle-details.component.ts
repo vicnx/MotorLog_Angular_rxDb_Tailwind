@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
+import { ImageSelectorComponent } from '@shared/components/image-selector/image-selector.component';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ButtonModule } from 'primeng/button';
@@ -26,7 +27,8 @@ import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 		ButtonModule,
 		SelectButtonModule,
 		ColorPickerModule,
-		InputNumberModule
+		InputNumberModule,
+    ImageSelectorComponent
 	],
 	templateUrl: './vehicle-details.component.html'
 })
@@ -94,7 +96,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			modelo: ['', Validators.required],
 			year: ['', [Validators.max(9999)]],
 			color: ['#ff0000'],
-			imagen: [{ value: '', disabled: true }],
+			imagen: [null],
 			imagenMarca: [{ value: '', disabled: true }],
 			cc: ['', [Validators.max(9999)]],
 			cv: ['', [Validators.max(999)]],
@@ -122,6 +124,10 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.loadIcons();
 		this.loadDropdowns();
 	}
+
+  get imageControl(): FormControl {
+    return this.vehicleForm.get('imagen') as FormControl;
+  }
 
 	private loadIcons(): void {
 		this.vehicleSvc.getVehicleIcons().subscribe({

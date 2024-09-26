@@ -1,0 +1,41 @@
+<div class="mb-4">
+	<label class="block text-gray-700 text-sm font-bold mb-2">{{ label }}</label>
+	<p-fileUpload #fileUpload name="imagen" (onSelect)="onFileUpload($event)" (onRemove)="onRemoveImage()" mode="basic" accept="image/*">
+	</p-fileUpload>
+
+	<div class="mt-2 relative">
+		<img
+			*ngIf="imageControl.value"
+			[src]="imageControl.value"
+			alt="Imagen seleccionada"
+			class="rounded-lg shadow-md object-contain w-32 h-32 cursor-pointer"
+			(click)="openModal()"
+		/>
+
+		<button
+			*ngIf="imageControl.value"
+			type="button"
+			class="absolute top-0 right-0 mt-2 mr-2 p-2 px-4 bg-red-500 text-white rounded-full hover:bg-red-700"
+			(click)="onRemoveImage()"
+		>
+			<i class="fa fa-trash"></i>
+		</button>
+		<button
+			*ngIf="imageControl.value"
+			type="button"
+			class="absolute bottom-0 right-0 mb-2 mr-2 p-2 px-4 bg-blue-500 text-white rounded-full hover:bg-blue-700"
+			(click)="downloadImage()"
+		>
+			<i class="fa fa-download"></i>
+		</button>
+	</div>
+</div>
+
+<div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+	<div class="bg-white rounded-lg p-4 relative">
+		<button class="absolute top-2 right-2 text-gray-500" (click)="closeModal()">
+			<i class="fa fa-times"></i>
+		</button>
+		<img [src]="imageControl.value" alt="Imagen ampliada" class="max-w-full max-h-[80vh] object-contain" />
+	</div>
+</div>

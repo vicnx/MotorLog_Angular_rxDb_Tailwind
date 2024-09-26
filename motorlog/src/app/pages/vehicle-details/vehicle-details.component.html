@@ -68,10 +68,7 @@
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.color' | translate }}</label>
 				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.imagen' | translate }}</label>
-				<input pInputText type="file" class="w-full" accept="image/*" formControlName="imagen" [disabled]="isConsulta" />
-			</div>
+      <app-image-selector [imageControl]="imageControl" [label]="'pages.add-vehicle.imagen' | translate" [modoConsulta]="isConsulta"></app-image-selector>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cc' | translate }}</label>
 				<p-inputNumber

@@ -46,6 +46,7 @@
 				"amount": "Amount",
 				"notes": "Notes",
 				"submit": "Save",
+        "imagen":"Image",
 				"service-type": {
 					"name": "Service Type",
 					"oil_change": "Oil Change",
