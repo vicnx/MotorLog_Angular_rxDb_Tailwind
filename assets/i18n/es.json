@@ -141,7 +141,14 @@
 			"generateOther": "Generar otro",
 			"apply": "Aplicar"
 		},
-		"changeName": "Cambiar nombre",
+    "changeName": {
+      "title": "Cambiar Nombre",
+      "msg": "Por favor, introduce tu nuevo nombre.",
+      "label": "Nuevo nombre",
+      "placeholder": "Introduce tu nuevo nombre",
+      "apply": "Aplicar",
+      "cancel": "Cancelar"
+    },
 		"logout": "Cerrar sesión"
 	}
 }
