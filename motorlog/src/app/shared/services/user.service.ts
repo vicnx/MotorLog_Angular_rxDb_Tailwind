@@ -89,7 +89,14 @@ export class UserService {
                 if (user) {
                     return from(user.update({ $set: updatedData })).pipe(
                         switchMap(() => {
-                            this.user.update((val) => ({ ...val, ...updatedData })); // Actualiza la señal
+                          this.getUser();
+                        //   this.user.update((val) => {
+                        //     console.log('Current value:', val);
+                        //     console.log('Updated data:', updatedData);
+                        //     const newUserData = { ...val, ...updatedData };
+                        //     console.log('Final merged data:', newUserData);
+                        //     return newUserData;
+                        // });
                             return new Observable<void>((observer) => {
                                 observer.next(); // Emitir valor
                                 observer.complete(); // Completar la observable

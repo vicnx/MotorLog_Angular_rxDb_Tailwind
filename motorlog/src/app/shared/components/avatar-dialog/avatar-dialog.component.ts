@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { DialogModule } from 'primeng/dialog';
 
@@ -12,7 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 export class AvatarDialogComponent extends BaseComponent {
 	@Input() visible: boolean = false;
 	@Output() close = new EventEmitter<void>();
-	newAvatar: string = '';
+	newAvatar: string = CONSTANTS.defaultImage;
 
 	ngOnInit() {
 		this.generateNewAvatar();

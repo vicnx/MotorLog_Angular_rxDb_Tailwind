@@ -1,0 +1,21 @@
+<p-dialog [header]="'userActions.changeName.title' | translate" [(visible)]="visible" [modal]="true" [closable]="true" (onHide)="onDialogClose()">
+	<div class="flex flex-col items-center">
+		<p>{{ 'userActions.changeName.msg' | translate }}</p>
+
+		<div class="w-full mt-4">
+			<label class="block mb-2 text-sm">{{ 'userActions.changeName.label' | translate }}</label>
+			<input
+				[(ngModel)]="newName"
+				type="text"
+				class="w-full p-inputtext p-component border border-gray-300 rounded-lg"
+				placeholder="{{ 'userActions.changeName.placeholder' | translate }}"
+			/>
+		</div>
+
+		<div class="flex justify-between w-full mt-6">
+			<button (click)="onApply()" class="p-button p-button-primary">
+				{{ 'userActions.changeName.apply' | translate }}
+			</button>
+		</div>
+	</div>
+</p-dialog>

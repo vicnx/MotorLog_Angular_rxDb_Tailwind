@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MenuService } from '@shared/services/menu.service';
@@ -30,7 +30,17 @@ export class NavbarComponent {
     menuSvc = inject(MenuService);
     userSvc = inject(UserService);
     locationSvc = inject(Location)
-    constructor() {}
+
+    avatar:string = '';
+    constructor() {
+      effect(() => {
+        if (this.userSvc.user()) {
+          console.log(this.userSvc.user().avatar);
+          this.avatar = this.userSvc.user().avatar;
+          console.log(this.userSvc.user());
+        }
+      });
+    }
 
     toggleSidebar() {
         this.menuSvc.toogleMenu();

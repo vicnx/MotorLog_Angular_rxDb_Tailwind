@@ -12,28 +12,15 @@
 				</div>
 			</div>
 		</div>
-		<!-- Sección de Acciones -->
 		<div class="px-4 py-6">
       <ng-container *ngFor="let action of userActions">
         <app-settings-button [action]="action" (handleAction)="handleUserAction($event)"></app-settings-button>
       </ng-container>
-			<!-- <button
-
-				class="w-full mb-4 flex justify-between items-center dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-				(click)="handleUserAction(action.action)"
-			>
-				<span class="flex items-center space-x-3">
-					<i [ngClass]="action.icon + ' text-gray-600 dark:text-gray-300'"></i>
-					<span class="text-lg">{{ action.label | translate }}</span>
-				</span>
-				<i class="fas fa-chevron-right text-gray-500 dark:text-gray-400"></i>
-			</button> -->
 		</div>
 		<div class="flex flex-col justify-center items-center pb-3">
 			<p-button severity="danger" [rounded]="false" [text]="true" (onClick)="logoutUser()">{{ 'userActions.logout' | translate }}</p-button>
 		</div>
 	</div>
-
-	<!-- Modal de Avatar -->
-	<app-avatar-dialog [visible]="showAvatarDialog" (close)="showAvatarDialog = false"> </app-avatar-dialog>
+	<app-avatar-dialog *ngIf="showAvatarDialog" [visible]="showAvatarDialog" (close)="showAvatarDialog = false"> </app-avatar-dialog>
+	<app-change-name-dialog  *ngIf="showChangeNameDialog" [visible]="showChangeNameDialog" (close)="showChangeNameDialog = false"> </app-change-name-dialog>
 </div>
