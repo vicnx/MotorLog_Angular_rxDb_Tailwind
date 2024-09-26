@@ -1,0 +1,10 @@
+<button
+class="w-full mb-4 flex justify-between items-center dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+(click)="handleUserAction(action.action)"
+>
+<span class="flex items-center space-x-3">
+  <i [ngClass]="action.icon + ' text-gray-600 dark:text-gray-300'"></i>
+  <span class="text-lg">{{ action.label | translate }}</span>
+</span>
+<i class="fas fa-chevron-right text-gray-500 dark:text-gray-400"></i>
+</button>

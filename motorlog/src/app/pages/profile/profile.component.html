@@ -14,8 +14,11 @@
 		</div>
 		<!-- Sección de Acciones -->
 		<div class="px-4 py-6">
-			<button
-				*ngFor="let action of userActions"
+      <ng-container *ngFor="let action of userActions">
+        <app-settings-button [action]="action" (handleAction)="handleUserAction($event)"></app-settings-button>
+      </ng-container>
+			<!-- <button
+
 				class="w-full mb-4 flex justify-between items-center dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
 				(click)="handleUserAction(action.action)"
 			>
@@ -24,7 +27,7 @@
 					<span class="text-lg">{{ action.label | translate }}</span>
 				</span>
 				<i class="fas fa-chevron-right text-gray-500 dark:text-gray-400"></i>
-			</button>
+			</button> -->
 		</div>
 		<div class="flex flex-col justify-center items-center pb-3">
 			<p-button severity="danger" [rounded]="false" [text]="true" (onClick)="logoutUser()">{{ 'userActions.logout' | translate }}</p-button>

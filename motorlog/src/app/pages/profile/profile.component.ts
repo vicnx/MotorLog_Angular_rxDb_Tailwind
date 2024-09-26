@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
 import { AvatarDialogComponent } from '@shared/components/avatar-dialog/avatar-dialog.component'; // Asegúrate de importar el componente de diálogo
+import { SettingsButtonComponent } from '@shared/components/settings-button/settings-button.component';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, ButtonModule, AvatarDialogComponent],
+  imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, ButtonModule, AvatarDialogComponent, SettingsButtonComponent],
   templateUrl: './profile.component.html'
 })
 export class ProfileComponent extends BaseComponent {

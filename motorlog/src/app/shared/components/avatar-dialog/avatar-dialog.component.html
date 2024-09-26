@@ -1,4 +1,4 @@
-<p-dialog [header]="'userActions.generateAvatar.title' | translate" [(visible)]="visible" [modal]="true" [closable]="false">
+<p-dialog [header]="'userActions.generateAvatar.title' | translate" [(visible)]="visible" [modal]="true" [closable]="true" (onHide)="onDialogClose()">
   <div class="flex flex-col items-center">
     <img [src]="newAvatar" [alt]="'userActions.generateAvatar.title' | translate" class="h-32 w-32 rounded-full mb-4" />
     <p>{{'userActions.generateAvatar.msg'| translate}}</p>

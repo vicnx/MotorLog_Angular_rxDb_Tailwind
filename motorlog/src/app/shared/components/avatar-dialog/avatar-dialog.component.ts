@@ -38,4 +38,8 @@ export class AvatarDialogComponent extends BaseComponent {
 	onGenerateAnother(): void {
 		this.generateNewAvatar();
 	}
+
+  onDialogClose(): void {
+    this.close.emit(); // Emitir el evento de cierre cuando el diálogo se cierra
+  }
 }
