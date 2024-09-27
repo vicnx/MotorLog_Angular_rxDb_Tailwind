@@ -8,6 +8,7 @@ import { USER_SCHEMA } from '@shared/models/user.model';
 import { VEHICLE_SCHEMA } from '@shared/models/vehicle.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({ providedIn: 'root' })
 export class DataExportImportService {
@@ -17,6 +18,7 @@ export class DataExportImportService {
 	confirmationService = inject(ConfirmationService);
 	translateSvc = inject(TranslateService);
 	messageSvc = inject(MessageService);
+	spinnerSvc = inject(NgxSpinnerService);
 
 	public async exportData(): Promise<void> {
 		try {
@@ -89,7 +91,8 @@ export class DataExportImportService {
 		}
 	}
 
-	onFileSelected(event: Event) {
+	onFileSelected(event: Event): void {
+		this.spinnerSvc.show();
 		const input = event.target as HTMLInputElement;
 		const file = input.files?.[0];
 
@@ -110,8 +113,11 @@ export class DataExportImportService {
 				const validationResult = this.validateImportedData(importedData);
 
 				if (!validationResult.valid) {
+					this.spinnerSvc.hide();
 					console.error('El JSON importado no es válido.');
 					return;
+				} else {
+					this.spinnerSvc.hide();
 				}
 
 				this.confirmationService.confirm({
@@ -125,15 +131,19 @@ export class DataExportImportService {
 					rejectLabel: this.translateSvc.instant('confirm.default_no'),
 					key: 'confirmDialog',
 					accept: () => {
+						this.spinnerSvc.show();
 						this.importData(file)
 							.then(() => {
-								// this.userSvc.setLogginUser(false);
+								this.spinnerSvc.hide();
 							})
 							.catch((error) => {
+								this.spinnerSvc.hide();
 								console.error('Error al importar los datos:', error);
 							});
 					},
-					reject: () => {}
+					reject: () => {
+						this.spinnerSvc.hide();
+					}
 				});
 			});
 		}
