@@ -99,7 +99,7 @@
     "label": "pages.mant-details.add-mant.service-type.exhaust_system_check",
     "value": "exhaust_system_check",
     "icon": "fas fa-smog",
-    "color": "text-gray-500"
+    "color": "text-pink-500"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.timing_belt_replacement",
@@ -124,5 +124,11 @@
     "value": "tire_puncture_repair",
     "icon": "fas fa-tools",
     "color": "text-orange-500"
+  },
+  {
+    "label": "pages.mant-details.add-mant.service-type.other",
+    "value": "tire_puncture_repair",
+    "icon": "fas fa-wrench",
+    "color": "text-fuchsia-600"
   }
 ]

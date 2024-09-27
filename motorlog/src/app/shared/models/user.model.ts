@@ -1,4 +1,5 @@
 import { ExtractDocumentTypeFromTypedRxJsonSchema, RxJsonSchema, toTypedRxJsonSchema } from 'rxdb';
+import { CustomService, CUSTOMSERVICE_SCHEMA } from './custom-service.model';
 //prettier-ignore
 export const USER_SCHEMA_LITERAL = {
 	title: 'user schema',
@@ -12,7 +13,8 @@ export const USER_SCHEMA_LITERAL = {
 		avatar: { type: 'string' },
 		username: { type: 'string' },
 		resgister_date: { type: 'string' },
-		gender: { type: 'string' }
+		gender: { type: 'string' },
+    customServices: { type: 'array', items: CUSTOMSERVICE_SCHEMA, default: [] }
 	},
 	required: ['id']
 };
@@ -29,4 +31,5 @@ export interface UserModel {
 	username: string;
   resgister_date: string;
   gender: string;
+  customServices: CustomService[];
 }

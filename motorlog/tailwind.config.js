@@ -36,17 +36,20 @@ module.exports = {
     'text-red-500',
     'text-red-600',
     'text-green-600',
+    'text-green-500',
     'text-blue-500',
+    'text-blue-400',
     'text-orange-500',
     'text-teal-500',
     'text-black',
     'text-gray-700',
     'text-indigo-600',
-    'text-blue-400',
     'text-cyan-400',
     'text-red-400',
     'text-yellow-300',
-    'text-gray-500'
+    'text-gray-500',
+    'text-pink-500',
+    'text-fuchsia-600'
 	],
 	plugins: [require('@tailwindcss/forms')]
 };

@@ -8,6 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { from, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { CustomService } from '@shared/models/custom-service.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -108,5 +109,73 @@ export class UserService {
                 }
             })
         );
+    }
+
+    addCustomServiceToUser(newCustomService: Omit<CustomService, 'id'>): Observable<any> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            const customServices = userData.customServices;
+
+            const nextId = customServices.length > 0
+              ? Math.max(...customServices.map((service: CustomService) => service.id)) + 1
+              : 1;
+
+            const serviceWithId = { ...newCustomService, id: nextId };
+
+            const updatedCustomServices = [...customServices, serviceWithId];
+
+            return from(
+              user.update({
+                $set: { customServices: updatedCustomServices }
+              })
+            ).pipe(
+              switchMap(() => this.getUser())
+            );
+          } else {
+            throw new Error(`User with id '1' not found`);
+          }
+        })
+      );
+    }
+
+
+    getCustomServices(): Observable<CustomService[]> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            return new Observable<CustomService[]>((observer) => {
+              observer.next(userData.customServices || []);
+              observer.complete();
+            });
+          } else {
+            throw new Error(`User with id '1' not found`);
+          }
+        })
+      );
+    }
+
+    removeCustomServiceFromUser(serviceId: number): Observable<any> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            const updatedCustomServices = userData.customServices.filter(
+              (service: CustomService) => service.id !== serviceId
+            );
+            return from(
+              user.update({
+                $set: { customServices: updatedCustomServices }
+              })
+            ).pipe(
+              switchMap(() => this.getUser())
+            );
+          } else {
+            throw new Error(`User with id '1' not found`);
+          }
+        })
+      );
     }
 }
