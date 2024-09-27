@@ -70,6 +70,7 @@
 					"itv": "ITV",
 					"full_inspection": "Revisión completa",
 					"tire_puncture_repair": "Reparación de pinchazo",
+					"other": "Otros",
 					"default": "Mantenimiento"
 				},
 				"validations": {
@@ -103,7 +104,10 @@
 		},
 		"profile": {
 			"title": "Perfil"
-		}
+		},
+    "custom-services-list":{
+      "title":"Servicios personalizados"
+    }
 	},
 	"welcome": {
 		"title": "Bienvenido a ",

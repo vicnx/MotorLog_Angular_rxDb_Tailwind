@@ -70,6 +70,7 @@
 					"itv": "ITV",
 					"full_inspection": "Full Inspection",
 					"tire_puncture_repair": "Puncture repair",
+					"other": "Other",
 					"default": "Maintenance"
 				},
 				"validations": {
@@ -103,7 +104,10 @@
 		},
 		"profile": {
 			"title": "Profile"
-		}
+		},
+    "custom-services-list":{
+      "title":"Custom services"
+    }
 	},
 	"welcome": {
 		"title": "Welcome to ",
