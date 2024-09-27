@@ -7,7 +7,8 @@
 		"build": "ng build --base-href=/MotorLog_Angular_rxDb_Tailwind/",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
-    "deploy": "npx angular-cli-ghpages --dir=dist/motorlog"
+    "deploy": "npx angular-cli-ghpages --dir=dist/motorlog",
+    "buildDeploy": "npm run build && npm run deploy"
 	},
 	"private": true,
 	"dependencies": {
