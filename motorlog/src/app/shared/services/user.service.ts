@@ -37,7 +37,7 @@ export class UserService {
       const query = this.dbSvc.db.user.insert(data);
       query.then(() => {
           this.getUser();
-        }).catch((error) => {
+        }).catch((error: any) => {
           throw error;
       });
 	  }
