@@ -105,8 +105,10 @@
 		"profile": {
 			"title": "Profile"
 		},
-    "custom-services-list":{
-      "title":"Custom services"
+    "custom-services":{
+      "title":"Custom services",
+      "no_customServices": "You have no personalized services.",
+			"add_customService": "Add new service"
     }
 	},
 	"welcome": {
