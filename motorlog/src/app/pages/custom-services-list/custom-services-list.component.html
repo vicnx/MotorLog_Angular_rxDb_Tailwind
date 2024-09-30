@@ -1,3 +1,30 @@
-<p>
-  custom-services-list works!
-</p>
+<div class="mx-auto max-w-screen-md sm:max-w-screen-lg px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 sm-shadow-lg sm:rounded-3xl">
+  <div class="flex flex-col justify-center items-center">
+    <p-button [rounded]="false" [text]="true" (onClick)="goToAddCustomService()">{{ 'pages.custom-services.add_customService' | translate }}</p-button>
+  </div>
+  @if(this.userSvc.user().customServices.length > 0){
+    <p-dataView #dv *ngIf="this.userSvc.user().customServices" [value]="this.userSvc.user().customServices">
+      <ng-template pTemplate="list" let-customServices>
+        <ul class="divide-y divide-gray-200 mb-10">
+          <li *ngFor="let customService of customServices" class="p-3 flex items-center user-card h-20 cursor-pointer transition duration-300 ease-in-out transform hover:brightness-90 bg-white" (click)="onClickCustomService(customService)">
+            <div class="ml-2">
+              <i [className]="customService.icon"></i>
+            </div>
+
+            <div class="ml-10 flex-grow">
+              <div class="text-ba">{{ customService.label | capitalizeFirst }}</div>
+            </div>
+
+            <div class="ml-auto w-1/3 truncate mr-5">
+              <span class="text-lg font-semibold truncate">
+                <i class="{{customService.icon}} text-sm mr-2" [ngStyle]="{ color: customService.color }"></i> <span class="text-sm">{{ customService.label | capitalizeFirst }}</span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+    </p-dataView>
+  }@else {
+    <span>{{ 'pages.custom-services.no_customServices' | translate }}</span>
+  }
+</div>

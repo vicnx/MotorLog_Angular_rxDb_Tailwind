@@ -10,6 +10,9 @@ export const CONSTANTS = {
         addMaintenance: '/add-maintenance',
         maintenanceDetails: '/maintenance-details',
         profile: '/profile',
+        customServiceDetails: '/custom-service-details',
+        customServiceAdd: '/custom-service-add',
+        customServiceList: '/custom-service-list',
         literal: {
             home: 'home',
             settings: 'settings',

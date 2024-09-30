@@ -51,6 +51,11 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/profile/profile.component').then((c) => c.ProfileComponent),
     canActivate: [AuthGuard]
   },
+  {
+		path: 'custom-service-list',
+		loadComponent: () => import('@pages/custom-services-list/custom-services-list.component').then((c) => c.CustomServicesListComponent),
+		canActivate: [AuthGuard]
+	},
 	{
 		path: '**',
 		redirectTo: 'welcome'

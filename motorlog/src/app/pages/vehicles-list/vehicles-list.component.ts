@@ -48,6 +48,6 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	}
 
 	public onClickVehicle(vehicle: VehicleModel): void {
-		this.routerSvc.navigate([`/vehicle-details/${vehicle.id}`]);
+		this.routerSvc.navigate([`${CONSTANTS.routes.vehicleDetails}/${vehicle.id}`]);
 	}
 }
