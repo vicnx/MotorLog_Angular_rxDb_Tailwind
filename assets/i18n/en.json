@@ -108,7 +108,20 @@
     "custom-services":{
       "title":"Custom services",
       "no_customServices": "You have no personalized services.",
-			"add_customService": "Add new service"
+			"add_customService": "Add new service",
+			"edit_customService": "Edit service",
+      "label": "Service name",
+			"color": "color",
+			"save": "Save",
+			"icon": "Icon",
+      "validations": {
+				"label_required": "Service name is required",
+				"icono_required": "Icon is required"
+			},
+      "delete_customService": {
+				"confirm_header": "Eliminate service",
+				"confirm_msg": "Are you sure you want to eliminate this personalized service? This action cannot be undone."
+			}
     }
 	},
 	"welcome": {

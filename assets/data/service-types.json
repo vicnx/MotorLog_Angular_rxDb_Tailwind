@@ -3,132 +3,132 @@
     "label": "pages.mant-details.add-mant.service-type.oil_change",
     "value": "oil_change",
     "icon": "fas fa-oil-can",
-    "color": "text-yellow-500"
+    "color": "#D8A300"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.tire_rotation",
     "value": "tire_rotation",
     "icon": "fas fa-sync-alt",
-    "color": "text-red-500"
+    "color": "#FF4B3A"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.brake_inspection",
     "value": "brake_inspection",
     "icon": "fas fa-car-crash",
-    "color": "text-red-600"
+    "color": "#C53030"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.battery_check",
     "value": "battery_check",
     "icon": "fas fa-car-battery",
-    "color": "text-green-600"
+    "color": "#2F855A"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.fluid_check",
     "value": "fluid_check",
     "icon": "fas fa-tint",
-    "color": "text-blue-500"
+    "color": "#3B82F6"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.filter_replacement",
     "value": "filter_replacement",
     "icon": "fas fa-filter",
-    "color": "text-orange-500"
+    "color": "#F97316"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.wiper_blade_replacement",
     "value": "wiper_blade_replacement",
     "icon": "fas fa-wind",
-    "color": "text-teal-500"
+    "color": "#38B2AC"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.spark_plug_replacement",
     "value": "spark_plug_replacement",
     "icon": "fas fa-bolt",
-    "color": "text-yellow-600"
+    "color": "#D69E2E"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.tire_replacement",
     "value": "tire_replacement",
     "icon": "fas fa-shuttle-van",
-    "color": "text-gray-700"
+    "color": "#4A5568"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.transmission_service",
     "value": "transmission_service",
     "icon": "fas fa-cogs",
-    "color": "text-gray-700"
+    "color": "#4A5568"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.alignment_service",
     "value": "alignment_service",
     "icon": "fas fa-align-center",
-    "color": "text-indigo-600"
+    "color": "#5A67D8"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.air_conditioning_service",
     "value": "air_conditioning_service",
     "icon": "fas fa-fan",
-    "color": "text-blue-400"
+    "color": "#63B3ED"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.coolant_service",
     "value": "coolant_service",
     "icon": "fas fa-snowflake",
-    "color": "text-cyan-400"
+    "color": "#67D5D7"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.belt_replacement",
     "value": "belt_replacement",
     "icon": "fas fa-belt",
-    "color": "text-red-400"
+    "color": "#F56565"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.hose_replacement",
     "value": "hose_replacement",
     "icon": "fas fa-tools",
-    "color": "text-yellow-300"
+    "color": "#F6E05E"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.light_check",
     "value": "light_check",
     "icon": "fas fa-lightbulb",
-    "color": "text-yellow-300"
+    "color": "#F6E05E"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.exhaust_system_check",
     "value": "exhaust_system_check",
     "icon": "fas fa-smog",
-    "color": "text-pink-500"
+    "color": "#D53F8C"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.timing_belt_replacement",
     "value": "timing_belt_replacement",
     "icon": "fas fa-clock",
-    "color": "text-orange-600"
+    "color": "#C05621"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.itv",
     "value": "itv",
     "icon": "fas fa-check-circle",
-    "color": "text-green-600"
+    "color": "#2F855A"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.full_inspection",
     "value": "full_inspection",
     "icon": "fas fa-clipboard-check",
-    "color": "text-blue-600"
+    "color": "#1E40AF"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.tire_puncture_repair",
     "value": "tire_puncture_repair",
     "icon": "fas fa-tools",
-    "color": "text-orange-500"
+    "color": "#F97316"
   },
   {
     "label": "pages.mant-details.add-mant.service-type.other",
     "value": "tire_puncture_repair",
     "icon": "fas fa-wrench",
-    "color": "text-fuchsia-600"
+    "color": "#D53F8C"
   }
 ]
