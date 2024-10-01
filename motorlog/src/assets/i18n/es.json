@@ -117,6 +117,10 @@
       "validations": {
 				"label_required": "Nombre del servicio es requerido",
 				"icono_required": "Icono es requerido"
+			},
+      "delete_customService": {
+				"confirm_header": "Eliminar servicio",
+				"confirm_msg": "¿Estás seguro de que deseas eliminar este servicio personalizado? Esta acción no se puede deshacer."
 			}
     }
 	},

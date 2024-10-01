@@ -31,6 +31,7 @@ import { CapitalizeFirstPipe } from 'src/app/capitalize-first.pipe';
 		ColorPickerModule,
 		DataViewModule,
 		CapitalizeFirstPipe,
+    ButtonModule
 	],
 })
 export class CustomServicesListComponent extends BaseComponent implements OnInit {
@@ -39,12 +40,30 @@ export class CustomServicesListComponent extends BaseComponent implements OnInit
 		this.userSvc.page.update((val) => (val = 'pages.custom-services.title'));
   }
 
-  public onClickCustomService(customService: CustomService): void {
-		this.routerSvc.navigate([`/custom-services/details/${customService.id}`]);
-	}
-
   public goToAddCustomService() :void {
     this.routerSvc.navigate([CONSTANTS.routes.customServiceAdd])
+  }
+
+  public removeCustomService(customService: any): void {
+    this.confirmationSvc.confirm({
+			message: this.translateSvc.instant('pages.custom-services.delete_customService.confirm_msg'),
+			header: this.translateSvc.instant('pages.custom-services.delete_customService.confirm_header'),
+			icon: 'fas fa-exclamation-triangle',
+			rejectButtonStyleClass: 'p-button-text',
+			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
+			rejectLabel: this.translateSvc.instant('confirm.default_no'),
+			key: 'confirmDialog',
+			accept: () => {
+				this.spinnerSvc.show();
+        this.userSvc.removeCustomServiceFromUser(customService.id).subscribe({
+          next: (res) => {
+				    this.spinnerSvc.hide();
+            console.log(res)
+          }
+        })
+			},
+			reject: () => {}
+		});
   }
 
 }

@@ -132,12 +132,12 @@ export class UserService {
               })
             ).pipe(
               switchMap(() => {
-                this.getUser(); // Solo ejecuta getUser sin esperar su resultado
-                return from([serviceWithId]); // Devuelve un observable vacío para mantener la cadena
+                this.getUser();
+                return from([serviceWithId]);
               })
             );
           } else {
-            return throwError(`User with id '1' not found`); // Usar throwError para devolver un observable de error
+            return throwError(`User with id '1' not found`);
           }
         })
       );
@@ -173,7 +173,10 @@ export class UserService {
                 $set: { customServices: updatedCustomServices }
               })
             ).pipe(
-              switchMap(() => this.getUser())
+              switchMap(() => {
+                this.getUser();
+                return from(['OK']);
+              })
             );
           } else {
             throw new Error(`User with id '1' not found`);

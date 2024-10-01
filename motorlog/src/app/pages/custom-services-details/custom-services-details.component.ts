@@ -78,7 +78,7 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 			label: ['', Validators.required],
 			value: ['', Validators.required],
 			color: ['#ff0000'],
-			icono: ['fa-car', Validators.required],
+			icono: ['fas fa-car', Validators.required],
 		});
 
     this.customServiceForm.get('label')?.valueChanges.subscribe((label: string) => {

@@ -117,6 +117,10 @@
       "validations": {
 				"label_required": "Service name is required",
 				"icono_required": "Icon is required"
+			},
+      "delete_customService": {
+				"confirm_header": "Eliminate service",
+				"confirm_msg": "Are you sure you want to eliminate this personalized service? This action cannot be undone."
 			}
     }
 	},
