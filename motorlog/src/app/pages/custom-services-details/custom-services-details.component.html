@@ -21,12 +21,12 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.icon' | translate }}</label>
-        <p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
-          <ng-template let-icono pTemplate>
-            <i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{'color': customServiceForm.get('color')?.value}"></i>
+        <p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icon" [disabled]="isConsulta">
+          <ng-template let-icon pTemplate>
+            <i [class]="icon" class="w-5 h-5 text-2xl" [ngStyle]="{'color': customServiceForm.get('color')?.value}"></i>
           </ng-template>
         </p-selectButton>
-				<div *ngIf="customServiceForm?.get('icono')?.invalid && customServiceForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="customServiceForm?.get('icon')?.invalid && customServiceForm?.get('icon')?.touched" class="text-red-500 text-sm mt-1">
 					{{ 'pages.custom-services.validations.icono_required' | translate }}
 				</div>
 			</div>

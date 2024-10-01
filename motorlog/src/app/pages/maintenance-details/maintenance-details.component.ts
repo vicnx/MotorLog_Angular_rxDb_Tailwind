@@ -18,6 +18,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { forkJoin } from 'rxjs';
 
 @Component({
 	selector: 'app-add-vehicle',
@@ -83,6 +84,18 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			notes: [''],
 			icon: null
 		});
+
+    this.mantForm.get('serviceType')?.valueChanges.subscribe((serviceTypes: any[]) => {
+      if (serviceTypes.length > 0) {
+        this.mantForm.patchValue({
+          icon: serviceTypes[0].icon || null
+        });
+      } else {
+        this.mantForm.patchValue({
+          icon: null
+        });
+      }
+    });
 		this.checkEdit();
 	}
 
@@ -110,19 +123,22 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	}
 
 	private loadServiceTypes(): void {
-		this.vehicleSvc.getServiceTypes().subscribe({
-			next: (resp: any) => {
-				this.serviceTypes = resp.map((obj: any) => ({ ...obj, desc: this.translateSvc.instant(obj.label) }));
-			}
-		});
+    forkJoin({
+      serviceTypes: this.vehicleSvc.getServiceTypes(),
+      customServices: this.userSvc.getCustomServices()
+    }).subscribe({
+      next: ({ serviceTypes, customServices }) => {
+        this.serviceTypes = [...serviceTypes, ...customServices].map((obj: any) => ({
+          ...obj,
+          desc: this.translateSvc.instant(obj.label)
+        }));
+      }
+    });
 	}
 
 	public onSubmit(): void {
 		if (this.mantForm.valid) {
 			//prettier-ignore
-			const serviceTypes = this.mantForm.value.serviceType || [];
-			const icon = serviceTypes?.[0]?.icon || null;
-			this.mantForm.patchValue({ icon });
 			if (this.isEdit) {
 				this.editMaintenance();
 			} else {
