@@ -106,8 +106,7 @@ export class MaintenanceTimelineComponent extends BaseComponent {
   }
 
   getIconClasses(mant: any) {
-    console.log(mant)
-    return [mant.icon || 'fas fa-question-circle', mant.color || 'text-gray-600', 'text-xl'];
+    return [mant.icon || 'fas fa-question-circle', 'text-xl'];
   }
 
   public updateMaintenances(): void {
