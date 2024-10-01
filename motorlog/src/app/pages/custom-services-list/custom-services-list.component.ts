@@ -36,7 +36,7 @@ import { CapitalizeFirstPipe } from 'src/app/capitalize-first.pipe';
 export class CustomServicesListComponent extends BaseComponent implements OnInit {
 
 	ngOnInit() {
-		this.userSvc.page.update((val) => (val = 'pages.custom-services-list.title'));
+		this.userSvc.page.update((val) => (val = 'pages.custom-services.title'));
   }
 
   public onClickCustomService(customService: CustomService): void {

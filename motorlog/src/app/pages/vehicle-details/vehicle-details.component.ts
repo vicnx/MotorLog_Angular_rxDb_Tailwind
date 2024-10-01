@@ -130,9 +130,9 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
   }
 
 	private loadIcons(): void {
-		this.vehicleSvc.getVehicleIcons().subscribe({
+		this.vehicleSvc.getIcons().subscribe({
 			next: (resp) => {
-				this.optionsIcons = resp.vehicle_icons;
+				this.optionsIcons = resp.icons;
 			}
 		});
 	}

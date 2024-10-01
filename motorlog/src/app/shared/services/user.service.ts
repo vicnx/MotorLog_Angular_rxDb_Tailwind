@@ -6,7 +6,7 @@ import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CustomService } from '@shared/models/custom-service.model';
 
@@ -116,13 +116,13 @@ export class UserService {
         switchMap((user: any) => {
           if (user) {
             const userData = user.toJSON();
-            const customServices = userData.customServices;
+            const customServices = userData.customServices || [];
 
             const nextId = customServices.length > 0
               ? Math.max(...customServices.map((service: CustomService) => service.id)) + 1
               : 1;
 
-            const serviceWithId = { ...newCustomService, id: nextId };
+            const serviceWithId = { ...newCustomService, id: nextId, value: `${newCustomService.value}_${nextId}` };
 
             const updatedCustomServices = [...customServices, serviceWithId];
 
@@ -131,10 +131,13 @@ export class UserService {
                 $set: { customServices: updatedCustomServices }
               })
             ).pipe(
-              switchMap(() => this.getUser())
+              switchMap(() => {
+                this.getUser(); // Solo ejecuta getUser sin esperar su resultado
+                return from([serviceWithId]); // Devuelve un observable vacío para mantener la cadena
+              })
             );
           } else {
-            throw new Error(`User with id '1' not found`);
+            return throwError(`User with id '1' not found`); // Usar throwError para devolver un observable de error
           }
         })
       );

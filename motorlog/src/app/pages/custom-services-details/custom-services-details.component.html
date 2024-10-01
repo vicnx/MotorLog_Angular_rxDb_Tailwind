@@ -1,0 +1,36 @@
+<div class="mx-auto h-screen md:h-full max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl">
+	<div class="container mx-auto max-w-screen-md">
+		<form class="p-4" [formGroup]="customServiceForm" (ngSubmit)="onSubmit()">
+			<div class="mb-4">
+				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.label' | translate }}</label>
+				<input
+					pInputText
+					type="text"
+					class="w-full"
+					[placeholder]="'pages.custom-services.label' | translate"
+					formControlName="label"
+					[disabled]="isConsulta"
+				/>
+				<div *ngIf="customServiceForm?.get('label')?.invalid && customServiceForm?.get('label')?.touched" class="text-red-500 text-sm mt-1">
+					{{ 'pages.custom-services.validations.label_required' | translate }}
+				</div>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.color' | translate }}</label>
+				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.icon' | translate }}</label>
+        <p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
+          <ng-template let-icono pTemplate>
+            <i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{'color': customServiceForm.get('color')?.value}"></i>
+          </ng-template>
+        </p-selectButton>
+				<div *ngIf="customServiceForm?.get('icono')?.invalid && customServiceForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">
+					{{ 'pages.custom-services.validations.icono_required' | translate }}
+				</div>
+			</div>
+			<p-button type="submit" [label]="'pages.custom-services.save' | translate"></p-button>
+		</form>
+	</div>
+</div>

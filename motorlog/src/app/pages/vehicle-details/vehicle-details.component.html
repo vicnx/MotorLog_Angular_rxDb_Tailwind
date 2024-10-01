@@ -99,7 +99,7 @@
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.icon' | translate }}</label>
 				<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
 					<ng-template let-icono pTemplate>
-						<i [class]="icono"></i>
+            <i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{'color': vehicleForm.get('color')?.value}"></i>
 					</ng-template>
 				</p-selectButton>
 				<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">

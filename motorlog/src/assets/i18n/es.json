@@ -108,7 +108,16 @@
     "custom-services":{
       "title":"Servicios personalizados",
 			"no_customServices": "No tienes servicios personalizados.",
-			"add_customService": "Añádir nuevo servicio"
+			"add_customService": "Añádir nuevo servicio",
+			"edit_customService": "Editar servicio",
+			"label": "Nombre servicio",
+			"color": "Color",
+			"save": "Guardar",
+			"icon": "Icono",
+      "validations": {
+				"label_required": "Nombre del servicio es requerido",
+				"icono_required": "Icono es requerido"
+			}
     }
 	},
 	"welcome": {

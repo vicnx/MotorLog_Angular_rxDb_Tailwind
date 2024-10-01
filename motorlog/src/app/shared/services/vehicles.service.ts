@@ -21,7 +21,7 @@ export class VehiclesService {
 	urlServiceTypes: string = './assets/data/service-types.json';
 	http = inject(HttpClient);
 
-	getVehicleIcons(): Observable<any> {
+	getIcons(): Observable<any> {
 		return this.http.get(this.urlIcons);
 	}
 

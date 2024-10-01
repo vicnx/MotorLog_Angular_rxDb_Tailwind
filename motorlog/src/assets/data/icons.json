@@ -1,7 +1,25 @@
 {
-	"vehicle_icons": [
+	"icons": [
 		"fas fa-car",
+		"fas fa-oil-can",
+		"fas fa-tools",
+		"fas fa-gas-pump",
+		"fas fa-battery-full",
+		"fas fa-tachometer-alt",
+		"fas fa-car-battery",
+		"fas fa-wrench",
+		"fas fa-road",
+		"fas fa-car-crash",
+		"fas fa-parking",
 		"fas fa-truck",
+		"fas fa-traffic-light",
+		"fas fa-warehouse",
+		"fas fa-clipboard-check",
+		"fas fa-route",
+		"fas fa-hands-helping",
+		"fas fa-cogs",
+		"fas fa-wind",
+		"fas fa-thermometer-half",
 		"fas fa-motorcycle",
 		"fas fa-bicycle",
 		"fas fa-plane",
@@ -10,6 +28,17 @@
 		"fas fa-cat",
 		"fas fa-fish",
 		"fas fa-dove",
-		"fas fa-horse"
+		"fas fa-horse",
+		"fas fa-car-side",
+		"fas fa-caravan",
+		"fas fa-trailer",
+		"fas fa-bus-alt",
+		"fas fa-shuttle-van",
+		"fas fa-screwdriver",
+		"fas fa-charging-station",
+		"fas fa-taxi",
+		"fas fa-ship",
+		"fas fa-helicopter",
+		"fas fa-subway"
 	]
 }
