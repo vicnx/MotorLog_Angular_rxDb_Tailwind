@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { UserService } from '@shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -18,6 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 export class WelcomeDialogInfoComponent {
 
 	userSvc = inject(UserService);
+	dataSvc = inject(DataExportImportService);
   displayDialog: boolean = false;
 
   constructor() {
@@ -32,5 +34,6 @@ export class WelcomeDialogInfoComponent {
 
   public hideDialog(): void {
     this.userSvc.displayWelcomeDialogInfo.set(false)
+    this.dataSvc.shouldShowBackupDialog.set(true);
   }
 }

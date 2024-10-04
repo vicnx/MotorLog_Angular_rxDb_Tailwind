@@ -18,12 +18,13 @@ import localeEs from '@angular/common/locales/es';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { ScrollTopComponent } from '@shared/components/scroll-top/scroll-top.component';
+import { BackupDialogMsgComponent } from '@shared/components/backup-dialog-msg/backup-dialog-msg.component';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule, WelcomeDialogInfoComponent, ScrollTopComponent],
+	imports: [RouterOutlet, CommonModule, NgxSpinnerModule, NavbarComponent, TranslateModule, ThemeToggleComponent, ToastModule, ConfirmDialogModule, WelcomeDialogInfoComponent, ScrollTopComponent, BackupDialogMsgComponent],
 	providers: [MenuService, ThemeService, MessageService, UserService, DBService, ConfirmationService, MessageService, VehiclesService, VehiclesApiService, DataExportImportService]
 })
 export class AppComponent implements OnInit {

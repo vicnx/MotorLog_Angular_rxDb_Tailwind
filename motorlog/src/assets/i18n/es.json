@@ -179,5 +179,14 @@
       "cancel": "Cancelar"
     },
 		"logout": "Cerrar sesión"
-	}
+	},
+  "backup": {
+    "dialog": {
+      "title": "Copia de seguridad de datos",
+      "message": "¿Deseas realizar una copia de seguridad de los datos de la aplicación?",
+      "warning": "Los datos se guardan localmente y pueden perderse si no se hace una copia.",
+      "confirm": "Hacer copia ahora",
+      "cancel": "Cancelar"
+    }
+  }
 }

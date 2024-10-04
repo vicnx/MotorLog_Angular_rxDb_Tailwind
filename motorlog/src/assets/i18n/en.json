@@ -179,5 +179,14 @@
 			"cancel": "Cancel"
 		},
 		"logout": "Logout"
-	}
+	},
+  "backup": {
+    "dialog": {
+      "title": "Backup Data",
+      "message": "Would you like to backup your application data?",
+      "warning": "The data is stored locally and may be lost if not backed up.",
+      "confirm": "Backup Now",
+      "cancel": "Cancel"
+    }
+  }
 }

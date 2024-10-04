@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { RxCollection } from 'rxdb';
@@ -19,6 +19,7 @@ export class DataExportImportService {
 	translateSvc = inject(TranslateService);
 	messageSvc = inject(MessageService);
 	spinnerSvc = inject(NgxSpinnerService);
+  shouldShowBackupDialog = signal<boolean>(false);
 
 	public async exportData(): Promise<void> {
 		try {
