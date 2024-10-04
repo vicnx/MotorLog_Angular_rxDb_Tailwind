@@ -100,7 +100,11 @@
         "confirm": {
           "msg": "User data will be imported {{username}}, do you want to continue?"
         }
-      }
+      },
+      "fixMant": {
+				"confirm_msg": "The maintenance data and repair possible errors will be checked.",
+				"confirm_header": "Repair maintenance data"
+			}
 		},
 		"profile": {
 			"title": "Profile"
