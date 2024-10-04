@@ -100,7 +100,11 @@
         "confirm": {
           "msg": "Se van a importar datos del usuario {{username}}, ¿quiere continuar?"
         }
-      }
+      },
+      "fixMant": {
+				"confirm_msg": "Se van a comprobar los datos de mantenimiento y reparar posibles errores.",
+				"confirm_header": "Reparar datos de mantenimientos"
+			}
 		},
 		"profile": {
 			"title": "Perfil"

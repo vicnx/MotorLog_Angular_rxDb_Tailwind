@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, from, switchMap, tap } from 'rxjs';
+import { Observable, from, of, switchMap, tap } from 'rxjs';
 import { UserService } from './user.service';
 import { DBService } from './db.service';
 import { UtilsService } from './utils.service';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import * as crypto from 'crypto-js';
 import { Maintenance } from '@shared/models/maintenance.model';
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class VehiclesService {
 	dbSvc = inject(DBService);
@@ -50,11 +51,14 @@ export class VehiclesService {
 		query.exec().then((results: any) => {
 			this.vehicles.update((val) => (val = results));
 			// Por defecto, al obtener los vehiculos se selecciona el primero en toda la aplicación, si no actualiza el actual.
-      if(this.vehicleSelected() === undefined || (typeof this.vehicleSelected() === 'object' && Object.keys(this.vehicleSelected()).length === 0)) {
-        this.vehicleSelected.update((val) => (val = this.vehicles()[0]));
-      }else{
-        this.getVehicleById(this.vehicleSelected().id);
-      }
+			if (
+				this.vehicleSelected() === undefined ||
+				(typeof this.vehicleSelected() === 'object' && Object.keys(this.vehicleSelected()).length === 0)
+			) {
+				this.vehicleSelected.update((val) => (val = this.vehicles()[0]));
+			} else {
+				this.getVehicleById(this.vehicleSelected().id);
+			}
 		});
 	}
 
@@ -88,8 +92,8 @@ export class VehiclesService {
 		);
 	}
 
-	getNextMaintenanceId(vehicle: any): number {
-    return vehicle.mantenimientos.length + 1;
+	getNextMaintenanceId(vehicle: any): string {
+		return uuidv4();
 	}
 
 	addMaintenanceToVehicle(vehicleId: string, newMaintenance: Omit<Maintenance, 'id'>): Observable<any> {
@@ -112,53 +116,71 @@ export class VehiclesService {
 		);
 	}
 
-  public getMaintenanceById(maintenanceId: string): Maintenance | undefined {
-    const vehicle = this.vehicleSelected();
-    return vehicle?.mantenimientos.find((maintenance: Maintenance) => maintenance.id.toString() === maintenanceId);
-  }
+	public getMaintenanceById(maintenanceId: string): Maintenance | undefined {
+		const vehicle = this.vehicleSelected();
+		return vehicle?.mantenimientos.find((maintenance: Maintenance) => maintenance.id.toString() === maintenanceId);
+	}
 
-  public updateMaintenance(vehicleId: string, maintenanceId: string, maintenanceData: any): Observable<any> {
-    const preparedData = this.prepareMaintenanceData(maintenanceData);
-    return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
-      switchMap((vehicle: any) => {
-        if (vehicle) {
-          const updatedMaintenances = vehicle.mantenimientos.map((maint: any) =>
-            maint.id.toString() == maintenanceId ? { ...maint, ...preparedData } : maint
-          );
-          return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
-        } else {
-          throw new Error(`Vehicle with id ${vehicleId} not found`);
-        }
-      })
-    );
-  }
+	public updateMaintenance(vehicleId: string, maintenanceId: string, maintenanceData: any): Observable<any> {
+		const preparedData = this.prepareMaintenanceData(maintenanceData);
+		return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
+			switchMap((vehicle: any) => {
+				if (vehicle) {
+					const updatedMaintenances = vehicle.mantenimientos.map((maint: any) =>
+						maint.id.toString() == maintenanceId ? { ...maint, ...preparedData } : maint
+					);
+					return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+				} else {
+					throw new Error(`Vehicle with id ${vehicleId} not found`);
+				}
+			})
+		);
+	}
 
-  public deleteMaintenance(vehicleId: string, maintenanceId: string): Observable<any> {
-    console.log("deleteMaintenance called with vehicleId:", vehicleId, "and maintenanceId:", maintenanceId);
-    return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
-      switchMap((vehicle: any) => {
-        if (vehicle) {
-          const updatedMaintenances = vehicle.mantenimientos.filter((maint: any) =>
-            maint.id.toString() !== maintenanceId
-          );
-          return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
-        } else {
-          throw new Error(`Vehicle with id ${vehicleId} not found`);
-        }
-      })
-    );
-  }
+	public deleteMaintenance(vehicleId: string, maintenanceId: string): Observable<any> {
+		console.log('deleteMaintenance called with vehicleId:', vehicleId, 'and maintenanceId:', maintenanceId);
+		return from(this.dbSvc.db.vehicles.findOne(vehicleId).exec()).pipe(
+			switchMap((vehicle: any) => {
+				if (vehicle) {
+					const updatedMaintenances = vehicle.mantenimientos.filter((maint: any) => maint.id.toString() !== maintenanceId);
+					return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+				} else {
+					throw new Error(`Vehicle with id ${vehicleId} not found`);
+				}
+			})
+		);
+	}
 
-  private prepareMaintenanceData(maintenance: any) {
-    return {
-      ...maintenance,
-      date: maintenance.date.toISOString(),
-      serviceType: maintenance.serviceType?.map((service: any) => ({
-        ...service,
-        label: service.label.toString()
-      }))
-    };
-  }
+	private prepareMaintenanceData(maintenance: any) {
+		return {
+			...maintenance,
+			date: maintenance.date.toISOString(),
+			serviceType: maintenance.serviceType?.map((service: any) => ({
+				...service,
+				label: service.label.toString()
+			}))
+		};
+	}
 
+	fixDuplicateMaintenanceIds(vehicle: any): any {
+		const existingIds = new Set();
+		let hasDuplicates = false;
 
+		const updatedMaintenances = vehicle.mantenimientos.map((maintenance: any) => {
+			if (existingIds.has(maintenance.id)) {
+				maintenance.id = uuidv4();
+				hasDuplicates = true;
+			} else {
+				existingIds.add(maintenance.id);
+			}
+			return maintenance;
+		});
+
+		if (hasDuplicates) {
+			vehicle.mantenimientos = updatedMaintenances;
+			return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+		}
+
+		return of(vehicle);
+	}
 }

@@ -24,6 +24,11 @@
           "label": "pages.settings.delete",
           "action": "delete",
           "icon": "fas fa-trash"
+        },
+        {
+          "label": "pages.settings.fixMant.confirm_header",
+          "icon": "fas fa-toolbox",
+          "action": "fixmant"
         }
       ]
     }
