@@ -168,17 +168,21 @@ export class VehiclesService {
 
 		const updatedMaintenances = vehicle.mantenimientos.map((maintenance: any) => {
 			if (existingIds.has(maintenance.id)) {
-				maintenance.id = uuidv4();
+				const maintenanceCopy = { ...maintenance, id: uuidv4() };
 				hasDuplicates = true;
+				return maintenanceCopy;
 			} else {
 				existingIds.add(maintenance.id);
+				return maintenance;
 			}
-			return maintenance;
 		});
 
 		if (hasDuplicates) {
-			vehicle.mantenimientos = updatedMaintenances;
-			return from(vehicle.update({ $set: { mantenimientos: updatedMaintenances } }));
+			return from(
+				vehicle.update({
+					$set: { mantenimientos: updatedMaintenances }
+				})
+			);
 		}
 
 		return of(vehicle);

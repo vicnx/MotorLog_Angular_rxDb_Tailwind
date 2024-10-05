@@ -1,14 +1,13 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { saveAs } from 'file-saver';
-import { RxCollection } from 'rxdb';
-import { DBService } from './db.service';
-import { UserService } from './user.service';
-import { USER_SCHEMA } from '@shared/models/user.model';
-import { VEHICLE_SCHEMA } from '@shared/models/vehicle.model';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { saveAs } from 'file-saver';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { removeRxDatabase, RxCollection } from 'rxdb';
+import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
+import { DBService, initDatabase } from './db.service';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataExportImportService {
@@ -19,7 +18,7 @@ export class DataExportImportService {
 	translateSvc = inject(TranslateService);
 	messageSvc = inject(MessageService);
 	spinnerSvc = inject(NgxSpinnerService);
-  shouldShowBackupDialog = signal<boolean>(false);
+	shouldShowBackupDialog = signal<boolean>(false);
 
 	public async exportData(): Promise<void> {
 		try {
@@ -41,31 +40,34 @@ export class DataExportImportService {
 			console.error('Error exportando datos:', error);
 		}
 	}
-
 	public async importData(file: File): Promise<void> {
 		try {
-			const db = this.dbSvc.db;
+			console.log('Borrando la base de datos...');
+			await removeRxDatabase('motorlog-db', getRxStorageDexie());
+			console.log('Base de datos eliminada.');
+
+			console.log('Recreando la base de datos...');
+			await initDatabase(this.confirmationService);
+			console.log('Base de datos recreada.');
+
 			const fileContent = await file.text();
 			const importedData = JSON.parse(fileContent);
-			const collections = Object.keys(db.collections);
-			for (const collectionName of collections) {
-				const collection = db.collections[collectionName as keyof typeof db.collections] as unknown as RxCollection<any>;
-				const allDocs = await collection.find().exec();
-				await Promise.all(allDocs.map((doc) => doc.remove()));
-			}
-			console.log('Todos los datos han sido eliminados exitosamente.');
+
+			const collections = this.dbSvc.db.collections;
 
 			for (const collectionName of Object.keys(importedData)) {
-				const collection = db.collections[collectionName as keyof typeof db.collections] as unknown as RxCollection<any>;
+				const collection = collections[collectionName as keyof typeof collections] as unknown as RxCollection<any>;
 
 				if (collection) {
 					for (const docData of importedData[collectionName]) {
-						await collection.upsert(docData); // Insertar o actualizar
+						await collection.upsert(docData);
 					}
+					console.log(`Datos importados en la colección "${collectionName}".`);
 				} else {
 					console.warn(`La colección "${collectionName}" no existe en la base de datos.`);
 				}
 			}
+
 			this.userSvc.setLogginUser(false);
 			location.reload();
 			console.log('Datos importados exitosamente.');
