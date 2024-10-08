@@ -46,7 +46,7 @@
 				"amount": "Cantidad",
 				"notes": "Notas",
 				"submit": "Guardar",
-        "imagen":"Imagen",
+				"imagen": "Imagen",
 				"service-type": {
 					"name": "Tipo de Servicio",
 					"oil_change": "Cambio de aceite",
@@ -96,12 +96,12 @@
 				"confirm_msg": "¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
 				"confirm_header": "Borrar datos"
 			},
-      "import_data":{
-        "confirm": {
-          "msg": "Se van a importar datos del usuario {{username}}, ¿quiere continuar?"
-        }
-      },
-      "fixMant": {
+			"import_data": {
+				"confirm": {
+					"msg": "Se van a importar datos del usuario {{username}}, ¿quiere continuar?"
+				}
+			},
+			"fixMant": {
 				"confirm_msg": "Se van a comprobar los datos de mantenimiento y reparar posibles errores.",
 				"confirm_header": "Reparar datos de mantenimientos"
 			}
@@ -109,8 +109,8 @@
 		"profile": {
 			"title": "Perfil"
 		},
-    "custom-services":{
-      "title":"Servicios personalizados",
+		"custom-services": {
+			"title": "Servicios personalizados",
 			"no_customServices": "No tienes servicios personalizados.",
 			"add_customService": "Añádir nuevo servicio",
 			"edit_customService": "Editar servicio",
@@ -118,15 +118,15 @@
 			"color": "Color",
 			"save": "Guardar",
 			"icon": "Icono",
-      "validations": {
+			"validations": {
 				"label_required": "Nombre del servicio es requerido",
 				"icono_required": "Icono es requerido"
 			},
-      "delete_customService": {
+			"delete_customService": {
 				"confirm_header": "Eliminar servicio",
 				"confirm_msg": "¿Estás seguro de que deseas eliminar este servicio personalizado? Esta acción no se puede deshacer."
 			}
-    }
+		}
 	},
 	"welcome": {
 		"title": "Bienvenido a ",
@@ -170,23 +170,70 @@
 			"generateOther": "Generar otro",
 			"apply": "Aplicar"
 		},
-    "changeName": {
-      "title": "Cambiar Nombre",
-      "msg": "Por favor, introduce tu nuevo nombre.",
-      "label": "Nuevo nombre",
-      "placeholder": "Introduce tu nuevo nombre",
-      "apply": "Aplicar",
-      "cancel": "Cancelar"
-    },
+		"changeName": {
+			"title": "Cambiar Nombre",
+			"msg": "Por favor, introduce tu nuevo nombre.",
+			"label": "Nuevo nombre",
+			"placeholder": "Introduce tu nuevo nombre",
+			"apply": "Aplicar",
+			"cancel": "Cancelar"
+		},
 		"logout": "Cerrar sesión"
 	},
-  "backup": {
-    "dialog": {
-      "title": "Copia de seguridad de datos",
-      "message": "¿Deseas realizar una copia de seguridad de los datos de la aplicación?",
-      "warning": "Los datos se guardan localmente y pueden perderse si no se hace una copia.",
-      "confirm": "Hacer copia ahora",
-      "cancel": "Cancelar"
-    }
-  }
+	"backup": {
+		"dialog": {
+			"title": "Copia de seguridad de datos",
+			"message": "¿Deseas realizar una copia de seguridad de los datos de la aplicación?",
+			"warning": "Los datos se guardan localmente y pueden perderse si no se hace una copia.",
+			"confirm": "Hacer copia ahora",
+			"cancel": "Cancelar"
+		}
+	},
+	"primeng": {
+		"startsWith": "Empieza con",
+		"contains": "Contiene",
+		"notContains": "No contiene",
+		"endsWith": "Termina con",
+		"equals": "Es igual a",
+		"notEquals": "No es igual a",
+		"noFilter": "Sin filtro",
+		"lt": "Menos que",
+		"lte": "Menos que o igual a",
+		"gt": "Mayor que",
+		"gte": "Mayor que o igual a",
+		"is": "Es",
+		"isNot": "No es",
+		"before": "Antes",
+		"after": "Después",
+		"dateIs": "La fecha es",
+		"dateIsNot": "La fecha no es",
+		"dateBefore": "La fecha es antes",
+		"dateAfter": "La fecha es después",
+		"clear": "Limpiar",
+		"apply": "Aplicar",
+		"matchAll": "Coincidir todos",
+		"matchAny": "Coincidir cualquiera",
+		"addRule": "Agregar regla",
+		"removeRule": "Eliminar regla",
+		"accept": "Sí",
+		"reject": "No",
+		"choose": "Elegir",
+		"upload": "Subir",
+		"cancel": "Cancelar",
+		"dayNames": ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+		"dayNamesShort": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+		"dayNamesMin": ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+		"monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+		"monthNamesShort": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+		"dateFormat": "dd/mm/yy",
+		"firstDayOfWeek": 1,
+		"today": "Hoy",
+		"weekHeader": "Sem",
+		"weak": "Débil",
+		"medium": "Medio",
+		"strong": "Fuerte",
+		"passwordPrompt": "Introduce una contraseña",
+		"emptyMessage": "No se encontraron resultados",
+		"emptyFilterMessage": "No se encontraron resultados"
+	}
 }
