@@ -47,6 +47,11 @@
 					[style]="{ width: '100%' }"
 					optionLabel="desc"
 				></p-multiSelect>
+                <ul class="list-inside text-xs pt-2" *ngIf="mantForm.get('serviceType')?.value?.length">
+					<span *ngFor="let service of mantForm.get('serviceType')?.value" class="text-gray-500">
+						{{ service.label | translate }} <br />
+					</span>
+				</ul>
 			</div>
 
 			<div class="mb-4">
@@ -73,11 +78,15 @@
 					currency="EUR"
 					locale="es-ES"
 					class="w-full"
-          [min]="0"
-          [max]="1000000"
+					[min]="0"
+					[max]="1000000"
 				></p-inputNumber>
 			</div>
-      <app-image-selector [imageControl]="imageControl" [label]="'pages.mant-details.add-mant.imagen' | translate" [modoConsulta]="!isEdit"></app-image-selector>
+			<app-image-selector
+				[imageControl]="imageControl"
+				[label]="'pages.mant-details.add-mant.imagen' | translate"
+				[modoConsulta]="!isEdit"
+			></app-image-selector>
 
 			<div class="mb-4">
 				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>

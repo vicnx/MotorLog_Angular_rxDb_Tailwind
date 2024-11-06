@@ -3,7 +3,6 @@
 	<button (click)="toggleFilters()" class="p-button p-button-info p-button-icon">
 		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
 	</button>
-
 	<p-button icon="fas fa-plus" [rounded]="true" severity="success" (onClick)="goToAddMaintenance()"></p-button>
 </div>
 <div @fadeInOut *ngIf="filtersVisible" class="flex flex-col md:flex-row justify-between items-start mb-4 mt-5 relative z-20">
@@ -30,13 +29,13 @@
 					class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700"
 				>
 					<div class="relative z-10 size-7 flex justify-center items-center">
-						<i [ngClass]="getIconClasses(maintenance)" [ngStyle]="{color: maintenance.color}" ></i>
+						<i [ngClass]="getIconClasses(maintenance)" [ngStyle]="{ color: maintenance.color }"></i>
 					</div>
 				</div>
 				<div class="grow p-2 pb-8">
 					<div class="flex justify-between items-start text-sm">
 						<div class="flex flex-col">
-							<h1 [ngStyle]="{color: maintenance.color}" class="font-semibold text-base">
+							<h1 [ngStyle]="{ color: maintenance.color }" class="font-semibold text-base">
 								{{ maintenance.title }}
 							</h1>
 							<p class="mt-1 flex items-center text-gray-600">
@@ -49,8 +48,10 @@
 							</p>
 						</div>
 						<div class="flex flex-col items-end">
-							<p class="mt-1 text-gray-400">{{ maintenance.date | date : 'd MMM' }}</p>
-							<p [ngStyle]="{color: maintenance.color}"  class="font-semibold text-base">
+							<p class="mt-1 text-gray-400">
+								{{ maintenance.date | date : 'd MMM' }}
+							</p>
+							<p [ngStyle]="{ color: maintenance.color }" class="font-semibold text-base">
 								{{ maintenance.amount | currency : 'EUR' : 'symbol' : '1.2-2' : 'es-ES' }}
 							</p>
 						</div>
