@@ -71,7 +71,8 @@
 					"full_inspection": "Revisión completa",
 					"tire_puncture_repair": "Reparación de pinchazo",
 					"other": "Otros",
-					"default": "Mantenimiento"
+					"default": "Mantenimiento",
+					"insurance_payment": "Seguro del vehiculo"
 				},
 				"validations": {
 					"date_required": "La fecha del mantenimiento es obligatoria"

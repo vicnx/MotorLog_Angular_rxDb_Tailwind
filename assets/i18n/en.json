@@ -71,7 +71,8 @@
 					"full_inspection": "Full Inspection",
 					"tire_puncture_repair": "Puncture repair",
 					"other": "Other",
-					"default": "Maintenance"
+					"default": "Maintenance",
+          "insurance_payment":"Vehicle insurance"
 				},
 				"validations": {
 					"date_required": "The maintenance date is required"
