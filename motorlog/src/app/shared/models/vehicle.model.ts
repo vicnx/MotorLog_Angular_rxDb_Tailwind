@@ -3,7 +3,7 @@ import { Maintenance, MAINTENANCE_SCHEMA } from './maintenance.model';
 //prettier-ignore
 export const VEHICLE_SCHEMA_LITERAL = {
 	title: 'vehicle schema',
-	version: 0,
+	version: 1,
 	description: 'Vechicle',
 	primaryKey: 'id',
 	type: 'object',
@@ -20,7 +20,23 @@ export const VEHICLE_SCHEMA_LITERAL = {
 		observaciones: { type: 'string' },
     mantenimientos: { type: 'array', items: MAINTENANCE_SCHEMA, default: [] }
 	},
-	required: ['id']
+	required: ['id'],
+    migrationStrategies: {
+        0: (oldDoc: any) => {
+          if (!oldDoc.mantenimientos) return oldDoc;
+          const mantenimientosMigrados = oldDoc.mantenimientos.map((m: any) => {
+            if (m.description === undefined) {
+              return { ...m, description: '' };
+            }
+            return m;
+          });
+
+          return {
+            ...oldDoc,
+            mantenimientos: mantenimientosMigrados
+          };
+        }
+      }
 };
 
 const schemaTyped = toTypedRxJsonSchema(VEHICLE_SCHEMA_LITERAL);
