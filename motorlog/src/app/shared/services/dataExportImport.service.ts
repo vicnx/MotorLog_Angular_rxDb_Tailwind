@@ -24,7 +24,6 @@ export class DataExportImportService {
 		try {
 			const db = this.dbSvc.db;
 			const collections = Object.keys(db.collections);
-
 			const dataToExport: Record<string, any[]> = {};
 
 			for (const collectionName of collections) {
@@ -33,13 +32,28 @@ export class DataExportImportService {
 				dataToExport[collectionName] = allDocs.map((doc) => doc.toJSON());
 			}
 
-			const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
-			saveAs(blob, 'motorLog_backup.json');
+			const json = JSON.stringify(dataToExport, null, 2);
+			const blob = new Blob([json], { type: 'application/json' });
+			const url = URL.createObjectURL(blob);
+
+			// Detecta navegador móvil que no soporta download (ej: Firefox iOS)
+			const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+			const isFirefoxIOS = /FxiOS/i.test(navigator.userAgent);
+
+			if (isMobile && isFirefoxIOS) {
+				// Abrir en nueva pestaña
+				window.open(url, '_blank');
+			} else {
+				// Descargar con FileSaver.js
+				saveAs(blob, 'motorLog_backup.json');
+			}
+
 			console.log('Datos exportados exitosamente.');
 		} catch (error) {
 			console.error('Error exportando datos:', error);
 		}
 	}
+
 	public async importData(file: File): Promise<void> {
 		try {
 			console.log('Borrando la base de datos...');
