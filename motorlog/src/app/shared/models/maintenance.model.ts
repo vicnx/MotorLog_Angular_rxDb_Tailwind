@@ -6,7 +6,8 @@ export const MAINTENANCE_SCHEMA = {
       serviceType: { type: 'string', nullable: true },
       location: { type: 'string', nullable: true },
       amount: { type: 'number', nullable: true },
-      notes: { type: 'string', default: '' }
+      notes: { type: 'string', default: '' },
+      description: { type: 'string', default: '' }
   },
   required: []
 };
@@ -19,5 +20,6 @@ export interface Maintenance {
   location: string | null;
   amount: number | null;
   notes: string;
+  description: string;
   title?:string;
 }

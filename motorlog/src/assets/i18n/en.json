@@ -45,6 +45,7 @@
 				"location": "Location",
 				"amount": "Amount",
 				"notes": "Notes",
+				"description": "Description",
 				"submit": "Save",
 				"imagen": "Image",
 				"service-type": {

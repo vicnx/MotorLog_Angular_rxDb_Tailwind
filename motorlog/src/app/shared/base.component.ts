@@ -11,60 +11,60 @@ import { FormGroup } from '@angular/forms';
 import { VehiclesService } from './services/vehicles.service';
 
 @Component({
-    template: ''
+	template: ''
 })
 export class BaseComponent {
-    public pageName: string = '';
-    public userIsLogged: boolean = false;
-    public const = CONSTANTS;
-    public userData: UserModel = {} as UserModel;
+	public pageName: string = '';
+	public userIsLogged: boolean = false;
+	public const = CONSTANTS;
+	public userData: UserModel = {} as UserModel;
 
-    // Services
-    routeSvc = inject(ActivatedRoute);
-    utilsSvc = inject(UtilsService);
-    translateSvc = inject(TranslateService);
-    routerSvc = inject(Router);
-    messageSvc = inject(MessageService);
-    spinnerSvc = inject(NgxSpinnerService);
-    userSvc = inject(UserService)
-	  vehicleSvc = inject(VehiclesService);
-    confirmationSvc = inject(ConfirmationService);
+	// Services
+	routeSvc = inject(ActivatedRoute);
+	utilsSvc = inject(UtilsService);
+	translateSvc = inject(TranslateService);
+	routerSvc = inject(Router);
+	messageSvc = inject(MessageService);
+	spinnerSvc = inject(NgxSpinnerService);
+	userSvc = inject(UserService);
+	vehicleSvc = inject(VehiclesService);
+	confirmationSvc = inject(ConfirmationService);
 
-    constructor() {
-        this.pageName = '';
-    }
+	constructor() {
+		this.pageName = '';
+	}
 
-    public showNotImplemented(): void {
-        this.messageSvc.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key: 'toast' });
-    }
+	public showNotImplemented(): void {
+		this.messageSvc.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key: 'toast' });
+	}
 
-    public showSuccess(): void {
-      this.messageSvc.add({ severity: 'success', summary: 'Success', detail:  this.translateSvc.instant('msgs.success'), key: 'toast'});
-    }
+	public showSuccess(): void {
+		this.messageSvc.add({ severity: 'success', summary: 'Success', detail: this.translateSvc.instant('msgs.success'), key: 'toast' });
+	}
 
-    protected checkUser(): void {
-        // this.dexieService.isLoggedIn$.subscribe((isLoggedIn) => {
-        //     this.userIsLogged = this.dexieService.isLoggedIn;
-        //     if (this.userIsLogged) {
-        //         this.userData = this.dexieService.userDataInfo;
-        //         this.router.navigate([CONSTANTS.routes.home]);
-        //     } else {
-        //         this.router.navigate([CONSTANTS.routes.welcome]);
-        //     }
-        // });
-    }
+	protected checkUser(): void {
+		// this.dexieService.isLoggedIn$.subscribe((isLoggedIn) => {
+		//     this.userIsLogged = this.dexieService.isLoggedIn;
+		//     if (this.userIsLogged) {
+		//         this.userData = this.dexieService.userDataInfo;
+		//         this.router.navigate([CONSTANTS.routes.home]);
+		//     } else {
+		//         this.router.navigate([CONSTANTS.routes.welcome]);
+		//     }
+		// });
+	}
 
-    public showErrorMsg(msg: string): void {
-        this.messageSvc.add({ severity: 'error', summary: 'Error', detail: msg, key: 'toast' });
-    }
+	public showErrorMsg(msg: string): void {
+		this.messageSvc.add({ severity: 'error', summary: 'Error', detail: msg, key: 'toast' });
+	}
 
-    protected markFieldsAsTouched(formGroup: FormGroup) {
-      Object.values(formGroup.controls).forEach((control) => {
-        control.markAsTouched();
-        control.markAsDirty();
-        if (control instanceof FormGroup) {
-          this.markFieldsAsTouched(control);
-        }
-      });
-    }
+	protected markFieldsAsTouched(formGroup: FormGroup) {
+		Object.values(formGroup.controls).forEach((control) => {
+			control.markAsTouched();
+			control.markAsDirty();
+			if (control instanceof FormGroup) {
+				this.markFieldsAsTouched(control);
+			}
+		});
+	}
 }

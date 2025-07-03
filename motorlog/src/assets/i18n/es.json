@@ -45,6 +45,7 @@
 				"location": "Ubicación",
 				"amount": "Cantidad",
 				"notes": "Notas",
+				"description": "Descripción",
 				"submit": "Guardar",
 				"imagen": "Imagen",
 				"service-type": {

@@ -82,6 +82,20 @@
 					[max]="1000000"
 				></p-inputNumber>
 			</div>
+            <div class="mb-4">
+				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{
+					'pages.mant-details.add-mant.notes' | translate
+				}}</label>
+				<input
+					[style]="{ width: '100%' }"
+					pInputText
+					type="text"
+					class="w-full p-inputtext"
+					[placeholder]="'pages.mant-details.add-mant.notes' | translate"
+					formControlName="notes"
+                    maxlength="50"
+				/>
+			</div>
 			<app-image-selector
 				[imageControl]="imageControl"
 				[label]="'pages.mant-details.add-mant.imagen' | translate"
@@ -89,8 +103,8 @@
 			></app-image-selector>
 
 			<div class="mb-4">
-				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>
-				<textarea id="notes" [style]="{ width: '100%' }" formControlName="notes" class="w-full p-inputtext"></textarea>
+				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.description' | translate }}</label>
+				<textarea id="description" [style]="{ width: '100%' }" formControlName="description" class="w-full p-inputtext"></textarea>
 			</div>
 
 			<div class="p-field col-span-2 flex items-center space-x-2">
