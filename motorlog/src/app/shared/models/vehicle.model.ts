@@ -22,18 +22,14 @@ export const VEHICLE_SCHEMA_LITERAL = {
 	},
 	required: ['id'],
     migrationStrategies: {
-        0: (oldDoc: any) => {
-          if (!oldDoc.mantenimientos) return oldDoc;
-          const mantenimientosMigrados = oldDoc.mantenimientos.map((m: any) => {
-            if (m.description === undefined) {
-              return { ...m, description: '' };
-            }
-            return m;
-          });
-
+        1: (oldDoc: any) => {
           return {
             ...oldDoc,
-            mantenimientos: mantenimientosMigrados
+            mantenimientos: oldDoc.mantenimientos?.map((m: any) => ({
+              ...m,
+              description: m.description ?? '',
+              date: (m.date instanceof Date) ? m.date.toISOString() : m.date ?? null
+            })) || []
           };
         }
       }
@@ -45,15 +41,15 @@ export type RxVehicleDocumentType = ExtractDocumentTypeFromTypedRxJsonSchema<typ
 export const VEHICLE_SCHEMA: RxJsonSchema<RxVehicleDocumentType> = VEHICLE_SCHEMA_LITERAL;
 
 export interface VehicleModel {
-  id: string;
-  nombreVehiculo: string;
-  marca: string;
-  modelo: string;
-  color: string;
-  year: string;
-  cc: string;
-  cv: string;
-  icono: string;
-  observaciones: string;
-  mantenimientos: Maintenance[];
+	id: string;
+	nombreVehiculo: string;
+	marca: string;
+	modelo: string;
+	color: string;
+	year: string;
+	cc: string;
+	cv: string;
+	icono: string;
+	observaciones: string;
+	mantenimientos: Maintenance[];
 }

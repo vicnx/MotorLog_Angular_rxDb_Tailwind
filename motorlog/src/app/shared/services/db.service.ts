@@ -20,6 +20,8 @@ async function createDatabase(confirmationService: ConfirmationService): Promise
     const db = await createRxDatabase<any>({
       name: 'motorlog-db',
       storage: getRxStorageDexie(),
+      multiInstance: false,
+      eventReduce: true,
     });
 
     await db.addCollections({
