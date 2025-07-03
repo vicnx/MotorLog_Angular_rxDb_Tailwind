@@ -15,13 +15,11 @@ addRxPlugin(RxDBDevModePlugin);
 addRxPlugin(RxDBQueryBuilderPlugin);
 addRxPlugin(RxDBUpdatePlugin);
 
-async function createDatabase(confirmationService: ConfirmationService): Promise<any> {
+async function createDatabase(): Promise<any> {
   try {
     const db = await createRxDatabase<any>({
       name: 'motorlog-db',
       storage: getRxStorageDexie(),
-      multiInstance: false,
-      eventReduce: true,
     });
 
     await db.addCollections({
@@ -32,32 +30,38 @@ async function createDatabase(confirmationService: ConfirmationService): Promise
     return db;
   } catch (error) {
     console.error('Error al inicializar la base de datos:', error);
+    console.log('Se va a eliminar la bd creada...');
+    await removeRxDatabase('motorlog-db', getRxStorageDexie());
+    const databases = await indexedDB.databases();
+    console.log(databases);
 
-    // Confirmar si se debe eliminar la base de datos
-    confirmationService.confirm({
-      message: 'Se detectó un problema con la base de datos. ¿Deseas reiniciarla?',
-      header: 'Confirmación',
-      icon: 'pi pi-exclamation-triangle',
-      accept: async () => {
-        console.log('Se va a eliminar la bd creada...');
-        await removeRxDatabase('motorlog-db', getRxStorageDexie());
+    // Recargar la aplicación después de eliminar la base de datos
+    // window.location.reload();
+    // // Confirmar si se debe eliminar la base de datos
+    // confirmationService.confirm({
+    //   message: 'Se detectó un problema con la base de datos. ¿Deseas reiniciarla?',
+    //   header: 'Confirmación',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: async () => {
+    //     console.log('Se va a eliminar la bd creada...');
+    //     await removeRxDatabase('motorlog-db', getRxStorageDexie());
 
-        // Recargar la aplicación después de eliminar la base de datos
-        window.location.reload();
-      },
-      reject: () => {
-        console.log('Cancelado');
-      },
-    });
+    //     // Recargar la aplicación después de eliminar la base de datos
+    //     window.location.reload();
+    //   },
+    //   reject: () => {
+    //     console.log('Cancelado');
+    //   },
+    // });
   }
 }
 
 let initState: any;
 let DB_INSTANCE: any;
 
-export async function initDatabase(confirmationService: ConfirmationService) {
+export async function initDatabase() {
   if (!initState) {
-    initState = createDatabase(confirmationService).then((db) => {
+    initState = createDatabase().then((db) => {
       DB_INSTANCE = db;
     });
   }

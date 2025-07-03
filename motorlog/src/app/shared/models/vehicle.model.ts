@@ -3,7 +3,7 @@ import { Maintenance, MAINTENANCE_SCHEMA } from './maintenance.model';
 //prettier-ignore
 export const VEHICLE_SCHEMA_LITERAL = {
 	title: 'vehicle schema',
-	version: 1,
+	version: 0,
 	description: 'Vechicle',
 	primaryKey: 'id',
 	type: 'object',
@@ -20,19 +20,7 @@ export const VEHICLE_SCHEMA_LITERAL = {
 		observaciones: { type: 'string' },
     mantenimientos: { type: 'array', items: MAINTENANCE_SCHEMA, default: [] }
 	},
-	required: ['id'],
-    migrationStrategies: {
-        1: (oldDoc: any) => {
-          return {
-            ...oldDoc,
-            mantenimientos: oldDoc.mantenimientos?.map((m: any) => ({
-              ...m,
-              description: m.description ?? '',
-              date: (m.date instanceof Date) ? m.date.toISOString() : m.date ?? null
-            })) || []
-          };
-        }
-      }
+	required: ['id']
 };
 
 const schemaTyped = toTypedRxJsonSchema(VEHICLE_SCHEMA_LITERAL);
@@ -41,15 +29,15 @@ export type RxVehicleDocumentType = ExtractDocumentTypeFromTypedRxJsonSchema<typ
 export const VEHICLE_SCHEMA: RxJsonSchema<RxVehicleDocumentType> = VEHICLE_SCHEMA_LITERAL;
 
 export interface VehicleModel {
-	id: string;
-	nombreVehiculo: string;
-	marca: string;
-	modelo: string;
-	color: string;
-	year: string;
-	cc: string;
-	cv: string;
-	icono: string;
-	observaciones: string;
-	mantenimientos: Maintenance[];
+  id: string;
+  nombreVehiculo: string;
+  marca: string;
+  modelo: string;
+  color: string;
+  year: string;
+  cc: string;
+  cv: string;
+  icono: string;
+  observaciones: string;
+  mantenimientos: Maintenance[];
 }

@@ -61,7 +61,7 @@ export class DataExportImportService {
 			console.log('Base de datos eliminada.');
 
 			console.log('Recreando la base de datos...');
-			await initDatabase(this.confirmationService);
+			await initDatabase();
 			console.log('Base de datos recreada.');
 
 			const fileContent = await file.text();
