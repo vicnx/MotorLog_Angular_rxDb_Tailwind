@@ -31,7 +31,21 @@
 					filterBy="name"
 					[showClear]="true"
 					[disabled]="isConsulta"
-				></p-dropdown>
+				>
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                    <div class="flex items-center gap-3" *ngIf="selectedOption">
+                        <img [src]="selectedOption.code | brandLogo" class="w-6 h-6 object-contain" />
+                        <span>{{ selectedOption.name }}</span>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="item" let-brand>
+                    <div class="flex items-center gap-3">
+                        <img [src]="brand.code | brandLogo" class="w-6 h-6 object-contain" />
+                        <span>{{ brand.name }}</span>
+                    </div>
+                </ng-template>
+				</p-dropdown>
 				<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="text-red-500 text-sm mt-1">
 					{{ 'pages.add-vehicle.validations.brand_required' | translate }}
 				</div>
@@ -61,14 +75,18 @@
 					[max]="9999"
 					class="w-full"
 					[disabled]="isConsulta"
-          [useGrouping]="false"
+					[useGrouping]="false"
 				></p-inputNumber>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.color' | translate }}</label>
 				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
 			</div>
-      <app-image-selector [imageControl]="imageControl" [label]="'pages.add-vehicle.imagen' | translate" [modoConsulta]="isConsulta"></app-image-selector>
+			<app-image-selector
+				[imageControl]="imageControl"
+				[label]="'pages.add-vehicle.imagen' | translate"
+				[modoConsulta]="isConsulta"
+			></app-image-selector>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cc' | translate }}</label>
 				<p-inputNumber
@@ -99,7 +117,7 @@
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.icon' | translate }}</label>
 				<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
 					<ng-template let-icono pTemplate>
-            <i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{'color': vehicleForm.get('color')?.value}"></i>
+						<i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{ color: vehicleForm.get('color')?.value }"></i>
 					</ng-template>
 				</p-selectButton>
 				<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">

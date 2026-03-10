@@ -13,23 +13,26 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
+import { BrandLogoPipe } from "../../shared/pipes/brand-logo.pipe";
+import { BrandService } from '@shared/services/brand.service';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
 	imports: [
-		CommonModule,
-		TranslateModule,
-		NgxSpinnerModule,
-		InputTextModule,
-		DropdownModule,
-		FormsModule,
-		ReactiveFormsModule,
-		ButtonModule,
-		SelectButtonModule,
-		ColorPickerModule,
-		InputNumberModule,
-    ImageSelectorComponent
-	],
+    CommonModule,
+    TranslateModule,
+    NgxSpinnerModule,
+    InputTextModule,
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    SelectButtonModule,
+    ColorPickerModule,
+    InputNumberModule,
+    ImageSelectorComponent,
+    BrandLogoPipe
+],
 	templateUrl: './vehicle-details.component.html'
 })
 export class VehicleDetailsComponent extends BaseComponent implements OnInit {
@@ -41,6 +44,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 	formBuilder = inject(FormBuilder);
 	vehicleForm: FormGroup;
 	vehiclesApiSvc = inject(VehiclesApiService);
+    brandSvc = inject(BrandService);
 
 	//Consulta
 	isConsulta: boolean = false;
@@ -141,6 +145,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.vehicleSvc.getVehicleBrands().subscribe({
 			next: (resp) => {
 				this.optionsBrands = resp;
+                this.brandSvc.setBrands(resp);
 			}
 		});
 	}

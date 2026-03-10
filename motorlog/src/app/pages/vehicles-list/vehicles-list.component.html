@@ -5,9 +5,13 @@
       <ng-template pTemplate="list" let-vehicles>
         <ul class="divide-y divide-gray-200 mb-10">
           <li *ngFor="let vehicle of vehicles" class="p-3 flex items-center user-card h-20 cursor-pointer transition duration-300 ease-in-out transform hover:brightness-90 bg-white" (click)="onClickVehicle(vehicle)">
-            <div class="ml-2">
-              <img class="w-10 h-full rounded-sm" [src]="getLogoBrand(vehicle.marca)" alt="image">
-            </div>
+            <div class="ml-2 w-16 h-16 flex items-center justify-center bg-transparent overflow-hidden">
+                <img
+                  class="max-w-full max-h-full object-contain"
+                  [src]="getLogoBrand(vehicle.marca)"
+                  [alt]="vehicle.marca"
+                >
+              </div>
 
             <div class="ml-10 flex-grow">
               <div class="text-ba">{{ vehicle.marca | capitalizeFirst }}</div>
