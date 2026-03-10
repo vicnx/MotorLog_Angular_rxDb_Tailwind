@@ -36,9 +36,13 @@
 				></p-inputNumber>
 			</div>
 			<div class="mb-4">
-				<label for="serviceType" class="block text-gray-700 text-sm font-bold mb-2">{{
-					'pages.mant-details.add-mant.service-type.name' | translate
-				}}</label>
+				<div class="flex justify-between items-center mb-2">
+					<label for="serviceType" class="block text-gray-700 text-sm font-bold">
+						{{ 'pages.mant-details.add-mant.service-type.name' | translate }}
+					</label>
+					<p-button icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddCustomService()" type="button">
+					</p-button>
+				</div>
 				<p-multiSelect
 					id="serviceType"
 					formControlName="serviceType"
@@ -46,11 +50,27 @@
 					placeholder="{{ 'pages.mant-details.add-mant.service-type.name' | translate }}"
 					[style]="{ width: '100%' }"
 					optionLabel="desc"
-				></p-multiSelect>
-                <ul class="list-inside text-xs pt-2" *ngIf="mantForm.get('serviceType')?.value?.length">
-					<span *ngFor="let service of mantForm.get('serviceType')?.value" class="text-gray-500">
-						{{ service.label | translate }} <br />
-					</span>
+					dataKey="value"
+				>
+					<ng-template let-service pTemplate="item">
+						<div class="flex items-center gap-2">
+							<i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
+							<span>{{ service.desc | translate }}</span>
+
+							<span *ngIf="service.isOrphan" class="text-[10px] text-red-400 font-bold italic">
+								({{ 'pages.custom-services.deleted' | translate }})
+							</span>
+						</div>
+					</ng-template>
+				</p-multiSelect>
+				<ul class="list-inside text-xs pt-2" *ngIf="mantForm.get('serviceType')?.value?.length">
+					<li *ngFor="let service of mantForm.get('serviceType')?.value" class="text-gray-500">
+                        <i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
+						{{ service.label | translate }}
+						<span *ngIf="isOrphan(service.value)" class="text-red-400 font-bold italic">
+							{{ 'pages.custom-services.deleted' | translate }}
+						</span>
+					</li>
 				</ul>
 			</div>
 
@@ -82,10 +102,8 @@
 					[max]="1000000"
 				></p-inputNumber>
 			</div>
-            <div class="mb-4">
-				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{
-					'pages.mant-details.add-mant.notes' | translate
-				}}</label>
+			<div class="mb-4">
+				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>
 				<input
 					[style]="{ width: '100%' }"
 					pInputText
@@ -93,7 +111,7 @@
 					class="w-full p-inputtext"
 					[placeholder]="'pages.mant-details.add-mant.notes' | translate"
 					formControlName="notes"
-                    maxlength="50"
+					maxlength="50"
 				/>
 			</div>
 			<app-image-selector
@@ -103,7 +121,9 @@
 			></app-image-selector>
 
 			<div class="mb-4">
-				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.description' | translate }}</label>
+				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{
+					'pages.mant-details.add-mant.description' | translate
+				}}</label>
 				<textarea id="description" [style]="{ width: '100%' }" formControlName="description" class="w-full p-inputtext"></textarea>
 			</div>
 

@@ -19,7 +19,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { forkJoin } from 'rxjs';
-
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CustomServiceDetailsComponent } from '../custom-services-details/custom-services-details.component';
+import { UtilsService } from '@shared/services/utils.service';
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -39,8 +41,10 @@ import { forkJoin } from 'rxjs';
 		InputMaskModule,
 		MultiSelectModule,
 		ConfirmDialogModule,
-    ImageSelectorComponent
+		ImageSelectorComponent,
+		ButtonModule
 	],
+	providers: [DialogService],
 	templateUrl: './maintenance-details.component.html'
 })
 export class MaintenanceDetailsComponent extends BaseComponent implements OnInit {
@@ -50,6 +54,8 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	currentVehicleInfo: VehicleModel;
 	serviceTypes: any[];
 	maintenanceData: Maintenance;
+	dialogService = inject(DialogService);
+	ref: DynamicDialogRef | undefined;
 
 	constructor() {
 		super();
@@ -70,7 +76,6 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	private initUi(): void {
 		//prettier-ignore
 		this.userSvc.page.update((val) => (val = this.isEdit ? 'pages.mant-details.edit-mant' : 'pages.mant-details.add-mant.title'));
-		this.loadServiceTypes();
 	}
 
 	private initForm(): void {
@@ -85,23 +90,23 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			icon: null
 		});
 
-    this.mantForm.get('serviceType')?.valueChanges.subscribe((serviceTypes: any[]) => {
-      if (serviceTypes.length > 0) {
-        this.mantForm.patchValue({
-          icon: serviceTypes[0].icon || null
-        });
-      } else {
-        this.mantForm.patchValue({
-          icon: null
-        });
-      }
-    });
+		this.mantForm.get('serviceType')?.valueChanges.subscribe((serviceTypes: any[]) => {
+			if (serviceTypes.length > 0) {
+				this.mantForm.patchValue({
+					icon: serviceTypes[0].icon || null
+				});
+			} else {
+				this.mantForm.patchValue({
+					icon: null
+				});
+			}
+		});
 		this.checkEdit();
 	}
 
-  get imageControl(): FormControl {
-    return this.mantForm.get('imagen') as FormControl;
-  }
+	get imageControl(): FormControl {
+		return this.mantForm.get('imagen') as FormControl;
+	}
 
 	private checkEdit(): void {
 		if (this.isEdit) {
@@ -113,27 +118,49 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 					let mantPatch = { ...maintenance, date: new Date(maintenance.date) };
 					this.mantForm.patchValue(mantPatch);
 					this.maintenanceData = mantPatch;
+					this.loadServiceTypes();
 					this.spinnerSvc.hide();
 				} else {
 					this.spinnerSvc.hide();
 					this.routerSvc.navigate([CONSTANTS.routes.home]);
 				}
 			});
+		} else {
+			this.loadServiceTypes();
 		}
 	}
 
 	private loadServiceTypes(): void {
-    forkJoin({
-      serviceTypes: this.vehicleSvc.getServiceTypes(),
-      customServices: this.userSvc.getCustomServices()
-    }).subscribe({
-      next: ({ serviceTypes, customServices }) => {
-        this.serviceTypes = [...serviceTypes, ...customServices].map((obj: any) => ({
-          ...obj,
-          desc: this.translateSvc.instant(obj.label)
-        }));
-      }
-    });
+		forkJoin({
+			serviceTypes: this.vehicleSvc.getServiceTypes(),
+			customServices: this.userSvc.getCustomServices()
+		}).subscribe({
+			next: ({ serviceTypes, customServices }) => {
+				let allOptions = [...serviceTypes, ...customServices];
+				console.log(allOptions);
+				console.log(this.maintenanceData);
+				if (this.isEdit && this.maintenanceData?.serviceType) {
+					this.maintenanceData.serviceType.forEach((savedService: any) => {
+						const exists = allOptions.find((opt) => opt.value === savedService.value);
+						if (!exists) {
+							allOptions.push({
+								...savedService,
+								label: `${savedService.label} (Eliminado)`,
+								isOrphan: true
+							});
+						}
+					});
+				}
+				this.serviceTypes = allOptions.map((obj: any) => ({
+					...obj,
+					desc: obj.isOrphan ? obj.label : this.translateSvc.instant(obj.label)
+				}));
+
+				if (this.isEdit && this.maintenanceData) {
+					this.mantForm.get('serviceType')?.patchValue(this.maintenanceData.serviceType);
+				}
+			}
+		});
 	}
 
 	public onSubmit(): void {
@@ -194,5 +221,23 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			},
 			reject: () => {}
 		});
+	}
+
+	public openAddCustomService(): void {
+		this.ref = this.dialogService.open(CustomServiceDetailsComponent, {
+			header: this.translateSvc.instant('pages.custom-services.add_customService'),
+			width: '90%',
+			contentStyle: { overflow: 'auto' },
+			baseZIndex: 10000,
+			data: { isModal: true }
+		});
+
+		this.ref.onClose.subscribe((result) => {
+			this.loadServiceTypes();
+		});
+	}
+
+	public isOrphan(value: any): boolean {
+		return UtilsService.isServiceOrphan(value, this.serviceTypes);
 	}
 }

@@ -56,14 +56,14 @@
 							</p>
 						</div>
 					</div>
-                    <p *ngIf="maintenance.notes" class="mt-1 flex items-center text-gray-600">
-                        <i class="fas fa-sticky-note mr-1"></i>
-                        {{ maintenance.notes}}
-                    </p>
+					<p *ngIf="maintenance.notes" class="mt-1 flex items-center text-gray-600">
+						<i class="fas fa-sticky-note mr-1"></i>
+						{{ maintenance.notes }}
+					</p>
 					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="font-semibold text-base">
-
 						<ul class="list-inside text-xs pt-2">
 							<span *ngFor="let service of maintenance.serviceType" class="text-gray-500">
+								<i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
 								{{ service.label | translate }} <br />
 							</span>
 						</ul>

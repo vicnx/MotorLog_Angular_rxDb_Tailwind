@@ -187,4 +187,5 @@ export class VehiclesService {
 
 		return of(vehicle);
 	}
+
 }

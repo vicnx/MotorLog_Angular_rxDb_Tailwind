@@ -120,6 +120,7 @@
 			"color": "Color",
 			"save": "Guardar",
 			"icon": "Icono",
+            "deleted": "(Eliminado)",
 			"validations": {
 				"label_required": "Nombre del servicio es requerido",
 				"icono_required": "Icono es requerido"

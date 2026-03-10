@@ -10,6 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DropdownModule } from 'primeng/dropdown';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -39,38 +40,44 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 	//Consulta
 	isConsulta: boolean = false;
 	customServiceData: CustomService;
-
+	public ref = inject(DynamicDialogRef, { optional: true });
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data) => {
 			this.isConsulta = data['isConsulta'];
 		});
-		this.userSvc.page.update((val) => (val = this.isConsulta ? 'pages.custom-services.edit_customService' : 'pages.custom-services.add_customService'));
+		this.userSvc.page.update(
+			(val) => (val = this.isConsulta ? 'pages.custom-services.edit_customService' : 'pages.custom-services.add_customService')
+		);
 		this.initForm();
 	}
 
 	public onSubmit(): void {
 		console.log(this.customServiceForm.value);
 		if (this.customServiceForm.valid) {
-      this.newCustomService();
+			this.newCustomService();
 		} else {
 			this.markFieldsAsTouched(this.customServiceForm);
 		}
 	}
 
-  private newCustomService(): void {
+	private newCustomService(): void {
 		this.spinnerSvc.show();
-    this.userSvc.addCustomServiceToUser(this.customServiceForm.value).subscribe({
-      next: (res: any)=>{
-        console.log(res)
-		 		this.operationOK();
-      }
-    })
+		this.userSvc.addCustomServiceToUser(this.customServiceForm.value).subscribe({
+			next: (res: any) => {
+				console.log(res);
+				this.operationOK();
+			}
+		});
 	}
 
 	private operationOK(): void {
 		this.showSuccess();
-    this.spinnerSvc.hide();
-		this.routerSvc.navigate([this.const.routes.customServiceList]);
+		this.spinnerSvc.hide();
+		if (this.ref) {
+			this.ref.close(true);
+		} else {
+			this.routerSvc.navigate([this.const.routes.customServiceList]);
+		}
 	}
 
 	private initForm(): void {
@@ -78,14 +85,14 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 			label: ['', Validators.required],
 			value: ['', Validators.required],
 			color: ['#ff0000'],
-			icon: ['fas fa-car', Validators.required],
+			icon: ['fas fa-car', Validators.required]
 		});
 
-    this.customServiceForm.get('label')?.valueChanges.subscribe((label: string) => {
-      this.customServiceForm.patchValue({
-        value: label.toLowerCase()
-      });
-    });
+		this.customServiceForm.get('label')?.valueChanges.subscribe((label: string) => {
+			this.customServiceForm.patchValue({
+				value: label.toLowerCase()
+			});
+		});
 		this.loadIcons();
 	}
 

@@ -1,5 +1,10 @@
-<div class="mx-auto h-screen md:h-full max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl">
-	<div class="container mx-auto max-w-screen-md">
+<div
+	[ngClass]="{
+		'mx-auto h-screen md:h-full max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl': !ref,
+		'w-full p-0 bg-transparent': ref
+	}"
+>
+	<div [ngClass]="{ 'container mx-auto max-w-screen-md': !ref }">
 		<form class="p-4" [formGroup]="customServiceForm" (ngSubmit)="onSubmit()">
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.label' | translate }}</label>
@@ -20,12 +25,26 @@
 				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
 			</div>
 			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.icon' | translate }}</label>
-        <p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icon" [disabled]="isConsulta">
-          <ng-template let-icon pTemplate>
-            <i [class]="icon" class="w-5 h-5 text-2xl" [ngStyle]="{'color': customServiceForm.get('color')?.value}"></i>
-          </ng-template>
-        </p-selectButton>
+				<label class="block text-gray-700 text-sm font-bold mb-2">
+					{{ 'pages.custom-services.icon' | translate }}
+				</label>
+
+				<div class="flex overflow-x-auto pb-2 custom-scrollbar gap-2 max-w-full">
+					<p-selectButton
+						[options]="optionsIcons"
+						optionLabel="icon"
+						formControlName="icon"
+						[disabled]="isConsulta"
+						styleClass="flex-nowrap whitespace-nowrap"
+					>
+						<ng-template let-icon pTemplate>
+							<div class="p-2 flex items-center justify-center min-w-[3rem]">
+								<i [class]="icon" class="text-2xl" [ngStyle]="{ color: customServiceForm.get('color')?.value }"> </i>
+							</div>
+						</ng-template>
+					</p-selectButton>
+				</div>
+
 				<div *ngIf="customServiceForm?.get('icon')?.invalid && customServiceForm?.get('icon')?.touched" class="text-red-500 text-sm mt-1">
 					{{ 'pages.custom-services.validations.icono_required' | translate }}
 				</div>
