@@ -49,6 +49,7 @@ import { UtilsService } from '@shared/services/utils.service';
 })
 export class MaintenanceDetailsComponent extends BaseComponent implements OnInit {
 	isEdit: boolean = false;
+	isConsulta: boolean = false;
 	formBuilder = inject(FormBuilder);
 	mantForm: FormGroup;
 	currentVehicleInfo: VehicleModel;
@@ -64,6 +65,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data: any) => {
 			this.isEdit = data['isEdit'];
+			this.isConsulta = this.isEdit;
 		});
 		this.currentVehicleInfo = this.vehicleSvc.vehicleSelected();
 		if (!this.currentVehicleInfo?.id) {
@@ -109,6 +111,15 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 		this.checkEdit();
 	}
 
+	public toggleEditMode(): void {
+		this.isConsulta = !this.isConsulta;
+		if (this.isConsulta) {
+			this.mantForm.disable();
+		} else {
+			this.mantForm.enable();
+		}
+	}
+
 	get imageControl(): FormControl {
 		return this.mantForm.get('imagen') as FormControl;
 	}
@@ -122,6 +133,9 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 				if (maintenance) {
 					let mantPatch = { ...maintenance, date: new Date(maintenance.date) };
 					this.mantForm.patchValue(mantPatch);
+					if (this.isConsulta) {
+						this.mantForm.disable();
+					}
 					this.maintenanceData = mantPatch;
 					this.loadServiceTypes();
 					this.spinnerSvc.hide();

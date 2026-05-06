@@ -1,6 +1,6 @@
 <div class="mb-4">
 	<label class="block text-gray-700 text-sm font-bold mb-2">{{ label }}</label>
-	<p-fileUpload #fileUpload name="imagen" (onSelect)="onFileUpload($event)" (onRemove)="onRemoveImage()" mode="basic" accept="image/*">
+	<p-fileUpload *ngIf="!modoConsulta" #fileUpload name="imagen" (onSelect)="onFileUpload($event)" (onRemove)="onRemoveImage()" mode="basic" accept="image/*">
 	</p-fileUpload>
 
 	<div class="mt-2 relative">
@@ -13,7 +13,7 @@
 		/>
 
 		<button
-			*ngIf="imageControl.value"
+			*ngIf="imageControl.value && !modoConsulta"
 			type="button"
 			class="absolute top-0 right-0 mt-2 mr-2 p-2 px-4 bg-red-500 text-white rounded-full hover:bg-red-700"
 			(click)="onRemoveImage()"

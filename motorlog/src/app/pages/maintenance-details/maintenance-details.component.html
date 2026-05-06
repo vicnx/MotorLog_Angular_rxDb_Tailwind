@@ -40,7 +40,7 @@
 					<label for="serviceType" class="block text-gray-700 text-sm font-bold">
 						{{ 'pages.mant-details.add-mant.service-type.name' | translate }}
 					</label>
-					<p-button icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddCustomService()" type="button">
+					<p-button *ngIf="!isConsulta" icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddCustomService()" type="button">
 					</p-button>
 				</div>
 				<p-multiSelect
@@ -115,19 +115,20 @@
 				/>
 			</div>
 			<app-image-selector
+				*ngIf="!isConsulta || imageControl.value"
 				[imageControl]="imageControl"
 				[label]="'pages.mant-details.add-mant.imagen' | translate"
-				[modoConsulta]="!isEdit"
+				[modoConsulta]="isConsulta"
 			></app-image-selector>
 
 			<div class="mb-4">
 				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{
 					'pages.mant-details.add-mant.description' | translate
 				}}</label>
-				<textarea id="description" [style]="{ width: '100%' }" formControlName="description" class="w-full p-inputtext"></textarea>
+				<textarea id="description" [style]="{ width: '100%' }" formControlName="description" class="w-full p-inputtext" [readonly]="isConsulta"></textarea>
 			</div>
 
-			<div class="p-field col-span-2 flex items-center space-x-2">
+			<div *ngIf="!isConsulta" class="p-field col-span-2 flex items-center space-x-2">
 				<button
 					pButton
 					type="submit"
@@ -148,3 +149,12 @@
 		</form>
 	</div>
 </div>
+
+<button
+	*ngIf="isEdit && isConsulta"
+	(click)="toggleEditMode()"
+	type="button"
+	class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl transition-all duration-300 z-[9999] cursor-pointer"
+>
+	<i class="fas fa-pencil-alt text-xl"></i>
+</button>
