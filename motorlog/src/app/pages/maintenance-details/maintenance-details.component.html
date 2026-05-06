@@ -75,17 +75,24 @@
 			</div>
 
 			<div class="mb-4">
-				<label for="location" class="block text-gray-700 text-sm font-bold mb-2">{{
-					'pages.mant-details.add-mant.location' | translate
-				}}</label>
-				<input
-					[style]="{ width: '100%' }"
-					pInputText
-					type="text"
-					class="w-full p-inputtext"
-					[placeholder]="'pages.mant-details.add-mant.location' | translate"
+				<div class="flex justify-between items-center mb-2">
+					<label for="location" class="block text-gray-700 text-sm font-bold">
+						{{ 'pages.mant-details.add-mant.location' | translate }}
+					</label>
+					<p-button *ngIf="!isConsulta" icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddLocation()" type="button">
+					</p-button>
+				</div>
+				<p-dropdown
+					id="location"
 					formControlName="location"
-				/>
+					[options]="locations"
+					placeholder="{{ 'pages.mant-details.add-mant.location' | translate }}"
+					[style]="{ width: '100%' }"
+					optionLabel="label"
+					optionValue="label"
+					[showClear]="true"
+				>
+				</p-dropdown>
 			</div>
 
 			<div class="mb-4">

@@ -1,5 +1,6 @@
 import { ExtractDocumentTypeFromTypedRxJsonSchema, RxJsonSchema, toTypedRxJsonSchema } from 'rxdb';
 import { CustomService, CUSTOMSERVICE_SCHEMA } from './custom-service.model';
+import { CustomLocation, CUSTOMLOCATION_SCHEMA } from './custom-location.model';
 //prettier-ignore
 export const USER_SCHEMA_LITERAL = {
 	title: 'user schema',
@@ -14,7 +15,8 @@ export const USER_SCHEMA_LITERAL = {
 		username: { type: 'string' },
 		resgister_date: { type: 'string' },
 		gender: { type: 'string' },
-    customServices: { type: 'array', items: CUSTOMSERVICE_SCHEMA, default: [] }
+    customServices: { type: 'array', items: CUSTOMSERVICE_SCHEMA, default: [] },
+    customLocations: { type: 'array', items: CUSTOMLOCATION_SCHEMA, default: [] }
 	},
 	required: ['id']
 };
@@ -32,4 +34,5 @@ export interface UserModel {
   resgister_date: string;
   gender: string;
   customServices: CustomService[];
+  customLocations: CustomLocation[];
 }

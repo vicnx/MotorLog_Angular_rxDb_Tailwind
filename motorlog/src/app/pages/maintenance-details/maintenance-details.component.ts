@@ -21,6 +21,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { forkJoin } from 'rxjs';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CustomServiceDetailsComponent } from '../custom-services-details/custom-services-details.component';
+import { CustomLocationsDetailsComponent } from '../custom-locations-details/custom-locations-details.component';
 import { UtilsService } from '@shared/services/utils.service';
 @Component({
 	selector: 'app-add-vehicle',
@@ -54,6 +55,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	mantForm: FormGroup;
 	currentVehicleInfo: VehicleModel;
 	serviceTypes: any[];
+	locations: any[];
 	maintenanceData: Maintenance;
 	dialogService = inject(DialogService);
 	ref: DynamicDialogRef | undefined;
@@ -137,7 +139,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 						this.mantForm.disable();
 					}
 					this.maintenanceData = mantPatch;
-					this.loadServiceTypes();
+					this.loadData();
 					this.spinnerSvc.hide();
 				} else {
 					this.spinnerSvc.hide();
@@ -145,19 +147,18 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 				}
 			});
 		} else {
-			this.loadServiceTypes();
+			this.loadData();
 		}
 	}
 
-	private loadServiceTypes(): void {
+	private loadData(): void {
 		forkJoin({
 			serviceTypes: this.vehicleSvc.getServiceTypes(),
-			customServices: this.userSvc.getCustomServices()
+			customServices: this.userSvc.getCustomServices(),
+			customLocations: this.userSvc.getCustomLocations()
 		}).subscribe({
-			next: ({ serviceTypes, customServices }) => {
+			next: ({ serviceTypes, customServices, customLocations }) => {
 				let allOptions = [...serviceTypes, ...customServices];
-				console.log(allOptions);
-				console.log(this.maintenanceData);
 				if (this.isEdit && this.maintenanceData?.serviceType) {
 					this.maintenanceData.serviceType.forEach((savedService: any) => {
 						const exists = allOptions.find((opt) => opt.value === savedService.value);
@@ -175,8 +176,11 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 					desc: obj.isOrphan ? obj.label : this.translateSvc.instant(obj.label)
 				}));
 
+				this.locations = customLocations;
+
 				if (this.isEdit && this.maintenanceData) {
 					this.mantForm.get('serviceType')?.patchValue(this.maintenanceData.serviceType);
+					this.mantForm.get('location')?.patchValue(this.maintenanceData.location);
 				}
 			}
 		});
@@ -252,7 +256,23 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 		});
 
 		this.ref.onClose.subscribe((result) => {
-			this.loadServiceTypes();
+			this.loadData();
+		});
+	}
+
+	public openAddLocation(): void {
+		this.ref = this.dialogService.open(CustomLocationsDetailsComponent, {
+			header: this.translateSvc.instant('pages.mant-details.add-mant.location_prompt') || 'Nueva Ubicación',
+			width: '90%',
+			contentStyle: { overflow: 'auto' },
+			baseZIndex: 10000,
+			data: { isModal: true }
+		});
+
+		this.ref.onClose.subscribe((result) => {
+			if (result) {
+				this.loadData();
+			}
 		});
 	}
 

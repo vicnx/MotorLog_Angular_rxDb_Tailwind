@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CustomService } from '@shared/models/custom-service.model';
+import { CustomLocation } from '@shared/models/custom-location.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -171,6 +172,79 @@ export class UserService {
             return from(
               user.update({
                 $set: { customServices: updatedCustomServices }
+              })
+            ).pipe(
+              switchMap(() => {
+                this.getUser();
+                return from(['OK']);
+              })
+            );
+          } else {
+            throw new Error(`User with id '1' not found`);
+          }
+        })
+      );
+    }
+
+    addCustomLocationToUser(newCustomLocation: Omit<CustomLocation, 'id'>): Observable<any> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            const customLocations = userData.customLocations || [];
+
+            const nextId = customLocations.length > 0
+              ? Math.max(...customLocations.map((loc: CustomLocation) => loc.id)) + 1
+              : 1;
+
+            const locWithId = { ...newCustomLocation, id: nextId, value: `${newCustomLocation.value}_${nextId}` };
+
+            const updatedCustomLocations = [...customLocations, locWithId];
+
+            return from(
+              user.update({
+                $set: { customLocations: updatedCustomLocations }
+              })
+            ).pipe(
+              switchMap(() => {
+                this.getUser();
+                return from([locWithId]);
+              })
+            );
+          } else {
+            return throwError(`User with id '1' not found`);
+          }
+        })
+      );
+    }
+
+    getCustomLocations(): Observable<CustomLocation[]> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            return new Observable<CustomLocation[]>((observer) => {
+              observer.next(userData.customLocations || []);
+              observer.complete();
+            });
+          } else {
+            throw new Error(`User with id '1' not found`);
+          }
+        })
+      );
+    }
+
+    removeCustomLocationFromUser(locationId: number): Observable<any> {
+      return from(this.dbSvc.db.user.findOne('1').exec()).pipe(
+        switchMap((user: any) => {
+          if (user) {
+            const userData = user.toJSON();
+            const updatedCustomLocations = userData.customLocations.filter(
+              (loc: CustomLocation) => loc.id !== locationId
+            );
+            return from(
+              user.update({
+                $set: { customLocations: updatedCustomLocations }
               })
             ).pipe(
               switchMap(() => {
