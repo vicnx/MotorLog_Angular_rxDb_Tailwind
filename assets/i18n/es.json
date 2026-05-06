@@ -43,6 +43,7 @@
 				"date": "Fecha",
 				"odometer": "Odómetro",
 				"location": "Ubicación",
+				"location_prompt": "Nombre de la ubicación",
 				"amount": "Cantidad",
 				"notes": "Notas",
 				"description": "Descripción",
