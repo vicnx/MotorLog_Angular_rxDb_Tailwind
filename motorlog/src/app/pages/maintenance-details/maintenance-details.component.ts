@@ -79,9 +79,14 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	}
 
 	private initForm(): void {
+		let defaultOdometer = 0;
+		if (!this.isEdit && this.currentVehicleInfo?.mantenimientos?.length > 0) {
+			defaultOdometer = Math.max(...this.currentVehicleInfo.mantenimientos.map(m => m.odometer || 0));
+		}
+
 		this.mantForm = this.formBuilder.group({
 			date: [new Date(), Validators.required],
-			odometer: [0],
+			odometer: [defaultOdometer],
 			serviceType: [null],
 			location: [null],
 			amount: [null],
