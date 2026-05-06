@@ -96,6 +96,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 			amount: [null],
 			imagen: [null],
 			notes: [''],
+			description: [''],
 			icon: null
 		});
 

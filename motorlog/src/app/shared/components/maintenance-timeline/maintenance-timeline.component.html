@@ -52,6 +52,9 @@
 								{{ service.label | translate }} <br />
 							</span>
 						</ul>
+						<p *ngIf="maintenance.description" class="mt-2 text-sm font-normal text-gray-600 break-words whitespace-pre-line">
+							{{ maintenance.description }}
+						</p>
 					</div>
 					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="absolute bottom-2 right-2">
 						<p-button

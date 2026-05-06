@@ -51,13 +51,14 @@
 					[style]="{ width: '100%' }"
 					optionLabel="desc"
 					dataKey="value"
+					[autofocusFilter]="false"
 				>
 					<ng-template let-service pTemplate="item">
-						<div class="flex items-center gap-2">
-							<i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
-							<span>{{ service.desc | translate }}</span>
+						<div class="flex items-center gap-2 max-w-[85vw] sm:max-w-full">
+							<i [class]="service.icon" [style.color]="service.color || '#6b7280'" class="shrink-0"></i>
+							<span class="whitespace-normal break-words leading-tight">{{ service.desc | translate }}</span>
 
-							<span *ngIf="service.isOrphan" class="text-[10px] text-red-400 font-bold italic">
+							<span *ngIf="service.isOrphan" class="text-[10px] text-red-400 font-bold italic shrink-0">
 								({{ 'pages.custom-services.deleted' | translate }})
 							</span>
 						</div>
@@ -132,26 +133,28 @@
 				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{
 					'pages.mant-details.add-mant.description' | translate
 				}}</label>
-				<textarea id="description" [style]="{ width: '100%' }" formControlName="description" class="w-full p-inputtext" [readonly]="isConsulta"></textarea>
+				<textarea id="description" pInputTextarea [style]="{ width: '100%' }" formControlName="description" class="w-full" rows="4"></textarea>
 			</div>
 
-			<div *ngIf="!isConsulta" class="p-field col-span-2 flex items-center space-x-2">
+			<div *ngIf="!isConsulta" class="flex flex-col gap-3 mt-8 pt-4 border-t border-gray-100">
 				<button
 					pButton
 					type="submit"
-					label="{{ 'pages.mant-details.add-mant.submit' | translate }}"
-					icon="fa fa-save"
-					class="p-button w-full"
-				></button>
+					class="w-full !rounded-full !bg-primary-500 !border-none !py-3.5 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300 flex justify-center items-center gap-2"
+				>
+					<i class="fa fa-check text-white"></i>
+					<span class="font-semibold text-white text-[1.05rem]">{{ 'pages.mant-details.add-mant.submit' | translate }}</span>
+				</button>
 				<button
 					*ngIf="isEdit"
 					pButton
 					type="button"
-					icon="fa fa-trash"
-					class="p-button p-button-danger"
-					style="width: 3.5rem; height: 3rem; font-size: 1.5rem"
+					class="p-button-text p-button-danger w-full !rounded-full !py-2.5 hover:bg-red-50 transition-colors flex justify-center items-center gap-2"
 					(click)="deleteMaintenance()"
-				></button>
+				>
+					<i class="fa fa-trash text-red-500"></i>
+					<span class="font-medium text-red-500">Eliminar</span>
+				</button>
 			</div>
 		</form>
 	</div>
