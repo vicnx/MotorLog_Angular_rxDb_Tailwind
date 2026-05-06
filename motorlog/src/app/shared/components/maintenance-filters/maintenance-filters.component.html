@@ -1,0 +1,47 @@
+<div class="flex justify-start items-center mb-6 mt-2 w-full px-1">
+	<button 
+		(click)="toggleFilters()" 
+		class="flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+	>
+		<i class="fas fa-filter text-blue-500"></i>
+		<span class="text-sm">Filtros</span>
+		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-xs ml-1 text-gray-400"></i>
+	</button>
+</div>
+
+<div @fadeInOut *ngIf="filtersVisible" class="mb-8 relative z-20">
+	<div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 p-5 md:p-6 transition-all">
+		<h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+			<i class="fas fa-calendar-alt text-blue-500"></i> Rango de fechas
+		</h4>
+		
+		<div class="flex flex-col md:flex-row gap-4 mb-2">
+			<div class="w-full">
+				<span class="block text-xs font-medium text-gray-500 mb-1 ml-1">Desde</span>
+				<p-calendar [(ngModel)]="startDate" [placeholder]="'pages.home.filters.desde' | translate" [showIcon]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-calendar>
+			</div>
+			<div class="w-full">
+				<span class="block text-xs font-medium text-gray-500 mb-1 ml-1">Hasta</span>
+				<p-calendar [(ngModel)]="endDate" [placeholder]="'pages.home.filters.hasta' | translate" [showIcon]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-calendar>
+			</div>
+		</div>
+
+		<div class="flex justify-end gap-3 border-t border-gray-100 pt-4 mt-6">
+			<p-button 
+				[outlined]="true" 
+				severity="secondary" 
+				[rounded]="true"
+				(onClick)="resetFilters()" 
+				icon="fas fa-undo"
+				title="{{ 'pages.home.filters.reset_filters' | translate }}"
+			></p-button>
+			<p-button 
+				severity="primary" 
+				[rounded]="true"
+				(onClick)="applyFilters()" 
+				icon="fas fa-check"
+				title="{{ 'pages.home.filters.apply_filters' | translate }}"
+			></p-button>
+		</div>
+	</div>
+</div>

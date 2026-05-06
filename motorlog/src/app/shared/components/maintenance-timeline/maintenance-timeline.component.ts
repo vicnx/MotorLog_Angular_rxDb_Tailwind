@@ -8,15 +8,17 @@ import { BaseComponent } from '@shared/base.component';
 import { Maintenance } from '@shared/models/maintenance.model';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import { VehiclesService } from '@shared/services/vehicles.service';
+import { VehicleSelectorComponent } from '../vehicle-selector/vehicle-selector.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { TimelineModule } from 'primeng/timeline';
+import { MaintenanceFiltersComponent, FilterDates } from '../maintenance-filters/maintenance-filters.component';
 
 @Component({
 	selector: 'app-maintenance-timeline',
 	templateUrl: './maintenance-timeline.component.html',
 	standalone: true,
-	imports: [CommonModule, TimelineModule, TranslateModule, ButtonModule, CalendarModule, FormsModule],
+	imports: [CommonModule, TimelineModule, TranslateModule, ButtonModule, CalendarModule, FormsModule, MaintenanceFiltersComponent, VehicleSelectorComponent],
 	animations: [
 		trigger('fadeInOut', [
 			state(
@@ -48,7 +50,6 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 
 	startDate: Date | null = null;
 	endDate: Date | null = null;
-	filtersVisible: boolean = false;
 	es = {
 		firstDayOfWeek: 1,
 		dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -136,14 +137,10 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		}
 	}
 
-	public resetFilters(): void {
-		this.startDate = null;
-		this.endDate = null;
-		this.updateMaintenances(); // Actualizar la lista de mantenimientos sin filtros
-	}
-
-	toggleFilters(): void {
-		this.filtersVisible = !this.filtersVisible;
+	public onFiltersChanged(dates: FilterDates): void {
+		this.startDate = dates.startDate;
+		this.endDate = dates.endDate;
+		this.updateMaintenances();
 	}
 
 	public goToAddMaintenance(): void {
