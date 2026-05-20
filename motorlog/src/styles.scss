@@ -35,8 +35,10 @@ body {
   width: 90% !important;
   max-width: 400px !important;
   bottom: 2rem !important;
+  pointer-events: none !important; /* Fix: evita que el contenedor vacío bloquee los clicks */
   
   .p-toast-message {
+    pointer-events: auto !important; /* Los mensajes activos sí son interactuables */
     border-radius: 50px !important;
     border: none !important;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
