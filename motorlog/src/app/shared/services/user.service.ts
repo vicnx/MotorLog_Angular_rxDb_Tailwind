@@ -18,7 +18,7 @@ export class UserService {
 	user = signal<UserModel>({} as UserModel);
 	page = signal<string>('');
 	isUserLogged = signal<boolean>(false);
-	userExistOnBd: Signal<boolean> = computed(() => (this.user() ? true : false));
+	userExistOnBd: Signal<boolean> = computed(() => !!(this.user() && this.user().id && this.user().name));
 	routerSvc = inject(Router);
 	confirmationService = inject(ConfirmationService);
 	translateSvc = inject(TranslateService);

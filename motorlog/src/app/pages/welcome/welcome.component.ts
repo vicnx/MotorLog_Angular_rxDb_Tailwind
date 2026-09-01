@@ -6,6 +6,7 @@ import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
+import { GDriveService } from '@shared/services/gdrive.service';
 import { UserService } from '@shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,7 +15,15 @@ import { ToastModule } from 'primeng/toast';
 @Component({
 	selector: 'welcome-page',
 	standalone: true,
-	imports: [CommonModule, TranslateModule, ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule, WelcomeDialogInfoComponent],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		ReactiveFormsModule,
+		InputTextModule,
+		ButtonModule,
+		ToastModule,
+		WelcomeDialogInfoComponent
+	],
 	templateUrl: './welcome.component.html',
 	styleUrls: ['./welcome.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,8 +31,9 @@ import { ToastModule } from 'primeng/toast';
 export class WelcomeComponent extends BaseComponent implements OnInit {
 	public welcomeImg: string = 'assets/images/welcome.svg';
 	public loginForm: FormGroup;
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  dataSvc = inject(DataExportImportService);
+	@ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+	dataSvc = inject(DataExportImportService);
+	gdriveSvc = inject(GDriveService);
 
 	constructor() {
 		super();
@@ -48,7 +58,7 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		if (this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()) {
 			this.userSvc.setLogginUser(true);
 			this.spinnerSvc.hide();
-      this.userSvc.displayWelcomeDialogInfo.set(true);
+			this.userSvc.displayWelcomeDialogInfo.set(true);
 			return;
 		}
 		this.spinnerSvc.show();
@@ -61,18 +71,37 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public importData(): void {
-    console.log(this.fileInput)
-    this.fileInput.nativeElement.click();
+		this.fileInput.nativeElement.click();
+	}
+
+	public async restoreFromGDrive(): Promise<void> {
+		this.spinnerSvc.show();
+		try {
+			if (!this.gdriveSvc.isLoggedIn()) {
+				this.gdriveSvc.login(async () => {
+					const content = await this.gdriveSvc.downloadBackupContent();
+					if (content) {
+						await this.dataSvc.importDataFromJsonString(content);
+					}
+				});
+			} else {
+				const content = await this.gdriveSvc.downloadBackupContent();
+				if (content) {
+					await this.dataSvc.importDataFromJsonString(content);
+				}
+			}
+		} catch (err) {
+			console.error('Error al restaurar desde Google Drive en pantalla de inicio:', err);
+		} finally {
+			this.spinnerSvc.hide();
+		}
 	}
 
 	private registerUser(): void {
 		if (!this.userSvc.userExistOnBd()) {
 			this.userSvc.setUser(this.loginForm.get('userName')?.value);
-      this.userSvc.displayWelcomeDialogInfo.set(true);
+			this.userSvc.displayWelcomeDialogInfo.set(true);
 			this.spinnerSvc.hide();
 		}
 	}
 }
-
-
-

@@ -1,41 +1,81 @@
-<form (ngSubmit)="checkErrors()" [formGroup]="loginForm">
-	<div class="h-screen flex flex-col">
-		<div class="flex flex-col justify-start mt-36">
-			<div class="flex items-center flex-col">
-				<img class="h-7.5" [src]="welcomeImg" alt="" class="h-32 mx-auto" />
-				<h1 class="text-2xl mt-5">
-					@if (!userSvc.userExistOnBd()) {
-					{{ 'welcome.title' | translate }}
+<form (ngSubmit)="checkErrors()" [formGroup]="loginForm" class="w-full">
+	<div class="min-h-screen flex flex-col justify-between items-center px-4">
+		
+		<!-- Contenido principal centrado vertical y horizontalmente en el medio -->
+		<div class="my-auto flex flex-col items-center justify-center text-center w-full max-w-md py-8">
+			<img [src]="welcomeImg" alt="MotorLog" class="h-32 sm:h-36 mx-auto transition-transform hover:scale-105 duration-300" />
+			
+			<h1 class="text-2xl sm:text-3xl font-bold mt-6 tracking-tight">
+				@if (!userSvc.userExistOnBd()) {
+				{{ 'welcome.title' | translate }}
+				}
+				<span class="text-primary-500"> {{ const.appName }} 🚗</span>
+			</h1>
+			
+			<p class="w-full sm:w-5/6 text-center text-sm text-gray-600 dark:text-gray-300 mt-2">
+				{{ 'welcome.info' | translate }}
+			</p>
+			
+			<div class="p-4 mt-2 w-full max-w-xs text-center">
+				<div class="mb-2">
+					@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
+					<span class="text-xl font-semibold">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
+					} @else {
+					<input 
+						type="text" 
+						name="userName" 
+						formControlName="userName" 
+						required 
+						placeholder="Name" 
+						pInputText 
+						class="w-full text-center p-3 text-base rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500" 
+						[maxlength]="const.form.inputText.maxLength" 
+					/>
 					}
-					<span class="text-primary-500 font-bold"> {{ const.appName }} 🚗</span>
-				</h1>
-				<p class="w-3/4 text-center text-sm mt-2">{{ 'welcome.info' | translate }}</p>
-				<div class="p-4 mt-1 w-3/4 text-center">
-					<div class="mb-1">
-						@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
-						<span class="text-xl">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
-						}@else {
-						<input type="text" name="userName" formControlName="userName" required placeholder="Name" pInputText class="m-2" [maxlength]="const.form.inputText.maxLength" />
-						}
-					</div>
-				</div>
-				<div>
-					<p-button type="submit" [outlined]="true">
-						@if (!userSvc.userExistOnBd()) {
-						{{ 'welcome.start' | translate }}
-						}@else {
-						{{ 'welcome.continue' | translate }}
-						}
-						<i class="fas fa-chevron-right ml-2"></i>
-					</p-button>
 				</div>
 			</div>
+			
+			<div class="mt-2">
+				<p-button type="submit" [outlined]="true" styleClass="p-button-rounded px-6 py-2.5">
+					@if (!userSvc.userExistOnBd()) {
+					{{ 'welcome.start' | translate }}
+					} @else {
+					{{ 'welcome.continue' | translate }}
+					}
+					<i class="fas fa-chevron-right ml-2"></i>
+				</p-button>
+			</div>
 		</div>
+
+		<!-- Footer de importación -->
 		@if (!userSvc.userExistOnBd()) {
-		<footer class="flex items-center flex-col py-5 text-center w-100 mb-5 mt-10">
-			<div class="w-3/4">
-				<p class="text-xs">{{ 'welcome.importText' | translate }}</p>
-				<p-button icon="fas fa-cloud-download-alt" [rounded]="false" [text]="true" (onClick)="importData()"></p-button>
+		<footer class="flex items-center flex-col py-6 text-center w-full mb-2">
+			<div class="w-full max-w-sm flex flex-col items-center gap-2">
+				<p class="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">
+					{{ 'welcome.importText' | translate }}
+				</p>
+				
+				<div class="flex items-center justify-center gap-3 w-full">
+					<!-- Botón de importación JSON local -->
+					<button 
+						type="button" 
+						(click)="importData()"
+						class="py-2.5 px-3.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium text-xs rounded-lg shadow-sm active:scale-[0.98] transition flex items-center gap-2"
+					>
+						<i class="fas fa-file-import text-blue-500"></i>
+						<span>JSON Local</span>
+					</button>
+
+					<!-- Botón de importación desde Google Drive -->
+					<button 
+						type="button" 
+						(click)="restoreFromGDrive()"
+						class="py-2.5 px-3.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-medium text-xs rounded-lg shadow-sm active:scale-[0.98] transition flex items-center gap-2"
+					>
+						<img src="assets/images/google-drive.png" alt="Google Drive" class="w-4 h-4 object-contain" />
+						<span>{{ 'welcome.gdrive_import' | translate }}</span>
+					</button>
+				</div>
 			</div>
 		</footer>
 		}
