@@ -15,7 +15,10 @@
 			<!-- Lista de mantenimientos -->
 			<ng-container *ngFor="let maintenance of group.maintenances">
 				<div 
-					class="flex gap-x-3 relative group rounded-xl p-3 mb-2 hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-150 cursor-pointer" 
+					class="flex gap-x-3 relative group rounded-xl p-3 mb-2 transition-all duration-150 cursor-pointer select-none border"
+					[ngClass]="selectedMaintenanceId === maintenance.id 
+						? 'bg-gray-50/90 dark:bg-gray-700/60 border-gray-200/90 dark:border-gray-700 shadow-xs' 
+						: 'bg-transparent border-transparent hover:bg-gray-50/80 dark:hover:bg-gray-700/40 active:bg-gray-100/90 dark:active:bg-gray-700/70 active:scale-[0.99]'" 
 					(click)="toggleMaintenance(maintenance.id)"
 				>
 					<!-- Eje de la línea de tiempo -->

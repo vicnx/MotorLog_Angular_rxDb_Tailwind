@@ -275,6 +275,10 @@ p-calendar,
   }
 
 @import "flag-icons/css/flag-icons.min.css";
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   @apply font-sans text-gray-900 dark:text-gray-100 antialiased;
 }
