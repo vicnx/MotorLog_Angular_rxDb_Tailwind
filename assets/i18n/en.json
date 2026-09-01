@@ -165,7 +165,10 @@
 		"english": "English"
 	},
 	"msgs": {
-		"success": "Operation carried out successfully."
+		"success": "Operation carried out successfully.",
+		"not_implemented": "Feature not implemented.",
+		"error_header": "Error",
+		"success_header": "Success"
 	},
 	"userActions": {
 		"generateAvatar": {
