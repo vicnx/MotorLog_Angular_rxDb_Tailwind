@@ -16,6 +16,7 @@ export class PrivacyPolicyComponent implements OnInit {
 	private router = inject(Router);
 	public userSvc = inject(UserService);
 	public appConstants = CONSTANTS;
+	public contactEmail: string = 'andanivicente@gmail.com';
 
 	ngOnInit(): void {
 		this.userSvc.page.set('pages.privacy.title');

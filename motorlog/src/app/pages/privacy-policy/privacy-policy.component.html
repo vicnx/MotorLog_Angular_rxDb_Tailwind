@@ -1,12 +1,7 @@
 <div class="w-full max-w-4xl mx-auto px-4 py-6 sm:py-10 space-y-6 pb-20">
-	
 	<!-- Barra superior de navegación / Volver -->
 	<div class="flex items-center justify-between gap-4">
-		<button 
-			type="button" 
-			(click)="goBack()" 
-			class="btn-secondary !py-2 !px-3.5 text-xs flex items-center gap-2"
-		>
+		<button type="button" (click)="goBack()" class="btn-secondary !py-2 !px-3.5 text-xs flex items-center gap-2">
 			<i class="fas fa-arrow-left text-xs"></i>
 			<span>{{ 'pages.privacy.back' | translate }}</span>
 		</button>
@@ -23,7 +18,9 @@
 		<div class="absolute -top-12 -right-12 w-36 h-36 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
 		<div class="absolute -bottom-12 -left-12 w-36 h-36 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-		<div class="w-14 h-14 rounded-2xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center text-2xl mx-auto mb-4 border border-primary-100 dark:border-primary-900/30 shadow-xs">
+		<div
+			class="w-14 h-14 rounded-2xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center text-2xl mx-auto mb-4 border border-primary-100 dark:border-primary-900/30 shadow-xs"
+		>
 			<i class="fas fa-user-shield"></i>
 		</div>
 
@@ -35,7 +32,9 @@
 			{{ 'pages.privacy.subtitle' | translate }}
 		</p>
 
-		<div class="inline-flex items-center gap-1.5 mt-4 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 text-xs font-semibold">
+		<div
+			class="inline-flex items-center gap-1.5 mt-4 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 text-xs font-semibold"
+		>
 			<i class="far fa-calendar-alt text-primary-500"></i>
 			<span>{{ 'pages.privacy.last_updated' | translate }}</span>
 		</div>
@@ -45,7 +44,9 @@
 	<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 		<!-- Pilar 1: Local-First -->
 		<div class="bg-white dark:bg-gray-800/90 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-5 text-left shadow-xs">
-			<div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-base mb-3 border border-emerald-100 dark:border-emerald-900/30">
+			<div
+				class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-base mb-3 border border-emerald-100 dark:border-emerald-900/30"
+			>
 				<i class="fas fa-hdd"></i>
 			</div>
 			<h3 class="font-bold text-sm text-gray-900 dark:text-white">
@@ -58,7 +59,9 @@
 
 		<!-- Pilar 2: Cero Servidores / Cero Rastreo -->
 		<div class="bg-white dark:bg-gray-800/90 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-5 text-left shadow-xs">
-			<div class="w-9 h-9 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 flex items-center justify-center text-base mb-3 border border-sky-100 dark:border-sky-900/30">
+			<div
+				class="w-9 h-9 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 flex items-center justify-center text-base mb-3 border border-sky-100 dark:border-sky-900/30"
+			>
 				<i class="fas fa-user-slash"></i>
 			</div>
 			<h3 class="font-bold text-sm text-gray-900 dark:text-white">
@@ -71,7 +74,9 @@
 
 		<!-- Pilar 3: Control Total del Usuario -->
 		<div class="bg-white dark:bg-gray-800/90 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-5 text-left shadow-xs">
-			<div class="w-9 h-9 rounded-xl bg-violet-50 dark:bg-violet-950/40 text-violet-600 dark:text-violet-400 flex items-center justify-center text-base mb-3 border border-violet-100 dark:border-violet-900/30">
+			<div
+				class="w-9 h-9 rounded-xl bg-violet-50 dark:bg-violet-950/40 text-violet-600 dark:text-violet-400 flex items-center justify-center text-base mb-3 border border-violet-100 dark:border-violet-900/30"
+			>
 				<i class="fas fa-lock"></i>
 			</div>
 			<h3 class="font-bold text-sm text-gray-900 dark:text-white">
@@ -85,7 +90,6 @@
 
 	<!-- Secciones del Documento Legal / Explicativo -->
 	<div class="card-container space-y-8 text-left p-6 sm:p-8">
-		
 		<!-- Sección 1: Introducción -->
 		<section class="space-y-3">
 			<h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2.5">
@@ -125,7 +129,9 @@
 					<span>{{ 'pages.privacy.section2_item3' | translate }}</span>
 				</li>
 			</ul>
-			<div class="p-3.5 bg-gray-50 dark:bg-gray-750/50 rounded-xl border border-gray-200/60 dark:border-gray-700/60 text-xs text-gray-600 dark:text-gray-300">
+			<div
+				class="p-3.5 bg-gray-50 dark:bg-gray-750/50 rounded-xl border border-gray-200/60 dark:border-gray-700/60 text-xs text-gray-600 dark:text-gray-300"
+			>
 				<i class="fas fa-info-circle text-primary-500 mr-1.5"></i>
 				<span>{{ 'pages.privacy.section2_storage_note' | translate }}</span>
 			</div>
@@ -139,14 +145,16 @@
 				<span class="w-6 h-6 rounded-lg bg-primary-500 text-white text-xs flex items-center justify-center font-bold">3</span>
 				<span>{{ 'pages.privacy.section3_title' | translate }}</span>
 			</h2>
-			
+
 			<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
 				{{ 'pages.privacy.section3_intro' | translate }}
 			</p>
 
 			<!-- Alcances Google Drive -->
 			<div class="space-y-3">
-				<div class="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-900/40 rounded-xl space-y-1.5">
+				<div
+					class="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-900/40 rounded-xl space-y-1.5"
+				>
 					<div class="flex items-center gap-2 text-xs font-bold text-emerald-800 dark:text-emerald-300">
 						<i class="fab fa-google-drive text-sm"></i>
 						<span>drive.appdata</span>
@@ -156,7 +164,9 @@
 					</p>
 				</div>
 
-				<div class="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-900/40 rounded-xl space-y-1.5">
+				<div
+					class="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-900/40 rounded-xl space-y-1.5"
+				>
 					<div class="flex items-center gap-2 text-xs font-bold text-emerald-800 dark:text-emerald-300">
 						<i class="fas fa-envelope text-sm"></i>
 						<span>userinfo.email</span>
@@ -167,15 +177,38 @@
 				</div>
 			</div>
 
+			<!-- Finalidad del tratamiento -->
+			<div class="p-4 bg-gray-50 dark:bg-gray-750/50 rounded-xl border border-gray-200/60 dark:border-gray-700/60 space-y-1.5">
+				<h4 class="text-xs font-bold text-gray-900 dark:text-white flex items-center gap-2">
+					<i class="fas fa-bullseye text-primary-500"></i>
+					<span>{{ 'pages.privacy.section3_purpose_title' | translate }}</span>
+				</h4>
+				<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+					{{ 'pages.privacy.section3_purpose_desc' | translate }}
+				</p>
+			</div>
+
+			<!-- Declaración de No Compartición con Terceros (Requisito Google) -->
+			<div class="p-4 bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200/80 dark:border-sky-900/50 rounded-xl space-y-1.5">
+				<h4 class="text-xs font-bold text-sky-900 dark:text-sky-200 flex items-center gap-2">
+					<i class="fas fa-user-shield text-sky-600 dark:text-sky-400"></i>
+					<span>{{ 'pages.privacy.section3_no_sharing_title' | translate }}</span>
+				</h4>
+				<p class="text-xs sm:text-sm font-semibold text-sky-950 dark:text-sky-100 leading-relaxed">
+					{{ 'pages.privacy.section3_no_sharing_desc' | translate }}
+				</p>
+			</div>
+
 			<!-- Cláusula Obligatoria de Cumplimiento de Uso Limitado de Google -->
 			<div class="p-4 bg-primary-50/70 dark:bg-primary-950/40 border border-primary-200/80 dark:border-primary-900/50 rounded-xl space-y-2">
 				<div class="flex items-center gap-2 text-xs sm:text-sm font-bold text-primary-900 dark:text-primary-200">
 					<i class="fas fa-certificate text-primary-500"></i>
 					<span>{{ 'pages.privacy.section3_limited_use_title' | translate }}</span>
 				</div>
-				<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-					{{ 'pages.privacy.section3_limited_use_desc' | translate }}
-				</p>
+				<p
+					class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed"
+					[innerHTML]="'pages.privacy.section3_limited_use_desc' | translate"
+				></p>
 			</div>
 		</section>
 
@@ -209,12 +242,16 @@
 					<span>{{ 'pages.privacy.section5_item1' | translate }}</span>
 				</li>
 				<li class="flex items-start gap-2.5">
-					<i class="fas fa-sign-out-alt text-amber-500 mt-1 text-xs shrink-0"></i>
+					<i class="fas fa-trash-alt text-red-500 mt-1 text-xs shrink-0"></i>
 					<span>{{ 'pages.privacy.section5_item2' | translate }}</span>
 				</li>
 				<li class="flex items-start gap-2.5">
+					<i class="fas fa-external-link-alt text-amber-500 mt-1 text-xs shrink-0"></i>
+					<span [innerHTML]="'pages.privacy.section5_item3' | translate"></span>
+				</li>
+				<li class="flex items-start gap-2.5">
 					<i class="fas fa-file-export text-primary-500 mt-1 text-xs shrink-0"></i>
-					<span>{{ 'pages.privacy.section5_item3' | translate }}</span>
+					<span>{{ 'pages.privacy.section5_item4' | translate }}</span>
 				</li>
 			</ul>
 		</section>
@@ -222,7 +259,7 @@
 		<hr class="border-gray-100 dark:border-gray-700/60" />
 
 		<!-- Sección 6: Contacto y Código Abierto -->
-		<section class="space-y-3">
+		<section class="space-y-4">
 			<h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2.5">
 				<span class="w-6 h-6 rounded-lg bg-primary-500 text-white text-xs flex items-center justify-center font-bold">6</span>
 				<span>{{ 'pages.privacy.section6_title' | translate }}</span>
@@ -230,10 +267,33 @@
 			<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
 				{{ 'pages.privacy.section6_p1' | translate }}
 			</p>
-			<div class="pt-2">
-				<a 
-					href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind" 
-					target="_blank" 
+
+			<div class="p-4 bg-gray-50 dark:bg-gray-750/50 rounded-xl border border-gray-200/60 dark:border-gray-700/60 space-y-2.5">
+				<div class="flex items-center gap-2 text-xs sm:text-sm">
+					<i class="fas fa-envelope text-primary-500"></i>
+					<span class="font-medium text-gray-700 dark:text-gray-300">{{ 'pages.privacy.section6_email_label' | translate }}</span>
+					<a [href]="'mailto:' + contactEmail" class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">
+						{{ contactEmail }}
+					</a>
+				</div>
+				<div class="flex items-center gap-2 text-xs sm:text-sm">
+					<i class="fab fa-github text-primary-500"></i>
+					<span class="font-medium text-gray-700 dark:text-gray-300">{{ 'pages.privacy.section6_github_label' | translate }}</span>
+					<a
+						href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="font-semibold text-primary-600 dark:text-primary-400 hover:underline truncate"
+					>
+						github.com/vicnx/MotorLog_Angular_rxDb_Tailwind
+					</a>
+				</div>
+			</div>
+
+			<div class="pt-1">
+				<a
+					href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind"
+					target="_blank"
 					rel="noopener noreferrer"
 					class="btn-secondary !py-2.5 !px-4 text-xs inline-flex items-center gap-2"
 				>
@@ -242,7 +302,5 @@
 				</a>
 			</div>
 		</section>
-
 	</div>
-
 </div>
