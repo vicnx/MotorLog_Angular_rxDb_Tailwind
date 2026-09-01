@@ -1,10 +1,10 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
-export const ErrorResponseInterceptor: HttpInterceptorFn = (req: any, next: any) => next(req).pipe(catchError(handleErrorResponse));
+export const ErrorResponseInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) =>
+  next(req).pipe(catchError(handleErrorResponse));
 
 function handleErrorResponse(error: HttpErrorResponse) {
-    //TODO toast error?
-    const errorResponse = `Error status: ${error.status}, message: ${error.message}`;
-    return throwError(() => errorResponse);
+  const errorResponse = `Error status: ${error.status}, message: ${error.message}`;
+  return throwError(() => new Error(errorResponse));
 }
