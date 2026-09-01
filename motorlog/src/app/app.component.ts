@@ -15,10 +15,11 @@ import { ThemeService } from '@shared/services/theme.service';
 import { UserService } from '@shared/services/user.service';
 import { VehiclesService } from '@shared/services/vehicles.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { VehiclesApiService } from './api/vehicles_api.service';
+
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -40,11 +41,8 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 	providers: [
 		MenuService,
 		ThemeService,
-		MessageService,
 		UserService,
 		DBService,
-		ConfirmationService,
-		MessageService,
 		VehiclesService,
 		VehiclesApiService,
 		DataExportImportService
@@ -52,7 +50,6 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 })
 export class AppComponent implements OnInit {
 	title = 'motorlog';
-	// darkMode = signal<boolean>(false)
 
 	// Services
 	vehiclesApiSvc = inject(VehiclesApiService);
@@ -60,7 +57,7 @@ export class AppComponent implements OnInit {
 	menuSvc = inject(MenuService);
 	userSvc = inject(UserService);
 	vehiclesSvc = inject(VehiclesService);
-  primeNgConfig = inject(PrimeNGConfig);
+	primeNgConfig = inject(PrimeNGConfig);
 
 	constructor() {
 		registerLocaleData(localeEs, 'es-ES');
@@ -68,7 +65,7 @@ export class AppComponent implements OnInit {
 		this.translateSvc.setDefaultLang('es');
 		const browserLang = this.translateSvc.getBrowserLang();
 		this.translateSvc.use(browserLang?.match(/en|es/) ? browserLang : 'es');
-		this.translateSvc.get('primeng').subscribe(res => {
+		this.translateSvc.get('primeng').subscribe((res) => {
 			this.primeNgConfig.setTranslation(res);
 		});
 		this.vehiclesSvc.getSavedVehicles();
@@ -77,8 +74,4 @@ export class AppComponent implements OnInit {
 	public ngOnInit(): void {
 		this.userSvc.checkUserExistsDb();
 	}
-
-	// @HostBinding('class.dark') get mode() {
-	//   return this.darkMode()
-	// }
 }

@@ -33,14 +33,16 @@ jobs:
           export const environment = {
               production: false,
               logoDevToken: '${{ secrets.LOGO_DEV_TOKEN }}',
-              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/'
+              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/',
+              googleClientId: '${{ secrets.GOOGLE_CLIENT_ID || '60943746649-217mnbspbes7i6o10od2ft11egota1de.apps.googleusercontent.com' }}'
           };
           EOF
           cat <<EOF > src/environments/environment.prod.ts
           export const environment = {
               production: true,
               logoDevToken: '${{ secrets.LOGO_DEV_TOKEN }}',
-              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/'
+              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/',
+              googleClientId: '${{ secrets.GOOGLE_CLIENT_ID || '60943746649-217mnbspbes7i6o10od2ft11egota1de.apps.googleusercontent.com' }}'
           };
           EOF
         working-directory: motorlog

@@ -107,6 +107,27 @@
 			"fixMant": {
 				"confirm_msg": "Se van a comprobar los datos de mantenimiento y reparar posibles errores.",
 				"confirm_header": "Reparar datos de mantenimientos"
+			},
+			"gdrive": {
+				"title": "Google Drive",
+				"description": "Copia de seguridad en la nube con tu cuenta de Google",
+				"connected_as": "Conectado como {{email}}",
+				"disconnected": "Desconectado",
+				"status_connected": "Conectado",
+				"account": "Cuenta",
+				"last_backup_label": "Última copia",
+				"connect": "Conectar Google Drive",
+				"disconnect": "Desconectar",
+				"upload": "Subir copia a Google Drive",
+				"download": "Restaurar desde Google Drive",
+				"last_backup": "Última copia: {{date}}",
+				"no_backup": "No se encontraron copias previas en Drive",
+				"upload_success": "Copia de seguridad guardada en Google Drive exitosamente.",
+				"upload_error": "Ocurrió un error al guardar la copia en Google Drive.",
+				"download_error": "Ocurrió un error al restaurar desde Google Drive.",
+				"no_backup_found": "No existe ninguna copia de seguridad en tu Google Drive.",
+				"confirm_restore_msg": "Se va a restaurar la copia de seguridad desde Google Drive. Esta acción reemplazará los datos actuales. ¿Deseas continuar?",
+				"confirm_restore_header": "Restaurar desde Google Drive"
 			}
 		},
 		"profile": {

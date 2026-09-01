@@ -6,16 +6,26 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { MenuModule } from 'primeng/menu'; // Si usas el componente de menú de PrimeNG
+import { MenuModule } from 'primeng/menu';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { CONSTANTS } from '@shared/app-constants';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { GDriveCardComponent } from '@shared/components/gdrive-card/gdrive-card.component';
 
 @Component({
 	selector: 'app-settings',
 	standalone: true,
 	templateUrl: './settings.component.html',
-	imports: [CommonModule, HttpClientModule, TranslateModule, ButtonModule, TooltipModule, MenuModule, ConfirmDialogModule]
+	imports: [
+		CommonModule,
+		HttpClientModule,
+		TranslateModule,
+		ButtonModule,
+		TooltipModule,
+		MenuModule,
+		ConfirmDialogModule,
+		GDriveCardComponent
+	]
 })
 export class SettingsComponent extends BaseComponent implements OnInit {
 	http = inject(HttpClient);
@@ -25,19 +35,19 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 	@ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 	ngOnInit() {
-		this.userSvc.page.update((val) => (val = 'pages.settings.settings'));
+		this.userSvc.page.set('pages.settings.settings');
 		this.loadSettingsMenu();
 	}
 
 	loadSettingsMenu() {
-		this.http.get<SettingsItemModel[]>('assets/data/settings-menu.json').subscribe(
-			(data: any) => {
+		this.http.get<{ settingsMenu: SettingsItemModel[] }>('assets/data/settings-menu.json').subscribe({
+			next: (data) => {
 				this.settingsMenu = data.settingsMenu;
 			},
-			(error) => {
+			error: (error) => {
 				console.error('Error loading settings menu:', error);
 			}
-		);
+		});
 	}
 
 	handleMenuAction(action: string) {
@@ -104,16 +114,17 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 			rejectLabel: this.translateSvc.instant('confirm.default_no'),
 			key: 'confirmDialog',
 			accept: () => {
-        this.spinnerSvc.show();
-        this.vehicleSvc.fixDuplicateMaintenanceIds(this.vehicleSvc.vehicleSelected()).subscribe({
-          next: (res: any) => {
-            this.spinnerSvc.hide();
-            this.showSuccess()
-          }, error: (err: any) => {
-            this.showErrorMsg(err)
-            this.spinnerSvc.hide();
-          }
-        })
+				this.spinnerSvc.show();
+				this.vehicleSvc.fixDuplicateMaintenanceIds(this.vehicleSvc.vehicleSelected()).subscribe({
+					next: () => {
+						this.spinnerSvc.hide();
+						this.showSuccess();
+					},
+					error: (err: unknown) => {
+						this.showErrorMsg(String(err));
+						this.spinnerSvc.hide();
+					}
+				});
 			},
 			reject: () => {}
 		});

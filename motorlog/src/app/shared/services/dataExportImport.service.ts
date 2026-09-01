@@ -54,40 +54,58 @@ export class DataExportImportService {
 		}
 	}
 
-	public async importData(file: File): Promise<void> {
-		try {
-			console.log('Borrando la base de datos...');
-			await removeRxDatabase('motorlog-db', getRxStorageDexie());
-			console.log('Base de datos eliminada.');
+	public async exportDataAsJsonString(): Promise<string> {
+		const db = this.dbSvc.db;
+		const collections = Object.keys(db.collections);
+		const dataToExport: Record<string, any[]> = {};
 
-			console.log('Recreando la base de datos...');
-			await initDatabase();
-			console.log('Base de datos recreada.');
-
-			const fileContent = await file.text();
-			const importedData = JSON.parse(fileContent);
-
-			const collections = this.dbSvc.db.collections;
-
-			for (const collectionName of Object.keys(importedData)) {
-				const collection = collections[collectionName as keyof typeof collections] as unknown as RxCollection<any>;
-
-				if (collection) {
-					for (const docData of importedData[collectionName]) {
-						await collection.upsert(docData);
-					}
-					console.log(`Datos importados en la colección "${collectionName}".`);
-				} else {
-					console.warn(`La colección "${collectionName}" no existe en la base de datos.`);
-				}
-			}
-
-			this.userSvc.setLogginUser(false);
-			location.reload();
-			console.log('Datos importados exitosamente.');
-		} catch (error) {
-			console.error('Error importando datos:', error);
+		for (const collectionName of collections) {
+			const collection = db.collections[collectionName as keyof typeof db.collections] as unknown as RxCollection<any>;
+			const allDocs = await collection.find().exec();
+			dataToExport[collectionName] = allDocs.map((doc) => doc.toJSON());
 		}
+
+		return JSON.stringify(dataToExport, null, 2);
+	}
+
+	public async importDataFromJsonString(jsonContent: string): Promise<void> {
+		const importedData = JSON.parse(jsonContent);
+		const validationResult = this.validateImportedData(importedData);
+
+		if (!validationResult.valid) {
+			throw new Error('El JSON importado no es válido.');
+		}
+
+		console.log('Borrando la base de datos...');
+		await removeRxDatabase('motorlog-db', getRxStorageDexie());
+		console.log('Base de datos eliminada.');
+
+		console.log('Recreando la base de datos...');
+		await initDatabase();
+		console.log('Base de datos recreada.');
+
+		const collections = this.dbSvc.db.collections;
+
+		for (const collectionName of Object.keys(importedData)) {
+			const collection = collections[collectionName as keyof typeof collections] as unknown as RxCollection<any>;
+
+			if (collection) {
+				for (const docData of importedData[collectionName]) {
+					await collection.upsert(docData);
+				}
+				console.log(`Datos importados en la colección "${collectionName}".`);
+			} else {
+				console.warn(`La colección "${collectionName}" no existe en la base de datos.`);
+			}
+		}
+
+		this.userSvc.setLogginUser(false);
+		location.reload();
+	}
+
+	public async importData(file: File): Promise<void> {
+		const fileContent = await file.text();
+		return this.importDataFromJsonString(fileContent);
 	}
 
 	public async clearAllData(): Promise<void> {

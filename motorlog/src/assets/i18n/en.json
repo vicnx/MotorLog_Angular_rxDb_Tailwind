@@ -107,6 +107,27 @@
 			"fixMant": {
 				"confirm_msg": "The maintenance data and repair possible errors will be checked.",
 				"confirm_header": "Repair maintenance data"
+			},
+			"gdrive": {
+				"title": "Google Drive",
+				"description": "Cloud backup with your Google account",
+				"connected_as": "Connected as {{email}}",
+				"disconnected": "Disconnected",
+				"status_connected": "Connected",
+				"account": "Account",
+				"last_backup_label": "Last backup",
+				"connect": "Connect Google Drive",
+				"disconnect": "Disconnect",
+				"upload": "Upload backup to Google Drive",
+				"download": "Restore from Google Drive",
+				"last_backup": "Last backup: {{date}}",
+				"no_backup": "No previous backups found in Drive",
+				"upload_success": "Backup successfully saved to Google Drive.",
+				"upload_error": "An error occurred while saving backup to Google Drive.",
+				"download_error": "An error occurred while restoring from Google Drive.",
+				"no_backup_found": "No backup found in your Google Drive.",
+				"confirm_restore_msg": "A backup will be restored from Google Drive. This action will replace current data. Do you want to continue?",
+				"confirm_restore_header": "Restore from Google Drive"
 			}
 		},
 		"profile": {

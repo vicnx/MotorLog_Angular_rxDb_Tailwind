@@ -113,9 +113,9 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 			this.routeSvc.paramMap.subscribe((params) => {
 				const vehicleId = params.get('id');
 				if (vehicleId) {
-					this.vehicleSvc.getVehicleById(vehicleId).then((vehicle: any) => {
+					this.vehicleSvc.getVehicleById(vehicleId).then((vehicle) => {
 						if (vehicle) {
-							this.vehicleData = vehicle.toJSON();
+							this.vehicleData = (vehicle as any).toJSON ? (vehicle as any).toJSON() : vehicle;
 							this.vehicleForm.patchValue(this.vehicleData);
 						} else {
 							this.routerSvc.navigate(['/vehicle-list']);

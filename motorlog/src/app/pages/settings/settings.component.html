@@ -2,6 +2,8 @@
 <div class="bg-gray-50 min-h-screen">
   <div class="sm:mx-auto max-w-screen-md sm:px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 pt-5 mx-3">
     <div class="max-w-full mx-autorounded-none flex justify-center flex-col items-center">
+      
+      <!-- Menú dinámico de ajustes -->
       <div *ngFor="let menuItem of settingsMenu" class="w-full border-b max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-5">
         <a
           *ngIf="menuItem.items?.length === 0"
@@ -34,6 +36,10 @@
           </div>
         </div>
       </div>
+
+      <!-- Componente modularizado de Google Drive -->
+      <app-gdrive-card></app-gdrive-card>
+
     </div>
   </div>
 </div>

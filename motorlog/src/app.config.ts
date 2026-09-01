@@ -9,9 +9,12 @@ import { HttpLoaderFactory } from './main';
 import { routes } from './routes';
 import { ErrorResponseInterceptor } from '@shared/interceptors/error-response.interceptor';
 import { LoadingInterceptor } from '@shared/interceptors/loading.interceptor';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        MessageService,
+        ConfirmationService,
         provideHttpClient(withFetch(), withInterceptors([ErrorResponseInterceptor, LoadingInterceptor])),
         importProvidersFrom(
             BrowserModule,

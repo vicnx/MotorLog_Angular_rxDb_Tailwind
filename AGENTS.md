@@ -18,7 +18,8 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 ## 📐 2. Estándares y Convenciones del Stack
 
 ### TypeScript & Angular (v17+)
-* **Standalone First:** Todos los componentes, directivas y pipes deben ser `standalone: true`. No crear ni modificar NgModule a menos que sea estrictamente necesario.
+* **Standalone First:** Todos los componentes, directivas y pipes deben ser `standalone: true`. No crear ni modificar NgModule a menos que sea strictly necesario.
+* **Componentes Pequeños y Modulares:** Minimizar el tamaño de los componentes. Crear siempre componentes pequeños, atómicos y desacoplados con la menor lógica posible. Si una sección de UI (tarjeta, widget, modal) se puede modularizar, **DEBE extraerse como un componente Standalone propio** en `@components` o `@shared/components`.
 * **Importaciones Limpias:** Utilizar siempre los alias declarados en `tsconfig.json`:
   * `@shared/*` -> `src/app/shared/*`
   * `@pages/*` -> `src/app/pages/*`
@@ -29,7 +30,7 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 * **Manejo de Suscripciones:** Preferir el uso del pipe `async` en plantillas HTML o `takeUntilDestroyed()` / `firstValueFrom()` para evitar fugas de memoria con RxJS.
 
 ### 🌍 Internacionalización (i18n) - OBLIGATORIO
-* **Cero Literales Hardcodeados:** **Está estrictamente prohibido** escribir texto visible para el usuario (títulos, botones, descripciones, mensajes de error, confirmaciones, placeholders, tooltips) directamente en las plantillas HTML o en código TypeScript.
+* **Cero Literales Hardcodeados:** **Está strictly prohibido** escribir texto visible para el usuario (títulos, botones, descripciones, mensajes de error, confirmaciones, placeholders, tooltips) directamente en las plantillas HTML o en código TypeScript.
 * **Uso de claves i18n:** Todos los textos deben registrarse en las claves correspondientes dentro de `src/assets/i18n/es.json` y `src/assets/i18n/en.json`.
 * **Consumo:** En las plantillas HTML utilizar el pipe `translate` (ej. `{{ 'VEHICLES.TITLE' | translate }}`) o la directiva `translate`. En TypeScript utilizar `TranslateService.instant()` o `TranslateService.get()`.
 
@@ -63,8 +64,9 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 ### Protocolo de Respuesta Final (Obligatorio tras cada tarea)
 Al completar cualquier tarea, el agente deberá entregar:
 1. **Resumen técnico en 2-3 puntos breves** de lo modificado.
-2. **Mensaje de commit de ejemplo** bajo el estándar *Conventional Commits*:
+2. **Mensaje de commit acumulativo:** Proporcionar SIEMPRE un mensaje de commit global que englobe toda la funcionalidad o característica en desarrollo (`feat` o `fix` principal), evitando mensajes fragmentados por pequeñas peticiones intermedias mientras no se haya commiteado la funcionalidad completa.
    * `feat(scope): descripción`
    * `fix(scope): descripción`
    * `refactor(scope): descripción`
    * `docs(scope): descripción`
+3. **Explicación súper sencilla ("Explicación para tontos"):** Una explicación en lenguaje coloquial, sin tecnicismos, que resuma en 2 frases qué se ha hecho y cómo probarlo.
