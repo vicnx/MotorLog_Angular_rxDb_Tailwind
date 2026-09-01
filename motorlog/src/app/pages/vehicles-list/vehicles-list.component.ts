@@ -14,7 +14,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CapitalizeFirstPipe } from '@shared/pipes/capitalize-first.pipe';
-import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-vehicles-list',
@@ -46,13 +45,7 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 	}
 
 	public getLogoBrand(brandCode: string): string {
-		const brandData = this.vehicleSvc.vehiclesBrands().find((b: any) => b.code.toLowerCase() === brandCode.toLowerCase());
-
-		if (brandData && brandData.domain) {
-			return `https://img.logo.dev/${brandData.domain}?token=${environment.logoDevToken}&size=128`;
-		}
-
-		return 'assets/images/default-vehicle.png';
+		return this.vehicleSvc.brandSvc.getLogoUrl(brandCode);
 	}
 
 	public onClickVehicle(vehicle: VehicleModel): void {

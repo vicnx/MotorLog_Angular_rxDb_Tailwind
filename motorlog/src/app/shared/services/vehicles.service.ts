@@ -7,6 +7,7 @@ import { UtilsService } from './utils.service';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import { BrandModel } from '@shared/models/brand.model';
 import { Maintenance } from '@shared/models/maintenance.model';
+import { BrandService } from './brand.service';
 import * as crypto from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class VehiclesService {
 	dbSvc = inject(DBService);
 	utilsSvc = inject(UtilsService);
+	brandSvc = inject(BrandService);
 	vehicles = signal<VehicleModel[]>([]);
 	vehiclesBrands = signal<BrandModel[]>([]);
 	vehicleSelected = signal<VehicleModel>({} as VehicleModel);
@@ -84,6 +86,7 @@ export class VehiclesService {
 		this.http.get<BrandModel[]>(this.urlVehicleBrands).subscribe({
 			next: (res) => {
 				this.vehiclesBrands.set(res);
+				this.brandSvc.setBrands(res);
 			}
 		});
 	}
