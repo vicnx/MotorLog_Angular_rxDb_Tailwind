@@ -3,6 +3,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
 
+export interface SettingsAction {
+	action: string;
+	icon: string;
+	label: string;
+}
+
 @Component({
 	selector: 'app-settings-button',
 	templateUrl: './settings-button.component.html',
@@ -11,7 +17,7 @@ import { BaseComponent } from '@shared/base.component';
 	imports: [CommonModule, TranslateModule]
 })
 export class SettingsButtonComponent extends BaseComponent implements OnInit {
-	@Input() action: any;
+	@Input() action: SettingsAction | any;
 	@Output() handleAction = new EventEmitter<string>();
 
 	ngOnInit() {}

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
-import { Maintenance } from '@shared/models/maintenance.model';
+import { Maintenance, ServiceTypeItem } from '@shared/models/maintenance.model';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import { VehiclesService } from '@shared/services/vehicles.service';
 import { VehicleSelectorComponent } from '../vehicle-selector/vehicle-selector.component';
@@ -14,11 +14,25 @@ import { CalendarModule } from 'primeng/calendar';
 import { TimelineModule } from 'primeng/timeline';
 import { MaintenanceFiltersComponent, FilterDates } from '../maintenance-filters/maintenance-filters.component';
 
+export interface GroupedMaintenanceItem {
+	date: string;
+	maintenances: (Maintenance & { title: string; color?: string })[];
+}
+
 @Component({
 	selector: 'app-maintenance-timeline',
 	templateUrl: './maintenance-timeline.component.html',
 	standalone: true,
-	imports: [CommonModule, TimelineModule, TranslateModule, ButtonModule, CalendarModule, FormsModule, MaintenanceFiltersComponent, VehicleSelectorComponent],
+	imports: [
+		CommonModule,
+		TimelineModule,
+		TranslateModule,
+		ButtonModule,
+		CalendarModule,
+		FormsModule,
+		MaintenanceFiltersComponent,
+		VehicleSelectorComponent
+	],
 	animations: [
 		trigger('fadeInOut', [
 			state(
@@ -45,8 +59,8 @@ import { MaintenanceFiltersComponent, FilterDates } from '../maintenance-filters
 })
 export class MaintenanceTimelineComponent extends BaseComponent {
 	vehicleSelected: Signal<VehicleModel> = inject(VehiclesService).vehicleSelected;
-	groupedMaintenances: any[] = [];
-	selectedMaintenanceId: number | null = null;
+	groupedMaintenances: GroupedMaintenanceItem[] = [];
+	selectedMaintenanceId: number | string | null = null;
 
 	startDate: Date | null = null;
 	endDate: Date | null = null;
@@ -54,10 +68,24 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		firstDayOfWeek: 1,
 		dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
 		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-		monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		monthNames: [
+			'Enero',
+			'Febrero',
+			'Marzo',
+			'Abril',
+			'Mayo',
+			'Junio',
+			'Julio',
+			'Agosto',
+			'Septiembre',
+			'Octubre',
+			'Noviembre',
+			'Diciembre'
+		],
 		monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
 		today: 'Hoy'
 	};
+
 	constructor() {
 		super();
 		effect(() => {
@@ -72,7 +100,6 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		const start = this.startDate ? new Date(this.startDate) : new Date('0001-01-01');
 		const end = this.endDate ? new Date(this.endDate) : new Date('9999-12-31');
 
-		// Ajustar el final del rango para incluir todo el día
 		end.setHours(23, 59, 59, 999);
 
 		return maintenances.filter((maintenance) => {
@@ -81,52 +108,56 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		});
 	}
 
-	private groupAndSortMaintenances(maintenances: Maintenance[]): any[] {
-		const grouped = maintenances.reduce((acc: any, maintenance: Maintenance) => {
-			const date = new Date(maintenance.date);
-			const monthYear = date.toLocaleString('default', { month: 'short', year: 'numeric' });
-			const serviceTypes = maintenance.serviceType || [];
-			const defaultText = this.translateSvc.instant('pages.mant-details.add-mant.service-type.default');
-			const firstServiceLabel = serviceTypes[0]?.label
-				? this.translateSvc.instant(String(serviceTypes[0].label)) || null
-				: null;
-			const serviceDescription =
-				serviceTypes.length === 0 ? defaultText : firstServiceLabel + (serviceTypes.length > 1 ? ` +${serviceTypes.length - 1}` : '');
+	private groupAndSortMaintenances(maintenances: Maintenance[]): GroupedMaintenanceItem[] {
+		const grouped = maintenances.reduce(
+			(acc: Record<string, (Maintenance & { title: string; color?: string })[]>, maintenance: Maintenance) => {
+				const date = new Date(maintenance.date);
+				const monthYear = date.toLocaleString('default', { month: 'short', year: 'numeric' });
+				const serviceTypes: ServiceTypeItem[] = (maintenance.serviceType as ServiceTypeItem[]) || [];
+				const defaultText = this.translateSvc.instant('pages.mant-details.add-mant.service-type.default');
+				const firstServiceLabel = serviceTypes[0]?.label
+					? this.translateSvc.instant(String(serviceTypes[0].label)) || null
+					: null;
+				const serviceDescription =
+					serviceTypes.length === 0
+						? defaultText
+						: firstServiceLabel + (serviceTypes.length > 1 ? ` +${serviceTypes.length - 1}` : '');
 
-			const color = serviceTypes.length > 0 ? serviceTypes[0].color : 'text-gray-600';
-			const updatedMaintenance = { ...maintenance, title: serviceDescription, color: color };
+				const color = serviceTypes.length > 0 ? serviceTypes[0].color || 'text-gray-600' : 'text-gray-600';
+				const updatedMaintenance = { ...maintenance, title: serviceDescription, color: color };
 
-			if (!acc[monthYear]) {
-				acc[monthYear] = [];
-			}
-			acc[monthYear].push(updatedMaintenance);
-			return acc;
-		}, {});
+				if (!acc[monthYear]) {
+					acc[monthYear] = [];
+				}
+				acc[monthYear].push(updatedMaintenance);
+				return acc;
+			},
+			{}
+		);
 
 		Object.keys(grouped).forEach((monthYear) => {
-			grouped[monthYear].sort((a: Maintenance, b: Maintenance) => {
-				return new Date(b.date).getTime() - new Date(a.date).getTime();
-			});
+			grouped[monthYear].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 		});
 
-		//prettier-ignore
-		return Object.keys(grouped).map((monthYear) => ({ date: monthYear, maintenances: grouped[monthYear]})).sort((a: any, b: any) => {
+		return Object.keys(grouped)
+			.map((monthYear) => ({ date: monthYear, maintenances: grouped[monthYear] }))
+			.sort((a, b) => {
 				const dateA = new Date(grouped[a.date][0].date);
 				const dateB = new Date(grouped[b.date][0].date);
 				return dateB.getTime() - dateA.getTime();
-		});
+			});
 	}
 
-	public toggleMaintenance(maintenanceId: number): void {
+	public toggleMaintenance(maintenanceId: number | string): void {
 		this.selectedMaintenanceId = this.selectedMaintenanceId === maintenanceId ? null : maintenanceId;
 	}
 
-	public goToEdit(maintenanceId: number): void {
+	public goToEdit(maintenanceId: number | string): void {
 		this.routerSvc.navigate([`${CONSTANTS.routes.maintenanceDetails}/${maintenanceId}`]);
 	}
 
-	getIconClasses(mant: any) {
-		return [mant.icon || 'fas fa-question-circle', 'text-xl'];
+	getIconClasses(mant: any): string[] {
+		return [mant?.icon || 'fas fa-question-circle', 'text-xl'];
 	}
 
 	public updateMaintenances(): void {

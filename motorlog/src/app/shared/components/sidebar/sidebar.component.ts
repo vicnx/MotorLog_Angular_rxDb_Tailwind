@@ -4,6 +4,7 @@ import { NavigationEnd, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from '@shared/base.component';
 import { MenuItemModel } from '@shared/models/menu.model';
+import { UserModel } from '@shared/models/user.model';
 import { MenuService } from '@shared/services/menu.service';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +12,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
-import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { CONSTANTS } from '@shared/app-constants';
 
 @Component({
@@ -22,11 +22,11 @@ import { CONSTANTS } from '@shared/app-constants';
 	styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent extends BaseComponent {
-	show: boolean;
+	show: boolean = false;
 	public pageSelected: string = '/home';
 	public menuItems: MenuItemModel[] = [];
-	public avatarImage: string;
-	public profile: any = {};
+	public avatarImage: string = '';
+	public profile: Partial<UserModel> = {};
 	menuSvc = inject(MenuService);
 
 	ngOnInit(): void {
@@ -37,10 +37,8 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public openSettings(): void {
-    this.hideSidebar();
-    this.routerSvc.navigate([CONSTANTS.routes.settings]);
-    // this.dataSvc.exportData();
-		// this.showNotImplemented();
+		this.hideSidebar();
+		this.routerSvc.navigate([CONSTANTS.routes.settings]);
 	}
 
 	public logout(): void {
@@ -49,7 +47,7 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	private routeControl(): void {
-		this.pageSelected = window.location.hash.substr(1);
+		this.pageSelected = window.location.hash.substring(1);
 		this.routerSvc.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
 				this.pageSelected = event.url;
@@ -66,7 +64,6 @@ export class SidebarComponent extends BaseComponent {
 	}
 
 	public hideSidebar(): void {
-    console.log('hideSidebar')
 		this.menuSvc.toogleMenu();
 	}
 }

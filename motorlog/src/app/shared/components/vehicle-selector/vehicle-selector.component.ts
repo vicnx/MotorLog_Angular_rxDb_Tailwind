@@ -12,7 +12,7 @@ import { AddVehicleButtonComponent } from '../add-vehicle-button/add-vehicle-but
 	templateUrl: './vehicle-selector.component.html'
 })
 export class VehicleSelectorComponent extends BaseComponent {
-	selectedVehicle: any | undefined;
+	selectedVehicle: string | undefined;
 	@Input() disabled: boolean = false;
 
 	constructor() {

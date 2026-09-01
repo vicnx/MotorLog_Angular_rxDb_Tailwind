@@ -49,7 +49,7 @@
 						<ul class="list-inside text-xs pt-2">
 							<span *ngFor="let service of maintenance.serviceType" class="text-gray-500">
 								<i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
-								{{ service.label | translate }} <br />
+								{{ (service.label || '') | translate }} <br />
 							</span>
 						</ul>
 						<p *ngIf="maintenance.description" class="mt-2 text-sm font-normal text-gray-600 break-words whitespace-pre-line">
