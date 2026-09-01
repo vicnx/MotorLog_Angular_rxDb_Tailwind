@@ -28,7 +28,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/privacy-policy.html",
+              "src/terms-of-service.html"
             ],
             "styles": [
               "src/styles.scss",
