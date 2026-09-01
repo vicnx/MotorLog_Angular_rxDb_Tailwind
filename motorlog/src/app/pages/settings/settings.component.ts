@@ -65,10 +65,10 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 				this.routerSvc.navigate([CONSTANTS.routes.profile]);
 				break;
 			case 'privacy':
-				this.routerSvc.navigate([CONSTANTS.routes.privacyPolicy]);
+				window.open('privacy-policy.html', '_blank');
 				break;
 			case 'terms':
-				this.routerSvc.navigate([CONSTANTS.routes.termsOfService]);
+				window.open('terms-of-service.html', '_blank');
 				break;
 			case 'fixmant':
 				this.fixMantIds();

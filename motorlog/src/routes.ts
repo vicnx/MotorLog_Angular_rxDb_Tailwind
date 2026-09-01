@@ -68,14 +68,6 @@ export const routes: Routes = [
 		data: { isConsulta: false }
 	},
 	{
-		path: 'privacy-policy',
-		loadComponent: () => import('@pages/privacy-policy/privacy-policy.component').then((c) => c.PrivacyPolicyComponent)
-	},
-	{
-		path: 'terms-of-service',
-		loadComponent: () => import('@pages/terms-of-service/terms-of-service.component').then((c) => c.TermsOfServiceComponent)
-	},
-	{
 		path: '**',
 		redirectTo: 'welcome'
 	}
