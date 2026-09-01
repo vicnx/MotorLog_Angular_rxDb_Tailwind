@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MotorLog - Política de Privacidad / Privacy Policy</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+	<style>
+		:root {
+			--primary-500: #48d0b0;
+			--primary-600: #38b293;
+			--primary-50: #f0fdf9;
+			--gray-900: #0f172a;
+			--gray-800: #1e293b;
+			--gray-700: #334155;
+			--gray-600: #475569;
+			--gray-500: #64748b;
+			--gray-100: #f1f5f9;
+			--gray-50: #f8fafc;
+			--border: #e2e8f0;
+			--card-bg: #ffffff;
+		}
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		body {
+			font-family: 'Inter', system-ui, -apple-system, sans-serif;
+			background-color: var(--gray-50);
+			color: var(--gray-800);
+			line-height: 1.6;
+			padding: 24px 16px 60px 16px;
+		}
+		.container {
+			max-width: 860px;
+			margin: 0 auto;
+		}
+		.nav-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 24px;
+		}
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 16px;
+			border-radius: 12px;
+			font-size: 13px;
+			font-weight: 600;
+			text-decoration: none;
+			cursor: pointer;
+			transition: all 0.15s ease;
+		}
+		.btn-back {
+			background: #ffffff;
+			color: var(--gray-700);
+			border: 1px solid var(--border);
+		}
+		.btn-back:hover { background: var(--gray-100); }
+		.btn-primary {
+			background: var(--primary-500);
+			color: #ffffff;
+			border: 1px solid var(--primary-600);
+		}
+		.btn-primary:hover { background: var(--primary-600); }
+		.lang-switch {
+			display: flex;
+			background: #ffffff;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			padding: 3px;
+			gap: 4px;
+		}
+		.lang-btn {
+			padding: 6px 12px;
+			border: none;
+			background: transparent;
+			font-size: 12px;
+			font-weight: 600;
+			color: var(--gray-600);
+			border-radius: 8px;
+			cursor: pointer;
+		}
+		.lang-btn.active {
+			background: var(--primary-500);
+			color: #ffffff;
+		}
+		.card {
+			background: var(--card-bg);
+			border: 1px solid var(--border);
+			border-radius: 20px;
+			padding: 32px;
+			margin-bottom: 24px;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+		}
+		.hero {
+			text-align: center;
+			padding: 36px 24px;
+		}
+		.hero-icon {
+			width: 60px;
+			height: 60px;
+			border-radius: 16px;
+			background: var(--primary-50);
+			color: var(--primary-500);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 26px;
+			margin: 0 auto 16px auto;
+			border: 1px solid #bbf7d0;
+		}
+		h1 {
+			font-family: 'Outfit', sans-serif;
+			font-size: 28px;
+			font-weight: 800;
+			color: var(--gray-900);
+			margin-bottom: 8px;
+		}
+		.subtitle {
+			font-size: 14px;
+			color: var(--gray-600);
+			max-width: 600px;
+			margin: 0 auto 16px auto;
+		}
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			background: var(--gray-100);
+			padding: 6px 12px;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 600;
+			color: var(--gray-700);
+		}
+		.pillars {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 16px;
+			margin-bottom: 24px;
+		}
+		.pillar-card {
+			background: #ffffff;
+			border: 1px solid var(--border);
+			border-radius: 16px;
+			padding: 20px;
+		}
+		.pillar-icon {
+			width: 36px;
+			height: 36px;
+			border-radius: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 16px;
+			margin-bottom: 12px;
+		}
+		.pillar-title {
+			font-size: 14px;
+			font-weight: 700;
+			color: var(--gray-900);
+			margin-bottom: 4px;
+		}
+		.pillar-desc {
+			font-size: 12px;
+			color: var(--gray-600);
+			line-height: 1.5;
+		}
+		section {
+			margin-bottom: 28px;
+		}
+		section:last-child {
+			margin-bottom: 0;
+		}
+		h2 {
+			font-family: 'Outfit', sans-serif;
+			font-size: 17px;
+			font-weight: 700;
+			color: var(--gray-900);
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		.num-badge {
+			width: 24px;
+			height: 24px;
+			border-radius: 8px;
+			background: var(--primary-500);
+			color: #ffffff;
+			font-size: 12px;
+			font-weight: 700;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		p, ul {
+			font-size: 13.5px;
+			color: var(--gray-700);
+			line-height: 1.65;
+			margin-bottom: 12px;
+		}
+		ul {
+			list-style: none;
+			padding-left: 4px;
+		}
+		li {
+			position: relative;
+			padding-left: 24px;
+			margin-bottom: 8px;
+		}
+		li::before {
+			content: "\f058";
+			font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+			position: absolute;
+			left: 0;
+			top: 2px;
+			color: var(--primary-500);
+			font-size: 13px;
+		}
+		.highlight-box {
+			background: #f0fdf9;
+			border: 1px solid #a7f3d0;
+			border-radius: 12px;
+			padding: 16px;
+			margin: 16px 0;
+		}
+		.highlight-box.blue {
+			background: #f0f9ff;
+			border-color: #bae6fd;
+		}
+		.highlight-box.yellow {
+			background: #fefce8;
+			border-color: #fef08a;
+		}
+		.box-title {
+			font-size: 13px;
+			font-weight: 700;
+			margin-bottom: 6px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		a {
+			color: #0d9488;
+			font-weight: 600;
+			text-decoration: underline;
+		}
+		a:hover {
+			color: #0f766e;
+		}
+		hr {
+			border: none;
+			border-top: 1px solid var(--border);
+			margin: 24px 0;
+		}
+		.app-meta {
+			background: var(--gray-100);
+			border-radius: 12px;
+			padding: 14px;
+			font-size: 12px;
+			color: var(--gray-700);
+			margin-top: 16px;
+		}
+		.hidden { display: none; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		
+		<!-- Barra superior -->
+		<div class="nav-bar">
+			<a href="index.html" class="btn btn-back">
+				<i class="fas fa-arrow-left"></i>
+				<span id="back-txt">Volver a MotorLog</span>
+			</a>
+
+			<div class="lang-switch">
+				<button class="lang-btn active" id="btn-es" onclick="switchLang('es')">Español</button>
+				<button class="lang-btn" id="btn-en" onclick="switchLang('en')">English</button>
+			</div>
+		</div>
+
+		<!-- VERSIÓN EN ESPAÑOL -->
+		<div id="content-es">
+			<div class="card hero">
+				<div class="hero-icon">
+					<i class="fas fa-user-shield"></i>
+				</div>
+				<h1>Política de Privacidad de MotorLog</h1>
+				<p class="subtitle">Información detallada sobre el tratamiento de datos, modelo 100% Local-First y la integración con la API de Google Drive.</p>
+				<div class="badge">
+					<i class="far fa-calendar-alt" style="color: var(--primary-500);"></i>
+					<span>Última actualización: Septiembre 2026</span>
+				</div>
+			</div>
+
+			<div class="pillars">
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+						<i class="fas fa-hdd"></i>
+					</div>
+					<div class="pillar-title">100% Local-First</div>
+					<div class="pillar-desc">Tus datos residen únicamente en la base de datos de tu navegador (IndexedDB). Sin servidores externos ni bases de datos remotas.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd;">
+						<i class="fas fa-user-slash"></i>
+					</div>
+					<div class="pillar-title">Cero Servidores y Rastreo</div>
+					<div class="pillar-desc">No compartimos ni vendemos datos a terceros. No usamos cookies de rastreo ni empleamos datos para modelos de IA o publicidad.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe;">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="pillar-title">Control Total del Usuario</div>
+					<div class="pillar-desc">La copia en Google Drive es voluntaria y solo accede a su propio archivo dentro de la carpeta privada de la app (appDataFolder).</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<!-- Sección 1 -->
+				<section>
+					<h2><span class="num-badge">1</span> Información de la Aplicación y el Desarrollador</h2>
+					<p><strong>Nombre de la Aplicación:</strong> MotorLog</p>
+					<p><strong>Página Principal oficial:</strong> <a href="https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/">https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/</a></p>
+					<p><strong>Desarrollador / Mantenedor:</strong> Vicente Andani (<a href="https://github.com/vicnx" target="_blank" rel="noopener noreferrer">@vicnx</a>)</p>
+					<p><strong>Correo electrónico de contacto para privacidad:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+					<p>MotorLog es una herramienta web de código abierto diseñada bajo la arquitectura <em>Local-First</em> para la gestión personal de registros y mantenimientos de vehículos.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 2 -->
+				<section>
+					<h2><span class="num-badge">2</span> Datos Recopilados y Almacenamiento Local</h2>
+					<p>Todos los datos introducidos en MotorLog pertenecen exclusivamente al usuario y se almacenan únicamente de forma local en su navegador web (mediante IndexedDB a través de RxDB):</p>
+					<ul>
+						<li><strong>Datos de Vehículos:</strong> Marca, modelo, año, kilometraje, potencia, color y notas.</li>
+						<li><strong>Registros de Mantenimiento:</strong> Fechas, importes, servicios realizados, ubicaciones e imágenes de factura/registro adjuntas.</li>
+						<li><strong>Perfil Local:</strong> Nombre de usuario y avatar configurado para la sesión.</li>
+					</ul>
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fas fa-check-circle"></i> Procesamiento Local Garantizado</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;">MotorLog no envía ningún dato a servidores propios o externos. Tu información permanece estrictamente en tu propio dispositivo.</p>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Sección 3 -->
+				<section>
+					<h2><span class="num-badge">3</span> Integración con la API de Google Drive y Permisos Solicitados</h2>
+					<p>MotorLog ofrece la posibilidad opcional y voluntaria de conectar la cuenta personal de Google Drive del usuario para realizar copias de seguridad y sincronización entre dispositivos. Esta integración solicita exclusivamente los siguientes permisos mínimos:</p>
+					
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fab fa-google-drive"></i> Permiso: drive.appdata (Carpeta privada de datos de la aplicación)</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;"><strong>Datos a los que accede:</strong> MotorLog accede a la cuenta de Google Drive del usuario <em>únicamente</em> para leer, crear y actualizar el archivo de copia de seguridad propio de la aplicación (<code>motorLog_backup.json</code>) ubicado en la carpeta privada oculta <code>appDataFolder</code>. MotorLog <strong>NO</strong> tiene acceso, no lee, no modifica ni elimina ningún otro archivo, documento, foto o carpeta de tu Google Drive.</p>
+					</div>
+
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fas fa-envelope"></i> Permiso: userinfo.email</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;">Permite obtener la dirección de correo electrónico del usuario únicamente para mostrarla en la pantalla de Ajustes de la aplicación y confirmar visualmente qué cuenta de Google se encuentra conectada.</p>
+					</div>
+
+					<h3 style="font-size: 14px; font-weight: 700; margin: 16px 0 6px 0;">Finalidad del Uso de los Datos de Google:</h3>
+					<p>Los datos de Google se utilizan de forma exclusiva para permitir al usuario almacenar, respaldar y restaurar sus propios registros de vehículos en su cuenta privada de Google Drive.</p>
+
+					<div class="highlight-box blue">
+						<div class="box-title" style="color: #0369a1;"><i class="fas fa-user-shield"></i> Declaración Explícita de No Compartición con Terceros</div>
+						<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0c4a6e;">No vendemos, alquilamos ni compartimos los datos de los usuarios de Google con terceros ni los utilizamos para publicidad, marketing o entrenamiento de modelos de inteligencia artificial (IA / Machine Learning).</p>
+					</div>
+
+					<div class="highlight-box yellow">
+						<div class="box-title" style="color: #854d0e;"><i class="fas fa-certificate"></i> Cláusula Obligatoria de Uso Limitado de Google (Limited Use Disclosure)</div>
+						<p style="margin: 0; font-size: 13px; color: #713f12;">El uso y la transferencia a cualquier otra aplicación de la información recibida de las API de Google por parte de esta app se adherirán a la <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Política de Datos de Usuario de los Servicios de la API de Google</a>, incluidos los requisitos de Uso Limitado (Limited Use).</p>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Sección 4 -->
+				<section>
+					<h2><span class="num-badge">4</span> Seguridad y Protección de Datos</h2>
+					<p>MotorLog implementa medidas estrictas para la protección de la información del usuario:</p>
+					<ul>
+						<li><strong>Comunicaciones Cifradas:</strong> Toda interacción con los servicios de Google se realiza mediante HTTPS y el protocolo oficial de autenticación OAuth 2.0 de Google.</li>
+						<li><strong>Sin Almacenamiento Central:</strong> Al carecer de servidores centrales propios, no existe riesgo de filtración masiva de bases de datos remotas.</li>
+						<li><strong>Tokens en Sesión:</strong> Los tokens de acceso a Google Drive se almacenan de forma volátil en la sesión del navegador y no se persisten de forma indefinida.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Sección 5 -->
+				<section>
+					<h2><span class="num-badge">5</span> Retención y Eliminación de Datos (Control del Usuario)</h2>
+					<p>El usuario mantiene el control total sobre su información y puede ejercer sus derechos de eliminación en cualquier momento:</p>
+					<ul>
+						<li><strong>Eliminación de Datos Locales:</strong> Puedes borrar todos los datos almacenados en tu navegador desde la aplicación accediendo a <em>Ajustes &gt; Borrar datos</em>.</li>
+						<li><strong>Eliminación de la Copia en Google Drive:</strong> Puedes borrar el archivo de copia de seguridad (<code>motorLog_backup.json</code>) en cualquier momento desde la propia app o eliminando los datos de la app en la configuración de almacenamiento de Google Drive.</li>
+						<li><strong>Revocación de Permisos de Google:</strong> Puedes revocar el acceso concedido a MotorLog en cualquier instante visitando la página de seguridad de tu cuenta de Google: <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">https://myaccount.google.com/permissions</a>.</li>
+						<li><strong>Exportación y Portabilidad:</strong> Puedes descargar una copia completa de tus registros en formato estándar JSON en cualquier momento desde los Ajustes.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Sección 6 -->
+				<section>
+					<h2><span class="num-badge">6</span> Contacto sobre Privacidad</h2>
+					<p>Si tienes preguntas, dudas o solicitudes relacionadas con esta Política de Privacidad o el tratamiento de tus datos, puedes contactarnos directamente:</p>
+					<div class="app-meta">
+						<p style="margin-bottom: 6px;"><strong>Email de Soporte / Privacidad:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+						<p style="margin-bottom: 0;"><strong>Repositorio Oficial:</strong> <a href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind" target="_blank" rel="noopener noreferrer">github.com/vicnx/MotorLog_Angular_rxDb_Tailwind</a></p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- VERSIÓN EN INGLÉS (ENGLISH VERSION) -->
+		<div id="content-en" class="hidden">
+			<div class="card hero">
+				<div class="hero-icon">
+					<i class="fas fa-user-shield"></i>
+				</div>
+				<h1>MotorLog Privacy Policy</h1>
+				<p class="subtitle">Comprehensive disclosures on data handling, 100% Local-First architecture, and Google Drive API integration.</p>
+				<div class="badge">
+					<i class="far fa-calendar-alt" style="color: var(--primary-500);"></i>
+					<span>Last updated: September 2026</span>
+				</div>
+			</div>
+
+			<div class="pillars">
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+						<i class="fas fa-hdd"></i>
+					</div>
+					<div class="pillar-title">100% Local-First</div>
+					<div class="pillar-desc">Your data resides solely in your browser's IndexedDB database. No external servers or unsolicited remote storage.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd;">
+						<i class="fas fa-user-slash"></i>
+					</div>
+					<div class="pillar-title">No Servers or Tracking</div>
+					<div class="pillar-desc">We do not share or sell user data to third parties. We do not use tracking cookies or train AI/ML models.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe;">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="pillar-title">Total User Control</div>
+					<div class="pillar-desc">Google Drive synchronization is voluntary and only accesses its own file inside the private appDataFolder.</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<!-- Section 1 -->
+				<section>
+					<h2><span class="num-badge">1</span> Application and Developer Information</h2>
+					<p><strong>Application Name:</strong> MotorLog</p>
+					<p><strong>Official Application Homepage:</strong> <a href="https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/">https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/</a></p>
+					<p><strong>Developer / Maintainer:</strong> Vicente Andani (<a href="https://github.com/vicnx" target="_blank" rel="noopener noreferrer">@vicnx</a>)</p>
+					<p><strong>Privacy Contact Email:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+					<p>MotorLog is an open-source web application designed under a <em>Local-First</em> paradigm for personal vehicle maintenance logging and cost tracking.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 2 -->
+				<section>
+					<h2><span class="num-badge">2</span> Data Collected and Local Storage</h2>
+					<p>All information entered into MotorLog belongs strictly to the user and is stored only on their local device (via browser IndexedDB powered by RxDB):</p>
+					<ul>
+						<li><strong>Vehicle Data:</strong> Make, model, year, mileage, power, color, and custom notes.</li>
+						<li><strong>Maintenance Records:</strong> Dates, service costs, performed tasks, provider locations, and attached receipt images.</li>
+						<li><strong>Local User Profile:</strong> Session username and selected avatar.</li>
+					</ul>
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fas fa-check-circle"></i> Local Processing Guarantee</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;">MotorLog does not transmit user data to any external or backend server. Your data never leaves your device unless you voluntarily create a backup.</p>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Section 3 -->
+				<section>
+					<h2><span class="num-badge">3</span> Google Drive API Integration & Requested Scopes</h2>
+					<p>MotorLog provides an optional feature allowing users to connect their personal Google Drive account to backup and restore their maintenance records. This integration requests only the following minimal scopes:</p>
+					
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fab fa-google-drive"></i> Scope: drive.appdata (Application-specific data folder)</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;"><strong>Accessed Data:</strong> MotorLog accesses the user's Google Drive account <em>solely</em> to read, create, and update the application's own backup file (<code>motorLog_backup.json</code>) inside the hidden private <code>appDataFolder</code>. MotorLog <strong>CANNOT</strong> access, view, modify, or delete any other files, folders, photos, or documents in your Google Drive.</p>
+					</div>
+
+					<div class="highlight-box">
+						<div class="box-title" style="color: #065f46;"><i class="fas fa-envelope"></i> Scope: userinfo.email</div>
+						<p style="margin: 0; font-size: 12.5px; color: #047857;">Allows retrieving the user's email address solely to display it in the app's Settings interface so the user can visually identify the connected Google account.</p>
+					</div>
+
+					<h3 style="font-size: 14px; font-weight: 700; margin: 16px 0 6px 0;">Purpose of Google User Data:</h3>
+					<p>Google user data is used exclusively to provide personal backup and restoration functionality requested by the user.</p>
+
+					<div class="highlight-box blue">
+						<div class="box-title" style="color: #0369a1;"><i class="fas fa-user-shield"></i> No Third-Party Sharing Affirmation</div>
+						<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0c4a6e;">We do not sell, rent, or share Google user data with third parties, nor do we use it for advertising, marketing, or training artificial intelligence (AI / Machine Learning) models.</p>
+					</div>
+
+					<div class="highlight-box yellow">
+						<div class="box-title" style="color: #854d0e;"><i class="fas fa-certificate"></i> Mandatory Google Limited Use Disclosure</div>
+						<p style="margin: 0; font-size: 13px; color: #713f12;">MotorLog's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Section 4 -->
+				<section>
+					<h2><span class="num-badge">4</span> Data Protection and Security</h2>
+					<p>MotorLog employs robust security measures to protect user information:</p>
+					<ul>
+						<li><strong>Encrypted Transport:</strong> All interactions with Google APIs use secure HTTPS communication and official Google OAuth 2.0 protocols.</li>
+						<li><strong>No Central Database:</strong> Having no backend servers prevents large-scale external database breaches.</li>
+						<li><strong>Session-Only Tokens:</strong> Google OAuth tokens are stored ephemerally in browser session memory and are not permanently persisted.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Section 5 -->
+				<section>
+					<h2><span class="num-badge">5</span> Data Retention and Deletion Disclosures</h2>
+					<p>Users maintain full ownership and control over their data at all times:</p>
+					<ul>
+						<li><strong>Local Data Deletion:</strong> You can wipe all data stored in your browser by going to <em>Settings &gt; Clear data</em>.</li>
+						<li><strong>Google Drive Backup Deletion:</strong> You can delete your backup file (<code>motorLog_backup.json</code>) directly from the application or by managing connected apps in Google Drive settings.</li>
+						<li><strong>Revoking Google Access:</strong> You can revoke MotorLog's access permissions at any time through Google Account Security: <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">https://myaccount.google.com/permissions</a>.</li>
+						<li><strong>Data Portability:</strong> You can export and download a full JSON copy of your maintenance data at any time from Settings.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Section 6 -->
+				<section>
+					<h2><span class="num-badge">6</span> Privacy Inquiries & Contact</h2>
+					<p>For questions or inquiries regarding this Privacy Policy or your data, please contact us:</p>
+					<div class="app-meta">
+						<p style="margin-bottom: 6px;"><strong>Privacy & Support Email:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+						<p style="margin-bottom: 0;"><strong>Official Repository:</strong> <a href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind" target="_blank" rel="noopener noreferrer">github.com/vicnx/MotorLog_Angular_rxDb_Tailwind</a></p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		function switchLang(lang) {
+			const esContent = document.getElementById('content-es');
+			const enContent = document.getElementById('content-en');
+			const btnEs = document.getElementById('btn-es');
+			const btnEn = document.getElementById('btn-en');
+			const backTxt = document.getElementById('back-txt');
+
+			if (lang === 'en') {
+				esContent.classList.add('hidden');
+				enContent.classList.remove('hidden');
+				btnEn.classList.add('active');
+				btnEs.classList.remove('active');
+				backTxt.textContent = 'Back to MotorLog';
+			} else {
+				enContent.classList.add('hidden');
+				esContent.classList.remove('hidden');
+				btnEs.classList.add('active');
+				btnEn.classList.remove('active');
+				backTxt.textContent = 'Volver a MotorLog';
+			}
+		}
+
+		// Detectar idioma del navegador por defecto
+		if (navigator.language && !navigator.language.startsWith('es')) {
+			switchLang('en');
+		}
+	</script>
+</body>
+</html>
