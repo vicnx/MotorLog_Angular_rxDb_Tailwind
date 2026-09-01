@@ -163,8 +163,9 @@ export class DataExportImportService {
 						username: validationResult.username
 					}),
 					header: this.translateSvc.instant('confirm.default_header'),
-					icon: 'fas fa-exclamation-triangle',
-					rejectButtonStyleClass: 'p-button-text',
+					icon: 'fas fa-file-import text-primary-500 text-xl',
+					acceptButtonStyleClass: 'btn-primary !py-2 !px-4 !text-xs',
+					rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
 					acceptLabel: this.translateSvc.instant('confirm.default_yes'),
 					rejectLabel: this.translateSvc.instant('confirm.default_no'),
 					key: 'confirmDialog',

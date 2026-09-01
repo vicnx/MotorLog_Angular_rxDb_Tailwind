@@ -17,7 +17,7 @@
 			{{ 'welcome.warning.message_2' | translate }}
 		</p>
 	</div>
-	<p-footer>
+	<ng-template pTemplate="footer">
 		<button
 			type="button"
 			(click)="hideDialog()"
@@ -25,5 +25,5 @@
 		>
 			<span>{{ 'welcome.continue' | translate }}</span>
 		</button>
-	</p-footer>
+	</ng-template>
 </p-dialog>

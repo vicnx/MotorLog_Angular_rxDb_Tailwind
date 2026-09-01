@@ -42,8 +42,9 @@ export class GDriveCardComponent {
 		this.confirmationSvc.confirm({
 			message: this.translateSvc.instant('pages.settings.gdrive.confirm_restore_msg'),
 			header: this.translateSvc.instant('pages.settings.gdrive.confirm_restore_header'),
-			icon: 'fas fa-exclamation-triangle',
-			rejectButtonStyleClass: 'p-button-text',
+			icon: 'fas fa-cloud-download-alt text-primary-500 text-xl',
+			acceptButtonStyleClass: 'btn-primary !py-2 !px-4 !text-xs',
+			rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
 			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
 			rejectLabel: this.translateSvc.instant('confirm.default_no'),
 			key: 'confirmDialog',
