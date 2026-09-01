@@ -284,6 +284,7 @@
 		"default_no": "No"
 	},
 	"lang": {
+		"title": "Idioma",
 		"spanish": "Español",
 		"english": "Inglés"
 	},
