@@ -143,6 +143,9 @@
 				"upload_error": "Ocurrió un error al guardar la copia en Google Drive.",
 				"download_error": "Ocurrió un error al restaurar desde Google Drive.",
 				"no_backup_found": "No existe ninguna copia de seguridad en tu Google Drive.",
+				"permissions_required": "Permisos insuficientes: Debes marcar la casilla de acceso a Google Drive para poder guardar y restaurar copias.",
+				"found_backup_msg": "Se ha encontrado una copia de seguridad en tu Google Drive del {{date}}. ¿Deseas restaurarla ahora en MotorLog?",
+				"found_backup_header": "Copia de seguridad disponible",
 				"confirm_restore_msg": "Se va a restaurar la copia de seguridad desde Google Drive. Esta acción reemplazará los datos actuales. ¿Deseas continuar?",
 				"confirm_restore_header": "Restaurar desde Google Drive"
 			},

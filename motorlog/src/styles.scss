@@ -292,9 +292,15 @@ body {
 }
 
 /* Overrides Globales de Modales PrimeNG (p-dialog & p-confirmDialog) */
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
 .p-dialog,
 .p-confirmdialog {
-  max-width: calc(100vw - 2.5rem) !important;
+  max-width: calc(100vw - 2rem) !important;
   margin: 0 auto !important;
   border-radius: 1.25rem !important; /* 20px */
   overflow: hidden !important;
@@ -330,8 +336,15 @@ body {
     padding: 1.25rem 1.5rem !important;
   }
 
+  .p-confirm-dialog-icon {
+    font-size: 1.5rem !important;
+    margin-right: 0.75rem !important;
+    flex-shrink: 0 !important;
+  }
+
   .p-confirm-dialog-message {
     font-size: 0.875rem !important;
+    line-height: 1.5 !important;
     color: #374151 !important;
   }
 
@@ -345,10 +358,33 @@ body {
     gap: 0.5rem !important;
 
     p-footer,
-    > div,
-    > button,
-    > * {
+    > div {
       width: 100% !important;
+    }
+
+    > button {
+      margin: 0 !important;
+    }
+  }
+}
+
+.p-confirmdialog {
+  width: 440px !important;
+
+  .p-dialog-content {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .p-dialog-footer {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 0.5rem !important;
+
+    button {
+      flex: 1 1 0% !important;
+      max-width: 160px !important;
+      justify-content: center !important;
     }
   }
 }

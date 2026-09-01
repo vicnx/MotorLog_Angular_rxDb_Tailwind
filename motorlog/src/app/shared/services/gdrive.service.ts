@@ -26,28 +26,64 @@ export class GDriveService {
 
 	private tokenClient: any;
 	private accessToken: string | null = null;
+	private tokenExpiresAt: number = 0;
+	private pendingCallback: (() => void) | null = null;
 
 	constructor() {
-		// Diferir la restauración del token para evitar disparar interceptores HTTP durante la instanciación del DI (NG0200)
+		// Restaurar estado persistido al iniciar el servicio
 		setTimeout(() => {
 			this.restoreSessionToken();
 		}, 0);
 	}
 
 	public initTokenClient(onSuccessCallback?: () => void): void {
+		if (onSuccessCallback) {
+			this.pendingCallback = onSuccessCallback;
+		}
 		if (typeof google !== 'undefined' && google.accounts?.oauth2) {
 			this.tokenClient = google.accounts.oauth2.initTokenClient({
 				client_id: environment.googleClientId,
 				scope: 'https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/userinfo.email',
 				callback: (response: any) => {
+					if (response.error) {
+						console.error('Error de autenticación con Google:', response.error);
+						return;
+					}
+
 					if (response.access_token) {
+						// Validar que el usuario haya marcado la casilla del permiso de Google Drive
+						const hasDrivePermission =
+							(typeof google !== 'undefined' && google.accounts?.oauth2?.hasGrantedAllScopes)
+								? google.accounts.oauth2.hasGrantedAllScopes(response, 'https://www.googleapis.com/auth/drive.appdata')
+								: (response.scope && response.scope.includes('drive.appdata'));
+
+						if (!hasDrivePermission) {
+							this.messageSvc.add({
+								severity: 'warn',
+								summary: this.translateSvc.instant('msgs.error_header'),
+								detail: this.translateSvc.instant('pages.settings.gdrive.permissions_required'),
+								key: 'toast'
+							});
+							this.logout();
+							return;
+						}
+
 						this.accessToken = response.access_token;
+						const expiresIn = Number(response.expires_in) || 3599;
+						this.tokenExpiresAt = Date.now() + expiresIn * 1000;
+
 						this.isLoggedIn.set(true);
-						sessionStorage.setItem('gdrive_token', response.access_token);
+						localStorage.setItem('gdrive_token', response.access_token);
+						localStorage.setItem('gdrive_token_expires_at', this.tokenExpiresAt.toString());
+						localStorage.setItem('gdrive_account_linked', 'true');
+
 						this.fetchUserInfo();
 						this.checkExistingBackup();
-						if (onSuccessCallback) {
-							onSuccessCallback();
+
+						if (this.pendingCallback) {
+							const cb = this.pendingCallback;
+							this.pendingCallback = null;
+							cb();
 						}
 					}
 				}
@@ -56,32 +92,60 @@ export class GDriveService {
 	}
 
 	public login(onSuccess?: () => void): void {
+		if (onSuccess) {
+			this.pendingCallback = onSuccess;
+		}
 		if (!this.tokenClient) {
-			this.initTokenClient(onSuccess);
+			this.initTokenClient();
 		}
 		if (this.tokenClient) {
-			this.tokenClient.requestAccessToken({ prompt: 'consent' });
+			const savedEmail = localStorage.getItem('gdrive_user_email');
+			this.tokenClient.requestAccessToken({
+				prompt: savedEmail ? '' : 'consent',
+				hint: savedEmail || undefined
+			});
 		}
 	}
 
 	public logout(): void {
 		if (this.accessToken && typeof google !== 'undefined' && google.accounts?.oauth2) {
-			google.accounts.oauth2.revoke(this.accessToken, () => {});
+			try {
+				google.accounts.oauth2.revoke(this.accessToken, () => {});
+			} catch (e) {}
 		}
 		this.accessToken = null;
+		this.tokenExpiresAt = 0;
 		this.isLoggedIn.set(false);
 		this.userEmail.set('');
 		this.lastBackupDate.set('');
-		sessionStorage.removeItem('gdrive_token');
+
+		localStorage.removeItem('gdrive_token');
+		localStorage.removeItem('gdrive_token_expires_at');
+		localStorage.removeItem('gdrive_user_email');
+		localStorage.removeItem('gdrive_account_linked');
+		localStorage.removeItem('gdrive_last_backup');
 	}
 
 	private restoreSessionToken(): void {
-		const savedToken = sessionStorage.getItem('gdrive_token');
-		if (savedToken) {
-			this.accessToken = savedToken;
+		const isLinked = localStorage.getItem('gdrive_account_linked') === 'true';
+		if (isLinked) {
 			this.isLoggedIn.set(true);
-			this.fetchUserInfo();
-			this.checkExistingBackup();
+			this.userEmail.set(localStorage.getItem('gdrive_user_email') || '');
+			this.lastBackupDate.set(localStorage.getItem('gdrive_last_backup') || '');
+
+			const savedToken = localStorage.getItem('gdrive_token');
+			const expiresAt = Number(localStorage.getItem('gdrive_token_expires_at') || '0');
+
+			// Si el token aún no ha caducado, restaurarlo
+			if (savedToken && Date.now() < expiresAt - 60000) {
+				this.accessToken = savedToken;
+				this.tokenExpiresAt = expiresAt;
+				this.fetchUserInfo();
+				this.checkExistingBackup();
+			} else {
+				this.accessToken = null;
+				this.tokenExpiresAt = 0;
+			}
 		}
 	}
 
@@ -102,10 +166,14 @@ export class GDriveService {
 				next: (info) => {
 					if (info?.email) {
 						this.userEmail.set(info.email);
+						localStorage.setItem('gdrive_user_email', info.email);
 					}
 				},
-				error: () => {
-					this.logout();
+				error: (err) => {
+					if (err?.status === 401) {
+						this.accessToken = null;
+						localStorage.removeItem('gdrive_token');
+					}
 				}
 			});
 	}
@@ -124,9 +192,14 @@ export class GDriveService {
 			if (res?.files && res.files.length > 0) {
 				const file = res.files[0];
 				this.lastBackupDate.set(file.modifiedTime);
+				localStorage.setItem('gdrive_last_backup', file.modifiedTime);
 				return file;
 			}
-		} catch (err) {
+		} catch (err: any) {
+			if (err?.status === 401) {
+				this.accessToken = null;
+				localStorage.removeItem('gdrive_token');
+			}
 			console.error('Error al comprobar backup en GDrive:', err);
 		}
 		return null;
@@ -134,8 +207,12 @@ export class GDriveService {
 
 	public async uploadBackup(jsonString: string): Promise<boolean> {
 		if (!this.accessToken) {
-			this.login(() => this.uploadBackup(jsonString));
-			return false;
+			return new Promise((resolve) => {
+				this.login(async () => {
+					const result = await this.uploadBackup(jsonString);
+					resolve(result);
+				});
+			});
 		}
 
 		this.isSyncing.set(true);
@@ -180,7 +257,9 @@ export class GDriveService {
 				await this.http.patch(url, body, { headers }).toPromise();
 			}
 
-			this.lastBackupDate.set(new Date().toISOString());
+			const nowIso = new Date().toISOString();
+			this.lastBackupDate.set(nowIso);
+			localStorage.setItem('gdrive_last_backup', nowIso);
 			this.isSyncing.set(false);
 
 			this.messageSvc.add({
@@ -191,8 +270,12 @@ export class GDriveService {
 			});
 
 			return true;
-		} catch (error) {
+		} catch (error: any) {
 			this.isSyncing.set(false);
+			if (error?.status === 401) {
+				this.accessToken = null;
+				localStorage.removeItem('gdrive_token');
+			}
 			console.error('Error al subir backup a Google Drive:', error);
 
 			this.messageSvc.add({
@@ -207,7 +290,14 @@ export class GDriveService {
 	}
 
 	public async downloadBackupContent(): Promise<string | null> {
-		if (!this.accessToken) return null;
+		if (!this.accessToken) {
+			return new Promise((resolve) => {
+				this.login(async () => {
+					const result = await this.downloadBackupContent();
+					resolve(result);
+				});
+			});
+		}
 
 		this.isSyncing.set(true);
 
@@ -234,8 +324,12 @@ export class GDriveService {
 
 			this.isSyncing.set(false);
 			return content || null;
-		} catch (error) {
+		} catch (error: any) {
 			this.isSyncing.set(false);
+			if (error?.status === 401) {
+				this.accessToken = null;
+				localStorage.removeItem('gdrive_token');
+			}
 			console.error('Error al descargar backup desde Google Drive:', error);
 			this.messageSvc.add({
 				severity: 'error',
