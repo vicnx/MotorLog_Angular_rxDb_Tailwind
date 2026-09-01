@@ -20,6 +20,8 @@ export class VehiclesService {
 	vehiclesBrands = signal<BrandModel[]>([]);
 	vehicleSelected = signal<VehicleModel>({} as VehicleModel);
 	vehicleSelectedId = signal<string>('');
+	maintenanceSearchQuery = signal<string>('');
+	isSearchOpen = signal<boolean>(false);
 	userSvc = inject(UserService);
 	urlIcons: string = './assets/data/icons.json';
 	urlVehicleBrands: string = './assets/data/vehicle-brands.json';

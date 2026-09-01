@@ -77,7 +77,7 @@
 
 							<div class="flex justify-end mt-2">
 								<button 
-									type="button"
+									type="button" 
 									(click)="goToEdit(maintenance.id); $event.stopPropagation()" 
 									class="btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5"
 								>
@@ -92,20 +92,43 @@
 		</ng-container>
 	</div>
 	} @else {
-	<div class="flex flex-col items-center justify-center text-center py-12 px-4">
-		<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
-			<i class="fas fa-clipboard-list"></i>
+		<!-- Estado Sin Resultados de Búsqueda -->
+		<div *ngIf="vehicleSvc.maintenanceSearchQuery(); else noMaintenanceState" class="flex flex-col items-center justify-center text-center py-14 px-4 animate-fadeIn">
+			<div class="w-14 h-14 rounded-2xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center text-2xl mb-4 border border-primary-100 dark:border-primary-900/30">
+				<i class="fas fa-search"></i>
+			</div>
+			<h3 class="font-bold text-base text-gray-900 dark:text-white mb-1.5">
+				{{ 'pages.home.no_search_results' | translate: { query: vehicleSvc.maintenanceSearchQuery() } }}
+			</h3>
+			<p class="text-xs text-gray-500 dark:text-gray-400 max-w-xs mb-5">
+				{{ 'pages.home.no_search_results_desc' | translate }}
+			</p>
+			<button
+				type="button"
+				(click)="clearSearch()"
+				class="btn-secondary !py-1.5 !px-3.5 !text-xs flex items-center gap-1.5 shadow-sm"
+			>
+				<i class="fas fa-times text-xs"></i>
+				<span>{{ 'pages.home.clear_search' | translate }}</span>
+			</button>
 		</div>
-		<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
-			{{ 'pages.home.no_mant' | translate }}
-		</p>
-	</div>
+
+		<!-- Estado Estándar Sin Mantenimientos -->
+		<ng-template #noMaintenanceState>
+			<div class="flex flex-col items-center justify-center text-center py-12 px-4 animate-fadeIn">
+				<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
+					<i class="fas fa-clipboard-list"></i>
+				</div>
+				<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
+					{{ 'pages.home.no_mant' | translate }}
+				</p>
+			</div>
+		</ng-template>
 	}
 </div>
 
-
 } @else {
-<div class="flex flex-col items-center justify-center text-center py-12 px-4">
+<div class="flex flex-col items-center justify-center text-center py-12 px-4 animate-fadeIn">
 	<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
 		<i class="fas fa-car"></i>
 	</div>

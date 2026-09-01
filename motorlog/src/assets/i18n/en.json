@@ -5,6 +5,10 @@
 			"no_mant": "There are no registered maintenance for this vehicle.",
 			"no_vehicles": "There are no registered vehicles for this user.",
 			"view_details": "View details",
+			"search_placeholder": "Search maintenances...",
+			"no_search_results": "No results for \"{{query}}\"",
+			"no_search_results_desc": "Check spelling or try a new search.",
+			"clear_search": "Clear search",
 			"filters": {
 				"title": "Filters",
 				"date_range": "Date range",

@@ -77,6 +77,41 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		});
 	}
 
+	/** Filtra los mantenimientos según la búsqueda textual en vivo del usuario. */
+	private filterBySearchQuery(maintenances: Maintenance[]): Maintenance[] {
+		const query = this.vehicleSvc.maintenanceSearchQuery()?.trim().toLowerCase();
+		if (!query) {
+			return maintenances;
+		}
+
+		return maintenances.filter((maintenance) => {
+			// 1. Tipos de servicio (etiquetas traducidas y literales)
+			const serviceTypes: ServiceTypeItem[] = (maintenance.serviceType as ServiceTypeItem[]) || [];
+			const matchesServices = serviceTypes.some((s) => {
+				const label = s.label ? String(s.label).toLowerCase() : '';
+				const translated = s.label ? this.translateSvc.instant(String(s.label)).toLowerCase() : '';
+				return label.includes(query) || translated.includes(query);
+			});
+
+			// 2. Ubicación / Taller
+			const matchesLocation = maintenance.location ? maintenance.location.toLowerCase().includes(query) : false;
+
+			// 3. Notas
+			const matchesNotes = maintenance.notes ? maintenance.notes.toLowerCase().includes(query) : false;
+
+			// 4. Descripción adicional
+			const matchesDescription = maintenance.description ? maintenance.description.toLowerCase().includes(query) : false;
+
+			// 5. Kilometraje
+			const matchesOdometer = maintenance.odometer ? maintenance.odometer.toString().includes(query) : false;
+
+			// 6. Importe
+			const matchesAmount = maintenance.amount ? maintenance.amount.toString().includes(query) : false;
+
+			return matchesServices || matchesLocation || matchesNotes || matchesDescription || matchesOdometer || matchesAmount;
+		});
+	}
+
 	/** Agrupa los mantenimientos por mes/año y los ordena cronológicamente de más reciente a más antiguo. */
 	private groupAndSortMaintenances(maintenances: Maintenance[]): GroupedMaintenanceItem[] {
 		const grouped = maintenances.reduce(
@@ -133,11 +168,16 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 	public updateMaintenances(): void {
 		const vehicle = this.vehicleSelected();
 		if (vehicle && vehicle.mantenimientos && vehicle.mantenimientos.length > 0) {
-			const filteredMaintenances = this.filterMaintenances(vehicle.mantenimientos);
-			this.groupedMaintenances = this.groupAndSortMaintenances(filteredMaintenances);
+			const dateFiltered = this.filterMaintenances(vehicle.mantenimientos);
+			const searchFiltered = this.filterBySearchQuery(dateFiltered);
+			this.groupedMaintenances = this.groupAndSortMaintenances(searchFiltered);
 		} else {
 			this.groupedMaintenances = [];
 		}
+	}
+
+	public clearSearch(): void {
+		this.vehicleSvc.maintenanceSearchQuery.set('');
 	}
 
 	public onFiltersChanged(dates: FilterDates): void {

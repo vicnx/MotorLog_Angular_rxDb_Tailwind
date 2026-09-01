@@ -1,0 +1,36 @@
+<!-- Input de búsqueda cuando está abierto -->
+<div *ngIf="isOpen" class="flex items-center gap-2 animate-fadeIn" [ngClass]="widthClass">
+  <i class="fas fa-search text-xs text-primary-500 flex-shrink-0"></i>
+  <input
+    #searchInput
+    type="text"
+    [value]="value"
+    (input)="onInputChange($event)"
+    [placeholder]="placeholder | translate"
+    class="w-full bg-transparent text-xs text-gray-900 dark:text-white placeholder-gray-400 border-none p-0 focus:outline-none focus:ring-0"
+  />
+  <button
+    type="button"
+    (click)="handleClearOrClose()"
+    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1 text-xs flex-shrink-0 transition-colors"
+    title="Cerrar / Limpiar"
+  >
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+
+<!-- Botón Lupa / Búsqueda cuando está cerrado -->
+<button
+  *ngIf="!isOpen"
+  type="button"
+  (click)="openSearch()"
+  class="inline-flex items-center justify-center w-10 h-10 rounded-full
+         bg-white/90 dark:bg-gray-800/90 border border-gray-200/80 dark:border-gray-700/80
+         text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white
+         hover:bg-gray-50 dark:hover:bg-gray-700/80 shadow-sm
+         transition-all duration-200 active:scale-95
+         focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+  [attr.aria-label]="buttonAriaLabel | translate"
+>
+  <i class="fas fa-search text-sm"></i>
+</button>

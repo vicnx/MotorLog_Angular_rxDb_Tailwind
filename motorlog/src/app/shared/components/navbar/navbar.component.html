@@ -13,28 +13,27 @@
   </div>
 </div>
 
-<!-- Botones de acción flotantes (Lupa + Añadir) centrados y alineados con max-w-screen-md en PC y móvil -->
+<!-- Botones de acción flotantes (Buscador Standalone + Añadir) centrados y alineados con max-w-screen-md en PC y móvil -->
 <div *ngIf="isHomePage" class="fixed top-3 left-0 right-0 z-50 pointer-events-none">
   <div class="max-w-screen-md mx-auto px-3 sm:px-4 flex justify-end">
+    
+    <!-- Contenedor flotante -->
     <div
       class="pointer-events-auto flex items-center gap-1.5 transition-all duration-300 rounded-full"
-      [ngClass]="isScrolled
-        ? 'translate-x-0 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg border border-gray-200/70 dark:border-gray-700/70 p-1.5'
-        : '-translate-x-[3.25rem] sm:-translate-x-[3.5rem] bg-transparent p-0 border-transparent shadow-none'"
+      [ngClass]="[
+        vehicleSvc.isSearchOpen() ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border border-gray-200/80 dark:border-gray-700/80 p-1 pl-3' : '',
+        !vehicleSvc.isSearchOpen() && isScrolled ? 'translate-x-0 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg border border-gray-200/70 dark:border-gray-700/70 p-1.5' : '',
+        !vehicleSvc.isSearchOpen() && !isScrolled ? '-translate-x-[3.25rem] sm:-translate-x-[3.5rem] bg-transparent p-0 border-transparent shadow-none' : ''
+      ]"
     >
-      <!-- Botón Lupa / Búsqueda (sin funcionalidad por ahora) -->
-      <button
-        type="button"
-        class="inline-flex items-center justify-center w-10 h-10 rounded-full
-               bg-white/90 dark:bg-gray-800/90 border border-gray-200/80 dark:border-gray-700/80
-               text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white
-               hover:bg-gray-50 dark:hover:bg-gray-700/80 shadow-sm
-               transition-all duration-200 active:scale-95
-               focus:outline-none focus:ring-2 focus:ring-primary-500/30"
-        aria-label="Buscar"
-      >
-        <i class="fas fa-search text-sm"></i>
-      </button>
+      <!-- Componente Modular y Reutilizable de Búsqueda -->
+      <app-search-bar
+        [value]="vehicleSvc.maintenanceSearchQuery()"
+        [isOpen]="vehicleSvc.isSearchOpen()"
+        (valueChange)="onSearchQueryChange($event)"
+        (isOpenChange)="onSearchOpenChange($event)"
+        [placeholder]="'pages.home.search_placeholder'"
+      ></app-search-bar>
 
       <!-- Botón Añadir Mantenimiento -->
       <button
@@ -43,12 +42,13 @@
         class="inline-flex items-center justify-center w-10 h-10 rounded-full
                bg-primary-500 hover:bg-primary-600 active:bg-primary-700
                text-white shadow-md shadow-primary-500/25
-               transition-all duration-200 active:scale-95
+               transition-all duration-200 active:scale-95 flex-shrink-0
                focus:outline-none focus:ring-2 focus:ring-primary-500/30"
         aria-label="Añadir Mantenimiento"
       >
         <i class="fas fa-plus text-sm"></i>
       </button>
     </div>
+
   </div>
 </div>

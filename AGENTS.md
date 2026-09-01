@@ -19,7 +19,7 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 
 ### TypeScript & Angular (v17+)
 * **Standalone First:** Todos los componentes, directivas y pipes deben ser `standalone: true`. No crear ni modificar NgModule a menos que sea estrictamente necesario.
-* **Componentes Pequeños y Modulares:** Minimizar el tamaño de los componentes. Crear siempre componentes pequeños, atómicos y desacoplados con la menor lógica posible. Si una sección de UI (tarjeta, widget, modal) se puede modularizar, **DEBE extraerse como un componente Standalone propio** en `@components` o `@shared/components`.
+* **Componentes Pequeños y Modulares (Proactividad Obligatoria):** Minimizar el tamaño de los componentes. Crear siempre componentes pequeños, atómicos y desacoplados con la menor lógica posible. El agente **DEBE pensar y actuar con mentalidad modular por defecto**: ante cualquier elemento de UI interactivo, buscador, cabecera de página, selector, tarjeta o widget funcional, **el agente NO debe incrustar la lógica ni el maquetado directamente en la página consumidora**, sino **extraerlo de forma autónoma e inmediata como un componente Standalone atómico, altamente configurable y reutilizable** en `@shared/components` (con sus `@Input`, `@Output` y two-way bindings limpios), sin esperar a que el usuario se lo tenga que recordar o solicitar.
 * **Importaciones Limpias:** Utilizar siempre los alias declarados en `tsconfig.json`:
   * `@shared/*` -> `src/app/shared/*`
   * `@pages/*` -> `src/app/pages/*`
