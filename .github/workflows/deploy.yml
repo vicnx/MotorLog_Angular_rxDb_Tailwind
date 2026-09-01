@@ -1,0 +1,39 @@
+name: Deploy MotorLog to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: motorlog/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: motorlog
+
+      - name: Build application
+        run: npm run build
+        working-directory: motorlog
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: motorlog/dist/motorlog
+          branch: gh-pages
