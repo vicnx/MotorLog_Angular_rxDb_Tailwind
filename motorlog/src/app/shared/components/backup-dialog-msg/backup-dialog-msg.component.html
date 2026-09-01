@@ -4,26 +4,43 @@
     [modal]="true"
     [closable]="false"
     [responsive]="true"
-    [style]="{ width: '350px' }"
+    [style]="{ width: '380px', maxWidth: '90vw' }"
 >
     <div class="text-center p-4">
-        <p class="text-gray-700">{{ 'backup.dialog.message' | translate }}</p>
-        <p class="mt-2 text-gray-700">{{ 'backup.dialog.warning' | translate }}</p>
+        <p class="text-gray-700 dark:text-gray-200 text-sm font-medium">{{ 'backup.dialog.message' | translate }}</p>
+        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ 'backup.dialog.warning' | translate }}</p>
     </div>
+
     <p-footer>
-        <button
-            pButton
-            type="button"
-            label="{{ 'backup.dialog.confirm' | translate }}"
-            class="p-button-sm p-button-primary w-full"
-            (click)="exportData()"
-        ></button>
-        <button
-            pButton
-            type="button"
-            label="{{ 'backup.dialog.cancel' | translate }}"
-            class="p-button-sm p-button-secondary w-full mt-2"
-            (click)="hideDialog()"
-        ></button>
+        <div class="flex flex-col gap-2 p-2">
+            <!-- Botón 1: Guardar copia en Google Drive -->
+            <button
+                type="button"
+                (click)="uploadToGDrive()"
+                class="w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-lg shadow-sm active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+                <img src="assets/images/google-drive.png" alt="Google Drive" class="w-4 h-4 object-contain" />
+                <span>{{ 'backup.dialog.gdrive' | translate }}</span>
+            </button>
+
+            <!-- Botón 2: Descargar JSON local -->
+            <button
+                type="button"
+                (click)="exportData()"
+                class="w-full py-2.5 px-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium text-xs rounded-lg active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+                <i class="fas fa-file-download text-blue-500"></i>
+                <span>{{ 'backup.dialog.download_local' | translate }}</span>
+            </button>
+
+            <!-- Botón 3: Cancelar -->
+            <button
+                type="button"
+                (click)="hideDialog()"
+                class="w-full py-2 px-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xs font-medium transition text-center mt-1"
+            >
+                {{ 'backup.dialog.cancel' | translate }}
+            </button>
+        </div>
     </p-footer>
 </p-dialog>

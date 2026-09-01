@@ -211,10 +211,12 @@
 	},
 	"backup": {
 		"dialog": {
-			"title": "Copia de seguridad de datos",
-			"message": "¿Deseas realizar una copia de seguridad de los datos de la aplicación?",
-			"warning": "Los datos se guardan localmente y pueden perderse si no se hace una copia.",
-			"confirm": "Hacer copia ahora",
+			"title": "Copia de seguridad",
+			"message": "¿Quieres realizar una copia de seguridad de tus datos?",
+			"warning": "Recuerda que tus datos solo están guardados en tu navegador.",
+			"confirm": "Descargar copia JSON",
+			"gdrive": "Guardar en Google Drive",
+			"download_local": "Descargar JSON",
 			"cancel": "Cancelar"
 		}
 	},
