@@ -2,9 +2,13 @@
 	"pages": {
 		"home": {
 			"title": "Inicio",
-			"no_mant": "No hay mantenimientos registrados para este vehiculo.",
-			"no_vehicles": "No hay vehiculos registrados para este usuario.",
+			"no_mant": "No hay mantenimientos registrados para este vehículo.",
+			"no_vehicles": "No hay vehículos registrados para este usuario.",
 			"view_details": "Ver detalles",
+			"search_placeholder": "Buscar mantenimientos...",
+			"no_search_results": "No hay resultados para \"{{query}}\"",
+			"no_search_results_desc": "Comprueba la ortografía o prueba con una nueva búsqueda.",
+			"clear_search": "Limpiar búsqueda",
 			"filters": {
 				"title": "Filtros",
 				"date_range": "Rango de fechas",
