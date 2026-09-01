@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmotorlog=self.webpackChunkmotorlog||[]).push([[76],{5312:(l,o,e)=>{e.d(o,{c:()=>n});const n={production:!1,logoDevToken:"",baseUrl:"/MotorLog_Angular_rxDb_Tailwind/"}}}]);
