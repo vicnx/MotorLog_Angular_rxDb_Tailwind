@@ -1,28 +1,53 @@
-<nav class="bg-white border-b border-gray-50 dark:bg-gray-900 sticky top-0 z-50">
-  <div class="relative max-w-screen-xl flex items-center justify-between mx-auto px-4 h-16">
-    
-    <!-- LEFT: Back Button -->
-    <div class="flex-1 flex justify-start z-10">
-      <p-button *ngIf="!isHomePage" icon="fas fa-chevron-left" (onClick)="goBack()" [text]="true" severity="secondary" styleClass="!text-gray-600 dark:!text-gray-300 hover:!bg-gray-100 dark:hover:!bg-gray-800 !rounded-full !w-10 !h-10" />
-    </div>
-
-    <!-- CENTER: Title (Perfectly Centered) -->
-    <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-      <h1 class="text-gray-900 font-bold sm:text-2xl text-xl dark:text-white pointer-events-auto">
-        {{userSvc.page() | translate}}
-      </h1>
-    </div>
-
-    <!-- RIGHT: Avatar Menu -->
-    <div class="flex-1 flex justify-end z-10">
-      <button (click)="toggleSidebar()" type="button" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all overflow-hidden dark:bg-gray-800 dark:border-gray-700">
-        <img *ngIf="avatar" [src]="avatar" alt="Avatar" class="w-full h-full object-cover" />
-        <i *ngIf="!avatar" class="fas fa-user text-gray-400"></i>
-      </button>
-    </div>
-
+<!-- Spacer relativo para mantener la separación superior y anclar el avatar en el documento -->
+<div class="relative h-16 w-full pointer-events-none">
+  <!-- Avatar estático: se queda fijado arriba en el documento y se desplaza hacia arriba con el scroll natural -->
+  <div class="absolute top-3 right-3 z-30 pointer-events-auto">
+    <button type="button" [routerLink]="['/profile']"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full
+             bg-gray-50 dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80
+             hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm
+             focus:outline-none transition-all overflow-hidden">
+      <img *ngIf="avatar" [src]="avatar" alt="Avatar" class="w-full h-full object-cover" />
+      <i *ngIf="!avatar" class="fas fa-user text-gray-400"></i>
+    </button>
   </div>
-</nav>
-<div class="card flex justify-content-center">
-  <app-sidebar></app-sidebar>
+</div>
+
+<!-- Botones de acción flotantes (Lupa + Añadir Mantenimiento) - Solo en timeline (/home) -->
+<!-- Sin scroll: flotan al lado del avatar sin contenedor de fondo -->
+<!-- Con scroll: se desplazan a la derecha con un contenedor pill flotante que los acompaña -->
+<div
+  *ngIf="isHomePage"
+  class="fixed top-3 z-50 flex items-center gap-1.5 transition-all duration-300 rounded-full"
+  [ngClass]="isScrolled
+    ? 'right-3 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg border border-gray-200/70 dark:border-gray-700/70 p-1.5'
+    : 'right-16 bg-transparent p-0 border-transparent shadow-none'"
+>
+  <!-- Botón Lupa / Búsqueda (sin funcionalidad por ahora) -->
+  <button
+    type="button"
+    class="inline-flex items-center justify-center w-10 h-10 rounded-full
+           bg-white/90 dark:bg-gray-800/90 border border-gray-200/80 dark:border-gray-700/80
+           text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white
+           hover:bg-gray-50 dark:hover:bg-gray-700/80 shadow-sm
+           transition-all duration-200 active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+    aria-label="Buscar"
+  >
+    <i class="fas fa-search text-sm"></i>
+  </button>
+
+  <!-- Botón Añadir Mantenimiento -->
+  <button
+    type="button"
+    (click)="goToAddMaintenance()"
+    class="inline-flex items-center justify-center w-10 h-10 rounded-full
+           bg-primary-500 hover:bg-primary-600 active:bg-primary-700
+           text-white shadow-md shadow-primary-500/25
+           transition-all duration-200 active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+    aria-label="Añadir Mantenimiento"
+  >
+    <i class="fas fa-plus text-sm"></i>
+  </button>
 </div>

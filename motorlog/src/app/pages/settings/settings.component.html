@@ -52,6 +52,19 @@
       </div>
     </div>
 
+    <!-- Selector de Idioma -->
+    <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/60 flex items-center justify-between">
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0 border border-gray-200/60 dark:border-gray-700/60">
+          <i class="fas fa-globe text-sm"></i>
+        </div>
+        <span class="font-bold text-sm text-gray-900 dark:text-white">
+          {{ 'lang.spanish' | translate }} / {{ 'lang.english' | translate }}
+        </span>
+      </div>
+      <app-lang-dropdown></app-lang-dropdown>
+    </div>
+
     <!-- Componente modularizado de Google Drive con espacio y separador -->
     <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/60">
       <app-gdrive-card></app-gdrive-card>

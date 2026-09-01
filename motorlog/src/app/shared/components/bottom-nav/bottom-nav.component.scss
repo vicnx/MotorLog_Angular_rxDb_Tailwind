@@ -1,0 +1,4 @@
+/* Pastilla de fondo para la pestaña activa del dock */
+:host a.active-tab {
+  @apply bg-primary-50 dark:bg-primary-950/40;
+}

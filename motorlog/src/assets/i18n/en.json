@@ -323,6 +323,12 @@
 			"cancel": "Cancel"
 		}
 	},
+	"NAVBAR": {
+		"HOME": "Home",
+		"VEHICLES": "Vehicles",
+		"PROFILE": "Profile",
+		"SETTINGS": "Settings"
+	},
 	"primeng": {
 		"startsWith": "Starts with",
 		"contains": "Contains",

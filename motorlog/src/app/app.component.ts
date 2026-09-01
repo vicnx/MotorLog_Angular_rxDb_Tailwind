@@ -4,13 +4,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BackupDialogMsgComponent } from '@shared/components/backup-dialog-msg/backup-dialog-msg.component';
+import { BottomNavComponent } from '@shared/components/bottom-nav/bottom-nav.component';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { ScrollTopComponent } from '@shared/components/scroll-top/scroll-top.component';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
 import { WelcomeDialogInfoComponent } from '@shared/components/welcome-dialog-info/welcome-dialog-info.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { DBService } from '@shared/services/db.service';
-import { MenuService } from '@shared/services/menu.service';
 import { ThemeService } from '@shared/services/theme.service';
 import { UserService } from '@shared/services/user.service';
 import { VehiclesService } from '@shared/services/vehicles.service';
@@ -36,10 +36,10 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 		ConfirmDialogModule,
 		WelcomeDialogInfoComponent,
 		ScrollTopComponent,
-		BackupDialogMsgComponent
+		BackupDialogMsgComponent,
+		BottomNavComponent
 	],
 	providers: [
-		MenuService,
 		ThemeService,
 		UserService,
 		DBService,
@@ -54,7 +54,6 @@ export class AppComponent implements OnInit {
 	// Services
 	vehiclesApiSvc = inject(VehiclesApiService);
 	translateSvc = inject(TranslateService);
-	menuSvc = inject(MenuService);
 	userSvc = inject(UserService);
 	vehiclesSvc = inject(VehiclesService);
 	primeNgConfig = inject(PrimeNGConfig);

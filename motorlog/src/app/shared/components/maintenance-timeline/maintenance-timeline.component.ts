@@ -145,8 +145,4 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		this.endDate = dates.endDate;
 		this.updateMaintenances();
 	}
-
-	public goToAddMaintenance(): void {
-		this.routerSvc.navigate([CONSTANTS.routes.addMaintenance]);
-	}
 }

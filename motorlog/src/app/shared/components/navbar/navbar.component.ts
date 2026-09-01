@@ -1,37 +1,23 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MenuService } from '@shared/services/menu.service';
-import { UtilsService } from '@shared/services/utils.service';
-import { DropdownModule } from 'primeng/dropdown';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, effect, inject } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '@shared/services/user.service';
 import { CONSTANTS } from '@shared/app-constants';
-import { LangDropdownComponent } from '../lang-dropdown/lang-dropdown.component';
-import { ButtonModule } from 'primeng/button';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-navbar',
 	standalone: true,
-	imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent, LangDropdownComponent, ButtonModule],
+	imports: [CommonModule, TranslateModule, RouterModule],
 	templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
-	menuOptions: any[] = [];
-	langs: any[] | undefined;
-	selectedLang: any | undefined;
 	avatar: string = '';
+	isScrolled = false;
 	isHomePage = false;
 
-	// Services
-	utilsSvc = inject(UtilsService);
-	translateSvc = inject(TranslateService);
-	menuSvc = inject(MenuService);
 	userSvc = inject(UserService);
-	locationSvc = inject(Location);
 	router = inject(Router);
 
 	constructor() {
@@ -39,26 +25,21 @@ export class NavbarComponent {
 			if (this.userSvc.user()) {
 				this.avatar = this.userSvc.user().avatar;
 			}
-            this.updateHomeCheck();
 		});
 
-        this.router.events
-        .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(() => this.updateHomeCheck());
-
+		this.router.events
+			.pipe(filter(event => event instanceof NavigationEnd))
+			.subscribe(() => this.isHomePage = this.router.url.includes(CONSTANTS.routes.home));
+		this.isHomePage = this.router.url.includes(CONSTANTS.routes.home);
 	}
 
-	toggleSidebar() {
-		this.menuSvc.toogleMenu();
+	/** Detecta scroll para añadir/quitar el contenedor pill */
+	@HostListener('window:scroll')
+	onScroll() {
+		this.isScrolled = window.scrollY > 10;
 	}
 
-	goBack() {
-		this.locationSvc.back();
+	goToAddMaintenance() {
+		this.router.navigate([CONSTANTS.routes.addMaintenance]);
 	}
-
-    private updateHomeCheck() {
-        const currentUrl = this.router.url;
-        this.isHomePage = currentUrl.includes(CONSTANTS.routes.home);
-      }
-
 }

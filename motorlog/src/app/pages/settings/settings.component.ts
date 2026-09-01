@@ -11,6 +11,7 @@ import { DataExportImportService } from '@shared/services/dataExportImport.servi
 import { CONSTANTS } from '@shared/app-constants';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { GDriveCardComponent } from '@shared/components/gdrive-card/gdrive-card.component';
+import { LangDropdownComponent } from '@shared/components/lang-dropdown/lang-dropdown.component';
 
 @Component({
 	selector: 'app-settings',
@@ -24,7 +25,8 @@ import { GDriveCardComponent } from '@shared/components/gdrive-card/gdrive-card.
 		TooltipModule,
 		MenuModule,
 		ConfirmDialogModule,
-		GDriveCardComponent
+		GDriveCardComponent,
+		LangDropdownComponent
 	]
 })
 export class SettingsComponent extends BaseComponent implements OnInit {

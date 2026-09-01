@@ -2,27 +2,23 @@
   "menuItems": [
     {
       "route": "/home",
-      "url": "/home",
-      "icon": "fa-home",
-      "name": "pages.home.title"
-    },
-    {
-      "route": "/add-vehicle",
-      "url": "/add-vehicle",
-      "icon": "fa-plus",
-      "name": "pages.add-vehicle.title"
+      "icon": "fas fa-stream",
+      "labelKey": "NAVBAR.HOME"
     },
     {
       "route": "/vehicles-list",
-      "url": "/vehicles-list",
-      "icon": "fa-list",
-      "name": "pages.vehicles-list.title"
+      "icon": "fas fa-car",
+      "labelKey": "NAVBAR.VEHICLES"
     },
     {
       "route": "/profile",
-      "url": "/profile",
-      "icon": "fa-user",
-      "name": "pages.profile.title"
+      "icon": "fas fa-user",
+      "labelKey": "NAVBAR.PROFILE"
+    },
+    {
+      "route": "/settings",
+      "icon": "fas fa-cog",
+      "labelKey": "NAVBAR.SETTINGS"
     }
   ]
 }
