@@ -87,7 +87,9 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 			const monthYear = date.toLocaleString('default', { month: 'short', year: 'numeric' });
 			const serviceTypes = maintenance.serviceType || [];
 			const defaultText = this.translateSvc.instant('pages.mant-details.add-mant.service-type.default');
-			const firstServiceLabel = serviceTypes[0] ? this.translateSvc.instant(serviceTypes[0]?.label?.toString()) || null : null;
+			const firstServiceLabel = serviceTypes[0]?.label
+				? this.translateSvc.instant(String(serviceTypes[0].label)) || null
+				: null;
 			const serviceDescription =
 				serviceTypes.length === 0 ? defaultText : firstServiceLabel + (serviceTypes.length > 1 ? ` +${serviceTypes.length - 1}` : '');
 

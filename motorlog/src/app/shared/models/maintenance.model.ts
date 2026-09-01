@@ -12,14 +12,22 @@ export const MAINTENANCE_SCHEMA = {
   required: []
 };
 
+export interface ServiceTypeItem {
+  id?: number | string;
+  label?: string;
+  value?: string;
+  color?: string;
+  icon?: string;
+}
+
 export interface Maintenance {
-  id:number;
+  id: number | string;
   date: string | Date;
   odometer: number;
-  serviceType: any | null;
+  serviceType: ServiceTypeItem[];
   location: string | null;
   amount: number | null;
   notes: string;
   description: string;
-  title?:string;
+  title?: string;
 }

@@ -1,11 +1,12 @@
 import { Injectable, signal } from '@angular/core';
+import { BrandModel } from '@shared/models/brand.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class BrandService {
-	private brands = signal<any[]>([]);
+	private brands = signal<BrandModel[]>([]);
 
-	setBrands(data: any[]) {
+	setBrands(data: BrandModel[]): void {
 		this.brands.set(data);
 	}
 
