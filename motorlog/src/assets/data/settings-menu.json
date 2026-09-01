@@ -31,6 +31,18 @@
           "action": "fixmant"
         }
       ]
+    },
+    {
+      "label": "pages.settings.privacy",
+      "icon": "fas fa-shield-alt",
+      "items": [],
+      "action": "privacy"
+    },
+    {
+      "label": "pages.settings.terms",
+      "icon": "fas fa-file-contract",
+      "items": [],
+      "action": "terms"
     }
   ]
 }

@@ -95,6 +95,14 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		}
 	}
 
+	public goToPrivacyPolicy(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.privacyPolicy]);
+	}
+
+	public goToTermsOfService(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.termsOfService]);
+	}
+
 	private registerUser(): void {
 		if (!this.userSvc.userExistOnBd()) {
 			this.userSvc.setUser(this.loginForm.get('userName')?.value);

@@ -13,11 +13,15 @@ export const CONSTANTS = {
         customServiceDetails: '/custom-service-details',
         customServiceAdd: '/custom-service-add',
         customServiceList: '/custom-service-list',
+        privacyPolicy: '/privacy-policy',
+        termsOfService: '/terms-of-service',
         literal: {
             home: 'home',
             settings: 'settings',
             vehicles: 'vehicles',
-            welcome: 'welcome'
+            welcome: 'welcome',
+            privacyPolicy: 'privacy-policy',
+            termsOfService: 'terms-of-service'
         }
     },
     user: {

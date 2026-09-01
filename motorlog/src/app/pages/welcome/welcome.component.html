@@ -98,6 +98,25 @@
 			</div>
 		}
 
+		<!-- Enlaces discretos a Política de Privacidad y Condiciones del Servicio -->
+		<div class="w-full mt-6 pt-4 border-t border-gray-100 dark:border-gray-700/60 flex items-center justify-center gap-3 text-[11px]">
+			<a 
+				(click)="goToPrivacyPolicy()" 
+				class="text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors cursor-pointer inline-flex items-center gap-1 font-medium"
+			>
+				<i class="fas fa-shield-alt text-[10px] text-primary-500"></i>
+				<span>{{ 'pages.privacy.link' | translate }}</span>
+			</a>
+			<span class="text-gray-300 dark:text-gray-600">•</span>
+			<a 
+				(click)="goToTermsOfService()" 
+				class="text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors cursor-pointer inline-flex items-center gap-1 font-medium"
+			>
+				<i class="fas fa-file-contract text-[10px] text-primary-500"></i>
+				<span>{{ 'pages.terms.link' | translate }}</span>
+			</a>
+		</div>
+
 	</div>
 
 	<!-- Diálogos y Elementos Adicionales -->

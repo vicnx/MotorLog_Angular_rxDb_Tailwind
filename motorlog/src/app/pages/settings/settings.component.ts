@@ -64,6 +64,12 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 			case 'profile':
 				this.routerSvc.navigate([CONSTANTS.routes.profile]);
 				break;
+			case 'privacy':
+				this.routerSvc.navigate([CONSTANTS.routes.privacyPolicy]);
+				break;
+			case 'terms':
+				this.routerSvc.navigate([CONSTANTS.routes.termsOfService]);
+				break;
 			case 'fixmant':
 				this.fixMantIds();
 				break;
