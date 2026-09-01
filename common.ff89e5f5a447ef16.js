@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmotorlog=self.webpackChunkmotorlog||[]).push([[76],{3901:(c,s,r)=>{r.d(s,{J:()=>i});var a=r(4438);let i=(()=>{class e{transform(t){return t&&t.charAt(0).toUpperCase()+t.slice(1)}static{this.\u0275fac=function(n){return new(n||e)}}static{this.\u0275pipe=a.EJ8({name:"capitalizeFirst",type:e,pure:!0,standalone:!0})}}return e})()}}]);

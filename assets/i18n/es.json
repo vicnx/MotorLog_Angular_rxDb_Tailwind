@@ -103,15 +103,32 @@
 			}
 		},
 		"vehicles-list": {
-			"title": "Mis vehiculos"
+			"title": "Mis vehículos",
+			"add_vehicle_btn": "Añadir vehículo",
+			"add_first_vehicle": "Añadir mi primer vehículo",
+			"active_badge": "Activo",
+			"no_vehicles_desc": "Registra tu primer coche o moto para comenzar a llevar el control de mantenimientos y gastos."
 		},
 		"settings": {
 			"settings": "Ajustes",
 			"profile": "Perfil",
 			"data": "Gestión de datos",
+			"data_desc": "Copias de seguridad, Google Drive, exportar e importar",
+			"back_to_settings": "Ajustes",
+			"preferences_section": "Preferencias",
+			"legal_section": "Legal y Privacidad",
+			"cloud_backup_section": "Copia en la Nube",
+			"local_backup_section": "Copias Locales y Archivos",
 			"import": "Importar datos",
+			"import_desc": "Restaura datos desde un archivo JSON de respaldo",
 			"export": "Exportar datos",
-			"delete": "Borrar datos",
+			"export_desc": "Descarga una copia completa en formato JSON",
+			"maintenance_tools_section": "Herramientas de Mantenimiento",
+			"fix_mant": "Reparar mantenimientos",
+			"fix_mant_desc": "Comprueba y repara posibles incidencias en registros",
+			"danger_zone_section": "Zona de Peligro",
+			"delete": "Borrar todos los datos",
+			"delete_desc": "Elimina permanentemente los vehículos y mantenimientos de este dispositivo",
 			"delete_data": {
 				"confirm_msg": "¿Estás seguro de que deseas eliminar todos los datos? Esta acción no se puede deshacer.",
 				"confirm_header": "Borrar datos"
@@ -232,7 +249,19 @@
 			"github_btn": "Ver repositorio en GitHub"
 		},
 		"profile": {
-			"title": "Perfil"
+			"title": "Perfil",
+			"account_section": "Cuenta y Perfil",
+			"customization_section": "Personalización",
+			"session_section": "Sesión",
+			"change_avatar_desc": "Genera o actualiza tu imagen de perfil",
+			"change_name_desc": "Modifica el nombre visible de tu sesión",
+			"custom_services_desc": "Gestiona los tipos de servicio propios",
+			"logout_desc": "Cierra la sesión activa en este navegador",
+			"logout_confirm_header": "Cerrar sesión",
+			"logout_confirm_msg": "¿Estás seguro de que deseas cerrar la sesión actual?",
+			"vehicles_count_zero": "Sin vehículos",
+			"vehicles_count_single": "1 vehículo",
+			"vehicles_count_multiple": "{{count}} vehículos"
 		},
 		"custom-services": {
 			"title": "Servicios personalizados",
@@ -284,6 +313,7 @@
 		"default_no": "No"
 	},
 	"lang": {
+		"title": "Idioma",
 		"spanish": "Español",
 		"english": "Inglés"
 	},
@@ -322,6 +352,12 @@
 			"not_now": "Ahora no",
 			"cancel": "Cancelar"
 		}
+	},
+	"NAVBAR": {
+		"HOME": "Inicio",
+		"VEHICLES": "Vehículos",
+		"PROFILE": "Perfil",
+		"SETTINGS": "Ajustes"
 	},
 	"primeng": {
 		"startsWith": "Empieza con",

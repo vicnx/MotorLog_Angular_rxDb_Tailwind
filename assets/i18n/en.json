@@ -103,15 +103,32 @@
 			}
 		},
 		"vehicles-list": {
-			"title": "My vehicles"
+			"title": "My Vehicles",
+			"add_vehicle_btn": "Add Vehicle",
+			"add_first_vehicle": "Add my first vehicle",
+			"active_badge": "Active",
+			"no_vehicles_desc": "Register your first car or motorcycle to start tracking maintenance and costs."
 		},
 		"settings": {
 			"settings": "Settings",
 			"profile": "Profile",
 			"data": "Data management",
-			"import": "Import Data",
-			"export": "Export Data",
-			"delete": "Delete Data",
+			"data_desc": "Backups, Google Drive, export and import",
+			"back_to_settings": "Settings",
+			"preferences_section": "Preferences",
+			"legal_section": "Legal & Privacy",
+			"cloud_backup_section": "Cloud Backup",
+			"local_backup_section": "Local Backups & Files",
+			"import": "Import data",
+			"import_desc": "Restore data from a backup JSON file",
+			"export": "Export data",
+			"export_desc": "Download a full backup in JSON format",
+			"maintenance_tools_section": "Maintenance Tools",
+			"fix_mant": "Repair maintenance data",
+			"fix_mant_desc": "Check and fix potential duplicate record issues",
+			"danger_zone_section": "Danger Zone",
+			"delete": "Delete all data",
+			"delete_desc": "Permanently deletes all vehicles and maintenance on this device",
 			"delete_data": {
 				"confirm_msg": "Are you sure you want to delete all data? This action cannot be undone.",
 				"confirm_header": "Confirm Deletion"
@@ -232,7 +249,19 @@
 			"github_btn": "View GitHub Repository"
 		},
 		"profile": {
-			"title": "Profile"
+			"title": "Profile",
+			"account_section": "User Account",
+			"customization_section": "Customization",
+			"session_section": "Session",
+			"change_avatar_desc": "Generate or update your profile picture",
+			"change_name_desc": "Modify the display name of your session",
+			"custom_services_desc": "Manage custom service types",
+			"logout_desc": "Log out of the active session on this browser",
+			"logout_confirm_header": "Log Out",
+			"logout_confirm_msg": "Are you sure you want to log out of the current session?",
+			"vehicles_count_zero": "No vehicles",
+			"vehicles_count_single": "1 vehicle",
+			"vehicles_count_multiple": "{{count}} vehicles"
 		},
 		"custom-services": {
 			"title": "Custom services",
@@ -284,6 +313,7 @@
 		"default_no": "No"
 	},
 	"lang": {
+		"title": "Language",
 		"spanish": "Spanish",
 		"english": "English"
 	},
@@ -322,6 +352,12 @@
 			"not_now": "Not now",
 			"cancel": "Cancel"
 		}
+	},
+	"NAVBAR": {
+		"HOME": "Home",
+		"VEHICLES": "Vehicles",
+		"PROFILE": "Profile",
+		"SETTINGS": "Settings"
 	},
 	"primeng": {
 		"startsWith": "Starts with",
