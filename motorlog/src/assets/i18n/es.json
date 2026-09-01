@@ -245,7 +245,19 @@
 			"github_btn": "Ver repositorio en GitHub"
 		},
 		"profile": {
-			"title": "Perfil"
+			"title": "Perfil",
+			"account_section": "Cuenta y Perfil",
+			"customization_section": "Personalización",
+			"session_section": "Sesión",
+			"change_avatar_desc": "Genera o actualiza tu imagen de perfil",
+			"change_name_desc": "Modifica el nombre visible de tu sesión",
+			"custom_services_desc": "Gestiona los tipos de servicio propios",
+			"logout_desc": "Cierra la sesión activa en este navegador",
+			"logout_confirm_header": "Cerrar sesión",
+			"logout_confirm_msg": "¿Estás seguro de que deseas cerrar la sesión actual?",
+			"vehicles_count_zero": "Sin vehículos",
+			"vehicles_count_single": "1 vehículo",
+			"vehicles_count_multiple": "{{count}} vehículos"
 		},
 		"custom-services": {
 			"title": "Servicios personalizados",

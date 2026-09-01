@@ -245,7 +245,19 @@
 			"github_btn": "View GitHub Repository"
 		},
 		"profile": {
-			"title": "Profile"
+			"title": "Profile",
+			"account_section": "User Account",
+			"customization_section": "Customization",
+			"session_section": "Session",
+			"change_avatar_desc": "Generate or update your profile picture",
+			"change_name_desc": "Modify the display name of your session",
+			"custom_services_desc": "Manage custom service types",
+			"logout_desc": "Log out of the active session on this browser",
+			"logout_confirm_header": "Log Out",
+			"logout_confirm_msg": "Are you sure you want to log out of the current session?",
+			"vehicles_count_zero": "No vehicles",
+			"vehicles_count_single": "1 vehicle",
+			"vehicles_count_multiple": "{{count}} vehicles"
 		},
 		"custom-services": {
 			"title": "Custom services",

@@ -1,50 +1,159 @@
-<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
-	<div class="card-container space-y-6">
-		
-		<!-- Encabezado del Perfil (Avatar + Nombre) -->
-		<div class="flex flex-col items-center justify-center pt-2 pb-4 text-center border-b border-gray-100 dark:border-gray-700/60">
-			<div class="relative group cursor-pointer mb-3">
-				<img
-					class="w-28 h-28 rounded-full border-4 border-primary-500/20 shadow-md object-cover ring-4 ring-primary-500/10 group-hover:scale-105 transition-transform duration-200"
-					[src]="userSvc.user().avatar"
-					[alt]="userSvc.user().name"
-				/>
-				<div 
-					(click)="showAvatarDialog = true"
-					class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-primary-500 text-white flex items-center justify-center shadow-sm border-2 border-white dark:border-gray-800 text-xs hover:bg-primary-600 transition"
-					title="Cambiar avatar"
-				>
-					<i class="fas fa-camera"></i>
-				</div>
-			</div>
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-16 space-y-6 animate-fadeIn">
 
-			<h3 class="font-bold text-lg text-gray-900 dark:text-white tracking-tight">
-				{{ userSvc.user().name }}
-			</h3>
-		</div>
+  <!-- 1. Tarjeta Hero del Perfil -->
+  <div class="card-container flex flex-col items-center justify-center pt-3 pb-5 text-center shadow-sm">
+    <div class="relative group cursor-pointer mb-3" (click)="openAvatarDialog()" title="Cambiar avatar">
+      <img
+        class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-primary-500/20 shadow-md object-cover ring-4 ring-primary-500/10 group-hover:scale-105 transition-transform duration-200"
+        [src]="userSvc.user().avatar"
+        [alt]="userSvc.user().name"
+      />
+      <div 
+        class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-primary-500 text-white flex items-center justify-center shadow-md border-2 border-white dark:border-gray-800 text-xs hover:bg-primary-600 transition-all active:scale-95"
+      >
+        <i class="fas fa-camera"></i>
+      </div>
+    </div>
 
-		<!-- Lista de Acciones del Usuario -->
-		<div class="space-y-1">
-			<ng-container *ngFor="let action of userActions">
-				<app-settings-button [action]="action" (handleAction)="handleUserAction($event)"></app-settings-button>
-			</ng-container>
-		</div>
+    <div class="flex items-center gap-2">
+      <h2 class="font-bold text-xl text-gray-900 dark:text-white tracking-tight">
+        {{ userSvc.user().name }}
+      </h2>
+      <button
+        type="button"
+        (click)="openChangeNameDialog()"
+        class="text-gray-400 hover:text-primary-500 text-xs p-1 rounded-md transition-colors"
+        title="Editar nombre"
+      >
+        <i class="fas fa-pen"></i>
+      </button>
+    </div>
 
-		<!-- Botón de Cerrar Sesión -->
-		<div class="pt-2">
-			<button
-				type="button"
-				(click)="logoutUser()"
-				class="btn-danger w-full flex items-center justify-center gap-2"
-			>
-				<i class="fas fa-sign-out-alt text-xs"></i>
-				<span>{{ 'userActions.logout' | translate }}</span>
-			</button>
-		</div>
+    <!-- Badge de resumen de vehículos -->
+    <div class="mt-2 flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-950/40 text-primary-700 dark:text-primary-300 text-xs font-medium border border-primary-200/50 dark:border-primary-800/40">
+      <i class="fas fa-car text-[0.7rem]"></i>
+      <span *ngIf="vehicleSvc.vehicles().length === 0">{{ 'pages.profile.vehicles_count_zero' | translate }}</span>
+      <span *ngIf="vehicleSvc.vehicles().length === 1">{{ 'pages.profile.vehicles_count_single' | translate }}</span>
+      <span *ngIf="vehicleSvc.vehicles().length > 1">{{ 'pages.profile.vehicles_count_multiple' | translate: { count: vehicleSvc.vehicles().length } }}</span>
+    </div>
+  </div>
 
-	</div>
+  <!-- 2. Sección: Cuenta y Perfil -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-user-circle text-primary-500"></i>
+      <span>{{ 'pages.profile.account_section' | translate }}</span>
+    </span>
 
-	<!-- Modales de Avatar y Cambio de Nombre -->
-	<app-avatar-dialog *ngIf="showAvatarDialog" [visible]="showAvatarDialog" (close)="showAvatarDialog = false"></app-avatar-dialog>
-	<app-change-name-dialog *ngIf="showChangeNameDialog" [visible]="showChangeNameDialog" (close)="showChangeNameDialog = false"></app-change-name-dialog>
+    <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
+      
+      <!-- Modificar Nombre -->
+      <div
+        (click)="openChangeNameDialog()"
+        class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
+      >
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center flex-shrink-0 border border-primary-100 dark:border-primary-900/30">
+            <i class="fas fa-user-edit text-sm"></i>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-sm text-gray-900 dark:text-white">
+              {{ 'userActions.changeName.title' | translate }}
+            </span>
+            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+              {{ 'pages.profile.change_name_desc' | translate }}
+            </span>
+          </div>
+        </div>
+        <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all ml-2 flex-shrink-0"></i>
+      </div>
+
+      <!-- Cambiar Avatar -->
+      <div
+        (click)="openAvatarDialog()"
+        class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
+      >
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-500 flex items-center justify-center flex-shrink-0 border border-purple-100 dark:border-purple-900/30">
+            <i class="fas fa-image text-sm"></i>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-sm text-gray-900 dark:text-white">
+              {{ 'userActions.generateAvatar.title' | translate }}
+            </span>
+            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+              {{ 'pages.profile.change_avatar_desc' | translate }}
+            </span>
+          </div>
+        </div>
+        <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-all ml-2 flex-shrink-0"></i>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. Sección: Personalización -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-sliders-h text-primary-500"></i>
+      <span>{{ 'pages.profile.customization_section' | translate }}</span>
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden shadow-sm">
+      <div
+        (click)="goToCustomServices()"
+        class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
+      >
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 flex items-center justify-center flex-shrink-0 border border-emerald-100 dark:border-emerald-900/30">
+            <i class="fas fa-wrench text-sm"></i>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-sm text-gray-900 dark:text-white">
+              {{ 'pages.custom-services.title' | translate }}
+            </span>
+            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+              {{ 'pages.profile.custom_services_desc' | translate }}
+            </span>
+          </div>
+        </div>
+        <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all ml-2 flex-shrink-0"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Sección: Sesión (Cerrar Sesión) -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-red-500 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>{{ 'pages.profile.session_section' | translate }}</span>
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden border-red-200/80 dark:border-red-900/40 bg-red-50/20 dark:bg-red-950/10 shadow-sm">
+      <div
+        (click)="logoutUser()"
+        class="flex items-center justify-between p-4 hover:bg-red-50/60 dark:hover:bg-red-950/30 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
+      >
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 flex items-center justify-center flex-shrink-0 border border-red-200 dark:border-red-800/40">
+            <i class="fas fa-sign-out-alt text-sm"></i>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-sm text-red-600 dark:text-red-400">
+              {{ 'userActions.logout' | translate }}
+            </span>
+            <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
+              {{ 'pages.profile.logout_desc' | translate }}
+            </span>
+          </div>
+        </div>
+        <i class="fas fa-chevron-right text-xs text-red-400 group-hover:text-red-600 group-hover:translate-x-0.5 transition-all ml-2 flex-shrink-0"></i>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<!-- Modales de Avatar y Cambio de Nombre -->
+<app-avatar-dialog *ngIf="showAvatarDialog" [visible]="showAvatarDialog" (close)="showAvatarDialog = false"></app-avatar-dialog>
+<app-change-name-dialog *ngIf="showChangeNameDialog" [visible]="showChangeNameDialog" (close)="showChangeNameDialog = false"></app-change-name-dialog>

@@ -1,37 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
-import { AvatarDialogComponent } from '@shared/components/avatar-dialog/avatar-dialog.component'; // Asegúrate de importar el componente de diálogo
+import { AvatarDialogComponent } from '@shared/components/avatar-dialog/avatar-dialog.component';
 import { ChangeNameDialogComponent } from '@shared/components/change-name-dialog/change-name-dialog.component';
-import { SettingsButtonComponent } from '@shared/components/settings-button/settings-button.component';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
 	selector: 'app-profile',
 	standalone: true,
 	imports: [
 		CommonModule,
-		DropdownModule,
-		FormsModule,
 		TranslateModule,
 		ButtonModule,
+		ConfirmDialogModule,
 		AvatarDialogComponent,
-		SettingsButtonComponent,
 		ChangeNameDialogComponent
 	],
 	templateUrl: './profile.component.html'
 })
-export class ProfileComponent extends BaseComponent {
-	userActions = [
-		{ label: 'userActions.generateAvatar.title', icon: 'fas fa-image', action: 'generateAvatar' },
-		{ label: 'userActions.changeName.title', icon: 'fas fa-user-edit', action: 'changeName' },
-		{ label: 'pages.custom-services.title', icon: 'fas fa-wrench', action: 'customServices' }
-	];
-
+export class ProfileComponent extends BaseComponent implements OnInit {
 	showAvatarDialog: boolean = false;
 	showChangeNameDialog: boolean = false;
 
@@ -39,23 +29,32 @@ export class ProfileComponent extends BaseComponent {
 		this.userSvc.page.update((val) => (val = 'pages.profile.title'));
 	}
 
-	handleUserAction(action: string) {
-		switch (action) {
-			case 'generateAvatar':
-				this.showAvatarDialog = true;
-				break;
-			case 'changeName':
-				this.showChangeNameDialog = true;
-				break;
-			case 'customServices':
-				this.routerSvc.navigate([`${CONSTANTS.routes.customServiceList}`]);
-				break;
-			default:
-				break;
-		}
+	openAvatarDialog(): void {
+		this.showAvatarDialog = true;
+	}
+
+	openChangeNameDialog(): void {
+		this.showChangeNameDialog = true;
+	}
+
+	goToCustomServices(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.customServiceList]);
 	}
 
 	logoutUser(): void {
-		this.userSvc.logoutUser();
+		this.confirmationSvc.confirm({
+			message: this.translateSvc.instant('pages.profile.logout_confirm_msg'),
+			header: this.translateSvc.instant('pages.profile.logout_confirm_header'),
+			icon: 'fas fa-sign-out-alt text-red-500 text-xl',
+			acceptButtonStyleClass: 'btn-danger !py-2 !px-4 !text-xs',
+			rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
+			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
+			rejectLabel: this.translateSvc.instant('confirm.default_no'),
+			key: 'confirmDialog',
+			accept: () => {
+				this.userSvc.logoutUser();
+			},
+			reject: () => {}
+		});
 	}
 }
