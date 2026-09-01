@@ -1,63 +1,106 @@
-<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-16 space-y-4 animate-fadeIn">
 	
-	<!-- Botón superior de Añadir Vehículo fuera del contenedor -->
-	<app-add-vehicle-button></app-add-vehicle-button>
-
-	<div class="card-container">
-		@if(vehicleSvc.vehicles().length > 0){
-		<p-dataView #dv *ngIf="this.vehicleSvc.vehicles()" [value]="this.vehicleSvc.vehicles()">
-			<ng-template pTemplate="list" let-vehicles>
-				<div class="space-y-2.5 mb-1">
-					<div 
-						*ngFor="let vehicle of vehicles" 
-						class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/70 dark:border-gray-700/70 bg-white dark:bg-gray-800 hover:border-primary-500/50 hover:bg-gray-50/80 dark:hover:bg-gray-700/50 cursor-pointer transition-all duration-150 active:scale-[0.99] group shadow-xs" 
-						(click)="onClickVehicle(vehicle)"
-					>
-						<!-- Contenedor del Logo de la Marca -->
-						<div class="flex items-center gap-3.5 min-w-0">
-							<div class="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700/60 p-2 flex items-center justify-center flex-shrink-0 border border-gray-100 dark:border-gray-700">
-								<img
-									class="max-w-full max-h-full object-contain"
-									[src]="getLogoBrand(vehicle.marca)"
-									[alt]="vehicle.marca"
-								/>
-							</div>
-
-							<!-- Marca y Modelo -->
-							<div class="truncate">
-								<h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">
-									{{ vehicle.marca | capitalizeFirst }} {{ vehicle.modelo | capitalizeFirst }}
-								</h3>
-								<p *ngIf="vehicle.year || vehicle.cc" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
-									{{ vehicle.year ? vehicle.year : '' }} {{ vehicle.cc ? (' • ' + vehicle.cc + ' cc') : '' }}
-								</p>
-							</div>
-						</div>
-
-						<!-- Apodo/Nombre e Icono personalizado -->
-						<div class="flex items-center gap-3 flex-shrink-0 pl-2">
-							<div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-50 dark:bg-gray-700/60 border border-gray-200/60 dark:border-gray-700/60">
-								<i class="{{vehicle.icono}} text-sm text-primary-500" [ngStyle]="{ color: vehicle.color || '#48d0b0' }"></i>
-								<span class="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate max-w-[120px]">
-									{{ vehicle.nombreVehiculo | capitalizeFirst }}
-								</span>
-							</div>
-
-							<i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
-						</div>
-					</div>
-				</div>
-			</ng-template>
-		</p-dataView>
-		}@else {
-		<div class="flex flex-col items-center justify-center text-center py-12 px-4">
-			<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
-				<i class="fas fa-car"></i>
-			</div>
-			<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
-				{{ 'pages.home.no_vehicles' | translate }}
-			</p>
+	<!-- Cabecera Superior: Título/Contador + Botón Añadir Vehículo -->
+	<div class="flex items-center justify-between gap-3 pt-1 pb-1">
+		<div class="flex items-center gap-2">
+			<span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+				{{ 'pages.vehicles-list.title' | translate }}
+			</span>
+			<span *ngIf="vehicleSvc.vehicles().length > 0" class="px-2 py-0.5 rounded-full bg-primary-50 dark:bg-primary-950/40 text-primary-700 dark:text-primary-300 text-[11px] font-bold border border-primary-200/50 dark:border-primary-800/40">
+				{{ vehicleSvc.vehicles().length }}
+			</span>
 		</div>
-		}
+
+		<button 
+			*ngIf="vehicleSvc.vehicles().length > 0"
+			type="button" 
+			(click)="goToAddVehicle()" 
+			class="btn-primary !py-2 !px-3.5 !text-xs flex items-center gap-1.5 shadow-sm"
+		>
+			<i class="fas fa-plus text-[0.7rem]"></i>
+			<span>{{ 'pages.vehicles-list.add_vehicle_btn' | translate }}</span>
+		</button>
 	</div>
+
+	<!-- Lista Agrupada de Vehículos -->
+	<div *ngIf="vehicleSvc.vehicles().length > 0; else emptyState" class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
+		<div 
+			*ngFor="let vehicle of vehicleSvc.vehicles()" 
+			class="flex items-center justify-between p-3.5 sm:p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group" 
+			(click)="onClickVehicle(vehicle)"
+		>
+			<!-- Izquierda: Logo de la Marca + Datos Principales -->
+			<div class="flex items-center gap-3.5 min-w-0">
+				
+				<!-- Logo de la marca -->
+				<div class="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700/60 p-2 flex items-center justify-center flex-shrink-0 border border-gray-100 dark:border-gray-700/70 shadow-2xs">
+					<img
+						*ngIf="vehicle.marca"
+						class="max-w-full max-h-full object-contain"
+						[src]="getLogoBrand(vehicle.marca)"
+						[alt]="vehicle.marca"
+					/>
+					<i *ngIf="!vehicle.marca" class="fas fa-car text-gray-400 text-lg"></i>
+				</div>
+
+				<!-- Nombre, Marca y Modelo -->
+				<div class="truncate">
+					<div class="flex items-center gap-2 truncate">
+						<h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">
+							{{ vehicle.nombreVehiculo | capitalizeFirst }}
+						</h3>
+
+						<!-- Badge de Vehículo Activo en timeline -->
+						<span 
+							*ngIf="vehicleSvc.vehicleSelected()?.id === vehicle.id" 
+							class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold border border-emerald-200 dark:border-emerald-800/40 flex-shrink-0"
+						>
+							<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+							<span>{{ 'pages.vehicles-list.active_badge' | translate }}</span>
+						</span>
+					</div>
+
+					<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate flex items-center gap-1">
+						<span>{{ vehicle.marca | capitalizeFirst }} {{ vehicle.modelo | capitalizeFirst }}</span>
+						<span *ngIf="vehicle.year || vehicle.cc" class="text-gray-300 dark:text-gray-600">•</span>
+						<span *ngIf="vehicle.year">{{ vehicle.year }}</span>
+						<span *ngIf="vehicle.cc">{{ vehicle.cc }} cc</span>
+					</p>
+				</div>
+			</div>
+
+			<!-- Derecha: Icono de color + Chevron -->
+			<div class="flex items-center gap-3 flex-shrink-0 pl-2">
+				<div class="w-8 h-8 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200/60 dark:border-gray-700/60 flex items-center justify-center">
+					<i class="{{ vehicle.icono }} text-sm" [ngStyle]="{ color: vehicle.color || '#48d0b0' }"></i>
+				</div>
+
+				<i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
+			</div>
+		</div>
+	</div>
+
+	<!-- Estado Vacío (Empty State) -->
+	<ng-template #emptyState>
+		<div class="card-container flex flex-col items-center justify-center text-center py-12 px-4 shadow-sm">
+			<div class="w-14 h-14 rounded-2xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center text-2xl mb-4 border border-primary-100 dark:border-primary-900/30">
+				<i class="fas fa-car-side"></i>
+			</div>
+			<h3 class="font-bold text-base text-gray-900 dark:text-white mb-1">
+				{{ 'pages.home.no_vehicles' | translate }}
+			</h3>
+			<p class="text-xs text-gray-500 dark:text-gray-400 max-w-xs mb-6">
+				{{ 'pages.vehicles-list.no_vehicles_desc' | translate }}
+			</p>
+			<button 
+				type="button" 
+				(click)="goToAddVehicle()" 
+				class="btn-primary flex items-center gap-2 !py-2.5 !px-5"
+			>
+				<i class="fas fa-plus text-xs"></i>
+				<span>{{ 'pages.vehicles-list.add_first_vehicle' | translate }}</span>
+			</button>
+		</div>
+	</ng-template>
+
 </div>

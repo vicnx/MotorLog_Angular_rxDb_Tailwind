@@ -103,7 +103,11 @@
 			}
 		},
 		"vehicles-list": {
-			"title": "Mis vehiculos"
+			"title": "Mis vehículos",
+			"add_vehicle_btn": "Añadir vehículo",
+			"add_first_vehicle": "Añadir mi primer vehículo",
+			"active_badge": "Activo",
+			"no_vehicles_desc": "Registra tu primer coche o moto para comenzar a llevar el control de mantenimientos y gastos."
 		},
 		"settings": {
 			"settings": "Ajustes",

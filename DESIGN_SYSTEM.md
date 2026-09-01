@@ -57,6 +57,27 @@ Se utiliza para encapsular cualquier tarjeta, widget o sección de contenido.
 </div>
 ```
 
+### 5. Listas y Opciones Táctiles Agrupadas (`.card-container !p-0 overflow-hidden divide-y`)
+Se utiliza para menús de navegación, listas de ajustes, perfiles y listados de entidades (vehículos, servicios). Agrupa múltiples filas táctiles en un único contenedor fluido con divisores sutiles:
+```html
+<div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
+  <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group">
+    <!-- Izquierda: Icono en caja + Título y subtítulo -->
+    <div class="flex items-center gap-3.5 min-w-0">
+      <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center flex-shrink-0 border border-primary-100 dark:border-primary-900/30">
+        <i class="fas fa-car text-sm"></i>
+      </div>
+      <div class="flex flex-col min-w-0">
+        <span class="font-bold text-sm text-gray-900 dark:text-white truncate">Título Principal</span>
+        <span class="text-xs text-gray-500 dark:text-gray-400 truncate">Descripción de soporte o datos</span>
+      </div>
+    </div>
+    <!-- Derecha: Chevron indicador de interacción -->
+    <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all ml-2 flex-shrink-0"></i>
+  </div>
+</div>
+```
+
 ---
 
 ## 📱 3. Directrices de Responsividad y Modo Oscuro

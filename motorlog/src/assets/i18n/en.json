@@ -103,7 +103,11 @@
 			}
 		},
 		"vehicles-list": {
-			"title": "My vehicles"
+			"title": "My Vehicles",
+			"add_vehicle_btn": "Add Vehicle",
+			"add_first_vehicle": "Add my first vehicle",
+			"active_badge": "Active",
+			"no_vehicles_desc": "Register your first car or motorcycle to start tracking maintenance and costs."
 		},
 		"settings": {
 			"settings": "Settings",
