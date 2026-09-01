@@ -1,8 +1,9 @@
-<div class="flex justify-end items-center mb-3 w-full">
+<div class="relative">
+	<!-- Botón Habilitar Filtros (con altura exacta de 42px alineada con el selector) -->
 	<button 
 		type="button"
 		(click)="toggleFilters()" 
-		class="btn-secondary flex items-center gap-2 !py-2 !px-3.5 text-xs relative"
+		class="btn-secondary flex items-center gap-2 h-[42px] !py-0 !px-3.5 text-xs relative flex-shrink-0"
 		[ngClass]="{ '!border-primary-500/60 !bg-primary-50/50 dark:!bg-primary-950/30': hasActiveFilters || filtersVisible }"
 	>
 		<i class="fas fa-filter text-primary-500"></i>
@@ -15,65 +16,66 @@
 
 		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-[10px] ml-1 text-gray-400"></i>
 	</button>
-</div>
 
-<div @fadeInOut *ngIf="filtersVisible" class="mb-4 relative z-20">
-	<div class="card-container p-4 sm:p-5">
-		<h4 class="input-label !mb-3 flex items-center gap-2">
-			<i class="fas fa-calendar-alt text-primary-500 text-xs"></i>
-			<span>{{ 'pages.home.filters.date_range' | translate }}</span>
-		</h4>
-		
-		<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-			<div>
-				<label class="input-label">
-					{{ 'pages.home.filters.desde' | translate }}
-				</label>
-				<p-calendar 
-					[(ngModel)]="startDate" 
-					[placeholder]="'pages.home.filters.desde' | translate" 
-					[showIcon]="true" 
-					dateFormat="dd/mm/yy"
-					styleClass="w-full"
-					inputStyleClass="input-field"
-				></p-calendar>
+	<!-- Panel emergente flotante de rango de fechas -->
+	<div @fadeInOut *ngIf="filtersVisible" class="absolute right-0 top-12 w-72 sm:w-80 z-30 pt-1">
+		<div class="card-container p-4 sm:p-5 shadow-xl border border-gray-200/80 dark:border-gray-700/80">
+			<h4 class="input-label !mb-3 flex items-center gap-2">
+				<i class="fas fa-calendar-alt text-primary-500 text-xs"></i>
+				<span>{{ 'pages.home.filters.date_range' | translate }}</span>
+			</h4>
+			
+			<div class="grid grid-cols-1 gap-3 mb-4">
+				<div>
+					<label class="input-label">
+						{{ 'pages.home.filters.desde' | translate }}
+					</label>
+					<p-calendar 
+						[(ngModel)]="startDate" 
+						[placeholder]="'pages.home.filters.desde' | translate" 
+						[showIcon]="true" 
+						dateFormat="dd/mm/yy"
+						styleClass="w-full"
+						inputStyleClass="input-field"
+					></p-calendar>
+				</div>
+
+				<div>
+					<label class="input-label">
+						{{ 'pages.home.filters.hasta' | translate }}
+					</label>
+					<p-calendar 
+						[(ngModel)]="endDate" 
+						[placeholder]="'pages.home.filters.hasta' | translate" 
+						[showIcon]="true" 
+						dateFormat="dd/mm/yy"
+						styleClass="w-full"
+						inputStyleClass="input-field"
+					></p-calendar>
+				</div>
 			</div>
 
-			<div>
-				<label class="input-label">
-					{{ 'pages.home.filters.hasta' | translate }}
-				</label>
-				<p-calendar 
-					[(ngModel)]="endDate" 
-					[placeholder]="'pages.home.filters.hasta' | translate" 
-					[showIcon]="true" 
-					dateFormat="dd/mm/yy"
-					styleClass="w-full"
-					inputStyleClass="input-field"
-				></p-calendar>
+			<div class="flex items-center justify-end gap-2 border-t border-gray-100 dark:border-gray-700/60 pt-3">
+				<button 
+					type="button" 
+					(click)="resetFilters()" 
+					class="btn-secondary !py-2 !px-3 text-xs flex items-center gap-1.5"
+					[title]="'pages.home.filters.reset_filters' | translate"
+				>
+					<i class="fas fa-undo text-xs"></i>
+					<span>{{ 'pages.home.filters.reset_filters' | translate }}</span>
+				</button>
+
+				<button 
+					type="button" 
+					(click)="applyFilters()" 
+					class="btn-primary !py-2 !px-4 text-xs flex items-center gap-1.5"
+					[title]="'pages.home.filters.apply_filters' | translate"
+				>
+					<i class="fas fa-check text-xs"></i>
+					<span>{{ 'pages.home.filters.apply_filters' | translate }}</span>
+				</button>
 			</div>
-		</div>
-
-		<div class="flex items-center justify-end gap-2 border-t border-gray-100 dark:border-gray-700/60 pt-3">
-			<button 
-				type="button" 
-				(click)="resetFilters()" 
-				class="btn-secondary !py-2 !px-3 text-xs flex items-center gap-1.5"
-				[title]="'pages.home.filters.reset_filters' | translate"
-			>
-				<i class="fas fa-undo text-xs"></i>
-				<span>{{ 'pages.home.filters.reset_filters' | translate }}</span>
-			</button>
-
-			<button 
-				type="button" 
-				(click)="applyFilters()" 
-				class="btn-primary !py-2 !px-4 text-xs flex items-center gap-1.5"
-				[title]="'pages.home.filters.apply_filters' | translate"
-			>
-				<i class="fas fa-check text-xs"></i>
-				<span>{{ 'pages.home.filters.apply_filters' | translate }}</span>
-			</button>
 		</div>
 	</div>
 </div>
