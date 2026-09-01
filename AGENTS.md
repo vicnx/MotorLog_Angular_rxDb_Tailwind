@@ -28,6 +28,7 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 * **Tipado Estricto:** Evitar el uso de `any`. Definir interfaces/tipos explicitos en `@shared/models`.
 * **Inyección de Dependencias:** Usar la función `inject()` de `@angular/core` en lugar de constructores recargados cuando sea posible.
 * **Manejo de Suscripciones:** Preferir el uso del pipe `async` en plantillas HTML o `takeUntilDestroyed()` / `firstValueFrom()` para evitar fugas de memoria con RxJS.
+* **Comentarios Explicativos Concisos:** Escribir siempre comentarios breves, sencillos y claros en funciones complejas o algoritmos no triviales. No comentar código evidente ni sobre-documentar; la meta es dejar clara la intención o el porqué de la lógica compleja en 1-2 líneas.
 
 ### 🌍 Internacionalización (i18n) - OBLIGATORIO
 * **Cero Literales Hardcodeados:** **Está estrictamente prohibido** escribir texto visible para el usuario (títulos, botones, descripciones, mensajes de error, confirmaciones, placeholders, tooltips) directamente en las plantillas HTML o en código TypeScript.
