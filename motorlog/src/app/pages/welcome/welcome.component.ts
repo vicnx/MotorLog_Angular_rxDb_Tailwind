@@ -96,11 +96,11 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	public goToPrivacyPolicy(): void {
-		this.routerSvc.navigate([CONSTANTS.routes.privacyPolicy]);
+		window.open('privacy-policy.html', '_blank');
 	}
 
 	public goToTermsOfService(): void {
-		this.routerSvc.navigate([CONSTANTS.routes.termsOfService]);
+		window.open('terms-of-service.html', '_blank');
 	}
 
 	private registerUser(): void {

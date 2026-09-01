@@ -3,6 +3,11 @@ import { AuthGuard } from './app/guards/auth.guard';
 
 export const routes: Routes = [
 	{
+		path: '',
+		redirectTo: 'welcome',
+		pathMatch: 'full'
+	},
+	{
 		path: 'home',
 		loadComponent: () => import('@pages/home/home.component').then((c) => c.HomeComponent),
 		canActivate: [AuthGuard]
@@ -61,14 +66,6 @@ export const routes: Routes = [
 		loadComponent: () => import('@pages/custom-services-details/custom-services-details.component').then((c) => c.CustomServiceDetailsComponent),
 		canActivate: [AuthGuard],
 		data: { isConsulta: false }
-	},
-	{
-		path: 'privacy-policy',
-		loadComponent: () => import('@pages/privacy-policy/privacy-policy.component').then((c) => c.PrivacyPolicyComponent)
-	},
-	{
-		path: 'terms-of-service',
-		loadComponent: () => import('@pages/terms-of-service/terms-of-service.component').then((c) => c.TermsOfServiceComponent)
 	},
 	{
 		path: '**',

@@ -1,6 +1,10 @@
 {
 	"name": "motorlog",
+<<<<<<< HEAD
 	"version": "1.4.2",
+=======
+	"version": "1.4.3",
+>>>>>>> db753d43f39bc20e6e9a013745b052bfae63e583
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",

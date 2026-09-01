@@ -1,7 +1,11 @@
 <h1 align="center">Welcome to MotorLog 🚗👋</h1>
 
 <p align="center">
+<<<<<<< HEAD
   <img alt="Version" src="https://img.shields.io/badge/version-1.4.2-blue.svg?cacheSeconds=2592000" />
+=======
+  <img alt="Version" src="https://img.shields.io/badge/version-1.4.3-blue.svg?cacheSeconds=2592000" />
+>>>>>>> db753d43f39bc20e6e9a013745b052bfae63e583
   <img alt="Angular" src="https://img.shields.io/badge/-Angular_17-DD0031?style=flat&logo=angular" />
   <img alt="RxDB" src="https://img.shields.io/badge/-RxDB-333333?style=flat&logo=rxdb" />
   <img alt="TailwindCSS" src="https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat&logo=tailwind-css" />

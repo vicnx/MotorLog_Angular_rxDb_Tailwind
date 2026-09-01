@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MotorLog - Condiciones del Servicio / Terms of Service</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+	<style>
+		:root {
+			--primary-500: #48d0b0;
+			--primary-600: #38b293;
+			--primary-50: #f0fdf9;
+			--gray-900: #0f172a;
+			--gray-800: #1e293b;
+			--gray-700: #334155;
+			--gray-600: #475569;
+			--gray-500: #64748b;
+			--gray-100: #f1f5f9;
+			--gray-50: #f8fafc;
+			--border: #e2e8f0;
+			--card-bg: #ffffff;
+		}
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		body {
+			font-family: 'Inter', system-ui, -apple-system, sans-serif;
+			background-color: var(--gray-50);
+			color: var(--gray-800);
+			line-height: 1.6;
+			padding: 24px 16px 60px 16px;
+		}
+		.container {
+			max-width: 860px;
+			margin: 0 auto;
+		}
+		.nav-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 24px;
+		}
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 16px;
+			border-radius: 12px;
+			font-size: 13px;
+			font-weight: 600;
+			text-decoration: none;
+			cursor: pointer;
+			transition: all 0.15s ease;
+		}
+		.btn-back {
+			background: #ffffff;
+			color: var(--gray-700);
+			border: 1px solid var(--border);
+		}
+		.btn-back:hover { background: var(--gray-100); }
+		.btn-primary {
+			background: var(--primary-500);
+			color: #ffffff;
+			border: 1px solid var(--primary-600);
+		}
+		.btn-primary:hover { background: var(--primary-600); }
+		.lang-switch {
+			display: flex;
+			background: #ffffff;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			padding: 3px;
+			gap: 4px;
+		}
+		.lang-btn {
+			padding: 6px 12px;
+			border: none;
+			background: transparent;
+			font-size: 12px;
+			font-weight: 600;
+			color: var(--gray-600);
+			border-radius: 8px;
+			cursor: pointer;
+		}
+		.lang-btn.active {
+			background: var(--primary-500);
+			color: #ffffff;
+		}
+		.card {
+			background: var(--card-bg);
+			border: 1px solid var(--border);
+			border-radius: 20px;
+			padding: 32px;
+			margin-bottom: 24px;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+		}
+		.hero {
+			text-align: center;
+			padding: 36px 24px;
+		}
+		.hero-icon {
+			width: 60px;
+			height: 60px;
+			border-radius: 16px;
+			background: var(--primary-50);
+			color: var(--primary-500);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 26px;
+			margin: 0 auto 16px auto;
+			border: 1px solid #bbf7d0;
+		}
+		h1 {
+			font-family: 'Outfit', sans-serif;
+			font-size: 28px;
+			font-weight: 800;
+			color: var(--gray-900);
+			margin-bottom: 8px;
+		}
+		.subtitle {
+			font-size: 14px;
+			color: var(--gray-600);
+			max-width: 600px;
+			margin: 0 auto 16px auto;
+		}
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			background: var(--gray-100);
+			padding: 6px 12px;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 600;
+			color: var(--gray-700);
+		}
+		.pillars {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 16px;
+			margin-bottom: 24px;
+		}
+		.pillar-card {
+			background: #ffffff;
+			border: 1px solid var(--border);
+			border-radius: 16px;
+			padding: 20px;
+		}
+		.pillar-icon {
+			width: 36px;
+			height: 36px;
+			border-radius: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 16px;
+			margin-bottom: 12px;
+		}
+		.pillar-title {
+			font-size: 14px;
+			font-weight: 700;
+			color: var(--gray-900);
+			margin-bottom: 4px;
+		}
+		.pillar-desc {
+			font-size: 12px;
+			color: var(--gray-600);
+			line-height: 1.5;
+		}
+		section {
+			margin-bottom: 28px;
+		}
+		section:last-child {
+			margin-bottom: 0;
+		}
+		h2 {
+			font-family: 'Outfit', sans-serif;
+			font-size: 17px;
+			font-weight: 700;
+			color: var(--gray-900);
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		.num-badge {
+			width: 24px;
+			height: 24px;
+			border-radius: 8px;
+			background: var(--primary-500);
+			color: #ffffff;
+			font-size: 12px;
+			font-weight: 700;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		p, ul {
+			font-size: 13.5px;
+			color: var(--gray-700);
+			line-height: 1.65;
+			margin-bottom: 12px;
+		}
+		ul {
+			list-style: none;
+			padding-left: 4px;
+		}
+		li {
+			position: relative;
+			padding-left: 24px;
+			margin-bottom: 8px;
+		}
+		li::before {
+			content: "\f058";
+			font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+			position: absolute;
+			left: 0;
+			top: 2px;
+			color: var(--primary-500);
+			font-size: 13px;
+		}
+		.highlight-box {
+			background: #f0fdf9;
+			border: 1px solid #a7f3d0;
+			border-radius: 12px;
+			padding: 16px;
+			margin: 16px 0;
+		}
+		.highlight-box.yellow {
+			background: #fefce8;
+			border-color: #fef08a;
+		}
+		.box-title {
+			font-size: 13px;
+			font-weight: 700;
+			margin-bottom: 6px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		a {
+			color: #0d9488;
+			font-weight: 600;
+			text-decoration: underline;
+		}
+		a:hover {
+			color: #0f766e;
+		}
+		hr {
+			border: none;
+			border-top: 1px solid var(--border);
+			margin: 24px 0;
+		}
+		.app-meta {
+			background: var(--gray-100);
+			border-radius: 12px;
+			padding: 14px;
+			font-size: 12px;
+			color: var(--gray-700);
+			margin-top: 16px;
+		}
+		.hidden { display: none; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		
+		<!-- Barra superior -->
+		<div class="nav-bar">
+			<a href="index.html" class="btn btn-back">
+				<i class="fas fa-arrow-left"></i>
+				<span id="back-txt">Volver a MotorLog</span>
+			</a>
+
+			<div class="lang-switch">
+				<button class="lang-btn active" id="btn-es" onclick="switchLang('es')">Español</button>
+				<button class="lang-btn" id="btn-en" onclick="switchLang('en')">English</button>
+			</div>
+		</div>
+
+		<!-- VERSIÓN EN ESPAÑOL -->
+		<div id="content-es">
+			<div class="card hero">
+				<div class="hero-icon">
+					<i class="fas fa-file-signature"></i>
+				</div>
+				<h1>Condiciones del Servicio de MotorLog</h1>
+				<p class="subtitle">Términos de uso, alcance y responsabilidades para los usuarios de la aplicación web MotorLog.</p>
+				<div class="badge">
+					<i class="far fa-calendar-alt" style="color: var(--primary-500);"></i>
+					<span>Última actualización: Septiembre 2026</span>
+				</div>
+			</div>
+
+			<div class="pillars">
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+						<i class="fas fa-gift"></i>
+					</div>
+					<div class="pillar-title">100% Gratuito y Libre</div>
+					<div class="pillar-desc">Herramienta gratuita para uso personal, sin suscripciones, costes ocultos ni anuncios.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd;">
+						<i class="fas fa-user-cog"></i>
+					</div>
+					<div class="pillar-title">Responsabilidad del Usuario</div>
+					<div class="pillar-desc">Tú tienes el control exclusivo de los datos introducidos y la custodia de tus copias de seguridad.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe;">
+						<i class="fas fa-code-branch"></i>
+					</div>
+					<div class="pillar-title">Código Abierto Transparente</div>
+					<div class="pillar-desc">Proyecto comunitario publicado con fines educativos y de utilidad pública.</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<!-- Sección 1 -->
+				<section>
+					<h2><span class="num-badge">1</span> Aceptación de los Términos</h2>
+					<p>Al acceder, navegar o utilizar la aplicación MotorLog (<a href="https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/">https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/</a>), el usuario acepta de manera voluntaria y plena las presentes Condiciones del Servicio. Si no estás de acuerdo con alguno de los términos descritos, debes abstenerte de utilizar la aplicación.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 2 -->
+				<section>
+					<h2><span class="num-badge">2</span> Descripción y Uso de la Aplicación</h2>
+					<p>MotorLog es una herramienta web diseñada bajo un modelo <em>local-first</em> para ayudar a los usuarios a registrar, organizar y hacer seguimiento del mantenimiento de sus vehículos. El uso de la aplicación está sujeto a las siguientes pautas:</p>
+					<ul>
+						<li><strong>Uso Personal:</strong> La aplicación está concebida para la gestión individual y personal de vehículos y gastos de mantenimiento.</li>
+						<li><strong>Gestión Local:</strong> Todos los registros se procesan y almacenan directamente en el dispositivo del usuario.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Sección 3 -->
+				<section>
+					<h2><span class="num-badge">3</span> Servicios de Terceros e Integración con Google Drive</h2>
+					<p>MotorLog ofrece la posibilidad opcional de conectar una cuenta personal de Google Drive para subir y restaurar copias de seguridad. Al utilizar esta funcionalidad, el usuario reconoce y acepta que los servicios de almacenamiento e infraestructura son provistos por Google LLC conforme a sus propios términos y políticas.</p>
+					<p>MotorLog no se hace responsable de fallos de conectividad, interrupciones del servicio de Google, cambios en sus cuotas de almacenamiento o modificaciones en las políticas de APIs de terceros.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 4 -->
+				<section>
+					<h2><span class="num-badge">4</span> Exención de Garantías y Limitación de Responsabilidad</h2>
+					<div class="highlight-box yellow">
+						<div class="box-title" style="color: #854d0e;"><i class="fas fa-exclamation-triangle"></i> Aviso Importante</div>
+						<p style="margin: 0; font-size: 13px; color: #713f12;">MotorLog se proporciona "tal cual" (AS IS) y "según disponibilidad", sin garantías de ningún tipo, ya sean expresas o implícitas. MotorLog es únicamente una herramienta informativa y de asistencia organizativa.</p>
+					</div>
+					<p>El usuario es el único responsable del mantenimiento mecánico real, revisiones periódicas, cumplimiento normativo (ITV/inspecciones) y seguridad de sus vehículos. MotorLog y sus desarrolladores no asumen responsabilidad alguna por pérdidas de datos debidas a limpiezas de caché del navegador, fallos del dispositivo o decisiones mecánicas tomadas a partir de la información registrada.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 5 -->
+				<section>
+					<h2><span class="num-badge">5</span> Propiedad Intelectual y Licencia</h2>
+					<p>El código fuente de MotorLog es de código abierto. Los usuarios son libres de inspeccionar, auditar y contribuir al proyecto respetando la licencia libre del repositorio.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 6 -->
+				<section>
+					<h2><span class="num-badge">6</span> Modificaciones de los Términos</h2>
+					<p>Nos reservamos el derecho de modificar o actualizar estas Condiciones del Servicio en cualquier momento. La fecha de última actualización reflejada en la parte superior indicará la versión en vigor.</p>
+				</section>
+
+				<hr />
+
+				<!-- Sección 7 -->
+				<section>
+					<h2><span class="num-badge">7</span> Contacto</h2>
+					<p>Si tienes preguntas o dudas acerca de estas Condiciones del Servicio, puedes contactar al desarrollador:</p>
+					<div class="app-meta">
+						<p style="margin-bottom: 6px;"><strong>Contacto:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+						<p style="margin-bottom: 0;"><strong>Repositorio GitHub:</strong> <a href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind" target="_blank" rel="noopener noreferrer">github.com/vicnx/MotorLog_Angular_rxDb_Tailwind</a></p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- VERSIÓN EN INGLÉS (ENGLISH VERSION) -->
+		<div id="content-en" class="hidden">
+			<div class="card hero">
+				<div class="hero-icon">
+					<i class="fas fa-file-signature"></i>
+				</div>
+				<h1>MotorLog Terms of Service</h1>
+				<p class="subtitle">Terms of use, scope, and responsibilities for users of the MotorLog web application.</p>
+				<div class="badge">
+					<i class="far fa-calendar-alt" style="color: var(--primary-500);"></i>
+					<span>Last updated: September 2026</span>
+				</div>
+			</div>
+
+			<div class="pillars">
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+						<i class="fas fa-gift"></i>
+					</div>
+					<div class="pillar-title">100% Free & Open</div>
+					<div class="pillar-desc">Free tool for personal use, with no subscriptions, hidden fees, or advertisements.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd;">
+						<i class="fas fa-user-cog"></i>
+					</div>
+					<div class="pillar-title">User Responsibility</div>
+					<div class="pillar-desc">You retain exclusive control over entered data and the custody of your backups.</div>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon" style="background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe;">
+						<i class="fas fa-code-branch"></i>
+					</div>
+					<div class="pillar-title">Transparent Open Source</div>
+					<div class="pillar-desc">Community project published for educational and public utility purposes.</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<!-- Section 1 -->
+				<section>
+					<h2><span class="num-badge">1</span> Acceptance of Terms</h2>
+					<p>By accessing, browsing, or using the MotorLog application (<a href="https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/">https://vicnx.github.io/MotorLog_Angular_rxDb_Tailwind/</a>), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use the application.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 2 -->
+				<section>
+					<h2><span class="num-badge">2</span> Description and Use of the Application</h2>
+					<p>MotorLog is a web utility designed under a <em>local-first</em> architecture to help individuals log, organize, and monitor their vehicle maintenance records. Usage is governed by the following guidelines:</p>
+					<ul>
+						<li><strong>Personal Use:</strong> The application is designed for individual personal vehicle tracking and cost monitoring.</li>
+						<li><strong>Local Storage:</strong> All records are stored and processed directly on the user's personal device.</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- Section 3 -->
+				<section>
+					<h2><span class="num-badge">3</span> Third-Party Services & Google Drive Integration</h2>
+					<p>MotorLog provides the option to connect a personal Google Drive account to backup and restore application data. By using this feature, you acknowledge that storage infrastructure services are provided by Google LLC under their own terms and policies.</p>
+					<p>MotorLog and its maintainers are not responsible for Google connectivity failures, service outages, quota limitations, or third-party API policy changes.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 4 -->
+				<section>
+					<h2><span class="num-badge">4</span> Disclaimer of Warranties and Limitation of Liability</h2>
+					<div class="highlight-box yellow">
+						<div class="box-title" style="color: #854d0e;"><i class="fas fa-exclamation-triangle"></i> Important Notice</div>
+						<p style="margin: 0; font-size: 13px; color: #713f12;">MotorLog is provided "AS IS" and "AS AVAILABLE", without warranties of any kind, whether express or implied. MotorLog is solely an informational and organizational assistance tool.</p>
+					</div>
+					<p>The user is solely responsible for actual vehicle mechanical maintenance, periodic checkups, inspection compliance, and road safety. MotorLog and its developers bear no liability for data loss due to browser cache clearing or mechanical decisions made based on recorded logs.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 5 -->
+				<section>
+					<h2><span class="num-badge">5</span> Intellectual Property and License</h2>
+					<p>MotorLog source code is open source. Users are free to audit, inspect, and contribute to the project under the terms of the project's open-source license.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 6 -->
+				<section>
+					<h2><span class="num-badge">6</span> Changes to Terms</h2>
+					<p>We reserve the right to modify these Terms of Service at any time. The updated date at the top will indicate the version currently in effect.</p>
+				</section>
+
+				<hr />
+
+				<!-- Section 7 -->
+				<section>
+					<h2><span class="num-badge">7</span> Contact Information</h2>
+					<p>If you have any questions regarding these Terms of Service, you can reach out:</p>
+					<div class="app-meta">
+						<p style="margin-bottom: 6px;"><strong>Email:</strong> <a href="mailto:andanivicente@gmail.com">andanivicente@gmail.com</a></p>
+						<p style="margin-bottom: 0;"><strong>GitHub Repository:</strong> <a href="https://github.com/vicnx/MotorLog_Angular_rxDb_Tailwind" target="_blank" rel="noopener noreferrer">github.com/vicnx/MotorLog_Angular_rxDb_Tailwind</a></p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		function switchLang(lang) {
+			const esContent = document.getElementById('content-es');
+			const enContent = document.getElementById('content-en');
+			const btnEs = document.getElementById('btn-es');
+			const btnEn = document.getElementById('btn-en');
+			const backTxt = document.getElementById('back-txt');
+
+			if (lang === 'en') {
+				esContent.classList.add('hidden');
+				enContent.classList.remove('hidden');
+				btnEn.classList.add('active');
+				btnEs.classList.remove('active');
+				backTxt.textContent = 'Back to MotorLog';
+			} else {
+				enContent.classList.add('hidden');
+				esContent.classList.remove('hidden');
+				btnEs.classList.add('active');
+				btnEn.classList.remove('active');
+				backTxt.textContent = 'Volver a MotorLog';
+			}
+		}
+
+		// Detectar idioma del navegador por defecto
+		if (navigator.language && !navigator.language.startsWith('es')) {
+			switchLang('en');
+		}
+	</script>
+</body>
+</html>
