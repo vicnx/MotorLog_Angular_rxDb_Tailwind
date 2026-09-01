@@ -8,12 +8,14 @@ import { removeRxDatabase, RxCollection } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { DBService, initDatabase } from './db.service';
 import { UserService } from './user.service';
+import { GDriveService } from './gdrive.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataExportImportService {
 	dbSvc = inject(DBService);
 	router = inject(Router);
 	userSvc = inject(UserService);
+	gdriveSvc = inject(GDriveService);
 	confirmationService = inject(ConfirmationService);
 	translateSvc = inject(TranslateService);
 	messageSvc = inject(MessageService);
@@ -36,15 +38,12 @@ export class DataExportImportService {
 			const blob = new Blob([json], { type: 'application/json' });
 			const url = URL.createObjectURL(blob);
 
-			// Detecta navegador móvil que no soporta download (ej: Firefox iOS)
 			const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 			const isFirefoxIOS = /FxiOS/i.test(navigator.userAgent);
 
 			if (isMobile && isFirefoxIOS) {
-				// Abrir en nueva pestaña
 				window.open(url, '_blank');
 			} else {
-				// Descargar con FileSaver.js
 				saveAs(blob, 'motorLog_backup.json');
 			}
 
@@ -110,14 +109,18 @@ export class DataExportImportService {
 
 	public async clearAllData(): Promise<void> {
 		try {
-			const db = this.dbSvc.db;
-			const collections = Object.keys(db.collections);
+			// 1. Desconectar la cuenta de Google Drive si estaba conectada
+			this.gdriveSvc.logout();
 
-			for (const collectionName of collections) {
-				const collection = db.collections[collectionName as keyof typeof db.collections] as unknown as RxCollection<any>;
-				const allDocs = await collection.find().exec();
-				await Promise.all(allDocs.map((doc) => doc.remove()));
-			}
+			// 2. Eliminar completamente la base de datos IndexedDB local
+			console.log('Eliminando base de datos local...');
+			await removeRxDatabase('motorlog-db', getRxStorageDexie());
+			await initDatabase();
+
+			// 3. Limpiar almacenamiento de sesión y almacenamiento local
+			sessionStorage.clear();
+			localStorage.clear();
+
 			console.log('Todos los datos han sido eliminados exitosamente.');
 			this.userSvc.setLogginUser(false);
 			location.reload();
