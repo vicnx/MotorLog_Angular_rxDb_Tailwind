@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { MessageService } from 'primeng/api';
+import { CONSTANTS } from '@shared/app-constants';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
-import { GDriveService } from '@shared/services/gdrive.service';
 
 @Component({
 	selector: 'app-backup-dialog-msg',
@@ -14,9 +14,8 @@ import { GDriveService } from '@shared/services/gdrive.service';
 	templateUrl: './backup-dialog-msg.component.html'
 })
 export class BackupDialogMsgComponent {
+	private router = inject(Router);
 	dataSvc = inject(DataExportImportService);
-	gdriveSvc = inject(GDriveService);
-	messageSvc = inject(MessageService);
 	displayDialog: boolean = false;
 
 	constructor() {
@@ -33,17 +32,11 @@ export class BackupDialogMsgComponent {
 		this.dataSvc.shouldShowBackupDialog.set(false);
 	}
 
-	public exportData(): void {
-		this.dataSvc.exportData();
-		this.hideDialog();
-	}
-
 	/**
-	 * Exporta los datos directamente a la cuenta de Google Drive del usuario.
+	 * Cierra el modal y redirige a la pantalla de Ajustes para gestionar copias de seguridad.
 	 */
-	public async uploadToGDrive(): Promise<void> {
+	public goToSettings(): void {
 		this.hideDialog();
-		const jsonString = await this.dataSvc.exportDataAsJsonString();
-		await this.gdriveSvc.uploadBackup(jsonString);
+		this.router.navigate([CONSTANTS.routes.settings]);
 	}
 }

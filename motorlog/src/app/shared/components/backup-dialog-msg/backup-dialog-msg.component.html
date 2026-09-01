@@ -16,33 +16,23 @@
 
     <ng-template pTemplate="footer">
         <div class="w-full flex flex-col gap-2 p-0">
-            <!-- Botón 1: Guardar copia en Google Drive -->
+            <!-- Botón 1: Ir a Ajustes para hacer copia de seguridad -->
             <button
                 type="button"
-                (click)="uploadToGDrive()"
-                class="btn-primary !bg-emerald-600 hover:!bg-emerald-700 !py-2.5 !px-3 text-xs w-full flex items-center justify-center gap-2"
+                (click)="goToSettings()"
+                class="btn-primary !py-2.5 !px-3 text-xs w-full flex items-center justify-center gap-2"
             >
-                <img src="assets/images/google-drive.png" alt="Google Drive" class="w-4 h-4 object-contain" />
-                <span>{{ 'backup.dialog.gdrive' | translate }}</span>
+                <i class="fas fa-cog text-xs"></i>
+                <span>{{ 'backup.dialog.go_to_settings' | translate }}</span>
             </button>
 
-            <!-- Botón 2: Descargar JSON local -->
-            <button
-                type="button"
-                (click)="exportData()"
-                class="btn-secondary !py-2.5 !px-3 text-xs w-full flex items-center justify-center gap-2"
-            >
-                <i class="fas fa-file-download text-primary-500"></i>
-                <span>{{ 'backup.dialog.download_local' | translate }}</span>
-            </button>
-
-            <!-- Botón 3: Cancelar -->
+            <!-- Botón 2: Cancelar / Ahora no -->
             <button
                 type="button"
                 (click)="hideDialog()"
                 class="w-full text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 font-semibold transition text-center pt-1"
             >
-                {{ 'backup.dialog.cancel' | translate }}
+                {{ 'backup.dialog.not_now' | translate }}
             </button>
         </div>
     </ng-template>

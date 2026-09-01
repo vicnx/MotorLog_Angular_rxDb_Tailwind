@@ -304,9 +304,11 @@
 			"title": "Backup",
 			"message": "Do you want to make a backup of your data?",
 			"warning": "Remember that your data is only saved in your browser.",
+			"go_to_settings": "Go to Settings to backup",
 			"confirm": "Download JSON backup",
 			"gdrive": "Save to Google Drive",
 			"download_local": "Download JSON",
+			"not_now": "Not now",
 			"cancel": "Cancel"
 		}
 	},

@@ -304,9 +304,11 @@
 			"title": "Copia de seguridad",
 			"message": "¿Quieres realizar una copia de seguridad de tus datos?",
 			"warning": "Recuerda que tus datos solo están guardados en tu navegador.",
+			"go_to_settings": "Ir a Ajustes para hacer copia",
 			"confirm": "Descargar copia JSON",
 			"gdrive": "Guardar en Google Drive",
 			"download_local": "Descargar JSON",
+			"not_now": "Ahora no",
 			"cancel": "Cancelar"
 		}
 	},
