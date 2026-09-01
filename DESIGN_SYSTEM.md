@@ -21,10 +21,14 @@ MotorLog adopta una estética **plana, minimalista, precisa y limpia**, eliminan
 
 Toda la interfaz debe construirse reutilizando las clases maestras declaradas en `@layer components` dentro de `src/styles.scss`:
 
-### 1. Campos de Entrada (`.input-field`)
-Se aplica a cualquier elemento `<input>`, `<select>` y `<textarea>`.
+### 1. Sistema de Formularios y Campos (`.input-label`, `.input-field`, `.input-error`)
+Se aplica de forma estandarizada a cualquier campo de formulario (`<input>`, `<select>`, `<p-dropdown>`, `<p-inputNumber>`, `<p-colorPicker>` y `<textarea>`).
 ```html
-<input type="text" class="input-field" placeholder="Introduce el nombre" />
+<div>
+  <label class="input-label">Nombre del campo *</label>
+  <input type="text" class="input-field" placeholder="Introduce el valor" />
+  <div class="input-error">Campo obligatorio</div>
+</div>
 ```
 
 ### 2. Botón Principal (`.btn-primary`)

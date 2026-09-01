@@ -11,43 +11,41 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 import { BrandLogoPipe } from "../../shared/pipes/brand-logo.pipe";
 import { BrandService } from '@shared/services/brand.service';
+
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
 	imports: [
-    CommonModule,
-    TranslateModule,
-    NgxSpinnerModule,
-    InputTextModule,
-    DropdownModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    SelectButtonModule,
-    ColorPickerModule,
-    InputNumberModule,
-    ImageSelectorComponent,
-    BrandLogoPipe
-],
+		CommonModule,
+		TranslateModule,
+		NgxSpinnerModule,
+		InputTextModule,
+		DropdownModule,
+		FormsModule,
+		ReactiveFormsModule,
+		ButtonModule,
+		ColorPickerModule,
+		InputNumberModule,
+		ImageSelectorComponent,
+		BrandLogoPipe
+	],
 	templateUrl: './vehicle-details.component.html'
 })
 export class VehicleDetailsComponent extends BaseComponent implements OnInit {
-	//FAKE INFO
-	optionsBrands = [];
-	// optionsModels = [];
-	optionsIcons = [];
+	optionsBrands: any[] = [];
+	optionsIcons: any[] = [];
 
 	formBuilder = inject(FormBuilder);
 	vehicleForm: FormGroup;
 	vehiclesApiSvc = inject(VehiclesApiService);
-    brandSvc = inject(BrandService);
+	brandSvc = inject(BrandService);
 
-	//Consulta
+	// Estado de consulta o edición
 	isConsulta: boolean = false;
+	isEditing: boolean = false;
 	vehicleData: VehicleModel;
 
 	ngOnInit(): void {
@@ -58,10 +56,44 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.initForm();
 	}
 
+	/**
+	 * Activa el modo de edición habilitando la modificación de todos los campos.
+	 */
+	public enableEdit(): void {
+		this.isConsulta = false;
+		this.isEditing = true;
+		this.vehicleForm.enable();
+	}
+
+	/**
+	 * Cancela la edición, restablece los datos originales y bloquea el formulario.
+	 */
+	public cancelEdit(): void {
+		this.isConsulta = true;
+		this.isEditing = false;
+		if (this.vehicleData) {
+			this.vehicleForm.patchValue(this.vehicleData);
+		}
+		this.vehicleForm.disable();
+	}
+
+	/**
+	 * Selecciona un icono del grid táctil únicamente en modo edición/alta.
+	 */
+	public selectIcon(iconName: string): void {
+		if (this.isConsulta || this.vehicleForm.disabled) {
+			return;
+		}
+		this.vehicleForm.get('icono')?.setValue(iconName);
+		this.vehicleForm.get('icono')?.markAsTouched();
+	}
+
 	public onSubmit(): void {
-		console.log(this.vehicleForm.value);
+		if (this.isConsulta) {
+			return;
+		}
 		if (this.vehicleForm.valid) {
-			if (this.isConsulta) {
+			if (this.vehicleData && this.vehicleData.id) {
 				this.editVehicle();
 			} else {
 				this.newVehicle();
@@ -73,7 +105,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 
 	private newVehicle(): void {
 		this.vehicleSvc.addVehicle(this.vehicleForm.value).subscribe({
-			next: (res) => {
+			next: () => {
 				this.operationOK();
 			}
 		});
@@ -81,7 +113,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 
 	private editVehicle(): void {
 		this.vehicleSvc.updateVehicle(this.vehicleData.id, this.vehicleForm.value).subscribe({
-			next: (res) => {
+			next: () => {
 				this.operationOK();
 			}
 		});
@@ -117,6 +149,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 						if (vehicle) {
 							this.vehicleData = (vehicle as any).toJSON ? (vehicle as any).toJSON() : vehicle;
 							this.vehicleForm.patchValue(this.vehicleData);
+							this.vehicleForm.disable();
 						} else {
 							this.routerSvc.navigate(['/vehicle-list']);
 						}
@@ -129,14 +162,14 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.loadDropdowns();
 	}
 
-  get imageControl(): FormControl {
-    return this.vehicleForm.get('imagen') as FormControl;
-  }
+	get imageControl(): FormControl {
+		return this.vehicleForm.get('imagen') as FormControl;
+	}
 
 	private loadIcons(): void {
 		this.vehicleSvc.getIcons().subscribe({
 			next: (resp) => {
-				this.optionsIcons = resp.icons;
+				this.optionsIcons = resp.icons || [];
 			}
 		});
 	}
@@ -145,7 +178,7 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		this.vehicleSvc.getVehicleBrands().subscribe({
 			next: (resp) => {
 				this.optionsBrands = resp;
-                this.brandSvc.setBrands(resp);
+				this.brandSvc.setBrands(resp);
 			}
 		});
 	}

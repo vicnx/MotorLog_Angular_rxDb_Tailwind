@@ -12,25 +12,30 @@
 			}
 		},
 		"add-vehicle": {
-			"title": "Add new vehicle",
-			"vehicle_name": "Vehicle name",
+			"title": "Add New Vehicle",
+			"title_consult": "Vehicle Details",
+			"title_edit": "Edit Vehicle",
+			"vehicle_name": "Vehicle Name",
 			"brand": "Brand",
 			"model": "Model",
 			"year": "Year",
 			"color": "Color",
 			"imagen": "Image",
-			"cc": "CC",
-			"cv": "CV",
-			"icon": "Icon",
-			"observ": "Observations",
+			"cc": "Engine Size (CC)",
+			"cv": "Power (HP)",
+			"icon": "Vehicle Icon",
+			"observ": "Notes",
 			"brand_placeholder": "Select a brand",
-			"model_placeholder": "Select a model",
-			"save": "Save",
+			"model_placeholder": "Enter model",
+			"save": "Save Vehicle",
+			"save_edit": "Save Changes",
+			"edit_mode": "Edit Vehicle",
+			"cancel_edit": "Cancel Editing",
 			"validations": {
 				"vehicle_name_required": "Vehicle name is required",
 				"brand_required": "Brand is required",
 				"model_required": "Model is required",
-				"icono_required": "Icon is required"
+				"icono_required": "Icon selection is required"
 			}
 		},
 		"vehicle-details": {

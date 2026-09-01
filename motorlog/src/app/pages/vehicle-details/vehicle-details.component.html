@@ -1,28 +1,65 @@
-<div class="mx-auto max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl">
-	<div class="container mx-auto max-w-screen-md">
-		<form class="p-4" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.vehicle_name' | translate }}</label>
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+	<div class="card-container">
+		
+		<!-- Encabezado de la pantalla -->
+		<div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-100 dark:border-gray-700/60">
+			<h2 class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
+				{{ (isConsulta ? 'pages.add-vehicle.title_consult' : (isEditing ? 'pages.add-vehicle.title_edit' : 'pages.add-vehicle.title')) | translate }}
+			</h2>
+
+			<!-- Botones de Alternar Modo Consulta / Edición -->
+			<div class="flex items-center gap-2">
+				<button 
+					*ngIf="isConsulta" 
+					type="button" 
+					(click)="enableEdit()" 
+					class="btn-secondary py-2 px-3 text-xs flex items-center gap-1.5"
+				>
+					<i class="fas fa-edit text-primary-500"></i>
+					<span>{{ 'pages.add-vehicle.edit_mode' | translate }}</span>
+				</button>
+
+				<button 
+					*ngIf="isEditing" 
+					type="button" 
+					(click)="cancelEdit()" 
+					class="btn-secondary py-2 px-3 text-xs flex items-center gap-1.5"
+				>
+					<i class="fas fa-times text-gray-500"></i>
+					<span>{{ 'pages.add-vehicle.cancel_edit' | translate }}</span>
+				</button>
+			</div>
+		</div>
+
+		<form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="space-y-5">
+			
+			<!-- 1. Nombre del Vehículo -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.add-vehicle.vehicle_name' | translate }} *
+				</label>
 				<input
-					pInputText
 					type="text"
-					class="w-full"
+					class="input-field"
 					[placeholder]="'pages.add-vehicle.vehicle_name' | translate"
 					formControlName="nombreVehiculo"
-					[disabled]="isConsulta"
+					[readonly]="isConsulta"
 				/>
 				<div
 					*ngIf="vehicleForm?.get('nombreVehiculo')?.invalid && vehicleForm?.get('nombreVehiculo')?.touched"
-					class="text-red-500 text-sm mt-1"
+					class="input-error"
 				>
 					{{ 'pages.add-vehicle.validations.vehicle_name_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.brand' | translate }}</label>
+
+			<!-- 2. Marca -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.add-vehicle.brand' | translate }} *
+				</label>
 				<p-dropdown
 					[options]="optionsBrands"
-					[style]="{ width: '100%' }"
 					[placeholder]="'pages.add-vehicle.brand_placeholder' | translate"
 					formControlName="marca"
 					optionLabel="name"
@@ -31,111 +68,182 @@
 					filterBy="name"
 					[showClear]="true"
 					[disabled]="isConsulta"
+					styleClass="w-full"
+					panelStyleClass="!rounded-2xl !bg-white dark:!bg-gray-800 !border !border-gray-200/80 dark:!border-gray-700/80 !shadow-xl !p-1.5 text-sm"
 				>
-                <ng-template pTemplate="selectedItem" let-selectedOption>
-                    <div class="flex items-center gap-3" *ngIf="selectedOption">
-                        <img [src]="selectedOption.code | brandLogo" class="w-6 h-6 object-contain" />
-                        <span>{{ selectedOption.name }}</span>
-                    </div>
-                </ng-template>
+					<ng-template pTemplate="selectedItem" let-selectedOption>
+						<div class="flex items-center gap-2.5" *ngIf="selectedOption">
+							<img [src]="selectedOption.code | brandLogo" class="w-5 h-5 object-contain" />
+							<span class="font-medium text-gray-800 dark:text-gray-100 text-xs">{{ selectedOption.name }}</span>
+						</div>
+					</ng-template>
 
-                <ng-template pTemplate="item" let-brand>
-                    <div class="flex items-center gap-3">
-                        <img [src]="brand.code | brandLogo" class="w-6 h-6 object-contain" />
-                        <span>{{ brand.name }}</span>
-                    </div>
-                </ng-template>
+					<ng-template pTemplate="item" let-brand>
+						<div class="flex items-center gap-2.5 p-1 text-xs">
+							<img [src]="brand.code | brandLogo" class="w-5 h-5 object-contain" />
+							<span class="font-medium text-gray-800 dark:text-gray-200">{{ brand.name }}</span>
+						</div>
+					</ng-template>
 				</p-dropdown>
-				<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="vehicleForm?.get('marca')?.invalid && vehicleForm?.get('marca')?.touched" class="input-error">
 					{{ 'pages.add-vehicle.validations.brand_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.model' | translate }}</label>
+
+			<!-- 3. Modelo -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.add-vehicle.model' | translate }} *
+				</label>
 				<input
-					pInputText
 					type="text"
-					class="w-full"
-					[placeholder]="'pages.add-vehicle.model' | translate"
+					class="input-field"
+					[placeholder]="'pages.add-vehicle.model_placeholder' | translate"
 					formControlName="modelo"
-					[disabled]="isConsulta"
 					maxlength="25"
+					[readonly]="isConsulta"
 				/>
-				<div *ngIf="vehicleForm?.get('modelo')?.invalid && vehicleForm?.get('modelo')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="vehicleForm?.get('modelo')?.invalid && vehicleForm?.get('modelo')?.touched" class="input-error">
 					{{ 'pages.add-vehicle.validations.model_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.year' | translate }}</label>
-				<p-inputNumber
-					[style]="{ width: '100%' }"
-					id="year"
-					formControlName="year"
-					[min]="0"
-					[max]="9999"
-					class="w-full"
-					[disabled]="isConsulta"
-					[useGrouping]="false"
-				></p-inputNumber>
+
+			<!-- 4. Año y Color (Grid equilibrado) -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+				<div>
+					<label class="input-label">
+						{{ 'pages.add-vehicle.year' | translate }}
+					</label>
+					<p-inputNumber
+						id="year"
+						formControlName="year"
+						[min]="0"
+						[max]="9999"
+						[useGrouping]="false"
+						[disabled]="isConsulta"
+						[readonly]="isConsulta"
+						inputStyleClass="input-field"
+						styleClass="w-full"
+					></p-inputNumber>
+				</div>
+				<div>
+					<label class="input-label">
+						{{ 'pages.add-vehicle.color' | translate }}
+					</label>
+					
+					<!-- Recuadro del color con altura exacta de 42px y alternancia limpia de is-readonly -->
+					<div 
+						class="input-field flex items-center justify-between h-[42px] !py-0"
+						[ngClass]="{ 'is-readonly': isConsulta }"
+					>
+						<div class="flex items-center gap-3">
+							<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+							<span class="text-xs font-mono font-semibold text-gray-800 dark:text-gray-200 uppercase select-none">
+								{{ vehicleForm.get('color')?.value }}
+							</span>
+						</div>
+
+						<!-- Muestra secundaria de color -->
+						<div 
+							class="w-5 h-5 rounded-full border border-gray-200 dark:border-gray-700 shadow-xs flex-shrink-0" 
+							[style.backgroundColor]="vehicleForm.get('color')?.value"
+						></div>
+					</div>
+				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.color' | translate }}</label>
-				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+
+			<!-- 5. Imagen Selector -->
+			<div class="pt-1">
+				<app-image-selector
+					[imageControl]="imageControl"
+					[label]="'pages.add-vehicle.imagen' | translate"
+					[modoConsulta]="isConsulta"
+				></app-image-selector>
 			</div>
-			<app-image-selector
-				[imageControl]="imageControl"
-				[label]="'pages.add-vehicle.imagen' | translate"
-				[modoConsulta]="isConsulta"
-			></app-image-selector>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cc' | translate }}</label>
-				<p-inputNumber
-					[style]="{ width: '100%' }"
-					id="cc"
-					formControlName="cc"
-					mode="decimal"
-					[min]="0"
-					[max]="9999"
-					class="w-full"
-					[disabled]="isConsulta"
-				></p-inputNumber>
+
+			<!-- 6. Cilindrada (cc) y Potencia (cv) -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+				<div>
+					<label class="input-label">
+						{{ 'pages.add-vehicle.cc' | translate }}
+					</label>
+					<p-inputNumber
+						id="cc"
+						formControlName="cc"
+						mode="decimal"
+						[min]="0"
+						[max]="9999"
+						[disabled]="isConsulta"
+						[readonly]="isConsulta"
+						inputStyleClass="input-field"
+						styleClass="w-full"
+					></p-inputNumber>
+				</div>
+				<div>
+					<label class="input-label">
+						{{ 'pages.add-vehicle.cv' | translate }}
+					</label>
+					<p-inputNumber
+						id="cv"
+						formControlName="cv"
+						mode="decimal"
+						[min]="0"
+						[max]="999"
+						[disabled]="isConsulta"
+						[readonly]="isConsulta"
+						inputStyleClass="input-field"
+						styleClass="w-full"
+					></p-inputNumber>
+				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.cv' | translate }}</label>
-				<p-inputNumber
-					[style]="{ width: '100%' }"
-					id="cv"
-					formControlName="cv"
-					mode="decimal"
-					[min]="0"
-					[max]="999"
-					class="w-full"
-					[disabled]="isConsulta"
-				></p-inputNumber>
-			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.icon' | translate }}</label>
-				<p-selectButton [options]="optionsIcons" optionLabel="icon" formControlName="icono" [disabled]="isConsulta">
-					<ng-template let-icono pTemplate>
-						<i [class]="icono" class="w-5 h-5 text-2xl" [ngStyle]="{ color: vehicleForm.get('color')?.value }"></i>
-					</ng-template>
-				</p-selectButton>
-				<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="text-red-500 text-sm mt-1">
+
+			<!-- 7. Selector de Iconos -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.add-vehicle.icon' | translate }} *
+				</label>
+				
+				<div class="grid grid-cols-4 sm:grid-cols-6 gap-2.5 p-3.5 rounded-2xl border border-gray-200/80 dark:border-gray-700/80 bg-gray-50/60 dark:bg-gray-900/40 max-h-48 overflow-y-auto">
+					<button
+						type="button"
+						*ngFor="let iconName of optionsIcons"
+						(click)="selectIcon(iconName)"
+						[disabled]="isConsulta"
+						class="h-11 rounded-xl flex items-center justify-center text-xl transition-all duration-150 border select-none disabled:pointer-events-none"
+						[ngClass]="vehicleForm.get('icono')?.value === iconName ? 'bg-primary-500 text-white border-primary-600 shadow-sm shadow-primary-500/30 scale-105' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200/80 dark:border-gray-700/80 hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950/40'"
+						[title]="iconName"
+					>
+						<i [class]="iconName" [style.color]="vehicleForm.get('icono')?.value === iconName ? '#ffffff' : (vehicleForm.get('color')?.value || '#48d0b0')"></i>
+					</button>
+				</div>
+
+				<div *ngIf="vehicleForm?.get('icono')?.invalid && vehicleForm?.get('icono')?.touched" class="input-error">
 					{{ 'pages.add-vehicle.validations.icono_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.add-vehicle.observ' | translate }}</label>
+
+			<!-- 8. Observaciones -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.add-vehicle.observ' | translate }}
+				</label>
 				<textarea
-					class="p-2 border border-gray-300 rounded-md w-full"
+					class="input-field resize-none"
 					rows="3"
 					[placeholder]="'pages.add-vehicle.observ' | translate"
 					formControlName="observaciones"
-					[disabled]="isConsulta"
-					maxlength="50"
+					maxlength="200"
+					[readonly]="isConsulta"
 				></textarea>
 			</div>
-			<p-button type="submit" [label]="'pages.add-vehicle.save' | translate"></p-button>
+
+			<!-- 9. Botón de Enviar / Guardar -->
+			<div *ngIf="!isConsulta || isEditing" class="pt-4">
+				<button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+					<span>{{ (isEditing ? 'pages.add-vehicle.save_edit' : 'pages.add-vehicle.save') | translate }}</span>
+					<i class="fas fa-check text-xs"></i>
+				</button>
+			</div>
 		</form>
 	</div>
 </div>

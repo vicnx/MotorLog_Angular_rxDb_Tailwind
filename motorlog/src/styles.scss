@@ -15,9 +15,92 @@
 
 /* Clases Utilitarias Reutilizables: Tactile Minimalism (Vercel & Shadcn UI Style) */
 @layer components {
-  /* Campo de texto de entrada minimalista */
+  /* 1. Etiqueta / Título de Formulario Unificado */
+  .input-label {
+    @apply block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-2;
+  }
+
+  /* 2. Mensaje de Error de Validación Unificado */
+  .input-error {
+    @apply text-red-500 text-xs mt-1.5 font-medium;
+  }
+
+  /* 3. Clase Unificada para Inputs de Texto Nativos */
   .input-field {
     @apply w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/90 text-gray-900 dark:text-white placeholder-gray-400 font-normal text-sm transition-all duration-150 focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/15 shadow-sm;
+  }
+
+  /* Modo Solo Lectura / Consulta restringido únicamente a campos formales de entrada */
+  input.input-field[readonly],
+  textarea.input-field[readonly],
+  select.input-field[readonly],
+  .input-field.is-readonly {
+    @apply bg-gray-50/80 dark:bg-gray-800/50 border-gray-200/80 dark:border-gray-700/80 text-gray-900 dark:text-gray-100 cursor-default focus:ring-0 focus:border-gray-200 dark:focus:border-gray-700 shadow-none;
+  }
+
+  /* Excepción para textareas */
+  textarea.input-field {
+    @apply h-auto;
+  }
+
+  /* 2. Unificación de PrimeNG Dropdown (p-dropdown) */
+  .p-dropdown {
+    @apply w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/90 text-gray-900 dark:text-white text-sm transition-all duration-150 shadow-sm flex items-center justify-between;
+
+    .p-dropdown-label {
+      @apply p-0 text-sm bg-transparent border-none shadow-none text-gray-900 dark:text-white flex items-center w-full;
+    }
+
+    .p-dropdown-trigger {
+      @apply text-gray-400 pl-2 flex items-center justify-center;
+    }
+
+    /* Modo Consulta / Deshabilitado para Dropdown */
+    &.p-disabled {
+      @apply bg-gray-50/80 dark:bg-gray-800/50 border-gray-200/80 dark:border-gray-700/80 cursor-default shadow-none;
+      opacity: 1 !important;
+
+      .p-dropdown-label {
+        @apply text-gray-900 dark:text-gray-100;
+      }
+    }
+  }
+
+  /* 3. Unificación de PrimeNG InputNumber (p-inputNumber) */
+  p-inputnumber,
+  .p-inputnumber {
+    width: 100% !important;
+    display: block !important;
+
+    .p-inputtext {
+      width: 100% !important;
+      @apply input-field;
+    }
+
+    &.p-disabled .p-inputtext,
+    .p-inputtext:disabled {
+      @apply bg-gray-50/80 dark:bg-gray-800/50 border-gray-200/80 dark:border-gray-700/80 text-gray-900 dark:text-gray-100 cursor-default focus:ring-0 shadow-none;
+      opacity: 1 !important;
+    }
+  }
+
+  /* 4. Selector de Color PrimeNG con tamano fijo exacto de 24px */
+  .p-colorpicker-preview {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    min-height: 1.5rem !important;
+    max-height: 1.5rem !important;
+    border-radius: 0.5rem !important;
+    padding: 0 !important;
+    border: 1px solid rgba(209, 213, 219, 0.8) !important;
+  }
+
+  .p-colorpicker.p-disabled {
+    opacity: 1 !important;
+
+    .p-colorpicker-preview {
+      cursor: default !important;
+    }
   }
 
   /* Botón Principal Minimalista (Verde Bulbasaur Sólido Limpio sin degradados) */
