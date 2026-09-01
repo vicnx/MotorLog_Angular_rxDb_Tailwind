@@ -30,24 +30,7 @@ jobs:
         env:
           LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-        run: |
-          mkdir -p src/environments
-          cat <<EOF > src/environments/environment.ts
-          export const environment = {
-              production: false,
-              logoDevToken: '$LOGO_DEV_TOKEN',
-              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/',
-              googleClientId: '$GOOGLE_CLIENT_ID'
-          };
-          EOF
-          cat <<EOF > src/environments/environment.prod.ts
-          export const environment = {
-              production: true,
-              logoDevToken: '$LOGO_DEV_TOKEN',
-              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/',
-              googleClientId: '$GOOGLE_CLIENT_ID'
-          };
-          EOF
+        run: node scripts/set-env.js
         working-directory: motorlog
 
       - name: Build application
