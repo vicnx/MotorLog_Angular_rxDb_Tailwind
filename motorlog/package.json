@@ -8,7 +8,10 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"deploy": "npx angular-cli-ghpages --dir=dist/motorlog",
-		"buildDeploy": "npm run build && npm run deploy"
+		"buildDeploy": "npm run build && npm run deploy",
+		"release:patch": "npm version patch -m \"chore(release): %s\"",
+		"release:minor": "npm version minor -m \"chore(release): %s\"",
+		"release:major": "npm version major -m \"chore(release): %s\""
 	},
 	"private": true,
 	"dependencies": {
