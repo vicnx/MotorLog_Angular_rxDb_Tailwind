@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { ImageSelectorComponent } from '@shared/components/image-selector/image-selector.component';
 import { VehicleModel } from '@shared/models/vehicle.model';
@@ -14,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 import { BrandLogoPipe } from "../../shared/pipes/brand-logo.pipe";
 import { BrandService } from '@shared/services/brand.service';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 @Component({
 	selector: 'app-add-vehicle',
@@ -30,7 +32,8 @@ import { BrandService } from '@shared/services/brand.service';
 		ColorPickerModule,
 		InputNumberModule,
 		ImageSelectorComponent,
-		BrandLogoPipe
+		BrandLogoPipe,
+		PageHeaderComponent
 	],
 	templateUrl: './vehicle-details.component.html'
 })
@@ -54,6 +57,10 @@ export class VehicleDetailsComponent extends BaseComponent implements OnInit {
 		});
 		this.userSvc.page.update((val) => (val = this.isConsulta ? 'pages.vehicle-details.title' : 'pages.add-vehicle.title'));
 		this.initForm();
+	}
+
+	public goBackToVehiclesList(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.vehiclesList]);
 	}
 
 	/**

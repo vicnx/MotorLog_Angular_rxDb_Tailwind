@@ -1,20 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
-import { ImageSelectorComponent } from '@shared/components/image-selector/image-selector.component';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { CustomService } from '@shared/models/custom-service.model';
-import { VehicleModel } from '@shared/models/vehicle.model';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
+
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -22,14 +17,10 @@ import { VehiclesApiService } from 'src/app/api/vehicles_api.service';
 		CommonModule,
 		TranslateModule,
 		NgxSpinnerModule,
-		InputTextModule,
-		DropdownModule,
 		FormsModule,
 		ReactiveFormsModule,
-		ButtonModule,
-		SelectButtonModule,
 		ColorPickerModule,
-		InputNumberModule
+		PageHeaderComponent
 	],
 	templateUrl: './custom-services-details.component.html'
 })
@@ -37,10 +28,12 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 	optionsIcons: string[] = [];
 	formBuilder = inject(FormBuilder);
 	customServiceForm: FormGroup;
-	//Consulta
+	
+	// Consulta
 	isConsulta: boolean = false;
 	customServiceData: CustomService;
 	public ref = inject(DynamicDialogRef, { optional: true });
+
 	ngOnInit(): void {
 		this.routeSvc.data.subscribe((data) => {
 			this.isConsulta = data['isConsulta'];
@@ -51,6 +44,10 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 		this.initForm();
 	}
 
+	public goBackToCustomServicesList(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.customServiceList]);
+	}
+
 	/**
 	 * Selecciona un icono del grid táctil para el servicio personalizado.
 	 */
@@ -59,57 +56,71 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 			return;
 		}
 		this.customServiceForm.get('icon')?.setValue(iconName);
+		this.customServiceForm.get('icon')?.markAsDirty();
 		this.customServiceForm.get('icon')?.markAsTouched();
 	}
 
-	public onSubmit(): void {
-		if (this.customServiceForm.valid) {
-			this.newCustomService();
-		} else {
-			this.markFieldsAsTouched(this.customServiceForm);
+	/**
+	 * Abre el selector de color al pulsar sobre la fila.
+	 */
+	public override openColorPicker(colorPicker: any, event: Event): void {
+		if (this.isConsulta) {
+			return;
 		}
-	}
-
-	private newCustomService(): void {
-		this.spinnerSvc.show();
-		this.userSvc.addCustomServiceToUser(this.customServiceForm.value).subscribe({
-			next: () => {
-				this.operationOK();
-			}
-		});
-	}
-
-	private operationOK(): void {
-		this.showSuccess();
-		this.spinnerSvc.hide();
-		if (this.ref) {
-			this.ref.close(true);
-		} else {
-			this.routerSvc.navigate([this.const.routes.customServiceList]);
+		event.stopPropagation();
+		if (colorPicker && typeof colorPicker.show === 'function') {
+			colorPicker.show();
 		}
 	}
 
 	private initForm(): void {
-		this.customServiceForm = this.formBuilder.group({
-			label: ['', Validators.required],
-			value: ['', Validators.required],
-			color: ['#ff0000'],
-			icon: ['fas fa-car', Validators.required]
+		this.vehicleSvc.getIcons().subscribe((data) => {
+			this.optionsIcons = data;
 		});
 
-		this.customServiceForm.get('label')?.valueChanges.subscribe((label: string) => {
-			this.customServiceForm.patchValue({
-				value: label.toLowerCase()
-			});
+		this.customServiceForm = this.formBuilder.group({
+			label: ['', [Validators.required]],
+			color: ['#48d0b0'],
+			icon: ['', [Validators.required]]
 		});
-		this.loadIcons();
+
+		if (this.isConsulta) {
+			this.routeSvc.params.subscribe((params) => {
+				const id = params['id'];
+				if (id) {
+					const service = (this.userSvc.user().customServices || []).find((s: CustomService) => s.id === +id);
+					if (service) {
+						this.customServiceData = service;
+						this.customServiceForm.patchValue({
+							label: service.label,
+							color: service.color || '#48d0b0',
+							icon: service.icon
+						});
+					}
+				}
+			});
+		}
 	}
 
-	private loadIcons(): void {
-		this.vehicleSvc.getIcons().subscribe({
-			next: (resp) => {
-				this.optionsIcons = resp.icons;
-			}
+	public onSubmit(): void {
+		if (this.customServiceForm.invalid) {
+			this.customServiceForm.markAllAsTouched();
+			return;
+		}
+
+		this.spinnerSvc.show();
+		const val = this.customServiceForm.value;
+
+		this.userSvc.addCustomServiceToUser(val).subscribe({
+			next: (data) => {
+				this.spinnerSvc.hide();
+				if (this.ref) {
+					this.ref.close(data);
+				} else {
+					this.goBackToCustomServicesList();
+				}
+			},
+			error: () => this.spinnerSvc.hide()
 		});
 	}
 }

@@ -24,6 +24,7 @@ import { CustomServiceDetailsComponent } from '../custom-services-details/custom
 import { CustomLocationsDetailsComponent } from '../custom-locations-details/custom-locations-details.component';
 import { UtilsService } from '@shared/services/utils.service';
 import { BrandLogoPipe } from '../../shared/pipes/brand-logo.pipe';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 @Component({
 	selector: 'app-add-vehicle',
@@ -45,7 +46,8 @@ import { BrandLogoPipe } from '../../shared/pipes/brand-logo.pipe';
 		MultiSelectModule,
 		ConfirmDialogModule,
 		ImageSelectorComponent,
-		BrandLogoPipe
+		BrandLogoPipe,
+		PageHeaderComponent
 	],
 	providers: [DialogService],
 	templateUrl: './maintenance-details.component.html'
@@ -58,6 +60,10 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	currentVehicleInfo: VehicleModel;
 	serviceTypes: any[];
 	locations: any[];
+
+	public goBackToTimeline(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.home]);
+	}
 	maintenanceData: Maintenance;
 	dialogService = inject(DialogService);
 	ref: DynamicDialogRef | undefined;

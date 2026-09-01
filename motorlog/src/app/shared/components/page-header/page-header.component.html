@@ -1,0 +1,28 @@
+<div class="flex items-center justify-between gap-3 pt-1 pb-1">
+  <!-- Izquierda: Botón de retorno + Título y Subtítulo -->
+  <div class="flex items-center gap-3 min-w-0">
+    <button
+      *ngIf="showBackButton"
+      type="button"
+      (click)="handleBack()"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm transition-all active:scale-95 text-gray-700 dark:text-gray-200 flex-shrink-0"
+      [title]="backTitle ? (backTitle | translate) : ('confirm.default_no' | translate)"
+    >
+      <i class="fas fa-chevron-left text-sm"></i>
+    </button>
+
+    <div class="flex flex-col min-w-0">
+      <h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white tracking-tight truncate leading-tight">
+        {{ title | translate }}
+      </h2>
+      <span *ngIf="subtitle" class="text-xs text-gray-500 dark:text-gray-400 truncate">
+        {{ subtitle | translate }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Derecha: Acciones proyectadas (botones de edición, alternadores, badges, etc.) -->
+  <div class="flex items-center gap-2 flex-shrink-0">
+    <ng-content></ng-content>
+  </div>
+</div>

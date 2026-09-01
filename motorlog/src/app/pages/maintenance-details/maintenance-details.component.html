@@ -1,35 +1,36 @@
-<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
-	<div class="card-container">
-		
-		<!-- Encabezado de la pantalla -->
-		<div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-100 dark:border-gray-700/60">
-			<h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white tracking-tight">
-				{{ (isEdit ? (isConsulta ? 'pages.mant-details.title_consult' : 'pages.mant-details.title_edit') : 'pages.mant-details.add-mant.title') | translate }}
-			</h2>
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-16 space-y-4 animate-fadeIn">
+	
+	<!-- Cabecera Reutilizable con Botón de Atrás y Acciones Proyectadas -->
+	<app-page-header
+		[title]="(isEdit ? (isConsulta ? 'pages.mant-details.title_consult' : 'pages.mant-details.title_edit') : 'pages.mant-details.add-mant.title')"
+		backRoute="/home"
+		[backTitle]="'pages.home.title'"
+	>
+		<!-- Botones de Alternar Modo Consulta / Edición -->
+		<div class="flex items-center gap-2" *ngIf="isEdit">
+			<button 
+				*ngIf="isConsulta" 
+				type="button" 
+				(click)="toggleEditMode()" 
+				class="btn-secondary !py-1.5 !px-3 !text-xs rounded-lg flex items-center gap-1.5"
+			>
+				<i class="fas fa-edit text-primary-500 text-xs"></i>
+				<span>{{ 'pages.mant-details.edit_mode' | translate }}</span>
+			</button>
 
-			<!-- Botones de Alternar Modo Consulta / Edición -->
-			<div class="flex items-center gap-2" *ngIf="isEdit">
-				<button 
-					*ngIf="isConsulta" 
-					type="button" 
-					(click)="toggleEditMode()" 
-					class="btn-secondary !py-1 !px-2.5 !text-xs rounded-lg flex items-center gap-1.5"
-				>
-					<i class="fas fa-edit text-primary-500 text-xs"></i>
-					<span>{{ 'pages.mant-details.edit_mode' | translate }}</span>
-				</button>
-
-				<button 
-					*ngIf="!isConsulta" 
-					type="button" 
-					(click)="toggleEditMode()" 
-					class="btn-secondary !py-1 !px-2.5 !text-xs rounded-lg flex items-center gap-1.5"
-				>
-					<i class="fas fa-times text-gray-500 text-xs"></i>
-					<span>{{ 'pages.mant-details.cancel_edit' | translate }}</span>
-				</button>
-			</div>
+			<button 
+				*ngIf="!isConsulta" 
+				type="button" 
+				(click)="toggleEditMode()" 
+				class="btn-secondary !py-1.5 !px-3 !text-xs rounded-lg flex items-center gap-1.5"
+			>
+				<i class="fas fa-times text-gray-500 text-xs"></i>
+				<span>{{ 'pages.mant-details.cancel_edit' | translate }}</span>
+			</button>
 		</div>
+	</app-page-header>
+
+	<div class="card-container">
 
 		<!-- Tarjeta Informativa del Vehículo Asociado (Sólo Lectura Elegante) -->
 		<div class="mb-6">

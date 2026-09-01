@@ -1,9 +1,17 @@
 <div
 	[ngClass]="{
-		'w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12': !ref,
+		'w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-16 space-y-4 animate-fadeIn': !ref,
 		'w-full p-0 bg-transparent': ref
 	}"
 >
+	<!-- Cabecera Reutilizable con Botón de Atrás si no es modal dialog -->
+	<app-page-header
+		*ngIf="!ref"
+		[title]="(isConsulta ? 'pages.custom-services.edit_customService' : 'pages.custom-services.add_customService')"
+		backRoute="/custom-service-list"
+		[backTitle]="'pages.custom-services.title'"
+	></app-page-header>
+
 	<div [ngClass]="{ 'card-container': !ref }">
 		<form [formGroup]="customServiceForm" (ngSubmit)="onSubmit()" class="space-y-5">
 			

@@ -139,26 +139,13 @@
   <!-- ========================================== -->
   <div *ngIf="currentView === 'data'" class="space-y-6 animate-fadeIn">
 
-    <!-- Cabecera de navegación de retorno -->
-    <div class="flex items-center gap-3 pt-1 pb-2">
-      <button
-        type="button"
-        (click)="backToMainSettings()"
-        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm transition-all active:scale-95 text-gray-700 dark:text-gray-200"
-        [title]="'pages.settings.back_to_settings' | translate"
-      >
-        <i class="fas fa-chevron-left text-sm"></i>
-      </button>
-
-      <div class="flex flex-col">
-        <h2 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight leading-tight">
-          {{ 'pages.settings.data' | translate }}
-        </h2>
-        <span class="text-xs text-gray-500 dark:text-gray-400">
-          {{ 'pages.settings.data_desc' | translate }}
-        </span>
-      </div>
-    </div>
+    <!-- Cabecera Reutilizable de Navegación de Retorno -->
+    <app-page-header
+      [title]="'pages.settings.data'"
+      [subtitle]="'pages.settings.data_desc'"
+      [backTitle]="'pages.settings.back_to_settings'"
+      (back)="backToMainSettings()"
+    ></app-page-header>
 
     <!-- 1. Google Drive (Copia en la Nube) -->
     <div class="space-y-2">

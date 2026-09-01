@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CapitalizeFirstPipe } from '@shared/pipes/capitalize-first.pipe';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 @Component({
 	selector: 'app-custom-services-list',
@@ -22,27 +23,23 @@ import { CapitalizeFirstPipe } from '@shared/pipes/capitalize-first.pipe';
 		CommonModule,
 		TranslateModule,
 		NgxSpinnerModule,
-		InputTextModule,
-		DropdownModule,
-		FormsModule,
-		ReactiveFormsModule,
-		ButtonModule,
-		SelectButtonModule,
-		ColorPickerModule,
-		DataViewModule,
 		CapitalizeFirstPipe,
-    ButtonModule
+		PageHeaderComponent
 	],
 })
 export class CustomServicesListComponent extends BaseComponent implements OnInit {
 
 	ngOnInit() {
 		this.userSvc.page.update((val) => (val = 'pages.custom-services.title'));
-  }
+	}
 
-  public goToAddCustomService() :void {
-    this.routerSvc.navigate([CONSTANTS.routes.customServiceAdd])
-  }
+	public goBackToProfile(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.profile]);
+	}
+
+	public goToAddCustomService(): void {
+		this.routerSvc.navigate([CONSTANTS.routes.customServiceAdd]);
+	}
 
   public removeCustomService(customService: any): void {
     this.confirmationSvc.confirm({

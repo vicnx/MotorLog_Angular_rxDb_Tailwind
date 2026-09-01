@@ -5,6 +5,7 @@ import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { GDriveCardComponent } from '@shared/components/gdrive-card/gdrive-card.component';
 import { LangDropdownComponent } from '@shared/components/lang-dropdown/lang-dropdown.component';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -23,7 +24,8 @@ export type SettingsView = 'main' | 'data';
 		TooltipModule,
 		ConfirmDialogModule,
 		GDriveCardComponent,
-		LangDropdownComponent
+		LangDropdownComponent,
+		PageHeaderComponent
 	]
 })
 export class SettingsComponent extends BaseComponent implements OnInit {
