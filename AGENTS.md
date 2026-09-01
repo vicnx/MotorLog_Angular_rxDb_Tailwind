@@ -72,3 +72,18 @@ Al completar cualquier tarea, el agente deberá entregar:
    * `style(scope): descripción`
    * `docs(scope): descripción`
 3. **Explicación súper sencilla ("Explicación para tontos"):** Una explicación en lenguaje coloquial, sin tecnicismos, que resuma en 2 frases qué se ha hecho y cómo probarlo.
+
+---
+
+## 🎨 5. Sistema de Diseño y Guía de Estilos (Verde Bulbasaur & Tactile Minimalism)
+
+Para garantizar una interfaz limpia, profesional y coherente (*estilo minimalista plano Shadcn UI / Vercel Geist*), todo agente DEBE consultar y cumplir de forma estricta las especificaciones detalladas en la guía oficial:
+
+👉 **[DESIGN_SYSTEM.md](file:///d:/vicen/Documents/Proyectos/MotorLog_Angular_rxDb_Tailwind/DESIGN_SYSTEM.md)**
+
+### Reglas Clave:
+1. **Paleta Verde Bulbasaur:** Usar `bg-primary-500` (`#48d0b0`) para elementos primarios. Prohibidos los degradados recargados.
+2. **Uso Obligatorio de Clases Globales:** Usar siempre `.input-field`, `.btn-primary`, `.btn-secondary` y `.card-container` declaradas en `src/styles.scss`.
+3. **Mobile-First & Dark Mode:** Garantizar diseño fluido y soporte de modo oscuro en toda la app.
+
+

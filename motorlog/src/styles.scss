@@ -6,15 +6,39 @@
   @tailwind base;
 }
 
-@layer primeng; //not necessary I think
+@layer primeng;
 
 @layer tailwind-utilities {
   @tailwind components;
   @tailwind utilities;
 }
+
+/* Clases Utilitarias Reutilizables: Tactile Minimalism (Vercel & Shadcn UI Style) */
+@layer components {
+  /* Campo de texto de entrada minimalista */
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/90 text-gray-900 dark:text-white placeholder-gray-400 font-normal text-sm transition-all duration-150 focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/15 shadow-sm;
+  }
+
+  /* Botón Principal Minimalista (Verde Bulbasaur Sólido Limpio sin degradados) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-medium text-sm text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700 border border-primary-600/20 shadow-sm active:scale-[0.98] transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+
+  /* Botón Secundario Minimalista */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2.5 rounded-xl font-medium text-sm text-gray-700 dark:text-gray-200 bg-gray-100/80 hover:bg-gray-200/80 dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-200/60 dark:border-gray-700/60 active:scale-[0.98] transition-all duration-150 cursor-pointer disabled:opacity-50 select-none;
+  }
+
+  /* Contenedor de Tarjeta Minimalista */
+  .card-container {
+    @apply w-full bg-white dark:bg-gray-800/90 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-6 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200;
+  }
+}
+
 @import "flag-icons/css/flag-icons.min.css";
 body {
-  @apply font-sans; /* Aplícalo a todo el cuerpo */
+  @apply font-sans text-gray-900 dark:text-gray-100 antialiased;
 }
 .p-sidebar-full {
   max-height: 100vh;
@@ -29,19 +53,19 @@ body {
   width: 100%;
 }
 
-/* Custom Clean Rounded Toasts */
+/* Toast Personalizado Verde Bulbasaur Minimalista */
 .p-toast {
   z-index: 99999 !important;
   width: 90% !important;
   max-width: 400px !important;
   bottom: 2rem !important;
-  pointer-events: none !important; /* Fix: evita que el contenedor vacío bloquee los clicks */
+  pointer-events: none !important;
   
   .p-toast-message {
-    pointer-events: auto !important; /* Los mensajes activos sí son interactuables */
-    border-radius: 50px !important;
-    border: none !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+    pointer-events: auto !important;
+    border-radius: 16px !important;
+    border: 1px solid #f3f4f6 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
     background: #ffffff !important;
     color: #374151 !important;
     margin-bottom: 1rem;
@@ -61,19 +85,19 @@ body {
 
     .p-toast-summary {
       font-weight: 600 !important;
-      font-size: 0.95rem !important;
+      font-size: 0.9rem !important;
       color: #1f2937 !important;
     }
 
     .p-toast-detail {
       margin-top: 0.1rem !important;
-      font-size: 0.85rem !important;
+      font-size: 0.8rem !important;
       color: #6b7280 !important;
     }
 
     .p-toast-icon-close {
-      width: 2rem !important;
-      height: 2rem !important;
+      width: 1.75rem !important;
+      height: 1.75rem !important;
       border-radius: 50% !important;
       color: #9ca3af !important;
       
@@ -83,8 +107,7 @@ body {
       }
     }
 
-    /* Indicadores de color sutiles por tipo */
-    &.p-toast-message-success .p-toast-message-icon { color: #10b981 !important; }
+    &.p-toast-message-success .p-toast-message-icon { color: #48d0b0 !important; }
     &.p-toast-message-info .p-toast-message-icon { color: #3b82f6 !important; }
     &.p-toast-message-warn .p-toast-message-icon { color: #f59e0b !important; }
     &.p-toast-message-error .p-toast-message-icon { color: #ef4444 !important; }

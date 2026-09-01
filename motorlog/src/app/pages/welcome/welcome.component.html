@@ -3,13 +3,13 @@
 		
 		<!-- Contenido principal centrado vertical y horizontalmente en el medio -->
 		<div class="my-auto flex flex-col items-center justify-center text-center w-full max-w-md py-8">
-			<img [src]="welcomeImg" alt="MotorLog" class="h-32 sm:h-36 mx-auto transition-transform hover:scale-105 duration-300" />
+			<img [src]="welcomeImg" alt="MotorLog" class="h-32 sm:h-36 mx-auto transition-transform hover:scale-105 duration-300 drop-shadow-md" />
 			
-			<h1 class="text-2xl sm:text-3xl font-bold mt-6 tracking-tight">
+			<h1 class="text-2xl sm:text-3xl font-bold mt-6 tracking-tight text-gray-900 dark:text-white">
 				@if (!userSvc.userExistOnBd()) {
 				{{ 'welcome.title' | translate }}
 				}
-				<span class="text-primary-500"> {{ const.appName }} 🚗</span>
+				<span class="text-primary-500 font-extrabold"> {{ const.appName }} 🚗</span>
 			</h1>
 			
 			<p class="w-full sm:w-5/6 text-center text-sm text-gray-600 dark:text-gray-300 mt-2">
@@ -19,7 +19,7 @@
 			<div class="p-4 mt-2 w-full max-w-xs text-center">
 				<div class="mb-2">
 					@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
-					<span class="text-xl font-semibold">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
+					<span class="text-xl font-semibold text-gray-800 dark:text-gray-100">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
 					} @else {
 					<input 
 						type="text" 
@@ -27,8 +27,7 @@
 						formControlName="userName" 
 						required 
 						placeholder="Name" 
-						pInputText 
-						class="w-full text-center p-3 text-base rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500" 
+						class="input-field text-center" 
 						[maxlength]="const.form.inputText.maxLength" 
 					/>
 					}
@@ -36,14 +35,14 @@
 			</div>
 			
 			<div class="mt-2">
-				<p-button type="submit" [outlined]="true" styleClass="p-button-rounded px-6 py-2.5">
+				<button type="submit" class="btn-primary">
 					@if (!userSvc.userExistOnBd()) {
 					{{ 'welcome.start' | translate }}
 					} @else {
 					{{ 'welcome.continue' | translate }}
 					}
-					<i class="fas fa-chevron-right ml-2"></i>
-				</p-button>
+					<i class="fas fa-chevron-right ml-2 text-xs"></i>
+				</button>
 			</div>
 		</div>
 
@@ -60,9 +59,9 @@
 					<button 
 						type="button" 
 						(click)="importData()"
-						class="py-2.5 px-3.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium text-xs rounded-lg shadow-sm active:scale-[0.98] transition flex items-center gap-2"
+						class="btn-secondary flex items-center gap-2"
 					>
-						<i class="fas fa-file-import text-blue-500"></i>
+						<i class="fas fa-file-import text-primary-500"></i>
 						<span>JSON Local</span>
 					</button>
 
@@ -70,7 +69,7 @@
 					<button 
 						type="button" 
 						(click)="restoreFromGDrive()"
-						class="py-2.5 px-3.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-medium text-xs rounded-lg shadow-sm active:scale-[0.98] transition flex items-center gap-2"
+						class="btn-secondary bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 flex items-center gap-2"
 					>
 						<img src="assets/images/google-drive.png" alt="Google Drive" class="w-4 h-4 object-contain" />
 						<span>{{ 'welcome.gdrive_import' | translate }}</span>
