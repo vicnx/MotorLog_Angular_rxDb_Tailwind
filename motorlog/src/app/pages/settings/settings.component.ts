@@ -1,17 +1,16 @@
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { SettingsItemModel } from '@shared/models/menu.model';
-import { BaseComponent } from '@shared/base.component';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { MenuModule } from 'primeng/menu';
-import { DataExportImportService } from '@shared/services/dataExportImport.service';
 import { CONSTANTS } from '@shared/app-constants';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { BaseComponent } from '@shared/base.component';
 import { GDriveCardComponent } from '@shared/components/gdrive-card/gdrive-card.component';
 import { LangDropdownComponent } from '@shared/components/lang-dropdown/lang-dropdown.component';
+import { DataExportImportService } from '@shared/services/dataExportImport.service';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TooltipModule } from 'primeng/tooltip';
+
+export type SettingsView = 'main' | 'data';
 
 @Component({
 	selector: 'app-settings',
@@ -19,65 +18,42 @@ import { LangDropdownComponent } from '@shared/components/lang-dropdown/lang-dro
 	templateUrl: './settings.component.html',
 	imports: [
 		CommonModule,
-		HttpClientModule,
 		TranslateModule,
 		ButtonModule,
 		TooltipModule,
-		MenuModule,
 		ConfirmDialogModule,
 		GDriveCardComponent,
 		LangDropdownComponent
 	]
 })
 export class SettingsComponent extends BaseComponent implements OnInit {
-	http = inject(HttpClient);
-	settingsMenu: SettingsItemModel[] = [];
 	dataSvc = inject(DataExportImportService);
+	currentView: SettingsView = 'main';
 
 	@ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 	ngOnInit() {
 		this.userSvc.page.set('pages.settings.settings');
-		this.loadSettingsMenu();
 	}
 
-	loadSettingsMenu() {
-		this.http.get<{ settingsMenu: SettingsItemModel[] }>('assets/data/settings-menu.json').subscribe({
-			next: (data) => {
-				this.settingsMenu = data.settingsMenu;
-			},
-			error: (error) => {
-				console.error('Error loading settings menu:', error);
-			}
-		});
+	goToDataManagement() {
+		this.currentView = 'data';
 	}
 
-	handleMenuAction(action: string) {
-		switch (action) {
-			case 'import':
-				this.importData();
-				break;
-			case 'export':
-				this.exportData();
-				break;
-			case 'delete':
-				this.deleteData();
-				break;
-			case 'profile':
-				this.routerSvc.navigate([CONSTANTS.routes.profile]);
-				break;
-			case 'privacy':
-				window.open('privacy-policy.html', '_blank');
-				break;
-			case 'terms':
-				window.open('terms-of-service.html', '_blank');
-				break;
-			case 'fixmant':
-				this.fixMantIds();
-				break;
-			default:
-				console.warn('Action not found:', action);
-		}
+	backToMainSettings() {
+		this.currentView = 'main';
+	}
+
+	goToProfile() {
+		this.routerSvc.navigate([CONSTANTS.routes.profile]);
+	}
+
+	openPrivacy() {
+		window.open('privacy-policy.html', '_blank');
+	}
+
+	openTerms() {
+		window.open('terms-of-service.html', '_blank');
 	}
 
 	importData() {
@@ -107,10 +83,6 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 			},
 			reject: () => {}
 		});
-	}
-
-	getTranslatedLabel(labelKey: string) {
-		return this.translateSvc.instant(labelKey);
 	}
 
 	fixMantIds(): void {

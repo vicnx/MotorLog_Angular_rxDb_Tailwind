@@ -10,7 +10,8 @@ import { GDriveService } from '@shared/services/gdrive.service';
 	selector: 'app-gdrive-card',
 	standalone: true,
 	imports: [CommonModule, TranslateModule],
-	templateUrl: './gdrive-card.component.html'
+	templateUrl: './gdrive-card.component.html',
+	host: { class: 'block w-full' }
 })
 export class GDriveCardComponent {
 	public gdriveSvc = inject(GDriveService);
