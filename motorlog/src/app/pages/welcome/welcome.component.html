@@ -1,84 +1,107 @@
-<form (ngSubmit)="checkErrors()" [formGroup]="loginForm" class="w-full">
-	<div class="min-h-screen flex flex-col justify-between items-center px-4">
+<form (ngSubmit)="checkErrors()" [formGroup]="loginForm" class="w-full min-h-screen flex items-center justify-center p-4 sm:p-6 bg-gray-50/50 dark:bg-gray-900/50">
+	
+	<!-- Tarjeta Principal de Bienvenida -->
+	<div class="card-container w-full max-w-md my-auto flex flex-col items-center text-center p-6 sm:p-8 backdrop-blur-sm relative overflow-hidden">
 		
-		<!-- Contenido principal centrado vertical y horizontalmente en el medio -->
-		<div class="my-auto flex flex-col items-center justify-center text-center w-full max-w-md py-8">
-			<img [src]="welcomeImg" alt="MotorLog" class="h-32 sm:h-36 mx-auto transition-transform hover:scale-105 duration-300 drop-shadow-md" />
-			
-			<h1 class="text-2xl sm:text-3xl font-bold mt-6 tracking-tight text-gray-900 dark:text-white">
-				@if (!userSvc.userExistOnBd()) {
+		<!-- Decoración sutil de fondo -->
+		<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
+		<div class="absolute -bottom-12 -left-12 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+		<!-- Logotipo Principal con Animación -->
+		<div class="relative mb-6 group cursor-pointer">
+			<div class="absolute inset-0 bg-primary-500/20 rounded-full blur-xl transition-all duration-300 group-hover:scale-110 opacity-70"></div>
+			<img 
+				[src]="welcomeImg" 
+				alt="MotorLog" 
+				class="relative h-28 sm:h-32 w-auto mx-auto transition-all duration-300 group-hover:scale-105 drop-shadow-md" 
+			/>
+		</div>
+
+		<!-- Encabezado y Título -->
+		<h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+			@if (!userSvc.userExistOnBd()) {
 				{{ 'welcome.title' | translate }}
-				}
-				<span class="text-primary-500 font-extrabold"> {{ const.appName }} 🚗</span>
-			</h1>
-			
-			<p class="w-full sm:w-5/6 text-center text-sm text-gray-600 dark:text-gray-300 mt-2">
-				{{ 'welcome.info' | translate }}
-			</p>
-			
-			<div class="p-4 mt-2 w-full max-w-xs text-center">
-				<div class="mb-2">
-					@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
-					<span class="text-xl font-semibold text-gray-800 dark:text-gray-100">👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }} 👋</span>
-					} @else {
+			}
+			<span class="text-primary-500"> {{ const.appName }} 🚗</span>
+		</h1>
+
+		<p class="text-sm text-gray-600 dark:text-gray-300 mt-2.5 leading-relaxed max-w-sm">
+			{{ 'welcome.info' | translate }}
+		</p>
+
+		<!-- Campo de Entrada / Mensaje de Bienvenida -->
+		<div class="w-full mt-6 mb-2">
+			@if (userSvc.userExistOnBd() && !userSvc.isUserLogged()) {
+				<div class="p-3 bg-primary-50/80 dark:bg-primary-950/40 border border-primary-200/60 dark:border-primary-900/40 rounded-xl">
+					<span class="text-base font-bold text-gray-800 dark:text-gray-100 flex items-center justify-center gap-2">
+						👋 {{ 'welcome.welcome-back' | translate : { userName: userSvc.user().name } }}
+					</span>
+				</div>
+			} @else {
+				<div class="flex flex-col gap-1.5 text-left">
+					<label class="input-label text-center">{{ 'welcome.title' | translate }}</label>
 					<input 
 						type="text" 
 						name="userName" 
 						formControlName="userName" 
 						required 
-						placeholder="Name" 
-						class="input-field text-center" 
+						placeholder="Nombre de usuario" 
+						class="input-field text-center font-medium" 
 						[maxlength]="const.form.inputText.maxLength" 
 					/>
-					}
 				</div>
-			</div>
-			
-			<div class="mt-2">
-				<button type="submit" class="btn-primary">
-					@if (!userSvc.userExistOnBd()) {
-					{{ 'welcome.start' | translate }}
-					} @else {
-					{{ 'welcome.continue' | translate }}
-					}
-					<i class="fas fa-chevron-right ml-2 text-xs"></i>
-				</button>
-			</div>
+			}
 		</div>
 
-		<!-- Footer de importación -->
+		<!-- Botón de Acción Principal -->
+		<div class="w-full mt-4">
+			<button type="submit" class="btn-primary w-full py-3 text-sm flex items-center justify-center gap-2 group">
+				<span>
+					@if (!userSvc.userExistOnBd()) {
+						{{ 'welcome.start' | translate }}
+					} @else {
+						{{ 'welcome.continue' | translate }}
+					}
+				</span>
+				<i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+			</button>
+		</div>
+
+		<!-- Sección de Importación Integrada -->
 		@if (!userSvc.userExistOnBd()) {
-		<footer class="flex items-center flex-col py-6 text-center w-full mb-2">
-			<div class="w-full max-w-sm flex flex-col items-center gap-2">
-				<p class="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">
+			<div class="w-full mt-8 pt-6 border-t border-gray-100 dark:border-gray-700/60 flex flex-col items-center">
+				<p class="text-xs text-gray-500 dark:text-gray-400 font-medium mb-3">
 					{{ 'welcome.importText' | translate }}
 				</p>
-				
-				<div class="flex items-center justify-center gap-3 w-full">
-					<!-- Botón de importación JSON local -->
+
+				<div class="grid grid-cols-2 gap-2.5 w-full">
+					<!-- Botón JSON Local -->
 					<button 
 						type="button" 
 						(click)="importData()"
-						class="btn-secondary flex items-center gap-2"
+						class="btn-secondary py-2 px-3 text-xs flex items-center justify-center gap-2"
 					>
 						<i class="fas fa-file-import text-primary-500"></i>
 						<span>JSON Local</span>
 					</button>
 
-					<!-- Botón de importación desde Google Drive -->
+					<!-- Botón Google Drive -->
 					<button 
 						type="button" 
 						(click)="restoreFromGDrive()"
-						class="btn-secondary bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 flex items-center gap-2"
+						class="btn-secondary py-2 px-3 text-xs flex items-center justify-center gap-2"
 					>
-						<img src="assets/images/google-drive.png" alt="Google Drive" class="w-4 h-4 object-contain" />
+						<img src="assets/images/google-drive.png" alt="Google Drive" class="w-3.5 h-3.5 object-contain" />
 						<span>{{ 'welcome.gdrive_import' | translate }}</span>
 					</button>
 				</div>
 			</div>
-		</footer>
 		}
+
 	</div>
+
+	<!-- Diálogos y Elementos Adicionales -->
+	<app-welcome-dialog-info></app-welcome-dialog-info>
 	<p-toast key="toast" position="top-center"></p-toast>
-  <input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />
+	<input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />
 </form>
