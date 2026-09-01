@@ -6,32 +6,13 @@
   <div *ngIf="currentView === 'main'" class="space-y-6 animate-fadeIn">
     
     <!-- 1. Tarjeta de Perfil Rápido -->
-    <div
-      (click)="goToProfile()"
-      class="card-container flex items-center justify-between p-4 cursor-pointer hover:border-primary-500/40 transition-all duration-200 active:scale-[0.99] group shadow-sm"
-    >
-      <div class="flex items-center gap-3.5 min-w-0">
-        <div class="relative flex-shrink-0">
-          <img
-            [src]="userSvc.user().avatar"
-            [alt]="userSvc.user().name"
-            class="w-12 h-12 rounded-full object-cover border-2 border-primary-500/30 ring-2 ring-primary-500/10"
-          />
-        </div>
-        <div class="flex flex-col min-w-0">
-          <span class="font-bold text-base text-gray-900 dark:text-white truncate">
-            {{ userSvc.user().name }}
-          </span>
-          <span class="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1">
-            <i class="fas fa-id-badge text-[0.7rem]"></i>
-            <span>{{ 'pages.settings.profile' | translate }}</span>
-          </span>
-        </div>
-      </div>
-      <div class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-gray-400 group-hover:text-primary-500 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 transition-all">
-        <i class="fas fa-chevron-right text-xs"></i>
-      </div>
-    </div>
+    <app-action-row
+      [avatarUrl]="userSvc.user().avatar"
+      [title]="userSvc.user().name"
+      [badge]="'pages.settings.profile'"
+      [isStandaloneCard]="true"
+      (action)="goToProfile()"
+    ></app-action-row>
 
     <!-- 2. Sección: Almacenamiento y Datos -->
     <div class="space-y-2">
@@ -40,28 +21,13 @@
       </span>
 
       <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
-        <!-- Entrada a la sub-pantalla de Gestión de Datos -->
-        <a
-          (click)="goToDataManagement()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center flex-shrink-0 border border-primary-100 dark:border-primary-900/30">
-              <i class="fas fa-database text-sm"></i>
-            </div>
-            <div class="flex flex-col min-w-0">
-              <span class="font-bold text-sm text-gray-900 dark:text-white">
-                {{ 'pages.settings.data' | translate }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {{ 'pages.settings.data_desc' | translate }}
-              </span>
-            </div>
-          </div>
-          <div class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-gray-400 group-hover:text-primary-500 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 transition-all ml-2 flex-shrink-0">
-            <i class="fas fa-chevron-right text-xs"></i>
-          </div>
-        </a>
+        <app-action-row
+          icon="fas fa-database"
+          iconType="primary"
+          [title]="'pages.settings.data'"
+          [subtitle]="'pages.settings.data_desc'"
+          (action)="goToDataManagement()"
+        ></app-action-row>
       </div>
     </div>
 
@@ -91,37 +57,21 @@
       </span>
 
       <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
-        <!-- Política de privacidad -->
-        <a
-          (click)="openPrivacy()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 group-hover:text-primary-500 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 flex items-center justify-center flex-shrink-0 border border-gray-200/60 dark:border-gray-700/60 transition-colors">
-              <i class="fas fa-shield-alt text-sm"></i>
-            </div>
-            <span class="font-bold text-sm text-gray-900 dark:text-white">
-              {{ 'pages.settings.privacy' | translate }}
-            </span>
-          </div>
-          <i class="fas fa-external-link-alt text-xs text-gray-400 group-hover:text-primary-500 transition-colors"></i>
-        </a>
+        <app-action-row
+          icon="fas fa-shield-alt"
+          iconType="default"
+          rightIcon="fas fa-external-link-alt"
+          [title]="'pages.settings.privacy'"
+          (action)="openPrivacy()"
+        ></app-action-row>
 
-        <!-- Condiciones del servicio -->
-        <a
-          (click)="openTerms()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 group-hover:text-primary-500 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 flex items-center justify-center flex-shrink-0 border border-gray-200/60 dark:border-gray-700/60 transition-colors">
-              <i class="fas fa-file-contract text-sm"></i>
-            </div>
-            <span class="font-bold text-sm text-gray-900 dark:text-white">
-              {{ 'pages.settings.terms' | translate }}
-            </span>
-          </div>
-          <i class="fas fa-external-link-alt text-xs text-gray-400 group-hover:text-primary-500 transition-colors"></i>
-        </a>
+        <app-action-row
+          icon="fas fa-file-contract"
+          iconType="default"
+          rightIcon="fas fa-external-link-alt"
+          [title]="'pages.settings.terms'"
+          (action)="openTerms()"
+        ></app-action-row>
       </div>
     </div>
 
@@ -137,143 +87,9 @@
   <!-- ========================================== -->
   <!-- VISTA 2: SUB-PANTALLA DE GESTIÓN DE DATOS   -->
   <!-- ========================================== -->
-  <div *ngIf="currentView === 'data'" class="space-y-6 animate-fadeIn">
-
-    <!-- Cabecera Reutilizable de Navegación de Retorno -->
-    <app-page-header
-      [title]="'pages.settings.data'"
-      [subtitle]="'pages.settings.data_desc'"
-      [backTitle]="'pages.settings.back_to_settings'"
-      (back)="backToMainSettings()"
-    ></app-page-header>
-
-    <!-- 1. Google Drive (Copia en la Nube) -->
-    <div class="space-y-2">
-      <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-        <i class="fab fa-google-drive text-primary-500"></i>
-        <span>{{ 'pages.settings.cloud_backup_section' | translate }}</span>
-      </span>
-
-      <app-gdrive-card class="block w-full"></app-gdrive-card>
-    </div>
-
-    <!-- 2. Copias Locales y Portabilidad (JSON) -->
-    <div class="space-y-2">
-      <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-        <i class="fas fa-file-code text-primary-500"></i>
-        <span>{{ 'pages.settings.local_backup_section' | translate }}</span>
-      </span>
-
-      <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
-        
-        <!-- Exportar copia JSON -->
-        <div
-          (click)="exportData()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center flex-shrink-0 border border-primary-100 dark:border-primary-900/30">
-              <i class="fas fa-file-export text-sm"></i>
-            </div>
-            <div class="flex flex-col min-w-0">
-              <span class="font-bold text-sm text-gray-900 dark:text-white">
-                {{ 'pages.settings.export' | translate }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {{ 'pages.settings.export_desc' | translate }}
-              </span>
-            </div>
-          </div>
-          <i class="fas fa-download text-xs text-gray-400 group-hover:text-primary-500 transition-colors ml-2 flex-shrink-0"></i>
-        </div>
-
-        <!-- Importar copia JSON -->
-        <div
-          (click)="importData()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-500 flex items-center justify-center flex-shrink-0 border border-blue-100 dark:border-blue-900/30">
-              <i class="fas fa-file-import text-sm"></i>
-            </div>
-            <div class="flex flex-col min-w-0">
-              <span class="font-bold text-sm text-gray-900 dark:text-white">
-                {{ 'pages.settings.import' | translate }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {{ 'pages.settings.import_desc' | translate }}
-              </span>
-            </div>
-          </div>
-          <i class="fas fa-upload text-xs text-gray-400 group-hover:text-blue-500 transition-colors ml-2 flex-shrink-0"></i>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 3. Herramientas de Mantenimiento -->
-    <div class="space-y-2">
-      <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-        <i class="fas fa-wrench text-primary-500"></i>
-        <span>{{ 'pages.settings.maintenance_tools_section' | translate }}</span>
-      </span>
-
-      <div class="card-container !p-0 overflow-hidden shadow-sm">
-        <div
-          (click)="fixMantIds()"
-          class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-500 flex items-center justify-center flex-shrink-0 border border-amber-100 dark:border-amber-900/30">
-              <i class="fas fa-toolbox text-sm"></i>
-            </div>
-            <div class="flex flex-col min-w-0">
-              <span class="font-bold text-sm text-gray-900 dark:text-white">
-                {{ 'pages.settings.fix_mant' | translate }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {{ 'pages.settings.fix_mant_desc' | translate }}
-              </span>
-            </div>
-          </div>
-          <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-amber-500 transition-colors ml-2 flex-shrink-0"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. Zona de Peligro -->
-    <div class="space-y-2">
-      <span class="px-1 text-xs font-bold text-red-500 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5">
-        <i class="fas fa-exclamation-triangle"></i>
-        <span>{{ 'pages.settings.danger_zone_section' | translate }}</span>
-      </span>
-
-      <div class="card-container !p-0 overflow-hidden border-red-200/80 dark:border-red-900/40 bg-red-50/20 dark:bg-red-950/10 shadow-sm">
-        <div
-          (click)="deleteData()"
-          class="flex items-center justify-between p-4 hover:bg-red-50/60 dark:hover:bg-red-950/30 cursor-pointer transition-all duration-200 active:scale-[0.99] group"
-        >
-          <div class="flex items-center gap-3.5 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 flex items-center justify-center flex-shrink-0 border border-red-200 dark:border-red-800/40">
-              <i class="fas fa-trash-alt text-sm"></i>
-            </div>
-            <div class="flex flex-col min-w-0">
-              <span class="font-bold text-sm text-red-600 dark:text-red-400">
-                {{ 'pages.settings.delete' | translate }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {{ 'pages.settings.delete_desc' | translate }}
-              </span>
-            </div>
-          </div>
-          <i class="fas fa-trash text-xs text-red-400 group-hover:text-red-600 transition-colors ml-2 flex-shrink-0"></i>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <app-data-management
+    *ngIf="currentView === 'data'"
+    (back)="backToMainSettings()"
+  ></app-data-management>
 
 </div>
-
-<!-- Input invisible para selección de archivo de importación JSON -->
-<input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />

@@ -1,0 +1,90 @@
+<div class="space-y-6 animate-fadeIn">
+
+  <!-- Cabecera Reutilizable de Navegación de Retorno -->
+  <app-page-header
+    [title]="'pages.settings.data'"
+    [subtitle]="'pages.settings.data_desc'"
+    [backTitle]="'pages.settings.back_to_settings'"
+    (back)="onBack()"
+  ></app-page-header>
+
+  <!-- 1. Google Drive (Copia en la Nube) -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fab fa-google-drive text-primary-500"></i>
+      <span>{{ 'pages.settings.cloud_backup_section' | translate }}</span>
+    </span>
+
+    <app-gdrive-card class="block w-full"></app-gdrive-card>
+  </div>
+
+  <!-- 2. Copias Locales y Portabilidad (JSON) -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-file-code text-primary-500"></i>
+      <span>{{ 'pages.settings.local_backup_section' | translate }}</span>
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
+      <app-action-row
+        icon="fas fa-file-export"
+        iconType="primary"
+        rightIcon="fas fa-download"
+        [title]="'pages.settings.export'"
+        [subtitle]="'pages.settings.export_desc'"
+        (action)="exportData()"
+      ></app-action-row>
+
+      <app-action-row
+        icon="fas fa-file-import"
+        iconType="blue"
+        rightIcon="fas fa-upload"
+        [title]="'pages.settings.import'"
+        [subtitle]="'pages.settings.import_desc'"
+        (action)="importData()"
+      ></app-action-row>
+    </div>
+  </div>
+
+  <!-- 3. Herramientas de Mantenimiento -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-wrench text-primary-500"></i>
+      <span>{{ 'pages.settings.maintenance_tools_section' | translate }}</span>
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden shadow-sm">
+      <app-action-row
+        icon="fas fa-toolbox"
+        iconType="amber"
+        [title]="'pages.settings.fix_mant'"
+        [subtitle]="'pages.settings.fix_mant_desc'"
+        (action)="fixMantIds()"
+      ></app-action-row>
+    </div>
+  </div>
+
+  <!-- 4. Zona de Peligro -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-red-500 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>{{ 'pages.settings.danger_zone_section' | translate }}</span>
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden border-red-200/80 dark:border-red-900/40 bg-red-50/20 dark:bg-red-950/10 shadow-sm">
+      <app-action-row
+        icon="fas fa-trash-alt"
+        iconType="red"
+        rightIcon="fas fa-trash"
+        [isDanger]="true"
+        [title]="'pages.settings.delete'"
+        [subtitle]="'pages.settings.delete_desc'"
+        (action)="deleteData()"
+      ></app-action-row>
+    </div>
+  </div>
+
+</div>
+
+<!-- Input invisible para selección de archivo de importación JSON -->
+<input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />

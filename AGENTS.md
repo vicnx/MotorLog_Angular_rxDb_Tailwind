@@ -86,4 +86,27 @@ Para garantizar una interfaz limpia, profesional y coherente (*estilo minimalist
 2. **Uso Obligatorio de Clases Globales:** Usar siempre `.input-field`, `.btn-primary`, `.btn-secondary` y `.card-container` declaradas en `src/styles.scss`.
 3. **Mobile-First & Dark Mode:** Garantizar diseño fluido y soporte de modo oscuro en toda la app.
 
+---
+
+## 🧩 6. Catálogo de Componentes Comunes y Reutilizables (Uso Obligatorio)
+
+> [!IMPORTANT]
+> **Mantenimiento Proactivo del Catálogo (OBLIGATORIO):** Cada vez que se cree, extraiga o refactorice un nuevo componente reutilizable en `@shared/components` o `@components`, el agente **DEBE añadirlo y registrarlo de forma inmediata y autónoma en esta tabla** (con su selector, ruta de importación, propiedades y eventos clave) **antes de dar por finalizada la tarea**, sin esperar a que el usuario se lo recuerde.
+
+Todo desarrollo de UI debe consultar este catálogo antes de crear maquetación o lógica nueva. Si ya existe un componente común para la tarea, **es estrictamente obligatorio reutilizarlo**:
+
+| Componente | Selector | Ruta de Importación | Descripción y Propiedades Clave |
+| :--- | :--- | :--- | :--- |
+| **`ActionRowComponent`** | `app-action-row` | `@shared/components/action-row/action-row.component` | **Fila táctil universal** para menús, opciones, listas divididas (`divide-y`), enlaces y perfiles. Soporta `[icon]`, `[iconType]` (`'primary' \| 'blue' \| 'amber' \| 'red' \| 'default'`), `[avatarUrl]`, `[title]`, `[subtitle]`, `[badge]`, `[rightIcon]`, `[isDanger]`, `[isStandaloneCard]` y evento `(action)`. |
+| **`PageHeaderComponent`** | `app-page-header` | `@shared/components/page-header/page-header.component` | **Cabecera estándar de sub-pantallas** con botón circular táctil de retorno, títulos traducidos y proyección `<ng-content>`. Soporta `[title]`, `[subtitle]`, `[backRoute]`, `[showBackButton]`, `[backTitle]` y evento `(back)`. |
+| **`SearchBarComponent`** | `app-search-bar` | `@shared/components/search-bar/search-bar.component` | **Buscador interactivo desplegable** con botón flotante de lupa, foco automático, botón `✕` de limpieza y two-way bindings `[(value)]` y `[(isOpen)]`. Emite `(search)`, `(clear)` y `(closed)`. |
+| **`GDriveCardComponent`** | `app-gdrive-card` | `@shared/components/gdrive-card/gdrive-card.component` | **Tarjeta interactiva de sincronización en la nube** con Google Drive (login OAuth2, estado de copia y botón de sincronizar). |
+| **`LangDropdownComponent`** | `app-lang-dropdown` | `@shared/components/lang-dropdown/lang-dropdown.component` | **Selector de idioma** estilizado con banderas e integración con `@ngx-translate`. |
+| **`ImageSelectorComponent`** | `app-image-selector` | `@shared/components/image-selector/image-selector.component` | **Selector de avatares/imágenes** para vehículos y perfil de usuario. |
+| **`VehicleSelectorComponent`** | `app-vehicle-selector` | `@shared/components/vehicle-selector/vehicle-selector.component` | **Selector dropdown** del vehículo activo en cabeceras. |
+| **`MaintenanceTimelineComponent`** | `app-maintenance-timeline` | `@shared/components/maintenance-timeline/maintenance-timeline.component` | **Línea de tiempo cronológica** interactiva de mantenimientos, con soporte de filtrado en vivo y estados vacíos. |
+| **`NavbarComponent`** | `app-navbar` | `@shared/components/navbar/navbar.component` | **Barra superior flotante** con avatar de usuario y acciones. |
+| **`BottomNavComponent`** | `app-bottom-nav` | `@shared/components/bottom-nav/bottom-nav.component` | **Barra de navegación inferior fija** mobile-first con pestañas principales. |
+
+
 

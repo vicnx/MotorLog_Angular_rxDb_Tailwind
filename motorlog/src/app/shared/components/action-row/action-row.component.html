@@ -1,0 +1,78 @@
+<div
+  (click)="onClick()"
+  class="flex items-center justify-between p-4 cursor-pointer transition-all duration-200 active:scale-[0.99] select-none group"
+  [ngClass]="[
+    isStandaloneCard ? 'card-container shadow-sm hover:border-primary-500/40' : '',
+    !isStandaloneCard && isDanger ? 'hover:bg-red-50/60 dark:hover:bg-red-950/30' : '',
+    !isStandaloneCard && !isDanger ? 'bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60' : ''
+  ]"
+>
+  <!-- Contenido Izquierdo: Icono o Avatar + Título/Subtítulo -->
+  <div class="flex items-center gap-3.5 min-w-0">
+    <!-- 1. Caso Avatar de Perfil -->
+    <div *ngIf="avatarUrl" class="relative flex-shrink-0">
+      <img
+        [src]="avatarUrl"
+        [alt]="title | translate"
+        class="w-12 h-12 rounded-full object-cover border-2 border-primary-500/30 ring-2 ring-primary-500/10"
+      />
+    </div>
+
+    <!-- 2. Caso Icono Cuadrado con Bordes Redondeados -->
+    <div
+      *ngIf="!avatarUrl && icon"
+      class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border transition-colors"
+      [ngClass]="getIconContainerClasses()"
+    >
+      <i [class]="icon" class="text-sm"></i>
+    </div>
+
+    <!-- Textos -->
+    <div class="flex flex-col min-w-0">
+      <span
+        class="font-bold truncate"
+        [ngClass]="[
+          avatarUrl ? 'text-base text-gray-900 dark:text-white' : 'text-sm',
+          !avatarUrl && isDanger ? 'text-red-600 dark:text-red-400' : '',
+          !avatarUrl && !isDanger ? 'text-gray-900 dark:text-white' : ''
+        ]"
+      >
+        {{ title | translate }}
+      </span>
+
+      <!-- Subtítulo o Badge -->
+      <span *ngIf="subtitle" class="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
+        {{ subtitle | translate }}
+      </span>
+
+      <span *ngIf="badge" class="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-0.5">
+        <i class="fas fa-id-badge text-[0.7rem]"></i>
+        <span>{{ badge | translate }}</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Contenido Derecho: Icono de Acción o Proyección personalizada -->
+  <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+    <ng-content></ng-content>
+
+    <ng-container *ngIf="showRightIcon">
+      <!-- Icono circular en tarjeta o chevron simple -->
+      <div
+        *ngIf="avatarUrl || isStandaloneCard"
+        class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-gray-400 group-hover:text-primary-500 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 transition-all"
+      >
+        <i [class]="rightIcon" class="text-xs"></i>
+      </div>
+
+      <i
+        *ngIf="!avatarUrl && !isStandaloneCard"
+        [class]="rightIcon"
+        class="text-xs transition-colors"
+        [ngClass]="[
+          isDanger ? 'text-red-400 group-hover:text-red-600' : 'text-gray-400 group-hover:text-primary-500'
+        ]"
+      ></i>
+    </ng-container>
+  </div>
+</div>
