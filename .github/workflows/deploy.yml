@@ -26,6 +26,25 @@ jobs:
         run: npm install
         working-directory: motorlog
 
+      - name: Create environment files
+        run: |
+          mkdir -p src/environments
+          cat <<EOF > src/environments/environment.ts
+          export const environment = {
+              production: false,
+              logoDevToken: '${{ secrets.LOGO_DEV_TOKEN }}',
+              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/'
+          };
+          EOF
+          cat <<EOF > src/environments/environment.prod.ts
+          export const environment = {
+              production: true,
+              logoDevToken: '${{ secrets.LOGO_DEV_TOKEN }}',
+              baseUrl: '/MotorLog_Angular_rxDb_Tailwind/'
+          };
+          EOF
+        working-directory: motorlog
+
       - name: Build application
         run: npm run build
         working-directory: motorlog
