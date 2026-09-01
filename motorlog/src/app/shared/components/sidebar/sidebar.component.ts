@@ -18,8 +18,7 @@ import { CONSTANTS } from '@shared/app-constants';
 	selector: 'app-sidebar',
 	standalone: true,
 	imports: [CommonModule, SidebarModule, RouterModule, TranslateModule, ToastModule, AvatarModule, ButtonModule, ConfirmDialogModule, LangDropdownComponent],
-	templateUrl: './sidebar.component.html',
-	styleUrls: ['./sidebar.component.scss']
+	templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent extends BaseComponent {
 	show: boolean = false;

@@ -11,8 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 	selector: 'app-home',
 	standalone: true,
 	imports: [CommonModule, TranslateModule, NgxSpinnerModule, VehicleSelectorComponent, MaintenanceTimelineComponent, MaintenanceFiltersComponent],
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	templateUrl: './home.component.html'
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 

@@ -28,12 +28,11 @@ export class AvatarDialogComponent extends BaseComponent {
 	}
 
 	onApply(): void {
-    this.userSvc.updateUser('1', { avatar: this.newAvatar }).subscribe({
-      next: (res) => {
-        this.close.emit();
-      }
-    })
-		console.log('Nuevo avatar aplicado:', this.newAvatar);
+		this.userSvc.updateUser('1', { avatar: this.newAvatar }).subscribe({
+			next: () => {
+				this.close.emit();
+			}
+		});
 	}
 
 	onGenerateAnother(): void {

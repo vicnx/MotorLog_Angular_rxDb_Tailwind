@@ -45,7 +45,6 @@ import { BrandLogoPipe } from '../../shared/pipes/brand-logo.pipe';
 		MultiSelectModule,
 		ConfirmDialogModule,
 		ImageSelectorComponent,
-		ButtonModule,
 		BrandLogoPipe
 	],
 	providers: [DialogService],
@@ -229,7 +228,6 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	}
 
 	public deleteMaintenance(): void {
-		console.log('deleteMaintenance');
 		this.confirmationSvc.confirm({
 			message: this.translateSvc.instant('pages.mant-details.delete_mant.confirm_msg'),
 			header: this.translateSvc.instant('pages.mant-details.delete_mant.confirm_header'),
@@ -266,7 +264,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 
 	public openAddLocation(): void {
 		this.ref = this.dialogService.open(CustomLocationsDetailsComponent, {
-			header: this.translateSvc.instant('pages.mant-details.add-mant.location_prompt') || 'Nueva Ubicación',
+			header: this.translateSvc.instant('pages.mant-details.add_location_btn'),
 			width: '450px',
 			contentStyle: { overflow: 'auto' },
 			baseZIndex: 10000,

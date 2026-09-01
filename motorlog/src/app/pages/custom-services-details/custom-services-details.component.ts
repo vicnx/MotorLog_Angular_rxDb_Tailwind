@@ -63,7 +63,6 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 	}
 
 	public onSubmit(): void {
-		console.log(this.customServiceForm.value);
 		if (this.customServiceForm.valid) {
 			this.newCustomService();
 		} else {
@@ -74,8 +73,7 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 	private newCustomService(): void {
 		this.spinnerSvc.show();
 		this.userSvc.addCustomServiceToUser(this.customServiceForm.value).subscribe({
-			next: (res: any) => {
-				console.log(res);
+			next: () => {
 				this.operationOK();
 			}
 		});

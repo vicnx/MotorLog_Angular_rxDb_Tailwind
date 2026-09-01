@@ -51,7 +51,7 @@ export class ProfileComponent extends BaseComponent {
 				this.routerSvc.navigate([`${CONSTANTS.routes.customServiceList}`]);
 				break;
 			default:
-				console.log('Acción no reconocida');
+				break;
 		}
 	}
 

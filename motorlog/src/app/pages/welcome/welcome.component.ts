@@ -50,9 +50,7 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {
-		this.checkUser();
-	}
+	ngOnInit(): void {}
 
 	public checkErrors(): void {
 		if (this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()) {

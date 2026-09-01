@@ -17,8 +17,7 @@ import { filter } from 'rxjs/operators';
 	selector: 'app-navbar',
 	standalone: true,
 	imports: [CommonModule, DropdownModule, FormsModule, TranslateModule, SidebarComponent, LangDropdownComponent, ButtonModule],
-	templateUrl: './navbar.component.html',
-	styleUrls: ['./navbar.component.scss']
+	templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 	menuOptions: any[] = [];

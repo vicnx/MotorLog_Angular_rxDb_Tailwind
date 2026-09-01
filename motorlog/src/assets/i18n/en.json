@@ -4,6 +4,7 @@
 			"title": "Home",
 			"no_mant": "There are no registered maintenance for this vehicle.",
 			"no_vehicles": "There are no registered vehicles for this user.",
+			"view_details": "View details",
 			"filters": {
 				"title": "Filters",
 				"date_range": "Date range",

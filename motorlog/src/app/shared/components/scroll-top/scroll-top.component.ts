@@ -7,7 +7,6 @@ import { Button } from 'primeng/button';
   standalone: true,
   selector: 'app-scroll-to-top',
   templateUrl: './scroll-top.component.html',
-  styleUrls: ['./scroll-top.component.scss'],
   imports: [CommonModule,Button]
 })
 export class ScrollTopComponent {

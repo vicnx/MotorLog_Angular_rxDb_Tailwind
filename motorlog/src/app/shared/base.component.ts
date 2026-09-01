@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CONSTANTS } from './app-constants';
-import { UserModel } from './models/user.model';
 import { UtilsService } from './services/utils.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from './services/user.service';
@@ -14,12 +13,9 @@ import { VehiclesService } from './services/vehicles.service';
 	template: ''
 })
 export class BaseComponent {
-	public pageName: string = '';
-	public userIsLogged: boolean = false;
 	public const = CONSTANTS;
-	public userData: UserModel = {} as UserModel;
 
-	// Services
+	// Servicios inyectados compartidos por todos los componentes
 	routeSvc = inject(ActivatedRoute);
 	utilsSvc = inject(UtilsService);
 	translateSvc = inject(TranslateService);
@@ -30,19 +26,6 @@ export class BaseComponent {
 	vehicleSvc = inject(VehiclesService);
 	confirmationSvc = inject(ConfirmationService);
 
-	constructor() {
-		this.pageName = '';
-	}
-
-	public showNotImplemented(): void {
-		this.messageSvc.add({
-			severity: 'error',
-			summary: this.translateSvc.instant('msgs.error_header'),
-			detail: this.translateSvc.instant('msgs.not_implemented'),
-			key: 'toast'
-		});
-	}
-
 	public showSuccess(): void {
 		this.messageSvc.add({
 			severity: 'success',
@@ -51,8 +34,6 @@ export class BaseComponent {
 			key: 'toast'
 		});
 	}
-
-	protected checkUser(): void {}
 
 	public showErrorMsg(msg: string): void {
 		this.messageSvc.add({
@@ -73,6 +54,7 @@ export class BaseComponent {
 		});
 	}
 
+	/** Abre el panel de p-colorPicker de PrimeNG con fallback chain: show → toggle → click en preview. */
 	public openColorPicker(colorPicker: any, event?: Event): void {
 		if (event) {
 			event.stopPropagation();
@@ -88,3 +70,4 @@ export class BaseComponent {
 		}
 	}
 }
+

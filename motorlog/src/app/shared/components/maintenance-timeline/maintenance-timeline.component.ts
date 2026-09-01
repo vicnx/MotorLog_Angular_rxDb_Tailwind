@@ -1,18 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, Signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@shared/app-constants';
 import { BaseComponent } from '@shared/base.component';
 import { Maintenance, ServiceTypeItem } from '@shared/models/maintenance.model';
 import { VehicleModel } from '@shared/models/vehicle.model';
 import { VehiclesService } from '@shared/services/vehicles.service';
-import { VehicleSelectorComponent } from '../vehicle-selector/vehicle-selector.component';
-import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { TimelineModule } from 'primeng/timeline';
-import { MaintenanceFiltersComponent, FilterDates } from '../maintenance-filters/maintenance-filters.component';
+import { FilterDates } from '../maintenance-filters/maintenance-filters.component';
 
 export interface GroupedMaintenanceItem {
 	date: string;
@@ -25,13 +20,7 @@ export interface GroupedMaintenanceItem {
 	standalone: true,
 	imports: [
 		CommonModule,
-		TimelineModule,
-		TranslateModule,
-		ButtonModule,
-		CalendarModule,
-		FormsModule,
-		MaintenanceFiltersComponent,
-		VehicleSelectorComponent
+		TranslateModule
 	],
 	animations: [
 		trigger('fadeInOut', [
@@ -64,27 +53,6 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 
 	startDate: Date | null = null;
 	endDate: Date | null = null;
-	es = {
-		firstDayOfWeek: 1,
-		dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-		monthNames: [
-			'Enero',
-			'Febrero',
-			'Marzo',
-			'Abril',
-			'Mayo',
-			'Junio',
-			'Julio',
-			'Agosto',
-			'Septiembre',
-			'Octubre',
-			'Noviembre',
-			'Diciembre'
-		],
-		monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-		today: 'Hoy'
-	};
 
 	constructor() {
 		super();
@@ -93,6 +61,7 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		});
 	}
 
+	/** Filtra los mantenimientos dentro del rango de fechas activo (startDate - endDate). */
 	private filterMaintenances(maintenances: Maintenance[]): Maintenance[] {
 		if (!this.startDate && !this.endDate) {
 			return maintenances;
@@ -108,6 +77,7 @@ export class MaintenanceTimelineComponent extends BaseComponent {
 		});
 	}
 
+	/** Agrupa los mantenimientos por mes/año y los ordena cronológicamente de más reciente a más antiguo. */
 	private groupAndSortMaintenances(maintenances: Maintenance[]): GroupedMaintenanceItem[] {
 		const grouped = maintenances.reduce(
 			(acc: Record<string, (Maintenance & { title: string; color?: string })[]>, maintenance: Maintenance) => {

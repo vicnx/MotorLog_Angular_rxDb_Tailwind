@@ -48,22 +48,22 @@ export class CustomServicesListComponent extends BaseComponent implements OnInit
     this.confirmationSvc.confirm({
 			message: this.translateSvc.instant('pages.custom-services.delete_customService.confirm_msg'),
 			header: this.translateSvc.instant('pages.custom-services.delete_customService.confirm_header'),
-			icon: 'fas fa-exclamation-triangle',
-			rejectButtonStyleClass: 'p-button-text',
+			icon: 'fas fa-exclamation-triangle text-red-500 text-xl',
+			acceptButtonStyleClass: 'btn-danger !py-2 !px-4 !text-xs',
+			rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
 			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
 			rejectLabel: this.translateSvc.instant('confirm.default_no'),
 			key: 'confirmDialog',
 			accept: () => {
 				this.spinnerSvc.show();
-        this.userSvc.removeCustomServiceFromUser(customService.id).subscribe({
-          next: (res) => {
-				    this.spinnerSvc.hide();
-            console.log(res)
-          }
-        })
+				this.userSvc.removeCustomServiceFromUser(customService.id).subscribe({
+					next: () => {
+						this.spinnerSvc.hide();
+					}
+				});
 			},
 			reject: () => {}
 		});
-  }
+	}
 
 }

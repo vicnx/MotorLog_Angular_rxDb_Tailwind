@@ -17,12 +17,10 @@ export class ChangeNameDialogComponent extends BaseComponent  {
 
   onApply(): void {
     this.userSvc.updateUser('1', { name: this.newName }).subscribe({
-      next: (res) => {
+      next: () => {
         this.close.emit();
-        console.log(this.userSvc.user())
       }
-    })
-		console.log('Nuevo nombre aplicado:', this.newName);
+    });
 	}
 
   onDialogClose(): void {
