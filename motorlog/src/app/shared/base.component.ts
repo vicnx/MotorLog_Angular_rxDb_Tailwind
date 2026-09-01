@@ -35,27 +35,32 @@ export class BaseComponent {
 	}
 
 	public showNotImplemented(): void {
-		this.messageSvc.add({ severity: 'error', summary: 'Error', detail: 'Funcionalidad no implementada.', key: 'toast' });
+		this.messageSvc.add({
+			severity: 'error',
+			summary: this.translateSvc.instant('msgs.error_header'),
+			detail: this.translateSvc.instant('msgs.not_implemented'),
+			key: 'toast'
+		});
 	}
 
 	public showSuccess(): void {
-		this.messageSvc.add({ severity: 'success', summary: 'Success', detail: this.translateSvc.instant('msgs.success'), key: 'toast' });
+		this.messageSvc.add({
+			severity: 'success',
+			summary: this.translateSvc.instant('msgs.success_header'),
+			detail: this.translateSvc.instant('msgs.success'),
+			key: 'toast'
+		});
 	}
 
-	protected checkUser(): void {
-		// this.dexieService.isLoggedIn$.subscribe((isLoggedIn) => {
-		//     this.userIsLogged = this.dexieService.isLoggedIn;
-		//     if (this.userIsLogged) {
-		//         this.userData = this.dexieService.userDataInfo;
-		//         this.router.navigate([CONSTANTS.routes.home]);
-		//     } else {
-		//         this.router.navigate([CONSTANTS.routes.welcome]);
-		//     }
-		// });
-	}
+	protected checkUser(): void {}
 
 	public showErrorMsg(msg: string): void {
-		this.messageSvc.add({ severity: 'error', summary: 'Error', detail: msg, key: 'toast' });
+		this.messageSvc.add({
+			severity: 'error',
+			summary: this.translateSvc.instant('msgs.error_header'),
+			detail: msg,
+			key: 'toast'
+		});
 	}
 
 	protected markFieldsAsTouched(formGroup: FormGroup) {
