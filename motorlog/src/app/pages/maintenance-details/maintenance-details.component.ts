@@ -23,6 +23,8 @@ import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dy
 import { CustomServiceDetailsComponent } from '../custom-services-details/custom-services-details.component';
 import { CustomLocationsDetailsComponent } from '../custom-locations-details/custom-locations-details.component';
 import { UtilsService } from '@shared/services/utils.service';
+import { BrandLogoPipe } from '../../shared/pipes/brand-logo.pipe';
+
 @Component({
 	selector: 'app-add-vehicle',
 	standalone: true,
@@ -43,7 +45,8 @@ import { UtilsService } from '@shared/services/utils.service';
 		MultiSelectModule,
 		ConfirmDialogModule,
 		ImageSelectorComponent,
-		ButtonModule
+		ButtonModule,
+		BrandLogoPipe
 	],
 	providers: [DialogService],
 	templateUrl: './maintenance-details.component.html'

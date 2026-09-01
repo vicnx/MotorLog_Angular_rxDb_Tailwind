@@ -11,13 +11,13 @@ export class BrandService {
 	}
 
 	getLogoUrl(brandCode: string | undefined): string {
-		if (!brandCode) return 'assets/img/default-vehicle.png';
+		if (!brandCode) return 'assets/images/default-vehicle.png';
 
 		const brandData = this.brands().find((b) => b.code.toLowerCase() === brandCode.toLowerCase());
 		if (brandData?.domain) {
 			return `https://img.logo.dev/${brandData.domain}?token=${environment.logoDevToken}&size=128`;
 		}
 
-		return 'assets/img/default-vehicle.png';
+		return 'assets/images/default-vehicle.png';
 	}
 }

@@ -1,55 +1,78 @@
 <div
 	[ngClass]="{
-		'mx-auto h-screen md:h-full max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl': !ref,
+		'w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12': !ref,
 		'w-full p-0 bg-transparent': ref
 	}"
 >
-	<div [ngClass]="{ 'container mx-auto max-w-screen-md': !ref }">
-		<form class="p-4" [formGroup]="customServiceForm" (ngSubmit)="onSubmit()">
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.label' | translate }}</label>
+	<div [ngClass]="{ 'card-container': !ref }">
+		<form [formGroup]="customServiceForm" (ngSubmit)="onSubmit()" class="space-y-5">
+			
+			<!-- 1. Nombre del Servicio -->
+			<div>
+				<label class="input-label">{{ 'pages.custom-services.label' | translate }} *</label>
 				<input
-					pInputText
 					type="text"
-					class="w-full"
+					class="input-field"
 					[placeholder]="'pages.custom-services.label' | translate"
 					formControlName="label"
-					[disabled]="isConsulta"
+					[readonly]="isConsulta"
 				/>
-				<div *ngIf="customServiceForm?.get('label')?.invalid && customServiceForm?.get('label')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="customServiceForm?.get('label')?.invalid && customServiceForm?.get('label')?.touched" class="input-error">
 					{{ 'pages.custom-services.validations.label_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.custom-services.color' | translate }}</label>
-				<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+
+			<!-- 2. Color del Servicio -->
+			<div>
+				<label class="input-label">{{ 'pages.custom-services.color' | translate }}</label>
+				
+				<div class="input-field flex items-center justify-between h-[42px] !py-0">
+					<div class="flex items-center gap-3">
+						<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+						<span class="text-xs font-mono font-semibold text-gray-800 dark:text-gray-200 uppercase select-none">
+							{{ customServiceForm.get('color')?.value }}
+						</span>
+					</div>
+
+					<div 
+						class="w-5 h-5 rounded-full border border-gray-200 dark:border-gray-700 shadow-xs flex-shrink-0" 
+						[style.backgroundColor]="customServiceForm.get('color')?.value"
+					></div>
+				</div>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">
-					{{ 'pages.custom-services.icon' | translate }}
+
+			<!-- 3. Selector de Icono (Grid Táctil) -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.custom-services.icon' | translate }} *
 				</label>
 
-				<div class="flex overflow-x-auto pb-2 custom-scrollbar gap-2 max-w-full">
-					<p-selectButton
-						[options]="optionsIcons"
-						optionLabel="icon"
-						formControlName="icon"
+				<div class="grid grid-cols-4 sm:grid-cols-6 gap-2.5 p-3.5 rounded-2xl border border-gray-200/80 dark:border-gray-700/80 bg-gray-50/60 dark:bg-gray-900/40 max-h-44 overflow-y-auto">
+					<button
+						type="button"
+						*ngFor="let iconName of optionsIcons"
+						(click)="selectIcon(iconName)"
 						[disabled]="isConsulta"
-						styleClass="flex-nowrap whitespace-nowrap"
+						class="h-11 rounded-xl flex items-center justify-center text-xl transition-all duration-150 border select-none disabled:pointer-events-none"
+						[ngClass]="customServiceForm.get('icon')?.value === iconName ? 'bg-primary-500 text-white border-primary-600 shadow-sm shadow-primary-500/30 scale-105' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200/80 dark:border-gray-700/80 hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950/40'"
+						[title]="iconName"
 					>
-						<ng-template let-icon pTemplate>
-							<div class="p-2 flex items-center justify-center min-w-[3rem]">
-								<i [class]="icon" class="text-2xl" [ngStyle]="{ color: customServiceForm.get('color')?.value }"> </i>
-							</div>
-						</ng-template>
-					</p-selectButton>
+						<i [class]="iconName" [style.color]="customServiceForm.get('icon')?.value === iconName ? '#ffffff' : (customServiceForm.get('color')?.value || '#48d0b0')"></i>
+					</button>
 				</div>
 
-				<div *ngIf="customServiceForm?.get('icon')?.invalid && customServiceForm?.get('icon')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="customServiceForm?.get('icon')?.invalid && customServiceForm?.get('icon')?.touched" class="input-error">
 					{{ 'pages.custom-services.validations.icono_required' | translate }}
 				</div>
 			</div>
-			<p-button type="submit" [label]="'pages.custom-services.save' | translate"></p-button>
+
+			<!-- 4. Botón de Enviar -->
+			<div class="pt-2">
+				<button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+					<span>{{ 'pages.custom-services.save' | translate }}</span>
+					<i class="fas fa-check text-xs"></i>
+				</button>
+			</div>
 		</form>
 	</div>
 </div>

@@ -52,7 +52,7 @@ export class VehiclesListComponent extends BaseComponent implements OnInit {
 			return `https://img.logo.dev/${brandData.domain}?token=${environment.logoDevToken}&size=128`;
 		}
 
-		return 'assets/img/default-vehicle.png';
+		return 'assets/images/default-vehicle.png';
 	}
 
 	public onClickVehicle(vehicle: VehicleModel): void {

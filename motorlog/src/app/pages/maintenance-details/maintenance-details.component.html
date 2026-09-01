@@ -1,11 +1,77 @@
-<div class="mx-auto max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 sm:shadow-lg sm:rounded-3xl">
-	<div class="flex flex-col justify-center items-center">
-		<app-vehicle-selector [disabled]="isEdit"></app-vehicle-selector>
-	</div>
-	<div class="container mx-auto max-w-screen-md">
-		<form class="p-4" [formGroup]="mantForm" (ngSubmit)="onSubmit()">
-			<div class="mb-4">
-				<label for="date" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.date' | translate }}</label>
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+	<div class="card-container">
+		
+		<!-- Encabezado de la pantalla -->
+		<div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-100 dark:border-gray-700/60">
+			<h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white tracking-tight">
+				{{ (isEdit ? (isConsulta ? 'pages.mant-details.title_consult' : 'pages.mant-details.title_edit') : 'pages.mant-details.add-mant.title') | translate }}
+			</h2>
+
+			<!-- Botones de Alternar Modo Consulta / Edición -->
+			<div class="flex items-center gap-2" *ngIf="isEdit">
+				<button 
+					*ngIf="isConsulta" 
+					type="button" 
+					(click)="toggleEditMode()" 
+					class="btn-secondary !py-1 !px-2.5 !text-xs rounded-lg flex items-center gap-1.5"
+				>
+					<i class="fas fa-edit text-primary-500 text-xs"></i>
+					<span>{{ 'pages.mant-details.edit_mode' | translate }}</span>
+				</button>
+
+				<button 
+					*ngIf="!isConsulta" 
+					type="button" 
+					(click)="toggleEditMode()" 
+					class="btn-secondary !py-1 !px-2.5 !text-xs rounded-lg flex items-center gap-1.5"
+				>
+					<i class="fas fa-times text-gray-500 text-xs"></i>
+					<span>{{ 'pages.mant-details.cancel_edit' | translate }}</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Tarjeta Informativa del Vehículo Asociado (Sólo Lectura Elegante) -->
+		<div class="mb-6">
+			<label class="input-label">
+				{{ 'pages.mant-details.vehicle_info' | translate }}
+			</label>
+			<div class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/80 dark:border-gray-700/80 bg-gray-50/80 dark:bg-gray-800/50 shadow-xs">
+				<div class="flex items-center gap-3">
+					<div 
+						class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-sm shadow-xs shrink-0"
+						[style.backgroundColor]="currentVehicleInfo.color || '#48d0b0'"
+					>
+						<i [class]="currentVehicleInfo.icono || 'fa fa-car'"></i>
+					</div>
+					<div class="flex flex-col">
+						<span class="font-bold text-gray-900 dark:text-white text-sm leading-tight">
+							{{ currentVehicleInfo.nombreVehiculo }}
+						</span>
+						<span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+							{{ currentVehicleInfo.modelo }}
+						</span>
+					</div>
+				</div>
+
+				<!-- Muestra siempre la imagen de la marca o default-vehicle.png si no hay marca -->
+				<div class="flex items-center gap-2">
+					<img 
+						[src]="currentVehicleInfo.marca | brandLogo" 
+						[alt]="currentVehicleInfo.marca || 'Vehículo'" 
+						class="w-7 h-7 object-contain"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<form [formGroup]="mantForm" (ngSubmit)="onSubmit()" class="space-y-5">
+			
+			<!-- 1. Fecha -->
+			<div>
+				<label for="date" class="input-label">
+					{{ 'pages.mant-details.add-mant.date' | translate }} *
+				</label>
 				<p-calendar
 					id="date"
 					formControlName="date"
@@ -15,46 +81,63 @@
 					[hourFormat]="'24'"
 					[iconDisplay]="'input'"
 					[showIcon]="true"
-					[style]="{ width: '100%' }"
 					[required]="true"
+					[disabled]="isConsulta"
+					styleClass="w-full"
+					panelStyleClass="!rounded-2xl !bg-white dark:!bg-gray-800 !border !border-gray-200/80 dark:!border-gray-700/80 !shadow-xl !p-2 text-sm"
 				></p-calendar>
-				<div *ngIf="mantForm?.get('date')?.invalid && mantForm?.get('date')?.touched" class="text-red-500 text-sm mt-1">
+				<div *ngIf="mantForm?.get('date')?.invalid && mantForm?.get('date')?.touched" class="input-error">
 					{{ 'pages.mant-details.add-mant.validations.date_required' | translate }}
 				</div>
 			</div>
-			<div class="mb-4">
-				<label for="odometer" class="block text-gray-700 text-sm font-bold mb-2">{{
-					'pages.mant-details.add-mant.odometer' | translate
-				}}</label>
+
+			<!-- 2. Cuentakilómetros (Odometer) -->
+			<div>
+				<label for="odometer" class="input-label">
+					{{ 'pages.mant-details.add-mant.odometer' | translate }}
+				</label>
 				<p-inputNumber
-					[style]="{ width: '100%' }"
 					id="odometer"
 					formControlName="odometer"
 					mode="decimal"
 					[min]="0"
-					class="w-full"
+					[disabled]="isConsulta"
+					[readonly]="isConsulta"
+					inputStyleClass="input-field"
+					styleClass="w-full"
 				></p-inputNumber>
 			</div>
-			<div class="mb-4">
+
+			<!-- 3. Tipos de Servicio (MultiSelect) -->
+			<div>
 				<div class="flex justify-between items-center mb-2">
-					<label for="serviceType" class="block text-gray-700 text-sm font-bold">
+					<label for="serviceType" class="input-label mb-0">
 						{{ 'pages.mant-details.add-mant.service-type.name' | translate }}
 					</label>
-					<p-button *ngIf="!isConsulta" icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddCustomService()" type="button">
-					</p-button>
+					<button 
+						*ngIf="!isConsulta" 
+						type="button" 
+						(click)="openAddCustomService()" 
+						class="btn-secondary !py-0.5 !px-2 !text-[11px] font-medium leading-tight rounded-lg inline-flex items-center gap-1"
+					>
+						<i class="fa fa-plus text-primary-500 text-[9px]"></i>
+						<span>{{ 'pages.mant-details.add_service_btn' | translate }}</span>
+					</button>
 				</div>
 				<p-multiSelect
 					id="serviceType"
 					formControlName="serviceType"
 					[options]="serviceTypes"
 					placeholder="{{ 'pages.mant-details.add-mant.service-type.name' | translate }}"
-					[style]="{ width: '100%' }"
 					optionLabel="desc"
 					dataKey="value"
 					[autofocusFilter]="false"
+					[disabled]="isConsulta"
+					styleClass="w-full"
+					panelStyleClass="!rounded-2xl !bg-white dark:!bg-gray-800 !border !border-gray-200/80 dark:!border-gray-700/80 !shadow-xl !p-1.5 text-sm"
 				>
 					<ng-template let-service pTemplate="item">
-						<div class="flex items-center gap-2 max-w-[85vw] sm:max-w-full">
+						<div class="flex items-center gap-2 max-w-[85vw] sm:max-w-full text-xs py-0.5">
 							<i [class]="service.icon" [style.color]="service.color || '#6b7280'" class="shrink-0"></i>
 							<span class="whitespace-normal break-words leading-tight">{{ service.desc | translate }}</span>
 
@@ -64,107 +147,125 @@
 						</div>
 					</ng-template>
 				</p-multiSelect>
-				<ul class="list-inside text-xs pt-2" *ngIf="mantForm.get('serviceType')?.value?.length">
-					<li *ngFor="let service of mantForm.get('serviceType')?.value" class="text-gray-500">
-                        <i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
-						{{ service.label | translate }}
+				<ul class="flex flex-wrap gap-1.5 pt-2" *ngIf="mantForm.get('serviceType')?.value?.length">
+					<li *ngFor="let service of mantForm.get('serviceType')?.value" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-100/80 dark:bg-gray-800 text-xs font-medium text-gray-700 dark:text-gray-300 border border-gray-200/60 dark:border-gray-700/60">
+						<i [class]="service.icon" [style.color]="service.color || '#48d0b0'"></i>
+						<span>{{ service.label | translate }}</span>
 						<span *ngIf="isOrphan(service.value)" class="text-red-400 font-bold italic">
-							{{ 'pages.custom-services.deleted' | translate }}
+							({{ 'pages.custom-services.deleted' | translate }})
 						</span>
 					</li>
 				</ul>
 			</div>
 
-			<div class="mb-4">
+			<!-- 4. Ubicación (Dropdown) -->
+			<div>
 				<div class="flex justify-between items-center mb-2">
-					<label for="location" class="block text-gray-700 text-sm font-bold">
+					<label for="location" class="input-label mb-0">
 						{{ 'pages.mant-details.add-mant.location' | translate }}
 					</label>
-					<p-button *ngIf="!isConsulta" icon="fa fa-plus" [rounded]="true" [text]="true" size="small" (onClick)="openAddLocation()" type="button">
-					</p-button>
+					<button 
+						*ngIf="!isConsulta" 
+						type="button" 
+						(click)="openAddLocation()" 
+						class="btn-secondary !py-0.5 !px-2 !text-[11px] font-medium leading-tight rounded-lg inline-flex items-center gap-1"
+					>
+						<i class="fa fa-plus text-primary-500 text-[9px]"></i>
+						<span>{{ 'pages.mant-details.add_location_btn' | translate }}</span>
+					</button>
 				</div>
 				<p-dropdown
 					id="location"
 					formControlName="location"
 					[options]="locations"
 					placeholder="{{ 'pages.mant-details.add-mant.location' | translate }}"
-					[style]="{ width: '100%' }"
 					optionLabel="label"
 					optionValue="label"
 					[showClear]="true"
+					[disabled]="isConsulta"
+					styleClass="w-full"
+					panelStyleClass="!rounded-2xl !bg-white dark:!bg-gray-800 !border !border-gray-200/80 dark:!border-gray-700/80 !shadow-xl !p-1.5 text-sm"
 				>
 				</p-dropdown>
 			</div>
 
-			<div class="mb-4">
-				<label for="amount" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.amount' | translate }}</label>
+			<!-- 5. Importe / Coste (Amount) -->
+			<div>
+				<label for="amount" class="input-label">
+					{{ 'pages.mant-details.add-mant.amount' | translate }}
+				</label>
 				<p-inputNumber
-					[style]="{ width: '100%' }"
 					id="amount"
 					formControlName="amount"
 					mode="currency"
 					currency="EUR"
 					locale="es-ES"
-					class="w-full"
 					[min]="0"
 					[max]="1000000"
+					[disabled]="isConsulta"
+					[readonly]="isConsulta"
+					inputStyleClass="input-field"
+					styleClass="w-full"
 				></p-inputNumber>
 			</div>
-			<div class="mb-4">
-				<label for="notes" class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.notes' | translate }}</label>
+
+			<!-- 6. Notas Rápidas (Notes) -->
+			<div>
+				<label for="notes" class="input-label">
+					{{ 'pages.mant-details.add-mant.notes' | translate }}
+				</label>
 				<input
-					[style]="{ width: '100%' }"
-					pInputText
 					type="text"
-					class="w-full p-inputtext"
+					class="input-field"
 					[placeholder]="'pages.mant-details.add-mant.notes' | translate"
 					formControlName="notes"
 					maxlength="50"
+					[readonly]="isConsulta"
 				/>
 			</div>
-			<app-image-selector
-				*ngIf="!isConsulta || imageControl.value"
-				[imageControl]="imageControl"
-				[label]="'pages.mant-details.add-mant.imagen' | translate"
-				[modoConsulta]="isConsulta"
-			></app-image-selector>
 
-			<div class="mb-4">
-				<label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{
-					'pages.mant-details.add-mant.description' | translate
-				}}</label>
-				<textarea id="description" pInputTextarea [style]="{ width: '100%' }" formControlName="description" class="w-full" rows="4"></textarea>
+			<!-- 7. Selector de Imagen -->
+			<div class="pt-1">
+				<app-image-selector
+					*ngIf="!isConsulta || imageControl.value"
+					[imageControl]="imageControl"
+					[label]="'pages.mant-details.add-mant.imagen' | translate"
+					[modoConsulta]="isConsulta"
+				></app-image-selector>
 			</div>
 
-			<div *ngIf="!isConsulta" class="flex flex-col gap-3 mt-8 pt-4 border-t border-gray-100">
-				<button
-					pButton
-					type="submit"
-					class="w-full !rounded-full !bg-primary-500 !border-none !py-3.5 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300 flex justify-center items-center gap-2"
-				>
-					<i class="fa fa-check text-white"></i>
-					<span class="font-semibold text-white text-[1.05rem]">{{ 'pages.mant-details.add-mant.submit' | translate }}</span>
+			<!-- 8. Descripción Detallada (Description) -->
+			<div>
+				<label for="description" class="input-label">
+					{{ 'pages.mant-details.add-mant.description' | translate }}
+				</label>
+				<textarea
+					id="description"
+					class="input-field resize-none"
+					rows="4"
+					[placeholder]="'pages.mant-details.add-mant.description' | translate"
+					formControlName="description"
+					[readonly]="isConsulta"
+				></textarea>
+			</div>
+
+			<!-- 9. Botones de Acción -->
+			<div *ngIf="!isConsulta" class="flex flex-col gap-3 pt-4">
+				<button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+					<span>{{ (isEdit ? 'pages.add-vehicle.save_edit' : 'pages.mant-details.add-mant.submit') | translate }}</span>
+					<i class="fas fa-check text-xs"></i>
 				</button>
+				
 				<button
 					*ngIf="isEdit"
-					pButton
 					type="button"
-					class="p-button-text p-button-danger w-full !rounded-full !py-2.5 hover:bg-red-50 transition-colors flex justify-center items-center gap-2"
 					(click)="deleteMaintenance()"
+					class="btn-danger w-full flex items-center justify-center gap-2"
 				>
-					<i class="fa fa-trash text-red-500"></i>
-					<span class="font-medium text-red-500">Eliminar</span>
+					<i class="fa fa-trash text-xs"></i>
+					<span>{{ 'pages.mant-details.delete_btn' | translate }}</span>
 				</button>
 			</div>
 		</form>
 	</div>
 </div>
-
-<button
-	*ngIf="isEdit && isConsulta"
-	(click)="toggleEditMode()"
-	type="button"
-	class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl transition-all duration-300 z-[9999] cursor-pointer"
->
-	<i class="fas fa-pencil-alt text-xl"></i>
-</button>

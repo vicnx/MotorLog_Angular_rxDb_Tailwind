@@ -51,6 +51,17 @@ export class CustomServiceDetailsComponent extends BaseComponent implements OnIn
 		this.initForm();
 	}
 
+	/**
+	 * Selecciona un icono del grid táctil para el servicio personalizado.
+	 */
+	public selectIcon(iconName: string): void {
+		if (this.isConsulta) {
+			return;
+		}
+		this.customServiceForm.get('icon')?.setValue(iconName);
+		this.customServiceForm.get('icon')?.markAsTouched();
+	}
+
 	public onSubmit(): void {
 		console.log(this.customServiceForm.value);
 		if (this.customServiceForm.valid) {

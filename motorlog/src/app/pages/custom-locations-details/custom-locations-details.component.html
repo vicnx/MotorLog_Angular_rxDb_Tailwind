@@ -1,25 +1,35 @@
 <div
 	[ngClass]="{
-		'mx-auto h-screen md:h-full max-w-md sm:max-w-screen-md px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 shadow-lg sm:rounded-3xl': !ref,
+		'w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12': !ref,
 		'w-full p-0 bg-transparent': ref
 	}"
 >
-	<div [ngClass]="{ 'container mx-auto max-w-screen-md': !ref }">
-		<form class="p-4" [formGroup]="customLocationForm" (ngSubmit)="onSubmit()">
-			<div class="mb-4">
-				<label class="block text-gray-700 text-sm font-bold mb-2">{{ 'pages.mant-details.add-mant.location_prompt' | translate }}</label>
+	<div [ngClass]="{ 'card-container': !ref }">
+		<form [formGroup]="customLocationForm" (ngSubmit)="onSubmit()" class="space-y-5">
+			
+			<!-- 1. Nombre de la Ubicación -->
+			<div>
+				<label class="input-label">
+					{{ 'pages.mant-details.add-mant.location_prompt' | translate }} *
+				</label>
 				<input
-					pInputText
 					type="text"
-					class="w-full"
+					class="input-field"
 					[placeholder]="'pages.mant-details.add-mant.location_prompt' | translate"
 					formControlName="label"
 				/>
-				<div *ngIf="customLocationForm?.get('label')?.invalid && customLocationForm?.get('label')?.touched" class="text-red-500 text-sm mt-1">
-					Requerido
+				<div *ngIf="customLocationForm?.get('label')?.invalid && customLocationForm?.get('label')?.touched" class="input-error">
+					{{ 'pages.mant-details.add-mant.validations.location_required' | translate }}
 				</div>
 			</div>
-			<p-button type="submit" [label]="'pages.custom-services.save' | translate"></p-button>
+
+			<!-- 2. Botón de Guardar -->
+			<div class="pt-2">
+				<button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+					<span>{{ 'pages.custom-services.save' | translate }}</span>
+					<i class="fas fa-check text-xs"></i>
+				</button>
+			</div>
 		</form>
 	</div>
 </div>
