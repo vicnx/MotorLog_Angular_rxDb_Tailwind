@@ -12,7 +12,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { CapitalizeFirstPipe } from 'src/app/capitalize-first.pipe';
+import { CapitalizeFirstPipe } from '@shared/pipes/capitalize-first.pipe';
 
 @Component({
 	selector: 'app-custom-services-list',
