@@ -253,7 +253,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	public openAddCustomService(): void {
 		this.ref = this.dialogService.open(CustomServiceDetailsComponent, {
 			header: this.translateSvc.instant('pages.custom-services.add_customService'),
-			width: '90%',
+			width: '450px',
 			contentStyle: { overflow: 'auto' },
 			baseZIndex: 10000,
 			data: { isModal: true }
@@ -267,7 +267,7 @@ export class MaintenanceDetailsComponent extends BaseComponent implements OnInit
 	public openAddLocation(): void {
 		this.ref = this.dialogService.open(CustomLocationsDetailsComponent, {
 			header: this.translateSvc.instant('pages.mant-details.add-mant.location_prompt') || 'Nueva Ubicación',
-			width: '90%',
+			width: '450px',
 			contentStyle: { overflow: 'auto' },
 			baseZIndex: 10000,
 			data: { isModal: true }
