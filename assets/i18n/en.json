@@ -143,6 +143,9 @@
 				"upload_error": "An error occurred while saving backup to Google Drive.",
 				"download_error": "An error occurred while restoring from Google Drive.",
 				"no_backup_found": "No backup found in your Google Drive.",
+				"permissions_required": "Insufficient permissions: You must check the Google Drive access box to enable cloud backups.",
+				"found_backup_msg": "A backup was found in your Google Drive from {{date}}. Would you like to restore it now to MotorLog?",
+				"found_backup_header": "Backup Available",
 				"confirm_restore_msg": "A backup will be restored from Google Drive. This action will replace current data. Do you want to continue?",
 				"confirm_restore_header": "Restore from Google Drive"
 			},
@@ -312,9 +315,11 @@
 			"title": "Backup",
 			"message": "Do you want to make a backup of your data?",
 			"warning": "Remember that your data is only saved in your browser.",
+			"go_to_settings": "Go to Settings to backup",
 			"confirm": "Download JSON backup",
 			"gdrive": "Save to Google Drive",
 			"download_local": "Download JSON",
+			"not_now": "Not now",
 			"cancel": "Cancel"
 		}
 	},
