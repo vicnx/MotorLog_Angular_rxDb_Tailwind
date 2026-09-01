@@ -5,6 +5,8 @@
 			"no_mant": "No hay mantenimientos registrados para este vehiculo.",
 			"no_vehicles": "No hay vehiculos registrados para este usuario.",
 			"filters": {
+				"title": "Filtros",
+				"date_range": "Rango de fechas",
 				"apply_filters": "Aplicar Filtros",
 				"reset_filters": "Limpiar Filtros",
 				"desde": "Desde",

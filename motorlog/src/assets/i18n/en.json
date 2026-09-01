@@ -5,8 +5,10 @@
 			"no_mant": "There are no registered maintenance for this vehicle.",
 			"no_vehicles": "There are no registered vehicles for this user.",
 			"filters": {
+				"title": "Filters",
+				"date_range": "Date range",
 				"apply_filters": "Apply filters",
-				"reset_filters": "Clean filters",
+				"reset_filters": "Reset filters",
 				"desde": "From",
 				"hasta": "To"
 			}

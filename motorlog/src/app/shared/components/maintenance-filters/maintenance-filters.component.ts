@@ -47,6 +47,10 @@ export class MaintenanceFiltersComponent {
 	endDate: Date | null = null;
 	filtersVisible: boolean = false;
 
+	public get hasActiveFilters(): boolean {
+		return !!(this.startDate || this.endDate);
+	}
+
 	public toggleFilters(): void {
 		this.filtersVisible = !this.filtersVisible;
 	}
