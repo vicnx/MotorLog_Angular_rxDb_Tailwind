@@ -1,10 +1,15 @@
-<p-dialog [header]="'userActions.generateAvatar.title' | translate" [(visible)]="visible" [modal]="true" [closable]="true" (onHide)="onDialogClose()">
-  <div class="flex flex-col items-center">
-    <img [src]="newAvatar" [alt]="'userActions.generateAvatar.title' | translate" class="h-32 w-32 rounded-full mb-4" />
-    <p>{{'userActions.generateAvatar.msg'| translate}}</p>
-    <div class="flex justify-between w-full mt-4">
-      <button (click)="onGenerateAnother()" class="p-button p-button-secondary">{{'userActions.generateAvatar.generateOther'| translate}}</button>
-      <button (click)="onApply()" class="p-button p-button-primary">{{'userActions.generateAvatar.apply'| translate}}</button>
+<p-dialog [header]="'userActions.generateAvatar.title' | translate" [(visible)]="visible" [modal]="true" [closable]="true" (onHide)="onDialogClose()" [style]="{ width: '380px', maxWidth: '90vw' }">
+  <div class="flex flex-col items-center p-2">
+    <img [src]="newAvatar" [alt]="'userActions.generateAvatar.title' | translate" class="h-28 w-28 rounded-full mb-4 shadow-sm border-2 border-primary-500/30 object-cover" />
+    <p class="text-sm text-gray-600 dark:text-gray-300 text-center mb-4">{{'userActions.generateAvatar.msg'| translate}}</p>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full mt-2">
+      <button type="button" (click)="onGenerateAnother()" class="btn-secondary w-full">
+        {{'userActions.generateAvatar.generateOther'| translate}}
+      </button>
+      <button type="button" (click)="onApply()" class="btn-primary w-full">
+        {{'userActions.generateAvatar.apply'| translate}}
+      </button>
     </div>
   </div>
 </p-dialog>

@@ -53,6 +53,88 @@ body {
   width: 100%;
 }
 
+/* Overrides Globales de Modales PrimeNG (p-dialog & p-confirmDialog) */
+.p-dialog,
+.p-confirmdialog {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(229, 231, 235, 0.8) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+
+  .p-dialog-header {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 1.25rem 1.5rem 0.75rem 1.5rem !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    font-weight: 700 !important;
+
+    .p-dialog-title {
+      font-weight: 700 !important;
+      font-size: 1.1rem !important;
+    }
+
+    .p-dialog-header-icon {
+      border-radius: 50% !important;
+      width: 2rem !important;
+      height: 2rem !important;
+
+      &:hover {
+        background: #f3f4f6 !important;
+      }
+    }
+  }
+
+  .p-dialog-content {
+    background: #ffffff !important;
+    color: #374151 !important;
+    padding: 1.25rem 1.5rem !important;
+  }
+
+  .p-dialog-footer {
+    background: #ffffff !important;
+    padding: 1rem 1.5rem 1.25rem 1.5rem !important;
+    border-top: 1px solid #f3f4f6 !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+
+    .p-button {
+      border-radius: 12px !important;
+      font-weight: 500 !important;
+      font-size: 0.875rem !important;
+      padding: 0.6rem 1.25rem !important;
+
+      &.p-button-primary {
+        background: #48d0b0 !important;
+        border-color: #38d39f !important;
+        color: #ffffff !important;
+
+        &:hover {
+          background: #059669 !important;
+        }
+      }
+    }
+  }
+}
+
+/* Modo Oscuro para Modales PrimeNG */
+.dark .p-dialog,
+.dark .p-confirmdialog {
+  border-color: rgba(55, 65, 81, 0.8) !important;
+
+  .p-dialog-header,
+  .p-dialog-content,
+  .p-dialog-footer {
+    background: #1f2937 !important;
+    color: #f9fafb !important;
+    border-color: #374151 !important;
+  }
+
+  .p-dialog-header .p-dialog-header-icon:hover {
+    background: #374151 !important;
+  }
+}
+
 /* Toast Personalizado Verde Bulbasaur Minimalista */
 .p-toast {
   z-index: 99999 !important;
