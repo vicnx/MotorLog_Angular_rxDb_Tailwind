@@ -1,5 +1,9 @@
+import packageInfo from '../../../package.json';
+
 export const CONSTANTS = {
     appName: 'MotorLog',
+    appVersion: packageInfo.version,
+    author: 'Xente',
     routes: {
         home: '/home',
         settings: '/settings',
