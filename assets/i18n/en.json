@@ -4,40 +4,57 @@
 			"title": "Home",
 			"no_mant": "There are no registered maintenance for this vehicle.",
 			"no_vehicles": "There are no registered vehicles for this user.",
+			"view_details": "View details",
 			"filters": {
+				"title": "Filters",
+				"date_range": "Date range",
 				"apply_filters": "Apply filters",
-				"reset_filters": "Clean filters",
+				"reset_filters": "Reset filters",
 				"desde": "From",
 				"hasta": "To"
 			}
 		},
 		"add-vehicle": {
-			"title": "Add new vehicle",
+			"title": "Add vehicle",
+			"title_edit": "Edit vehicle",
+			"title_consult": "Vehicle details",
+			"edit_mode": "Edit",
+			"cancel_edit": "Cancel",
+			"save": "Save vehicle",
+			"save_edit": "Save changes",
 			"vehicle_name": "Vehicle name",
 			"brand": "Brand",
+			"brand_placeholder": "Select a brand",
 			"model": "Model",
+			"model_placeholder": "Ex: Corolla, Golf, Focus...",
 			"year": "Year",
 			"color": "Color",
-			"imagen": "Image",
-			"cc": "CC",
-			"cv": "CV",
-			"icon": "Icon",
-			"observ": "Observations",
-			"brand_placeholder": "Select a brand",
-			"model_placeholder": "Select a model",
-			"save": "Save",
+			"cc": "Displacement (cc)",
+			"cv": "Power (hp)",
+			"icon": "Vehicle icon",
+			"observ": "Notes",
+			"imagen": "Vehicle image",
 			"validations": {
 				"vehicle_name_required": "Vehicle name is required",
 				"brand_required": "Brand is required",
 				"model_required": "Model is required",
-				"icono_required": "Icon is required"
+				"icono_required": "You must select an icon"
 			}
 		},
 		"vehicle-details": {
 			"title": "Edit vehicle"
 		},
 		"mant-details": {
+			"title_consult": "Maintenance Details",
+			"title_edit": "Edit Maintenance",
 			"edit-mant": "Edit Maintenance",
+			"vehicle_info": "Associated vehicle",
+			"edit_mode": "Edit",
+			"cancel_edit": "Cancel",
+			"save_edit": "Save Changes",
+			"delete_btn": "Delete Maintenance",
+			"add_service_btn": "Add service",
+			"add_location_btn": "Add location",
 			"add-mant": {
 				"title": "Add Maintenance",
 				"date": "Date",
