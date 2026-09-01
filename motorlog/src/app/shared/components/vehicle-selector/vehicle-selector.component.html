@@ -6,26 +6,54 @@
 	placeholder="Vehicle"
 	optionValue="id"
 	(onChange)="switchVehicle($event)"
-	[style]="{ minWidth: '200px', maxWidth: '200px', marginTop: '5px' }"
+	[style]="{ minWidth: '220px', maxWidth: '300px' }"
 	[disabled]="disabled"
-	styleClass="!rounded-full !bg-white hover:!bg-gray-50 !shadow-sm !border !border-gray-200 transition-all text-gray-700 font-medium [&_.p-dropdown-label]:!flex [&_.p-dropdown-label]:!justify-start [&_.p-dropdown-label]:!items-center"
+	styleClass="!w-full !rounded-xl !bg-white dark:!bg-gray-800 hover:!bg-gray-50 dark:hover:!bg-gray-700/80 !shadow-sm !border !border-gray-200/80 dark:!border-gray-700/80 transition-all text-gray-900 dark:text-white font-medium [&_.p-dropdown-label]:!flex [&_.p-dropdown-label]:!items-center [&_.p-dropdown-label]:!p-2 [&_.p-dropdown-trigger]:!w-8"
+	panelStyleClass="!rounded-2xl !bg-white dark:!bg-gray-800 !border !border-gray-200/80 dark:!border-gray-700/80 !shadow-xl !p-1.5 [&_.p-dropdown-items]:!space-y-1 [&_.p-dropdown-items]:!p-0 [&_.p-dropdown-item]:!p-0 [&_.p-dropdown-item]:!rounded-xl [&_.p-dropdown-item]:!bg-transparent"
 >
+	<!-- Ítem seleccionado en el botón gatillo -->
 	<ng-template let-item pTemplate="selectedItem">
-		<div class="flex items-center justify-start gap-2 w-full pl-2">
-			<i class="{{ item?.icono }}"></i>
-			<span>{{ item?.nombreVehiculo }}</span>
+		<div class="flex items-center gap-2.5 w-full text-left">
+			<div class="w-7 h-7 rounded-lg bg-primary-50 dark:bg-primary-950/50 text-primary-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+				<i class="{{ item?.icono || 'fas fa-car' }} text-xs"></i>
+			</div>
+			<div class="truncate">
+				<span class="block font-semibold text-xs text-gray-900 dark:text-white truncate">
+					{{ item?.nombreVehiculo }}
+				</span>
+			</div>
 		</div>
 	</ng-template>
+
+	<!-- Opciones dentro del panel desplegable rediseñado -->
 	<ng-template let-item pTemplate="item">
-		<div class="block text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
-			<div class="inline-flex items-center">
-				<i class="{{ item.icono }} rounded-sm mr-2"></i>
-				{{ item.nombreVehiculo }}
+		<div 
+			class="flex items-center justify-between gap-3 p-2.5 rounded-xl transition-all duration-150 cursor-pointer w-full"
+			[ngClass]="item.id === selectedVehicle ? 'bg-primary-50/80 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 font-semibold' : 'hover:bg-gray-100/80 dark:hover:bg-gray-700/60 text-gray-700 dark:text-gray-200'"
+		>
+			<div class="flex items-center gap-3 min-w-0">
+				<div 
+					class="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0 transition-colors"
+					[ngClass]="item.id === selectedVehicle ? 'bg-primary-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'"
+				>
+					<i class="{{ item.icono || 'fas fa-car' }}"></i>
+				</div>
+				<div class="truncate text-left">
+					<span class="block text-xs font-semibold truncate text-gray-900 dark:text-white">
+						{{ item.nombreVehiculo }}
+					</span>
+					<span *ngIf="item.marca || item.modelo" class="block text-[11px] text-gray-500 dark:text-gray-400 truncate">
+						{{ item.marca }} {{ item.modelo }}
+					</span>
+				</div>
 			</div>
+
+			<!-- Indicador de vehículo seleccionado -->
+			<i *ngIf="item.id === selectedVehicle" class="fas fa-check text-xs text-primary-500 mr-1"></i>
 		</div>
 	</ng-template>
 </p-dropdown>
 
-}@else{
+} @else {
   <app-add-vehicle-button></app-add-vehicle-button>
 }
