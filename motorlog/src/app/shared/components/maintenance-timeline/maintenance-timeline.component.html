@@ -1,89 +1,127 @@
 @if (vehicleSvc.vehicles().length > 0){
+<!-- Botón y desplegable de filtros fuera del contenedor principal -->
 <app-maintenance-filters (onFiltersApplied)="onFiltersChanged($event)"></app-maintenance-filters>
-@if (groupedMaintenances.length > 0) {
-<div class="w-full pt-5 mb-20">
-	<ng-container *ngFor="let group of groupedMaintenances">
-		<div class="ps-2 my-2 first:mt-0">
-			<h3 class="text-xs font-medium uppercase text-gray-500">
-				{{ group.date }}
-			</h3>
-		</div>
-		<ng-container *ngFor="let maintenance of group.maintenances">
-			<div class="flex gap-x-3 relative group rounded-lg hover:bg-gray-100 cursor-pointer" (click)="toggleMaintenance(maintenance.id)">
-				<div
-					class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700"
-				>
-					<div class="relative z-10 size-7 flex justify-center items-center">
-						<i [ngClass]="getIconClasses(maintenance)" [ngStyle]="{ color: maintenance.color }"></i>
-					</div>
-				</div>
-				<div class="grow p-2 pb-8">
-					<div class="flex justify-between items-start text-sm">
-						<div class="flex flex-col">
-							<h1 [ngStyle]="{ color: maintenance.color }" class="font-semibold text-base">
-								{{ maintenance.title }}
-							</h1>
-							<p class="mt-1 flex items-center text-gray-600">
-								<i class="fas fa-tachometer-alt mr-1"></i>
-								{{ maintenance.odometer | number : '1.0-0' }} km
-							</p>
-							<p class="mt-1 flex items-center text-gray-600">
-								<i class="fas fa-map-pin mr-1"></i>
-								{{ maintenance.location || 'N/A' }}
-							</p>
-						</div>
-						<div class="flex flex-col items-end">
-							<p class="mt-1 text-gray-400">
-								{{ maintenance.date | date : 'd MMM' }}
-							</p>
-							<p [ngStyle]="{ color: maintenance.color }" class="font-semibold text-base">
-								{{ maintenance.amount | currency : 'EUR' : 'symbol' : '1.2-2' : 'es-ES' }}
-							</p>
-						</div>
-					</div>
-					<p *ngIf="maintenance.notes" class="mt-1 flex items-center text-gray-600">
-						<i class="fas fa-sticky-note mr-1"></i>
-						{{ maintenance.notes }}
-					</p>
-					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="font-semibold text-base">
-						<ul class="list-inside text-xs pt-2">
-							<span *ngFor="let service of maintenance.serviceType" class="text-gray-500">
-								<i [class]="service.icon" [style.color]="service.color || '#6b7280'"></i>
-								{{ (service.label || '') | translate }} <br />
-							</span>
-						</ul>
-						<p *ngIf="maintenance.description" class="mt-2 text-sm font-normal text-gray-600 break-words whitespace-pre-line">
-							{{ maintenance.description }}
-						</p>
-					</div>
-					<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="absolute bottom-2 right-2">
-						<p-button
-							[rounded]="true"
-							[text]="true"
-							severity="primary"
-							(click)="goToEdit(maintenance.id)"
-							class="text-gray-500 hover:text-gray-700"
-						>
-							<i class="fas fa-eye text-lg"></i>
-						</p-button>
-					</div>
-				</div>
-			</div>
-		</ng-container>
-	</ng-container>
-</div>
-} @else {
-<span>{{ 'pages.home.no_mant' | translate }}</span>
-} 
 
-<!-- FAB for Add Maintenance -->
+<!-- Contenedor maestro de la línea de tiempo -->
+<div class="card-container min-h-[400px]">
+	@if (groupedMaintenances.length > 0) {
+	<div class="w-full pt-1 pb-16">
+		<ng-container *ngFor="let group of groupedMaintenances">
+			<!-- Cabecera de fecha del grupo -->
+			<div class="ps-1 my-3 first:mt-0">
+				<span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+					{{ group.date }}
+				</span>
+			</div>
+
+			<!-- Lista de mantenimientos -->
+			<ng-container *ngFor="let maintenance of group.maintenances">
+				<div 
+					class="flex gap-x-3 relative group rounded-xl p-3 mb-2 hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-150 cursor-pointer" 
+					(click)="toggleMaintenance(maintenance.id)"
+				>
+					<!-- Eje de la línea de tiempo -->
+					<div
+						class="relative last:after:hidden after:absolute after:top-8 after:bottom-0 after:start-3.5 after:w-0.5 after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-gray-700"
+					>
+						<div class="relative z-10 w-7 h-7 rounded-lg bg-primary-50 dark:bg-primary-950/50 flex justify-center items-center flex-shrink-0">
+							<i [ngClass]="getIconClasses(maintenance)" class="text-sm" [ngStyle]="{ color: maintenance.color || '#48d0b0' }"></i>
+						</div>
+					</div>
+
+					<!-- Contenido del mantenimiento -->
+					<div class="grow min-w-0">
+						<div class="flex justify-between items-start text-sm gap-2">
+							<div class="flex flex-col min-w-0">
+								<h4 class="font-bold text-base text-gray-900 dark:text-white truncate">
+									{{ maintenance.title }}
+								</h4>
+								
+								<div class="flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
+									<span class="flex items-center gap-1 font-medium">
+										<i class="fas fa-tachometer-alt text-primary-500"></i>
+										{{ maintenance.odometer | number : '1.0-0' }} km
+									</span>
+									<span *ngIf="maintenance.location" class="flex items-center gap-1">
+										<i class="fas fa-map-pin text-gray-400"></i>
+										{{ maintenance.location }}
+									</span>
+								</div>
+							</div>
+
+							<div class="flex flex-col items-end flex-shrink-0">
+								<span class="text-xs text-gray-400 font-medium">
+									{{ maintenance.date | date : 'd MMM' }}
+								</span>
+								<span class="font-bold text-base text-primary-600 dark:text-primary-400 mt-0.5">
+									{{ maintenance.amount | currency : 'EUR' : 'symbol' : '1.2-2' : 'es-ES' }}
+								</span>
+							</div>
+						</div>
+
+						<p *ngIf="maintenance.notes" class="mt-2 text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1.5">
+							<i class="fas fa-sticky-note text-gray-400"></i>
+							<span>{{ maintenance.notes }}</span>
+						</p>
+
+						<!-- Detalles expandibles -->
+						<div *ngIf="selectedMaintenanceId === maintenance.id" @fadeInOut class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700/60">
+							<div class="flex flex-wrap gap-1.5 mb-2">
+								<span *ngFor="let service of maintenance.serviceType" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+									<i [class]="service.icon" [style.color]="service.color || '#48d0b0'"></i>
+									{{ (service.label || '') | translate }}
+								</span>
+							</div>
+
+							<p *ngIf="maintenance.description" class="text-xs text-gray-600 dark:text-gray-300 break-words whitespace-pre-line bg-gray-50 dark:bg-gray-800/80 p-2.5 rounded-lg border border-gray-100 dark:border-gray-700/50">
+								{{ maintenance.description }}
+							</p>
+
+							<div class="flex justify-end mt-2">
+								<button 
+									type="button"
+									(click)="goToEdit(maintenance.id); $event.stopPropagation()" 
+									class="btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5"
+								>
+									<i class="fas fa-eye text-primary-500"></i>
+									<span>Ver detalles</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ng-container>
+		</ng-container>
+	</div>
+	} @else {
+	<div class="flex flex-col items-center justify-center text-center py-12 px-4">
+		<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
+			<i class="fas fa-clipboard-list"></i>
+		</div>
+		<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
+			{{ 'pages.home.no_mant' | translate }}
+		</p>
+	</div>
+	}
+</div>
+
+<!-- Botón Flotante de Añadir Mantenimiento (FAB) -->
 <button 
+	type="button"
 	(click)="goToAddMaintenance()" 
-	class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl transition-all duration-300 z-[9000] focus:outline-none focus:ring-4 focus:ring-green-500/30"
+	class="fixed bottom-6 right-6 bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg shadow-primary-500/30 transition-all duration-200 active:scale-95 z-[9000] focus:outline-none focus:ring-4 focus:ring-primary-500/20"
+	aria-label="Añadir Mantenimiento"
 >
 	<i class="fas fa-plus text-xl"></i>
 </button>
 
 } @else {
-<span>{{ 'pages.home.no_vehicles' | translate }}</span>
+<div class="flex flex-col items-center justify-center text-center py-12 px-4">
+	<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
+		<i class="fas fa-car"></i>
+	</div>
+	<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
+		{{ 'pages.home.no_vehicles' | translate }}
+	</p>
+</div>
 }

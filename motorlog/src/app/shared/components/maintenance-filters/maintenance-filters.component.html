@@ -1,47 +1,52 @@
-<div class="flex justify-end items-center mb-4 mt-2 w-full">
+<div class="flex justify-end items-center mb-3 w-full">
 	<button 
+		type="button"
 		(click)="toggleFilters()" 
-		class="flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+		class="btn-secondary flex items-center gap-2 py-2 px-3.5"
 	>
-		<i class="fas fa-filter text-blue-500"></i>
-		<span class="text-sm">Filtros</span>
-		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-xs ml-1 text-gray-400"></i>
+		<i class="fas fa-filter text-primary-500"></i>
+		<span class="text-xs font-semibold">Filtros</span>
+		<i [ngClass]="filtersVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-[10px] ml-1 text-gray-400"></i>
 	</button>
 </div>
 
-<div @fadeInOut *ngIf="filtersVisible" class="mb-8 relative z-20">
-	<div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 p-5 md:p-6 transition-all">
-		<h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-			<i class="fas fa-calendar-alt text-blue-500"></i> Rango de fechas
+<div @fadeInOut *ngIf="filtersVisible" class="mb-4 relative z-20">
+	<div class="card-container p-4 md:p-5">
+		<h4 class="text-xs font-bold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-2 uppercase tracking-wider">
+			<i class="fas fa-calendar-alt text-primary-500"></i> Rango de fechas
 		</h4>
 		
-		<div class="flex flex-col md:flex-row gap-4 mb-2">
-			<div class="w-full">
-				<span class="block text-xs font-medium text-gray-500 mb-1 ml-1">Desde</span>
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+			<div>
+				<label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-0.5">Desde</label>
 				<p-calendar [(ngModel)]="startDate" [placeholder]="'pages.home.filters.desde' | translate" [showIcon]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-calendar>
 			</div>
-			<div class="w-full">
-				<span class="block text-xs font-medium text-gray-500 mb-1 ml-1">Hasta</span>
+			<div>
+				<label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-0.5">Hasta</label>
 				<p-calendar [(ngModel)]="endDate" [placeholder]="'pages.home.filters.hasta' | translate" [showIcon]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-calendar>
 			</div>
 		</div>
 
-		<div class="flex justify-end gap-3 border-t border-gray-100 pt-4 mt-6">
-			<p-button 
-				[outlined]="true" 
-				severity="secondary" 
-				[rounded]="true"
-				(onClick)="resetFilters()" 
-				icon="fas fa-undo"
+		<div class="flex justify-end gap-2 border-t border-gray-100 dark:border-gray-700/60 pt-3 mt-4">
+			<button 
+				type="button" 
+				(click)="resetFilters()" 
+				class="btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
 				title="{{ 'pages.home.filters.reset_filters' | translate }}"
-			></p-button>
-			<p-button 
-				severity="primary" 
-				[rounded]="true"
-				(onClick)="applyFilters()" 
-				icon="fas fa-check"
+			>
+				<i class="fas fa-undo"></i>
+				<span>Reset</span>
+			</button>
+
+			<button 
+				type="button" 
+				(click)="applyFilters()" 
+				class="btn-primary text-xs py-2 px-4 flex items-center gap-1.5"
 				title="{{ 'pages.home.filters.apply_filters' | translate }}"
-			></p-button>
+			>
+				<i class="fas fa-check"></i>
+				<span>Aplicar</span>
+			</button>
 		</div>
 	</div>
 </div>
