@@ -14,7 +14,10 @@
 	<!-- Ítem seleccionado en el botón gatillo -->
 	<ng-template let-item pTemplate="selectedItem">
 		<div class="flex items-center gap-2.5 w-full text-left">
-			<div class="w-7 h-7 rounded-lg bg-primary-50 dark:bg-primary-950/50 text-primary-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+			<div 
+				class="w-7 h-7 rounded-lg text-white flex items-center justify-center flex-shrink-0 shadow-xs"
+				[style.backgroundColor]="item?.color || '#48d0b0'"
+			>
 				<i class="{{ item?.icono || 'fas fa-car' }} text-xs"></i>
 			</div>
 			<div class="truncate">
@@ -28,13 +31,13 @@
 	<!-- Opciones dentro del panel desplegable rediseñado -->
 	<ng-template let-item pTemplate="item">
 		<div 
-			class="flex items-center justify-between gap-3 p-2.5 rounded-xl transition-all duration-150 cursor-pointer w-full"
+			class="flex items-center justify-between gap-3 p-2 rounded-xl transition-all duration-150 cursor-pointer w-full"
 			[ngClass]="item.id === selectedVehicle ? 'bg-primary-50/80 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 font-semibold' : 'hover:bg-gray-100/80 dark:hover:bg-gray-700/60 text-gray-700 dark:text-gray-200'"
 		>
 			<div class="flex items-center gap-3 min-w-0">
 				<div 
-					class="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0 transition-colors"
-					[ngClass]="item.id === selectedVehicle ? 'bg-primary-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'"
+					class="w-8 h-8 rounded-lg text-white flex items-center justify-center text-xs flex-shrink-0 shadow-xs"
+					[style.backgroundColor]="item?.color || '#48d0b0'"
 				>
 					<i class="{{ item.icono || 'fas fa-car' }}"></i>
 				</div>
