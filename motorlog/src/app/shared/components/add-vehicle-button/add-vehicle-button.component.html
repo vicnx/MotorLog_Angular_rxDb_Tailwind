@@ -1,3 +1,6 @@
-<div class="flex flex-col justify-center items-center">
-	<p-button [rounded]="false" [text]="true" (onClick)="goToAddVehicle()">{{ 'pages.add-vehicle.title' | translate }}</p-button>
+<div class="flex justify-end items-center mb-4 w-full">
+	<button type="button" (click)="goToAddVehicle()" class="btn-primary flex items-center gap-2">
+		<i class="fas fa-plus text-xs"></i>
+		<span>{{ 'pages.add-vehicle.title' | translate }}</span>
+	</button>
 </div>

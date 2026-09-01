@@ -1,33 +1,63 @@
-<div class="mx-auto max-w-screen-md sm:max-w-screen-lg px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 bg-white border-0 sm-shadow-lg sm:rounded-3xl">
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+	
+	<!-- Botón superior de Añadir Vehículo fuera del contenedor -->
 	<app-add-vehicle-button></app-add-vehicle-button>
-  @if(vehicleSvc.vehicles().length > 0){
-    <p-dataView #dv *ngIf="this.vehicleSvc.vehicles()" [value]="this.vehicleSvc.vehicles()">
-      <ng-template pTemplate="list" let-vehicles>
-        <ul class="divide-y divide-gray-200 mb-10">
-          <li *ngFor="let vehicle of vehicles" class="p-3 flex items-center user-card h-20 cursor-pointer transition duration-300 ease-in-out transform hover:brightness-90 bg-white" (click)="onClickVehicle(vehicle)">
-            <div class="ml-2 w-16 h-16 flex items-center justify-center bg-transparent overflow-hidden">
-                <img
-                  class="max-w-full max-h-full object-contain"
-                  [src]="getLogoBrand(vehicle.marca)"
-                  [alt]="vehicle.marca"
-                >
-              </div>
 
-            <div class="ml-10 flex-grow">
-              <div class="text-ba">{{ vehicle.marca | capitalizeFirst }}</div>
-              <div class="text-xs">{{ vehicle.modelo | capitalizeFirst }}</div>
-            </div>
+	<div class="card-container">
+		@if(vehicleSvc.vehicles().length > 0){
+		<p-dataView #dv *ngIf="this.vehicleSvc.vehicles()" [value]="this.vehicleSvc.vehicles()">
+			<ng-template pTemplate="list" let-vehicles>
+				<div class="space-y-2.5 mb-1">
+					<div 
+						*ngFor="let vehicle of vehicles" 
+						class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/70 dark:border-gray-700/70 bg-white dark:bg-gray-800 hover:border-primary-500/50 hover:bg-gray-50/80 dark:hover:bg-gray-700/50 cursor-pointer transition-all duration-150 active:scale-[0.99] group shadow-xs" 
+						(click)="onClickVehicle(vehicle)"
+					>
+						<!-- Contenedor del Logo de la Marca -->
+						<div class="flex items-center gap-3.5 min-w-0">
+							<div class="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700/60 p-2 flex items-center justify-center flex-shrink-0 border border-gray-100 dark:border-gray-700">
+								<img
+									class="max-w-full max-h-full object-contain"
+									[src]="getLogoBrand(vehicle.marca)"
+									[alt]="vehicle.marca"
+								/>
+							</div>
 
-            <div class="ml-auto w-1/3 truncate mr-5">
-              <span class="text-lg font-semibold truncate">
-                <i class="{{vehicle.icono}} text-sm mr-2" [ngStyle]="{ color: vehicle.color }"></i> <span class="text-sm">{{ vehicle.nombreVehiculo | capitalizeFirst }}</span>
-              </span>
-            </div>
-          </li>
-        </ul>
-      </ng-template>
-    </p-dataView>
-  }@else {
-    <span>{{ 'pages.home.no_vehicles' | translate }}</span>
-  }
+							<!-- Marca y Modelo -->
+							<div class="truncate">
+								<h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">
+									{{ vehicle.marca | capitalizeFirst }} {{ vehicle.modelo | capitalizeFirst }}
+								</h3>
+								<p *ngIf="vehicle.year || vehicle.cc" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
+									{{ vehicle.year ? vehicle.year : '' }} {{ vehicle.cc ? (' • ' + vehicle.cc + ' cc') : '' }}
+								</p>
+							</div>
+						</div>
+
+						<!-- Apodo/Nombre e Icono personalizado -->
+						<div class="flex items-center gap-3 flex-shrink-0 pl-2">
+							<div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-50 dark:bg-gray-700/60 border border-gray-200/60 dark:border-gray-700/60">
+								<i class="{{vehicle.icono}} text-sm text-primary-500" [ngStyle]="{ color: vehicle.color || '#48d0b0' }"></i>
+								<span class="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate max-w-[120px]">
+									{{ vehicle.nombreVehiculo | capitalizeFirst }}
+								</span>
+							</div>
+
+							<i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+		</p-dataView>
+		}@else {
+		<div class="flex flex-col items-center justify-center text-center py-12 px-4">
+			<div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center text-xl mb-3">
+				<i class="fas fa-car"></i>
+			</div>
+			<p class="text-sm font-medium text-gray-600 dark:text-gray-300">
+				{{ 'pages.home.no_vehicles' | translate }}
+			</p>
+		</div>
+		}
+	</div>
 </div>
