@@ -54,7 +54,8 @@ MotorLog es una aplicación web local-first para la gestión y seguimiento del m
 ## 🔄 4. Control de Versiones y Cierre de Tareas
 
 ### Comandos y Reglas de Versionado (SemVer)
-* **Actualización Obligatoria en Funcionalidades Importantes:** Al desarrollar o completar cualquier funcionalidad relevante (`feat` minor/major), es **OBLIGATORIO** actualizar la versión de la aplicación sincrónicamente tanto en `motorlog/package.json` como en la badge de versión de `README.md` (`https://img.shields.io/badge/version-X.X-blue.svg`).
+* **Autoevaluación Obligatoria del Agente (Cero Recordatorios del Usuario):** El agente DEBE verificar autónomamente antes de entregar cualquier tarea si los cambios representan una funcionalidad importante (`feat` minor/major) o refactorización relevante.
+* **Actualización Proactiva Sincronizada:** Cuando corresponda subir la versión, el agente **DEBE actualizar de forma automática y proactiva** tanto la propiedad `version` en `motorlog/package.json` como la badge en `README.md` (`https://img.shields.io/badge/version-X.X-blue.svg`) **antes de dar por finalizada la respuesta**, sin esperar a que el usuario se lo pida o lo recuerde.
 * Patch: `npm run release:patch`
 * Minor: `npm run release:minor`
 * Major: `npm run release:major`

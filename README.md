@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to MotorLog 🚗👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1-blue.svg?cacheSeconds=2592000" />
   <img alt="Angular" src="https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular" />
   <img alt="PrimeNG" src="https://img.shields.io/badge/-PrimeNG-4CAF50?style=flat&logo=primeng" />
   <img alt="TailwindCSS" src="https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat&logo=tailwind-css" />
