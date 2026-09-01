@@ -1,26 +1,50 @@
-<div class="h-screen dark:bg-gray-700 bg-gray-50 pt-8">
-	<div class="max-w-sm mx-4 sm:mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-		<div class="border-b px-4 pb-2">
-			<div class="text-center my-4">
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+	<div class="card-container space-y-6">
+		
+		<!-- Encabezado del Perfil (Avatar + Nombre) -->
+		<div class="flex flex-col items-center justify-center pt-2 pb-4 text-center border-b border-gray-100 dark:border-gray-700/60">
+			<div class="relative group cursor-pointer mb-3">
 				<img
-					class="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
+					class="w-28 h-28 rounded-full border-4 border-primary-500/20 shadow-md object-cover ring-4 ring-primary-500/10 group-hover:scale-105 transition-transform duration-200"
 					[src]="userSvc.user().avatar"
 					[alt]="userSvc.user().name"
 				/>
-				<div class="py-2">
-					<h3 class="font-bold text-2xl text-gray-800 dark:text-white mb-1">{{ userSvc.user().name }}</h3>
+				<div 
+					(click)="showAvatarDialog = true"
+					class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-primary-500 text-white flex items-center justify-center shadow-sm border-2 border-white dark:border-gray-800 text-xs hover:bg-primary-600 transition"
+					title="Cambiar avatar"
+				>
+					<i class="fas fa-camera"></i>
 				</div>
 			</div>
+
+			<h3 class="font-bold text-lg text-gray-900 dark:text-white tracking-tight">
+				{{ userSvc.user().name }}
+			</h3>
 		</div>
-		<div class="px-4 py-6">
-      <ng-container *ngFor="let action of userActions">
-        <app-settings-button [action]="action" (handleAction)="handleUserAction($event)"></app-settings-button>
-      </ng-container>
+
+		<!-- Lista de Acciones del Usuario -->
+		<div class="space-y-1">
+			<ng-container *ngFor="let action of userActions">
+				<app-settings-button [action]="action" (handleAction)="handleUserAction($event)"></app-settings-button>
+			</ng-container>
 		</div>
-		<div class="flex flex-col justify-center items-center pb-3">
-			<p-button severity="danger" [rounded]="false" [text]="true" (onClick)="logoutUser()">{{ 'userActions.logout' | translate }}</p-button>
+
+		<!-- Botón de Cerrar Sesión -->
+		<div class="pt-2">
+			<button
+				type="button"
+				(click)="logoutUser()"
+				class="btn-danger w-full flex items-center justify-center gap-2"
+			>
+				<i class="fas fa-sign-out-alt text-xs"></i>
+				<span>{{ 'userActions.logout' | translate }}</span>
+			</button>
 		</div>
+
 	</div>
-	<app-avatar-dialog *ngIf="showAvatarDialog" [visible]="showAvatarDialog" (close)="showAvatarDialog = false"> </app-avatar-dialog>
-	<app-change-name-dialog  *ngIf="showChangeNameDialog" [visible]="showChangeNameDialog" (close)="showChangeNameDialog = false"> </app-change-name-dialog>
+
+	<!-- Modales de Avatar y Cambio de Nombre -->
+	<app-avatar-dialog *ngIf="showAvatarDialog" [visible]="showAvatarDialog" (close)="showAvatarDialog = false"></app-avatar-dialog>
+	<app-change-name-dialog *ngIf="showChangeNameDialog" [visible]="showChangeNameDialog" (close)="showChangeNameDialog = false"></app-change-name-dialog>
 </div>

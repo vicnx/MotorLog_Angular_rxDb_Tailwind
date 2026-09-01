@@ -85,8 +85,9 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 		this.confirmationSvc.confirm({
 			message: this.translateSvc.instant('pages.settings.delete_data.confirm_msg'),
 			header: this.translateSvc.instant('pages.settings.delete_data.confirm_header'),
-			icon: 'fas fa-exclamation-triangle',
-			rejectButtonStyleClass: 'p-button-text',
+			icon: 'fas fa-exclamation-triangle text-red-500 text-xl',
+			acceptButtonStyleClass: 'btn-danger !py-2 !px-4 !text-xs',
+			rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
 			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
 			rejectLabel: this.translateSvc.instant('confirm.default_no'),
 			key: 'confirmDialog',
@@ -108,8 +109,9 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 		this.confirmationSvc.confirm({
 			message: this.translateSvc.instant('pages.settings.fixMant.confirm_msg'),
 			header: this.translateSvc.instant('pages.settings.fixMant.confirm_header'),
-			icon: 'fas fa-exclamation-triangle',
-			rejectButtonStyleClass: 'p-button-text',
+			icon: 'fas fa-wrench text-primary-500 text-xl',
+			acceptButtonStyleClass: 'btn-primary !py-2 !px-4 !text-xs',
+			rejectButtonStyleClass: 'btn-secondary !py-2 !px-4 !text-xs',
 			acceptLabel: this.translateSvc.instant('confirm.default_yes'),
 			rejectLabel: this.translateSvc.instant('confirm.default_no'),
 			key: 'confirmDialog',

@@ -1,46 +1,62 @@
 <!-- Menú de configuración -->
-<div class="bg-gray-50 min-h-screen">
-  <div class="sm:mx-auto max-w-screen-md sm:px-6 sm:pt-6 sm:pb-4 my-0 sm:my-5 pt-5 mx-3">
-    <div class="max-w-full mx-autorounded-none flex justify-center flex-col items-center">
-      
-      <!-- Menú dinámico de ajustes -->
-      <div *ngFor="let menuItem of settingsMenu" class="w-full border-b max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-5">
+<div class="w-full max-w-screen-md mx-auto px-3 sm:px-4 py-4 pb-12">
+  <div class="card-container space-y-6">
+    
+    <!-- Menú dinámico de ajustes -->
+    <div class="space-y-4">
+      <div *ngFor="let menuItem of settingsMenu" class="space-y-2">
+        
+        <!-- Item único sin sub-items -->
         <a
           *ngIf="menuItem.items?.length === 0"
-          class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg cursor-pointer transition duration-500 ease-in-out transform"
+          class="flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-gray-200/70 dark:border-gray-700/70 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 hover:border-primary-500/40 cursor-pointer transition-all duration-200 active:scale-[0.99] group shadow-xs"
           (click)="handleMenuAction(menuItem.action!)"
         >
-          <div class="flex items-center space-x-4">
-            <i [ngClass]="menuItem.icon + ' text-gray-500'"></i>
-            <span class="text-lg">{{ getTranslatedLabel(menuItem.label) }}</span>
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-500 flex items-center justify-center flex-shrink-0 border border-primary-100 dark:border-primary-900/30">
+              <i [ngClass]="menuItem.icon" class="text-sm"></i>
+            </div>
+            <span class="font-bold text-sm text-gray-900 dark:text-white">
+              {{ getTranslatedLabel(menuItem.label) }}
+            </span>
           </div>
-          <i class="fas fa-chevron-right text-gray-400"></i>
+          <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
         </a>
 
-        <div *ngIf="menuItem.items?.length">
-          <div class="p-2 text-xs text-gray-400 uppercase ml-1">
-            <i [ngClass]="menuItem.icon + ' text-gray-500'"></i> <span class="ml-2">{{ getTranslatedLabel(menuItem.label) }}</span>
+        <!-- Grupo de items con categoría/sub-items -->
+        <div *ngIf="menuItem.items?.length" class="space-y-2">
+          <div class="flex items-center gap-2 px-1 text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+            <i [ngClass]="menuItem.icon" class="text-primary-500"></i>
+            <span>{{ getTranslatedLabel(menuItem.label) }}</span>
           </div>
-          <div *ngFor="let subItem of menuItem.items">
+
+          <div class="space-y-2">
             <a
-              class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg cursor-pointer transition duration-500 ease-in-out transform"
+              *ngFor="let subItem of menuItem.items"
+              class="flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-gray-200/70 dark:border-gray-700/70 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 hover:border-primary-500/40 cursor-pointer transition-all duration-200 active:scale-[0.99] group shadow-xs"
               (click)="handleMenuAction(subItem.action!)"
             >
-              <div class="flex items-center space-x-4">
-                <i [ngClass]="subItem.icon + ' text-gray-500'"></i>
-                <span class="text-lg">{{ getTranslatedLabel(subItem.label) }}</span>
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 group-hover:text-primary-500 flex items-center justify-center flex-shrink-0 border border-gray-200/60 dark:border-gray-700/60 transition-colors">
+                  <i [ngClass]="subItem.icon" class="text-sm"></i>
+                </div>
+                <span class="font-bold text-sm text-gray-900 dark:text-white">
+                  {{ getTranslatedLabel(subItem.label) }}
+                </span>
               </div>
-              <i class="fas fa-chevron-right text-gray-400"></i>
+              <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
             </a>
-            <hr>
           </div>
         </div>
+
       </div>
-
-      <!-- Componente modularizado de Google Drive -->
-      <app-gdrive-card></app-gdrive-card>
-
     </div>
+
+    <!-- Componente modularizado de Google Drive con espacio y separador -->
+    <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/60">
+      <app-gdrive-card></app-gdrive-card>
+    </div>
+
   </div>
 </div>
 

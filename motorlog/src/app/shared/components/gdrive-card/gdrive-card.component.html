@@ -1,15 +1,15 @@
-<div class="w-full max-w-sm sm:max-w-md bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-5 mb-5">
+<div class="w-full bg-white dark:bg-gray-800/90 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-5 shadow-sm transition-all">
   
   <!-- Encabezado de la tarjeta -->
   <div class="flex items-start justify-between gap-3 mb-4">
-    <div class="flex items-center space-x-3">
+    <div class="flex items-center space-x-3.5">
       <!-- Icono de Google Drive desde la imagen en assets -->
-      <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 shadow-inner p-2">
+      <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center flex-shrink-0 border border-emerald-100 dark:border-emerald-900/30 p-2 shadow-xs">
         <img src="assets/images/google-drive.png" alt="Google Drive" class="w-full h-full object-contain" />
       </div>
 
       <div>
-        <h3 class="font-bold text-gray-900 dark:text-white text-base tracking-tight">
+        <h3 class="font-bold text-gray-900 dark:text-white text-sm tracking-tight">
           {{ 'pages.settings.gdrive.title' | translate }}
         </h3>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
@@ -19,20 +19,21 @@
     </div>
 
     <!-- Indicador de estado de conexión -->
-    <div *ngIf="gdriveSvc.isLoggedIn()" class="flex items-center space-x-1.5 bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-800/50 px-2.5 py-1 rounded-full text-[11px] font-medium text-green-700 dark:text-green-300">
+    <div *ngIf="gdriveSvc.isLoggedIn()" class="flex items-center space-x-1.5 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 px-2.5 py-1 rounded-full text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 shrink-0">
       <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
       </span>
       <span>{{ 'pages.settings.gdrive.status_connected' | translate }}</span>
     </div>
   </div>
 
-  <!-- Estado 1: Desconectado -> Botón oficial de login usando la imagen/icono -->
+  <!-- Estado 1: Desconectado -> Botón oficial de login -->
   <div *ngIf="!gdriveSvc.isLoggedIn()" class="mt-2">
     <button 
+      type="button"
       (click)="connectGDrive()" 
-      class="w-full py-2.5 px-4 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-100 font-semibold text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3"
+      class="btn-secondary w-full flex items-center justify-center gap-3"
     >
       <img src="assets/images/google-drive.png" alt="Google Drive" class="w-5 h-5 object-contain" />
       <span>{{ 'pages.settings.gdrive.connect' | translate }}</span>
@@ -40,7 +41,7 @@
   </div>
 
   <!-- Estado 2: Conectado -> Info de usuario y acciones de copia -->
-  <div *ngIf="gdriveSvc.isLoggedIn()" class="space-y-3 pt-3 border-t border-gray-100 dark:border-gray-700/60">
+  <div *ngIf="gdriveSvc.isLoggedIn()" class="space-y-3 pt-3.5 border-t border-gray-100 dark:border-gray-700/60">
     <!-- Email del usuario -->
     <div class="flex items-center justify-between text-xs">
       <span class="text-gray-500 dark:text-gray-400 font-medium">{{ 'pages.settings.gdrive.account' | translate }}:</span>
@@ -50,28 +51,30 @@
     </div>
 
     <!-- Fecha del último backup -->
-    <div *ngIf="gdriveSvc.lastBackupDate()" class="flex items-center justify-between text-xs bg-gray-50 dark:bg-gray-900/50 p-2 rounded-md">
+    <div *ngIf="gdriveSvc.lastBackupDate()" class="flex items-center justify-between text-xs bg-gray-50/80 dark:bg-gray-800/60 p-2.5 rounded-xl border border-gray-100 dark:border-gray-700/60">
       <span class="text-gray-500 dark:text-gray-400">{{ 'pages.settings.gdrive.last_backup_label' | translate }}:</span>
-      <span class="text-gray-700 dark:text-gray-300 font-medium">
+      <span class="text-gray-800 dark:text-gray-200 font-semibold">
         {{ gdriveSvc.lastBackupDate() | date:'dd/MM/yyyy HH:mm' }}
       </span>
     </div>
 
-    <!-- Botones de Acción -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+    <!-- Botones de Acción (Bulbasaur Green .btn-primary) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
       <button 
+        type="button"
         (click)="uploadToGDrive()" 
         [disabled]="gdriveSvc.isSyncing()"
-        class="w-full py-2.5 px-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-xs rounded-lg shadow-md shadow-blue-500/20 active:scale-[0.98] transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50"
+        class="btn-primary !py-2.5 !px-3 text-xs w-full flex items-center justify-center gap-2"
       >
         <i class="fas fa-cloud-upload-alt text-sm"></i>
         <span>{{ 'pages.settings.gdrive.upload' | translate }}</span>
       </button>
 
       <button 
+        type="button"
         (click)="restoreFromGDrive()" 
         [disabled]="gdriveSvc.isSyncing()"
-        class="w-full py-2.5 px-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium text-xs rounded-lg active:scale-[0.98] transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50"
+        class="btn-secondary !py-2.5 !px-3 text-xs w-full flex items-center justify-center gap-2"
       >
         <i class="fas fa-cloud-download-alt text-sm"></i>
         <span>{{ 'pages.settings.gdrive.download' | translate }}</span>
@@ -81,8 +84,9 @@
     <!-- Botón Desconectar -->
     <div class="flex justify-end pt-1">
       <button 
+        type="button"
         (click)="disconnectGDrive()" 
-        class="text-xs text-red-500 hover:text-red-700 dark:text-red-400 hover:underline font-medium transition"
+        class="text-xs text-red-500 hover:text-red-600 dark:text-red-400 font-semibold transition hover:underline"
       >
         {{ 'pages.settings.gdrive.disconnect' | translate }}
       </button>

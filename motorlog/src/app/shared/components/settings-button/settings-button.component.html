@@ -1,10 +1,15 @@
 <button
-class="w-full mb-4 flex justify-between items-center dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-(click)="handleUserAction(action.action)"
+  type="button"
+  class="w-full mb-3 flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-gray-200/70 dark:border-gray-700/70 bg-white dark:bg-gray-800 hover:bg-gray-50/80 dark:hover:bg-gray-700/60 hover:border-primary-500/40 cursor-pointer transition-all duration-200 active:scale-[0.99] group shadow-xs"
+  (click)="handleUserAction(action.action)"
 >
-<span class="flex items-center space-x-3">
-  <i [ngClass]="action.icon + ' text-gray-600 dark:text-gray-300'"></i>
-  <span class="text-lg">{{ action.label | translate }}</span>
-</span>
-<i class="fas fa-chevron-right text-gray-500 dark:text-gray-400"></i>
+  <div class="flex items-center gap-3.5">
+    <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 group-hover:text-primary-500 flex items-center justify-center flex-shrink-0 border border-gray-200/60 dark:border-gray-700/60 transition-colors">
+      <i [ngClass]="action.icon" class="text-sm"></i>
+    </div>
+    <span class="font-bold text-sm text-gray-900 dark:text-white">
+      {{ action.label | translate }}
+    </span>
+  </div>
+  <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all"></i>
 </button>
