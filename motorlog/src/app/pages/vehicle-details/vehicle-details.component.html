@@ -133,11 +133,12 @@
 					
 					<!-- Recuadro del color con altura exacta de 42px y alternancia limpia de is-readonly -->
 					<div 
-						class="input-field flex items-center justify-between h-[42px] !py-0"
+						class="input-field flex items-center justify-between h-[42px] !py-0 cursor-pointer select-none"
 						[ngClass]="{ 'is-readonly': isConsulta }"
+						(click)="!isConsulta && openColorPicker(colorPicker, $event)"
 					>
 						<div class="flex items-center gap-3">
-							<p-colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
+							<p-colorPicker #colorPicker formControlName="color" [disabled]="isConsulta"></p-colorPicker>
 							<span class="text-xs font-mono font-semibold text-gray-800 dark:text-gray-200 uppercase select-none">
 								{{ vehicleForm.get('color')?.value }}
 							</span>

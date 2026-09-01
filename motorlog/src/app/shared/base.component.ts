@@ -72,4 +72,19 @@ export class BaseComponent {
 			}
 		});
 	}
+
+	public openColorPicker(colorPicker: any, event?: Event): void {
+		if (event) {
+			event.stopPropagation();
+		}
+		if (!colorPicker) return;
+		if (typeof colorPicker.show === 'function') {
+			colorPicker.show();
+		} else if (typeof colorPicker.toggle === 'function') {
+			colorPicker.toggle();
+		} else if (colorPicker.el?.nativeElement) {
+			const preview = colorPicker.el.nativeElement.querySelector('.p-colorpicker-preview') || colorPicker.el.nativeElement;
+			preview?.click();
+		}
+	}
 }
