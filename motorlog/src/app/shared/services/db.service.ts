@@ -68,7 +68,7 @@ export async function initDatabase() {
   await initState;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DBService {
   get db(): RxMotorLogDataBase {
     return DB_INSTANCE;

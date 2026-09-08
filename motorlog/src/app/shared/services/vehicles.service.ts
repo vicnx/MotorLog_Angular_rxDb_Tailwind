@@ -9,7 +9,7 @@ import { Maintenance } from '@shared/models/maintenance.model';
 import * as crypto from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class VehiclesService {
 	private static readonly SELECTED_VEHICLE_KEY = 'selected_vehicle_id';
 

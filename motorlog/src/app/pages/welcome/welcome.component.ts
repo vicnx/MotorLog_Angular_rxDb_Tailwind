@@ -12,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 
+import { DevModeDialogComponent } from '@shared/components/dev-mode-dialog/dev-mode-dialog.component';
+
 @Component({
 	selector: 'welcome-page',
 	standalone: true,
@@ -22,7 +24,8 @@ import { ToastModule } from 'primeng/toast';
 		InputTextModule,
 		ButtonModule,
 		ToastModule,
-		WelcomeDialogInfoComponent
+		WelcomeDialogInfoComponent,
+		DevModeDialogComponent
 	],
 	templateUrl: './welcome.component.html',
 	styleUrls: ['./welcome.component.scss'],
@@ -34,6 +37,8 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	@ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 	dataSvc = inject(DataExportImportService);
 	gdriveSvc = inject(GDriveService);
+	showDevDialog: boolean = false;
+	logoTapCount: number = 0;
 
 	constructor() {
 		super();
@@ -51,6 +56,18 @@ export class WelcomeComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit(): void {}
+
+	public onLogoTap(): void {
+		this.logoTapCount++;
+		if (this.logoTapCount >= 5) {
+			this.logoTapCount = 0;
+			this.showDevDialog = true;
+		}
+	}
+
+	public onDevModeActivated(): void {
+		this.routerSvc.navigate([this.const.routes.home]);
+	}
 
 	public checkErrors(): void {
 		if (this.userSvc.userExistOnBd() && !this.userSvc.isUserLogged()) {

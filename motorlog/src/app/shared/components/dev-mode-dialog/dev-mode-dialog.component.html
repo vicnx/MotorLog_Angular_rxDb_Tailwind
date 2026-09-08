@@ -1,0 +1,86 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [dismissableMask]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="close()"
+  styleClass="w-full max-w-md mx-4"
+>
+  <ng-template pTemplate="header">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center flex-shrink-0 border border-amber-500/20">
+        <i class="fas fa-terminal text-base"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-gray-900 dark:text-white leading-snug">
+          {{ 'dev_mode.dialog.title' | translate }}
+        </h3>
+        <p class="text-xs text-gray-500 dark:text-gray-400 font-normal">
+          {{ 'dev_mode.subtitle' | translate }}
+        </p>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="space-y-4 pt-2">
+    <!-- Aviso de seguridad y snapshot local -->
+    <div class="p-3.5 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/70 dark:border-amber-900/50 flex gap-3 text-xs leading-relaxed text-amber-800 dark:text-amber-300">
+      <i class="fas fa-info-circle text-sm mt-0.5 flex-shrink-0 text-amber-600 dark:text-amber-400"></i>
+      <p>
+        {{ 'dev_mode.dialog.warning' | translate }}
+      </p>
+    </div>
+
+    <!-- Campo de contraseña -->
+    <div class="space-y-1.5">
+      <label class="input-label mb-1">
+        {{ 'dev_mode.dialog.password_label' | translate }}
+      </label>
+      <div class="relative">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          (keydown.enter)="onSubmit()"
+          [placeholder]="'dev_mode.dialog.password_placeholder' | translate"
+          class="input-field pr-10"
+          autofocus
+        />
+        <button
+          type="button"
+          (click)="toggleShowPassword()"
+          tabindex="-1"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1"
+        >
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'" class="text-sm"></i>
+        </button>
+      </div>
+
+      <p *ngIf="errorMessage" class="input-error animate-fadeIn">
+        <i class="fas fa-exclamation-circle mr-1"></i>
+        {{ errorMessage | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex items-center justify-end gap-2.5 pt-3">
+      <button
+        type="button"
+        (click)="close()"
+        class="btn-secondary !py-2 !px-4 !text-xs"
+      >
+        {{ 'dev_mode.dialog.cancel' | translate }}
+      </button>
+      <button
+        type="button"
+        (click)="onSubmit()"
+        [disabled]="!password.trim() || isLoading"
+        class="btn-primary !py-2 !px-4 !text-xs flex items-center gap-1.5"
+      >
+        <i *ngIf="isLoading" class="fas fa-circle-notch fa-spin text-xs"></i>
+        <span>{{ 'dev_mode.dialog.submit' | translate }}</span>
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>

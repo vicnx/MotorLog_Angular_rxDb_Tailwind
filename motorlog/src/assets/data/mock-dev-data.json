@@ -1,0 +1,197 @@
+{
+	"user": {
+		"id": "1",
+		"name": "DevMode",
+		"avatar": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%2348d0b0'/><rect x='28' y='32' width='44' height='36' rx='8' fill='%231f2937'/><circle cx='40' cy='46' r='4' fill='%2348d0b0'/><circle cx='60' cy='46' r='4' fill='%2348d0b0'/><path d='M38 56 Q50 64 62 56' stroke='%2348d0b0' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M50 20 L50 32' stroke='%231f2937' stroke-width='4' stroke-linecap='round'/><circle cx='50' cy='18' r='4' fill='%23f59e0b'/></svg>",
+		"username": "devmode",
+		"gender": "developer",
+		"customServices": [],
+		"customLocations": []
+	},
+	"vehicles": [
+		{
+			"id": "dev_focus_st",
+			"nombreVehiculo": "Focus ST",
+			"marca": "Ford",
+			"modelo": "Focus ST 2.5T Mk2",
+			"year": "2008",
+			"color": "#EA580C",
+			"cc": "2522",
+			"cv": "225",
+			"icono": "assets/images/default-vehicle.png",
+			"observaciones": "Color Naranja Eléctrico tricapa. Reprogramación Stage 1 Mountune a 260cv, intercooler de alto flujo Airtec, escape completo Scorpion Cat-back con supresor intermedio homologable y suspensión roscada Bilstein B14.",
+			"mantenimientos": []
+		},
+		{
+			"id": "dev_bmw_330d",
+			"nombreVehiculo": "BMW 330d",
+			"marca": "BMW",
+			"modelo": "Serie 3 Touring (F31)",
+			"year": "2017",
+			"color": "#2563EB",
+			"cc": "2993",
+			"cv": "258",
+			"icono": "assets/images/default-vehicle.png",
+			"observaciones": "Azul Estoril metalizado con paquete M Sport completo interior y exterior. Cambio automático deportivo ZF de 8 velocidades con levas en el volante, tracción integral xDrive, frenos M Sport azules de 4 pistones y faros adaptativos LED.",
+			"mantenimientos": []
+		},
+		{
+			"id": "dev_toyota_yaris",
+			"nombreVehiculo": "GR Yaris",
+			"marca": "Toyota",
+			"modelo": "GR Yaris RZ Circuit Pack",
+			"year": "2021",
+			"color": "#DC2626",
+			"cc": "1618",
+			"cv": "261",
+			"icono": "assets/images/default-vehicle.png",
+			"observaciones": "Rojo Emoción con paquete Circuit Pack. Diferenciales autoblocantes Torsen delantero y trasero, suspensión GR con barras estabilizadoras reforzadas, llantas forjadas BBS de 18 pulgadas, pinzas de freno rojas y techo aligerado en fibra de carbono.",
+			"mantenimientos": []
+		}
+	],
+	"maintenancesByVehicle": {
+		"dev_focus_st": [
+			{
+				"date": "2026-04-23T10:30:00.000Z",
+				"odometer": 124800,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.exhaust_system_check",
+						"value": "exhaust_system_check",
+						"icon": "fas fa-smog",
+						"color": "#D53F8C"
+					}
+				],
+				"location": "Chollomotor Performance",
+				"amount": 760.00,
+				"title": "Escape Scorpion Cat-back",
+				"notes": "Línea de escape en acero inoxidable T304 de 3 pulgadas con colas pulidas de 100mm. Sonido deportivo homologado.",
+				"description": "Instalación de línea Cat-back completa y juntas cónicas reforzadas."
+			},
+			{
+				"date": "2026-01-14T09:00:00.000Z",
+				"odometer": 119500,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.oil_change",
+						"value": "oil_change",
+						"icon": "fas fa-oil-can",
+						"color": "#D8A300"
+					},
+					{
+						"label": "pages.mant-details.add-mant.service-type.filter_replacement",
+						"value": "filter_replacement",
+						"icon": "fas fa-filter",
+						"color": "#F97316"
+					}
+				],
+				"location": "Ford Ontinyent",
+				"amount": 143.88,
+				"title": "Revisión anual y lubricación",
+				"notes": "Aceite 100% sintético Motul 300V Power 5W-40 (6.4 litros). Filtro de aceite Mann HU 719/7 x y arandela de cobre nueva.",
+				"description": "Revisión periódica de 120.000 km."
+			},
+			{
+				"date": "2025-08-20T16:15:00.000Z",
+				"odometer": 114200,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.brake_inspection",
+						"value": "brake_inspection",
+						"icon": "fas fa-car-crash",
+						"color": "#C53030"
+					}
+				],
+				"location": "Chollomotor Performance",
+				"amount": 285.50,
+				"title": "Pastillas de freno Ferodo DS2500",
+				"notes": "Sustitución de pastillas delanteras y traseras por compuesto deportivo Ferodo DS2500. Purga completa con líquido Motul RBF660.",
+				"description": "Mejora de frenada para trackday."
+			},
+			{
+				"date": "2025-03-12T11:00:00.000Z",
+				"odometer": 108900,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.itv",
+						"value": "itv",
+						"icon": "fas fa-check-circle",
+						"color": "#2F855A"
+					}
+				],
+				"location": "Estación ITV Alzira",
+				"amount": 49.20,
+				"title": "Inspección Técnica Periódica",
+				"notes": "Inspección favorable sin defectos leves ni graves. Comprobación de opacidad de gases y alineación de suspensión roscada.",
+				"description": "ITV en regla hasta marzo de 2026."
+			}
+		],
+		"dev_bmw_330d": [
+			{
+				"date": "2026-02-18T11:00:00.000Z",
+				"odometer": 145000,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.transmission_service",
+						"value": "transmission_service",
+						"icon": "fas fa-cogs",
+						"color": "#4A5568"
+					}
+				],
+				"location": "ZF Transmissions Valencia",
+				"amount": 520.00,
+				"title": "Mantenimiento caja de cambios ZF 8HP",
+				"notes": "Diálisis completa de líquido de transmisión automática ZF Lifeguard Fluid 8 (9.5 litros) y cambio de cárter de plástico con filtro integrado e imanes magnéticos.",
+				"description": "Mantenimiento preventivo oficial ZF."
+			},
+			{
+				"date": "2025-10-05T09:30:00.000Z",
+				"odometer": 138600,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.tire_replacement",
+						"value": "tire_replacement",
+						"icon": "fas fa-shuttle-van",
+						"color": "#4A5568"
+					},
+					{
+						"label": "pages.mant-details.add-mant.service-type.alignment_service",
+						"value": "alignment_service",
+						"icon": "fas fa-align-center",
+						"color": "#5A67D8"
+					}
+				],
+				"location": "Neumáticos Soledad",
+				"amount": 680.00,
+				"title": "Juego 4x Michelin Pilot Sport 5",
+				"notes": "Montaje de 4 neumáticos nuevos en medida doble: 225/45 R18 95Y delante y 255/40 R18 99Y detrás. Alineación láser 3D de ambos ejes.",
+				"description": "Cambio de neumáticos por desgaste al testigo."
+			}
+		],
+		"dev_toyota_yaris": [
+			{
+				"date": "2026-03-01T15:00:00.000Z",
+				"odometer": 32000,
+				"serviceType": [
+					{
+						"label": "pages.mant-details.add-mant.service-type.oil_change",
+						"value": "oil_change",
+						"icon": "fas fa-oil-can",
+						"color": "#D8A300"
+					},
+					{
+						"label": "pages.mant-details.add-mant.service-type.coolant_service",
+						"value": "coolant_service",
+						"icon": "fas fa-snowflake",
+						"color": "#67D5D7"
+					}
+				],
+				"location": "Toyota Valencia Concesionario",
+				"amount": 215.00,
+				"title": "Revisión de 30.000 km Toyota GR",
+				"notes": "Aceite sintético de baja fricción 0W-20 Toyota Gazoo Racing. Cambio de aceite del diferencial delantero y trasero Torsen.",
+				"description": "Mantenimiento del libro oficial Toyota Relax para ampliación de garantía."
+			}
+		]
+	}
+}

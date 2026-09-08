@@ -75,9 +75,30 @@
       </div>
     </div>
 
-    <!-- 5. Pie de versión de la app -->
+    <!-- 5. Sección: Modo Desarrollador -->
+    <div class="space-y-2">
+      <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        {{ 'dev_mode.title' | translate }}
+      </span>
+
+      <div class="card-container !p-0 overflow-hidden shadow-sm">
+        <app-action-row
+          icon="fas fa-terminal"
+          iconType="amber"
+          [badge]="devModeSvc.isDevModeActive() ? 'DEV' : undefined"
+          [title]="'dev_mode.title'"
+          [subtitle]="'dev_mode.subtitle'"
+          (action)="goToDevMode()"
+        ></app-action-row>
+      </div>
+    </div>
+
+    <!-- 6. Pie de versión de la app (con soporte para toques de activación rápida) -->
     <div class="pt-4 text-center">
-      <p class="text-xs text-gray-400 dark:text-gray-500 font-medium">
+      <p
+        (click)="onVersionTap()"
+        class="text-xs text-gray-400 dark:text-gray-500 font-medium select-none cursor-pointer hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+      >
         {{ const.appName }} v{{ const.appVersion }} • by {{ const.author }}
       </p>
     </div>
@@ -91,5 +112,19 @@
     *ngIf="currentView === 'data'"
     (back)="backToMainSettings()"
   ></app-data-management>
+
+  <!-- ========================================== -->
+  <!-- VISTA 3: SUB-PANTALLA DE MODO DESARROLLADOR -->
+  <!-- ========================================== -->
+  <app-dev-mode-menu
+    *ngIf="currentView === 'dev'"
+    (back)="backToMainSettings()"
+  ></app-dev-mode-menu>
+
+  <!-- Diálogo de Acceso por Contraseña a Dev Mode -->
+  <app-dev-mode-dialog
+    [(visible)]="showDevDialog"
+    (success)="onDevModeActivated()"
+  ></app-dev-mode-dialog>
 
 </div>

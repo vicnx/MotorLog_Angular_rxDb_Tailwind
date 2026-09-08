@@ -1,0 +1,117 @@
+<div class="space-y-6 animate-fadeIn">
+
+  <!-- Cabecera Modular Estándar -->
+  <app-page-header
+    [title]="'dev_mode.title' | translate"
+    [subtitle]="'dev_mode.subtitle' | translate"
+    (back)="onBack()"
+  ></app-page-header>
+
+  <!-- 1. Tarjeta de Estado del Entorno de Desarrollo -->
+  <div class="card-container p-4 sm:p-5 bg-gradient-to-br from-amber-500/5 to-transparent border-amber-500/20">
+    <div class="flex items-center justify-between pb-3.5 border-b border-gray-100 dark:border-gray-700/60">
+      <div class="flex items-center gap-3">
+        <img
+          [src]="userSvc.user().avatar"
+          alt="DevMode User"
+          class="w-11 h-11 rounded-full object-cover border border-amber-500/30 shadow-sm"
+        />
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h4 class="font-bold text-sm text-gray-900 dark:text-white">
+              {{ userSvc.user().name }}
+            </h4>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-amber-500/15 text-amber-600 dark:text-amber-400">
+              DEV
+            </span>
+          </div>
+          <p class="text-xs text-gray-500 dark:text-gray-400">
+            &#64;{{ userSvc.user().username }}
+          </p>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <span class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 block">
+          {{ 'dev_mode.status.backup_status' | translate }}
+        </span>
+        <span
+          class="inline-flex items-center gap-1 text-xs font-bold"
+          [ngClass]="devModeSvc.hasBackupSnapshot() ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400'"
+        >
+          <i [class]="devModeSvc.hasBackupSnapshot() ? 'fas fa-check-circle text-primary-500' : 'fas fa-minus-circle'"></i>
+          {{ (devModeSvc.hasBackupSnapshot() ? 'dev_mode.status.backup_saved' : 'dev_mode.status.backup_none') | translate }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Estadísticas Rápidas de la BD -->
+    <div class="grid grid-cols-2 gap-3 pt-3.5 text-center">
+      <div class="p-2.5 rounded-xl bg-gray-50/80 dark:bg-gray-800/40 border border-gray-100 dark:border-gray-700/50">
+        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 block">
+          {{ 'dev_mode.status.vehicles_count' | translate }}
+        </span>
+        <span class="text-lg font-extrabold text-gray-900 dark:text-white">
+          {{ vehicleSvc.vehicles().length }}
+        </span>
+      </div>
+
+      <div class="p-2.5 rounded-xl bg-gray-50/80 dark:bg-gray-800/40 border border-gray-100 dark:border-gray-700/50">
+        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 block">
+          {{ 'dev_mode.status.maintenances_count' | translate }}
+        </span>
+        <span class="text-lg font-extrabold text-gray-900 dark:text-white">
+          {{ totalMaintenancesCount() }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Sección: Acciones Rápidas de Mock -->
+  <div class="space-y-2">
+    <span class="px-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+      {{ 'dev_mode.actions.title' | translate }}
+    </span>
+
+    <div class="card-container !p-0 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700/60 shadow-sm">
+      <app-action-row
+        icon="fas fa-car"
+        iconType="primary"
+        [title]="'dev_mode.actions.populate_vehicles' | translate"
+        [subtitle]="'dev_mode.actions.populate_vehicles_desc' | translate"
+        (action)="populateVehicles()"
+      ></app-action-row>
+
+      <app-action-row
+        icon="fas fa-wrench"
+        iconType="blue"
+        [title]="'dev_mode.actions.populate_maintenances' | translate"
+        [subtitle]="'dev_mode.actions.populate_maintenances_desc' | translate"
+        (action)="populateMaintenances()"
+      ></app-action-row>
+
+      <app-action-row
+        icon="fas fa-trash-alt"
+        iconType="amber"
+        [title]="'dev_mode.actions.clear_mock' | translate"
+        [subtitle]="'dev_mode.actions.clear_mock_desc' | translate"
+        (action)="clearMock()"
+      ></app-action-row>
+    </div>
+  </div>
+
+  <!-- 3. Sección: Salida y Restauración de Datos -->
+  <div class="space-y-2 pt-2">
+    <div class="card-container !p-0 overflow-hidden shadow-sm">
+      <app-action-row
+        icon="fas fa-sign-out-alt"
+        iconType="red"
+        [isDanger]="true"
+        [title]="'dev_mode.actions.exit' | translate"
+        [subtitle]="'dev_mode.actions.exit_desc' | translate"
+        (action)="exitDevMode()"
+      ></app-action-row>
+    </div>
+  </div>
+
+</div>

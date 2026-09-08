@@ -7,8 +7,8 @@
 		<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
 		<div class="absolute -bottom-12 -left-12 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-		<!-- Logotipo Principal con Animación -->
-		<div class="relative mb-6 group cursor-pointer">
+		<!-- Logotipo Principal con Animación y Activador Oculto Dev Mode -->
+		<div (click)="onLogoTap()" class="relative mb-6 group cursor-pointer select-none">
 			<div class="absolute inset-0 bg-primary-500/20 rounded-full blur-xl transition-all duration-300 group-hover:scale-110 opacity-70"></div>
 			<img 
 				[src]="welcomeImg" 
@@ -121,6 +121,7 @@
 
 	<!-- Diálogos y Elementos Adicionales -->
 	<app-welcome-dialog-info></app-welcome-dialog-info>
+	<app-dev-mode-dialog [(visible)]="showDevDialog" (success)="onDevModeActivated()"></app-dev-mode-dialog>
 	<p-toast key="toast" position="top-center"></p-toast>
 	<input type="file" #fileInput (change)="dataSvc.onFileSelected($event)" style="display:none;" accept=".json" />
 </form>

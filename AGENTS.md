@@ -107,6 +107,9 @@ Todo desarrollo de UI debe consultar este catálogo antes de crear maquetación 
 | **`MaintenanceTimelineComponent`** | `app-maintenance-timeline` | `@shared/components/maintenance-timeline/maintenance-timeline.component` | **Línea de tiempo cronológica** interactiva de mantenimientos, con soporte de filtrado en vivo y estados vacíos. |
 | **`NavbarComponent`** | `app-navbar` | `@shared/components/navbar/navbar.component` | **Barra superior flotante** con avatar de usuario y acciones. |
 | **`BottomNavComponent`** | `app-bottom-nav` | `@shared/components/bottom-nav/bottom-nav.component` | **Barra de navegación inferior fija** mobile-first con pestañas principales. |
+| **`DevModeDialogComponent`** | `app-dev-mode-dialog` | `@shared/components/dev-mode-dialog/dev-mode-dialog.component` | **Modal de acceso por contraseña al Modo Desarrollador** con validación SHA-256 y avisos de seguridad. Soporta `[(visible)]` y emite `(success)`. |
+| **`DevBadgeComponent`** | `app-dev-badge` | `@shared/components/dev-badge/dev-badge.component` | **Distintivo visual flotante de Dev Mode** con dot pulsante, enlace directo a panel de desarrollador y botón rápido de salida. |
+| **`DevModeMenuComponent`** | `app-dev-mode-menu` | `@pages/settings/components/dev-mode-menu/dev-mode-menu.component` | **Panel de control de desarrollo** con estadísticas de la BD, generador de datos mock (vehículos y mantenimientos) y salida segura. Emite `(back)`. |
 
 
 

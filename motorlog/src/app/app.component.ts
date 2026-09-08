@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BackupDialogMsgComponent } from '@shared/components/backup-dialog-msg/backup-dialog-msg.component';
 import { BottomNavComponent } from '@shared/components/bottom-nav/bottom-nav.component';
+import { DevBadgeComponent } from '@shared/components/dev-badge/dev-badge.component';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { ScrollTopComponent } from '@shared/components/scroll-top/scroll-top.component';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
@@ -18,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { PrimeNGConfig } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { DevModeService } from '@shared/services/dev-mode.service';
 import { VehiclesApiService } from './api/vehicles_api.service';
 
 @Component({
@@ -37,7 +39,8 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 		WelcomeDialogInfoComponent,
 		ScrollTopComponent,
 		BackupDialogMsgComponent,
-		BottomNavComponent
+		BottomNavComponent,
+		DevBadgeComponent
 	],
 	providers: [
 		ThemeService,
@@ -45,7 +48,8 @@ import { VehiclesApiService } from './api/vehicles_api.service';
 		DBService,
 		VehiclesService,
 		VehiclesApiService,
-		DataExportImportService
+		DataExportImportService,
+		DevModeService
 	]
 })
 export class AppComponent implements OnInit {

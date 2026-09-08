@@ -1,0 +1,36 @@
+<div
+  *ngIf="devModeSvc.isDevModeActive()"
+  (click)="openDevMenu()"
+  class="fixed top-3 left-3 sm:left-4 z-50 pointer-events-auto
+         bg-amber-50/90 dark:bg-gray-900/90 backdrop-blur-md
+         border border-amber-500/30 dark:border-amber-500/40
+         text-amber-800 dark:text-amber-300
+         rounded-full px-2.5 py-1 shadow-sm
+         flex items-center gap-2 cursor-pointer
+         hover:bg-amber-100/90 dark:hover:bg-gray-800/90
+         transition-all duration-200 active:scale-95 select-none animate-fadeIn"
+  [title]="'dev_mode.subtitle' | translate"
+>
+  <!-- Dot indicador pulsante -->
+  <span class="relative flex h-2 w-2">
+    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+  </span>
+
+  <div class="flex items-center gap-1.5">
+    <i class="fas fa-terminal text-[11px] text-amber-600 dark:text-amber-400"></i>
+    <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase">
+      {{ 'dev_mode.badge' | translate }}
+    </span>
+  </div>
+
+  <!-- Botón rápido de salida -->
+  <button
+    type="button"
+    (click)="exitDevMode($event)"
+    [title]="'dev_mode.actions.exit' | translate"
+    class="w-4 h-4 rounded-full bg-amber-200/60 dark:bg-amber-900/60 hover:bg-amber-300 dark:hover:bg-amber-800 flex items-center justify-center text-[9px] text-amber-900 dark:text-amber-200 transition-colors ml-0.5"
+  >
+    <i class="fas fa-times"></i>
+  </button>
+</div>

@@ -409,5 +409,54 @@
 		"passwordPrompt": "Introduce una contraseña",
 		"emptyMessage": "No se encontraron resultados",
 		"emptyFilterMessage": "No se encontraron resultados"
+	},
+	"dev_mode": {
+		"badge": "DEV MODE",
+		"badge_desc": "Modo Desarrollador activo",
+		"title": "Modo Desarrollador",
+		"subtitle": "Herramientas y datos de prueba para desarrolladores",
+		"menu_header": "Panel Desarrollador",
+		"dialog": {
+			"title": "Acceso a Modo Desarrollador",
+			"description": "Introduce la clave de desarrollador para acceder al entorno de pruebas.",
+			"warning": "Se creará automáticamente una copia de seguridad local de tus datos actuales. Al salir del Modo Desarrollador, tus datos originales se restaurarán intactos.",
+			"password_label": "Clave de acceso",
+			"password_placeholder": "Introduce la clave",
+			"submit": "Activar Dev Mode",
+			"cancel": "Cancelar",
+			"error_password": "Clave incorrecta. Acceso denegado.",
+			"success": "Modo Desarrollador activado correctamente."
+		},
+		"actions": {
+			"title": "Acciones rápidas",
+			"populate_vehicles": "Insertar vehículos de ejemplo",
+			"populate_vehicles_desc": "Añade 3 vehículos completos (Focus ST, BMW 330d, GR Yaris) con todos sus datos.",
+			"populate_maintenances": "Insertar mantenimientos de ejemplo",
+			"populate_maintenances_desc": "Añade un historial cronológico y realista de mantenimientos a los vehículos.",
+			"clear_mock": "Vaciar datos de prueba",
+			"clear_mock_desc": "Elimina los vehículos y mantenimientos de prueba sin salir de Dev Mode.",
+			"exit": "Salir de Modo Desarrollador",
+			"exit_desc": "Restaura tus datos originales y elimina el entorno de prueba."
+		},
+		"status": {
+			"title": "Estado del entorno",
+			"active_user": "Usuario activo",
+			"backup_status": "Copia de respaldo",
+			"backup_saved": "Copia previa guardada localmente",
+			"backup_none": "Sin datos previos (nuevo)",
+			"vehicles_count": "Vehículos en BD",
+			"maintenances_count": "Mantenimientos totales"
+		},
+		"confirm_exit": {
+			"header": "Salir de Modo Desarrollador",
+			"message": "¿Seguro que deseas salir del Modo Desarrollador? Se restaurarán todos tus datos y vehículos previos."
+		},
+		"messages": {
+			"vehicles_added": "Vehículos de ejemplo insertados con éxito.",
+			"maintenances_added": "Mantenimientos de ejemplo añadidos al historial.",
+			"no_vehicles_for_maint": "Inserta primero los vehículos de prueba antes de añadir mantenimientos.",
+			"mock_cleared": "Datos de prueba eliminados.",
+			"restored": "Datos originales restaurados exitosamente."
+		}
 	}
 }

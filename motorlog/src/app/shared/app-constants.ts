@@ -4,6 +4,11 @@ export const CONSTANTS = {
     appName: 'MotorLog',
     appVersion: packageInfo.version,
     author: 'Xente',
+    devMode: {
+        passwordHash: 'b5b22da3c3fe40849fdcb00533cee3958f6bb94b2bca55263ef11ac6b1d9953a',
+        snapshotStorageKey: '_motorlog_dev_mode_snapshot',
+        activeStorageKey: '_motorlog_dev_mode_active'
+    },
     routes: {
         home: '/home',
         settings: '/settings',
