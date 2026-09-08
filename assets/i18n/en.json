@@ -409,5 +409,54 @@
 		"passwordPrompt": "Enter a password",
 		"emptyMessage": "No results found",
 		"emptyFilterMessage": "No results found"
+	},
+	"dev_mode": {
+		"badge": "DEV MODE",
+		"badge_desc": "Developer Mode active",
+		"title": "Developer Mode",
+		"subtitle": "Developer tools and mock test data",
+		"menu_header": "Developer Panel",
+		"dialog": {
+			"title": "Developer Mode Access",
+			"description": "Enter the developer password to access the test environment.",
+			"warning": "A local backup of your current data will be created automatically. When exiting Developer Mode, your original data will be restored intact.",
+			"password_label": "Access Key",
+			"password_placeholder": "Enter key",
+			"submit": "Activate Dev Mode",
+			"cancel": "Cancel",
+			"error_password": "Incorrect password. Access denied.",
+			"success": "Developer Mode successfully enabled."
+		},
+		"actions": {
+			"title": "Quick Actions",
+			"populate_vehicles": "Insert Mock Vehicles",
+			"populate_vehicles_desc": "Adds 3 complete vehicles (Focus ST, BMW 330d, GR Yaris) with all details.",
+			"populate_maintenances": "Insert Mock Maintenances",
+			"populate_maintenances_desc": "Adds a realistic chronological maintenance history to the vehicles.",
+			"clear_mock": "Clear Mock Data",
+			"clear_mock_desc": "Removes test vehicles and maintenances without exiting Dev Mode.",
+			"exit": "Exit Developer Mode",
+			"exit_desc": "Restores your original data and cleans up test environment."
+		},
+		"status": {
+			"title": "Environment Status",
+			"active_user": "Active User",
+			"backup_status": "Backup State",
+			"backup_saved": "Previous data stored locally",
+			"backup_none": "No previous data (new)",
+			"vehicles_count": "Vehicles in DB",
+			"maintenances_count": "Total Maintenances"
+		},
+		"confirm_exit": {
+			"header": "Exit Developer Mode",
+			"message": "Are you sure you want to exit Developer Mode? All your previous data and vehicles will be restored."
+		},
+		"messages": {
+			"vehicles_added": "Mock vehicles inserted successfully.",
+			"maintenances_added": "Mock maintenances added to history.",
+			"no_vehicles_for_maint": "Please insert mock vehicles before adding maintenances.",
+			"mock_cleared": "Test data cleared.",
+			"restored": "Original data restored successfully."
+		}
 	}
 }
